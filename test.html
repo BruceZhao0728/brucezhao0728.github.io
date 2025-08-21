@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>Test Markdown</title>
+    <link rel="stylesheet" href="static/css/main.css">
+</head>
+<body>
+    <div id="content"></div>
+    <script src="static/js/marked.min.js"></script>
+    <script>
+        fetch('contents/test.md')
+            .then(response => response.text())
+            .then(md => {
+                document.getElementById('content').innerHTML = marked.parse(md);
+            });
+    </script>
+</body>
+</html>

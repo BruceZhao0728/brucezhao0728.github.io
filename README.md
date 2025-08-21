@@ -62,13 +62,10 @@ git push
 
 Fire up a browser and go to `https://<username>.github.io`
 
-### 4. Further Personalization
+## Further Personalization
 
 1. To create a subpage, create the HTML file in the root directory and the Markdown file in the `contents` directory.
 2. For subpages, use `header_subpage.html` as the header and change the linking website. For the main page `index.html`, use `header_index.html` as the header.
 3. To create a new column in the main page `index.html`, modify `section_names` in `script.js` and the link in `header_index.html`.
 
 
-## License
-
-Copyright Sen Li, 2023. Licensed under an MIT license. You can copy and mess with this template.

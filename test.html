@@ -76,12 +76,36 @@
 
 </head>
 <body>
-    <!-- Navigation-->
+    <!-- Navigation -->
     <div id="header"></div>
 
-    <div id="content"></div>
-    <script src="static/js/marked.min.js"></script>
+    <section class="bg-gradient-primary-to-secondary-light mt5 md5">
+        <div class="container px-5">
+            <header>
+                <h2>Test.md 内容</h2>
+            </header>
+            <div class="main-body" id="content"></div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <div id="footer"></div>
+
+    <!-- Scripts for Header, Footer and Markdown File -->
     <script>
+        // Load header
+        fetch('static/template/header.html')
+            .then(res => res.text())
+            .then(html => {
+                document.getElementById('header').innerHTML = html;
+            });
+        // Load footer
+        fetch('static/template/footer.html')
+            .then(res => res.text())
+            .then(html => {
+                document.getElementById('footer').innerHTML = html;
+            });
+        // Load Markdown file
         fetch('contents/test.md')
             .then(response => response.text())
             .then(md => {
@@ -89,24 +113,5 @@
             });
     </script>
 
-    <!-- Footer-->
-    <div id="footer"></div>
-
-    <!-- Scripts for Header and Footer -->
-    <script>
-        // 加载 header
-        fetch('static/template/header.html')
-            .then(res => res.text())
-            .then(html => {
-                document.getElementById('header').innerHTML = html;
-            });
-        // 加载 footer
-        fetch('static/template/footer.html')
-            .then(res => res.text())
-            .then(html => {
-                document.getElementById('footer').innerHTML = html;
-            });
-    </script>
-    
 </body>
 </html>

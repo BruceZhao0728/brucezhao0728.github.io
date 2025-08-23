@@ -2,9 +2,9 @@
 
 This is a test
 
-$a + b = 1$
+<span>$a + b = 1$</span>
 
-$$a+b=1$$
+<div>$$a+b=1$$</div>
 
 ## abstract
 

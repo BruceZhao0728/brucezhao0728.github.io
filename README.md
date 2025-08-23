@@ -67,5 +67,10 @@ Fire up a browser and go to `https://<username>.github.io`
 1. To create a subpage, create the HTML file in the root directory and the Markdown file in the `contents` directory.
 2. For subpages, use `header_subpage.html` as the header and change the linking website. For the main page `index.html`, use `header_index.html` as the header.
 3. To create a new column in the main page `index.html`, modify `section_names` in `script.js` and the link in `header_index.html`.
+4. To insert math formula, use the following code:
+   ```markdown
+    I claim that <span>$a + b = 1$</span>
 
-
+    To make it clear, <div>$$a+b=1$$</div>
+   ```
+    The first line is equivalent to `I claim that $a + b = 1$` while the second line is equivalent to `To make it clear, $$a+b=1$$`.

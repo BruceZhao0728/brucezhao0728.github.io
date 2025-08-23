@@ -67,7 +67,7 @@
             }
         };
     </script>
-    <script type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+    <!-- Mathematics -->
     <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
     <!-- Core JS-->
@@ -110,6 +110,9 @@
             .then(response => response.text())
             .then(md => {
                 document.getElementById('content').innerHTML = marked.parse(md);
+                if (window.MathJax) {
+                    MathJax.typesetPromise();
+                }
             });
     </script>
 

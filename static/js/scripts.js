@@ -56,8 +56,8 @@ window.addEventListener('DOMContentLoaded', event => {
                 const html = marked.parse(markdown);
                 document.getElementById(name + '-md').innerHTML = html;
             }).then(() => {
-                // MathJax
-                MathJax.typeset();
+                    // MathJax
+                    MathJax.typesetPromise();
             })
             .catch(error => console.log(error));
     })

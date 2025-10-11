@@ -118,8 +118,8 @@ ul {
     box-shadow: 0 2px 12px rgba(52,152,219,0.08);
     padding: 20px 28px;
     margin: 18px 0;
-    /* max-width: 500px; */
     width: 500px;
+    font-size: 1em;
     transition: transform 0.3s cubic-bezier(.25,.8,.25,1), box-shadow 0.3s;
 }
 
@@ -127,22 +127,6 @@ ul {
     transform: translateY(-5px);
     box-shadow: 0 8px 16px rgba(0,0,0,0.2);
 }
-
-/* .box-education {
-    background: #f8fafd;
-    border: 2px solid #3498db;
-    border-radius: 16px;
-    box-shadow: 0 2px 12px rgba(52,152,219,0.08);
-    padding: 20px 28px;
-    margin: 18px 0;
-    max-width: 800px;
-    transition: transform 0.3s cubic-bezier(.25,.8,.25,1), box-shadow 0.3s;
-}
-
-.box-education:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-} */
 
 .box-hobby {
     background: #f8fafd;
@@ -152,6 +136,8 @@ ul {
     padding: 20px 28px;
     margin: 18px 0;
     max-width: 500px;
+    width: 500px;
+    font-size: 1em;
     transition: transform 0.3s cubic-bezier(.25,.8,.25,1), box-shadow 0.3s;
 }
 
@@ -217,4 +203,13 @@ ul {
     margin-top: 4px;
     font-size: 0.95em;
     text-align: center;
+}
+
+@media (max-width: 600px) {
+    .box-contact,
+    .box-hobby {
+        font-size: 1em;
+        max-width: 100%;
+        padding: 16px 8px;
+    }
 }

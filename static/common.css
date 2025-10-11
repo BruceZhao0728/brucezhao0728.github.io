@@ -46,7 +46,7 @@ ul {
     background: 
     linear-gradient(90deg, #3498db, #2c3e50); 
     margin-top: 5px; border-radius: 2px;
-    margin-bottom: 10px; 
+    margin-bottom: 20px; 
 }
 
 .title3{
@@ -158,4 +158,62 @@ ul {
     transform: translateY(-5px);
     box-shadow: 0 8px 16px rgba(0,0,0,0.2);
 
+}
+
+.awards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    max-width: 1020px;
+    margin: 0 auto;
+}
+.award-card {
+    background: #f8f8f8;
+    border-radius: 8px;
+    padding: 16px 20px;
+    flex: 1 1 300px;
+    max-width: 300px;
+    min-width: 240px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.award-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    transition: transform 0.3s cubic-bezier(.25,.8,.25,1), box-shadow 0.3s;
+}
+
+.award-card i {
+    font-size: 2em;
+    margin-bottom: 8px;
+}
+.award-title {
+    font-weight: bold;
+    margin-bottom: 4px;
+    font-size: 1.1em;
+    text-align: center;
+}
+
+.award-subtitle {
+    font-size: 0.95em;
+    color: #555;
+    margin-bottom: 4px;
+    font-family: 'Microsoft Yahei', 'Segoe UI', Arial, sans-serif;
+    text-align: center;
+}
+
+.award-date {
+    font-size: 0.95em;
+    color: #888;
+    margin-bottom: 6px;
+}
+.award-desc {
+    margin-top: 4px;
+    font-size: 0.95em;
+    text-align: center;
 }

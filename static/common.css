@@ -8,7 +8,7 @@
 body {
     padding: 30px;
     font-size: 18px;
-    line-height: 1.6;
+    line-height: 1.5;
     background: linear-gradient(120deg, #f8f8f8, #cfdef3);
 }
 
@@ -31,7 +31,7 @@ ul {
 
 .title2{
     color: black;
-    font-size: 35px;
+    font-size: 32px;
     font-weight: 600;
     font-family: Microsoft Yahei;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /*水平阴影、垂直阴影、模糊半径、颜色*/
@@ -68,9 +68,11 @@ ul {
 .image-container {
     position: relative;
     width: 100%;
-    max-width: 400px;
+    max-width: 350px;
     margin: 10px auto;
     overflow: hidden;
+    justify-content: center; 
+    align-items: center;
 }
 
 .image-container img {
@@ -108,9 +110,8 @@ ul {
     box-shadow: 0 2px 12px rgba(52,152,219,0.08);
     padding: 20px 28px;
     margin: 18px 0;
-    max-width: 500px;
-    width: 500px;
-    /* font-size: 1em; */
+    /* max-width: 500px; */
+    width: 100%; /* responsive: fill available space but not exceed max-width */
     font-size: 18px;
     transition: transform 0.3s cubic-bezier(.25,.8,.25,1), box-shadow 0.3s;
 }
@@ -215,11 +216,35 @@ ul {
     text-align: center;
 }
 
-@media (max-width: 600px) {
-    .box-contact,
-    .box-hobby {
-        font-size: 1em;
-        max-width: 100%;
-        padding: 16px 8px;
+@media (max-width: 800px) {
+    /* stack boxes vertically and make them fill the screen width with small side gutters */
+    body { padding-left: 12px; padding-right: 12px; }
+
+    .row-of-boxes {
+        flex-direction: column;
+        gap: 12px;
+        align-items: stretch;
     }
+
+    .box, .box-contact, .box-hobby, .box-project {
+        width: calc(100% - 24px) !important; /* leave 12px gutter each side */
+        max-width: none !important;
+        padding: 16px 14px !important;
+        font-size: 20px !important; /* ensure readable text and match body */
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    .title1 { font-size: 34px; }
+    .title2 { font-size: 22px; }
+    .title3 { font-size: 18px; }
+
+    /* awards: allow horizontal scroll on very narrow screens but keep cards readable */
+    .awards-container {
+        gap: 12px;
+        overflow-x: auto;
+        padding-bottom: 8px;
+    }
+
+    .award-card { min-width: 260px; }
 }

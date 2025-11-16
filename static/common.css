@@ -180,6 +180,69 @@ ul {
     text-align: center;
 }
 
+.lyric-card {
+    background: rgba(255,255,255,0.95);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+    padding: 1.2em;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: 160px;
+    /* 平滑过渡：对 transform 和 box-shadow 添加 transition */
+    transition: transform 220ms cubic-bezier(.25,.8,.25,1), box-shadow 220ms cubic-bezier(.25,.8,.25,1);
+    will-change: transform, box-shadow;
+}
+.lyric-card:hover {
+    box-shadow: 0 6px 20px rgba(0,0,0,0.16);
+    transform: translateY(-4px);
+}
+.lyric-content {
+    flex: 1 1 auto;
+}
+.album-cover {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    background: #eee;
+    flex: 0 0 140px;
+    transition: transform 220ms ease, box-shadow 220ms ease, opacity 220ms ease;
+}
+.album-cover:hover {
+    transform: translateY(-4px) scale(1.02);
+}
+.song, .artist, .album-title {
+    text-align: left;
+}
+.song {
+    font-weight: 700;
+    color: #3498DB;
+    font-size: 1.15em;
+    margin-bottom: 0.1em;
+}
+.artist {
+    color: #444;
+    font-size: 0.98em;
+    margin-bottom: 0.2em;
+}
+.album-title {
+    color: #666;
+    font-size: 0.95em;
+    margin-bottom: 0.4em;
+    font-style: italic;
+}
+.lyric-text {
+    font-size: 0.98em;
+    color: #222;
+    margin-top: 0.2em;
+    text-align: left;
+    width: 100%;
+}
+
 @media (max-width: 800px) {
     /* stack boxes vertically and make them fill the screen width with small side gutters */
     body { padding-left: 12px; padding-right: 12px; }

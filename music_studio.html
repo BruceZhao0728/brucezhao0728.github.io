@@ -8,61 +8,6 @@
 	<link rel="stylesheet" href="static/common.css" />
 		<style>
 			/* Card layout: content left, album cover right on wide screens; stack on small screens */
-			.lyric-card {
-				background: rgba(255,255,255,0.95);
-				border-radius: 12px;
-				box-shadow: 0 2px 8px rgba(0,0,0,0.10);
-				padding: 1.2em;
-				display: flex;
-				flex-direction: row;
-				align-items: flex-start;
-				justify-content: space-between;
-				gap: 1rem;
-				min-height: 160px;
-			}
-			.lyric-card:hover {
-				box-shadow: 0 6px 20px rgba(0,0,0,0.16);
-				transform: translateY(-4px);
-			}
-			.lyric-content {
-				flex: 1 1 auto;
-			}
-			.album-cover {
-				width: 140px;
-				height: 140px;
-				object-fit: cover;
-				border-radius: 8px;
-				box-shadow: 0 2px 8px rgba(0,0,0,0.12);
-				background: #eee;
-				flex: 0 0 140px;
-			}
-			.song, .artist, .album-title {
-				text-align: left;
-			}
-			.song {
-				font-weight: 700;
-				color: #3498DB;
-				font-size: 1.15em;
-				margin-bottom: 0.1em;
-			}
-			.artist {
-				color: #444;
-				font-size: 0.98em;
-				margin-bottom: 0.2em;
-			}
-			.album-title {
-				color: #666;
-				font-size: 0.95em;
-				margin-bottom: 0.4em;
-				font-style: italic;
-			}
-			.lyric-text {
-				font-size: 0.98em;
-				color: #222;
-				margin-top: 0.2em;
-				text-align: left;
-				width: 100%;
-			}
 			@media (max-width: 800px) {
 				/* stack vertically on small screens */
 				.lyric-card { flex-direction: column; align-items: center; }
@@ -88,7 +33,7 @@
 						<div class="song">突然好想你 (Suddenly Missing You So Bad)</div>
 						<div class="artist">五月天 (Mayday)</div>
 						<div class="album-title">后青春期的诗 (Poetry of the Day After)</div>
-						<button class="toggle-lyric btn btn-outline-primary btn-sm mt-2 mb-2">显示歌词</button>
+						<button class="toggle-lyric btn btn-outline-primary btn-sm mt-2 mb-2">Show Lyrics</button>
 						<div class="lyric-text" style="display:none;">
 							<p>最怕空气突然安静<br>
 							最怕朋友突然的关心<br>
@@ -115,7 +60,7 @@
 						<div class="song">夜空中最亮的星 (The Brightest Star in the Night Sky)</div>
 						<div class="artist">逃跑计划 (Escape Plan)</div>
 						<div class="album-title">世界 (Earth)</div>
-						<button class="toggle-lyric btn btn-outline-primary btn-sm mt-2 mb-2">显示歌词</button>
+						<button class="toggle-lyric btn btn-outline-primary btn-sm mt-2 mb-2">Show Lyrics</button>
 						<div class="lyric-text" style="display:none;">
 							<p>夜空中最亮的星 能否听清<br>
 							那仰望的人 心底的孤独和叹息<br>
@@ -142,7 +87,7 @@
 						<div class="song">追光者 (Light Chaser)</div>
 						<div class="artist">岑宁儿 (Yoyo Sham)</div>
 						<div class="album-title">《夏至未至》影视原声带 (Soundtrack of Rush to the Dead Summer)</div>
-						<button class="toggle-lyric btn btn-outline-primary btn-sm mt-2 mb-2">显示歌词</button>
+						<button class="toggle-lyric btn btn-outline-primary btn-sm mt-2 mb-2">Show Lyrics</button>
 						<div class="lyric-text" style="display:none;">
 							<p>如果说 你是海上的烟火<br>
 							我是浪花的泡沫<br>
@@ -172,7 +117,7 @@
 						<div class="song">太聪明 (Too Smart)</div>
 						<div class="artist">陈绮贞 (Cheer Chen)</div>
 						<div class="album-title">吉他手 (Groupies)</div>
-						<button class="toggle-lyric btn btn-outline-primary btn-sm mt-2 mb-2">显示歌词</button>
+						<button class="toggle-lyric btn btn-outline-primary btn-sm mt-2 mb-2">Show Lyrics</button>
 						<div class="lyric-text" style="display:none;">
 							<p>总以为谜一般难懂的我<br>
 							在你了解了以后 其实也没什么<br>
@@ -204,7 +149,7 @@
 						<div class="song">囍帖街 (Wedding Card Street)</div>
 						<div class="artist">谢安琪 (Kay Tse)</div>
 						<div class="album-title">Binary</div>
-						<button class="toggle-lyric btn btn-outline-primary btn-sm mt-2 mb-2">显示歌词</button>
+						<button class="toggle-lyric btn btn-outline-primary btn-sm mt-2 mb-2">Show Lyrics</button>
 						<div class="lyric-text" style="display:none;">
 							<p>忘掉种过的花 重新的出发 放弃理想吧<br>
 							别再看 尘封的喜帖 你正在要搬家<br>
@@ -229,6 +174,31 @@
 					</a>
 				</div>
 			</div>
+			<div class="col-12">
+				<div class="lyric-card">
+					<div class="lyric-content">
+						<div class="song">明年今日 (Today Next Year)</div>
+						<div class="artist">陈奕迅 (Eason Chan)</div>
+						<div class="album-title">The Line-Up</div>
+						<button class="toggle-lyric btn btn-outline-primary btn-sm mt-2 mb-2">Show Lyrics</button>
+						<div class="lyric-text" style="display:none;">
+							<p>明年今日<br>
+							别要再失眠 床褥都改变<br>
+							如果有幸会面<br>
+							或在同伴新婚的盛宴<br>
+							惶惑地等待你出现</p>
+							<p>明年今日<br>
+							未见你一年 谁舍得改变<br>
+							离开你六十年<br>
+							但愿能认得出你的子女<br>
+							临别亦听得到你讲再见</p>
+						</div>
+					</div>
+					<a href="https://www.bilibili.com/video/BV1fv411y7BV/?spm_id_from=333.337.search-card.all.click" target="_blank" rel="noopener noreferrer">
+						<img class="album-cover" src="static/eason_chan_the_line_up.jpg" alt="cheer_chen_groupies" />
+					</a>
+				</div>
+			</div>
 		</div>
 	</div>
 
@@ -240,10 +210,10 @@
 			if (lyric && lyric.classList.contains('lyric-text')) {
 				if (lyric.style.display === 'none' || lyric.style.display === '') {
 					lyric.style.display = 'block';
-					btn.textContent = '收起歌词';
+					btn.textContent = 'Hide Lyrics';
 				} else {
 					lyric.style.display = 'none';
-					btn.textContent = '显示歌词';
+					btn.textContent = 'Show Lyrics';
 				}
 			}
 		});

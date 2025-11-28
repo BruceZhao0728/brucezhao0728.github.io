@@ -20,11 +20,26 @@
 		</style>
 </head>
 <body>
+		<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" style="border-bottom:1px solid #eee;">
+			<div class="container">
+				<a class="navbar-brand" href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNav">
+					<ul class="navbar-nav ms-auto">
+						<li class="nav-item"><a class="nav-link" href="#mandarin">Mandarin</a></li>
+						<li class="nav-item"><a class="nav-link" href="#cantonese">Cantonese</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div class="container" style="padding-top:70px;">
 	<h1 class="title1">Zichen ZHAO's Music Studio</h1>
 	<br><br>
 	<p style="text-align: center;">Welcome to my music studio! Here are some of my favorite songs and lyrics. You can click the album cover image to watch the music video on Bilibili. To know more about myself, you can visit my <a href="index.html">main</a> page.</p>
 
-	<h2 class="title2">Mandarin</h2>
+	<h2 class="title2" id="mandarin">Mandarin</h2>
 	<div class="container">
 		<div class="row g-4">
 			<div class="col-12">
@@ -140,7 +155,7 @@
 			</div>
 		</div>
 	</div>
-	<h2 class="title2">Cantonese</h2>
+	<h2 class="title2" id="cantonese">Cantonese</h2>
 	<div class="container">
 		<div class="row g-4">
 			<div class="col-12">
@@ -203,21 +218,22 @@
 	</div>
 
 
+</div>
 <script>
-	document.querySelectorAll('.toggle-lyric').forEach(function(btn) {
-		btn.addEventListener('click', function() {
-			var lyric = btn.nextElementSibling;
-			if (lyric && lyric.classList.contains('lyric-text')) {
-				if (lyric.style.display === 'none' || lyric.style.display === '') {
-					lyric.style.display = 'block';
-					btn.textContent = 'Hide Lyrics';
-				} else {
-					lyric.style.display = 'none';
-					btn.textContent = 'Show Lyrics';
-				}
+document.querySelectorAll('.toggle-lyric').forEach(function(btn) {
+	btn.addEventListener('click', function() {
+		var lyric = btn.nextElementSibling;
+		if (lyric && lyric.classList.contains('lyric-text')) {
+			if (lyric.style.display === 'none' || lyric.style.display === '') {
+				lyric.style.display = 'block';
+				btn.textContent = 'Hide Lyrics';
+			} else {
+				lyric.style.display = 'none';
+				btn.textContent = 'Show Lyrics';
 			}
-		});
+		}
 	});
+});
 </script>
 </body>
 

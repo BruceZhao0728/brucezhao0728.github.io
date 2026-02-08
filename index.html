@@ -2,173 +2,145 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Zichen's Website</title>
-    <style>
-        
-    </style>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="static/common.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="description" content="Personal Website - About me, Academic Experience, Blog">
+    <title>Homepage - Zichen's Website</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" style="border-bottom:1px solid #eee;">
-            <div class="container">
-                <a class="navbar-brand" href="#">Zichen ZHAO</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" href="#self-intro">Self Introduction</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#education">Education</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#research">Research & Projects</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#life">Personal Life</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#awards">Honors & Awards</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <div class="container" style="padding-top:70px;">
-        <h1 class="title1">Zichen ZHAO's Website</h1>
-        <h2 class="title2" id="self-intro">Self Introduction</h2>
-            <!-- <br> -->
-            <p>Hi, my name is Zichen ZHAO (赵子辰). I am a junior student in School of Computer Science (SCS) at Shanghai Jiao Tong University (SJTU, 上海交通大学).</p>
-            <br>
-            <p>I was born and raised in Shanghai, the biggest and most modern city in China. My family is originally from Hunan Province, the paradise of spicy food. Welcome to visit Hunan and taste its delicious food!</p>
-            <br>
-            <p>I major in information security and minor in economics. Currently I am interested in program analysis and software security. Feel free to contact me!</p>
-            <!-- <br> -->
-            
-            <div class="container" id="contact">
-                <div class="row g-3" style="justify-content: center">
-                    <div class="col-12 col-md-6 d-flex">
-                        <div class="box flex-fill">
-                            <h3 class="title3" style="text-align: center">Contact</h3>
-                                <div><i class="fa-solid fa-envelope"></i> <b>Email:</b> bruce0728@sjtu.edu.cn</div>
-                                <div><i class="fa-brands fa-github"></i> <b>Github:</b> <a href="https://github.com/BruceZhao0728">BruceZhao0728</a></div>
-                        </div>
-                    </div>
-                    
-                    <div class="col-12 col-md-6 d-flex" id="education">
-                        <div class="box flex-fill">
-                            <h3 class="title3" style="text-align: center">Education</h3>
-                                <div><b>Bachelor:</b> Shanghai Jiao Tong University, 2023-2027 (Expected)</div>
-                        </div>
+    <!-- 导航栏占位符 -->
+    <div id="navbar-placeholder"></div>
+
+    <!-- 主内容 -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Personal Introduction Section -->
+            <section class="hero-section section">
+                <div class="hero-content">
+                    <h1 class="hero-title">Zichen Zhao | 赵子辰</h1>
+                    <p class="hero-subtitle">Student | 大学生</p>
+                    <p class="hero-description">
+                        Welcome to my personal website! I'm a student passionate about learning and exploration,
+                        enthusiastic about artificial intelligence, program analysis, and related fields.
+                        Here, I share my learning experiences, research achievements, and life reflections.
+                    </p>
+                    <p class="hero-description">
+                        欢迎来到我的个人网站！我是一名对人工智能、程序分析以及相关领域感兴趣的学生，
+                        我会在我的个人网站上分享我的学习经验和生活随感。
+                    </p>
+                    <div class="btn-group">
+                        <a href="blog.html" class="btn btn-primary">View Blog</a>
+                        <a href="research.html" class="btn btn-outline">Research</a>
                     </div>
                 </div>
-            </div>
+                <div class="hero-avatar">
+                    <!-- Replace with your avatar image -->
+                    <img src="img/avatar.jpg" alt="Profile Avatar" class="avatar-img">
+                </div>
+            </section>
 
-        <h2 class="title2" id="research">Research & Projects</h2>
-            <div class="container">
-                <div class="row g-3" style="justify-content: center">
-                    <div class="col-12 d-flex">
-                        <div class="box flex-fill">
-                            <h3 class="title3" style="text-align: center">Research Assistant</h3>
-                            <h4 class="title3-subtitle" style="text-align: center">LoCCS @ SJTU</h4>
-                                <div>
-                                    <p>Since July 2024, I have been working as a research assistant in the Lab of Cryptography and Computer Security (密码与计算机安全实验室, LoCCS) under the supervision of <a href="https://yikunh.github.io/">Dr. Yikun HU (胡易坤)</a>.</p>
-                                    <br>
-                                    <p>My research focuses on program analysis and software security. I am currently working on a project about <b>AI software protection system based on code obfuscation</b>, aiming to design and implement a code obfuscation technique to protect locally-deployed AI models.</p>
-                                    <br>
-                                    <p>Feel free to contact me if you are interested in my research!</p>
-                                </div>
+            <!-- About Me -->
+            <section class="section">
+                <h2>About Me | 自我介绍</h2>
+                <div class="card">
+                    <p>
+                        I am currently studying at Shanghai Jiao Tong University (SJTU), majoring in information security and minoring in economics.
+                        I have strong interests in artificial intelligence and program analysis, and I am committed to solving practical problems through technology.
+                    </p>
+                    <p>
+                        目前我就读于上海交通大学计算机学院，主修信息安全，辅修经济学。
+                        我对人工智能和程序分析有浓厚兴趣，希望能将所学技术应用于实践。
+                    </p>
+                    <br>
+                    <p>
+                        I grew up in Shanghai, the biggest and most modern city in China. 
+                        My family is originally from Hunan Province. Welcome to visit Hunan and taste its delicious food!
+                    </p>
+                    <p>
+                        我成长于魔都上海，根植于星城长沙。欢迎来火宫殿嗦粉吃辣！
+                    </p>
+                    <br>
+                    <p>
+                        In my spare time, I enjoy music, traveling, and badminton.
+                        I believe that continuous learning and knowledge sharing make us better.
+                    </p>
+                    <p>
+                        课余时间，我喜欢音乐、旅行、打羽毛球。
+                        我的兴趣爱好可以让我放松身心、享受生活。期待遇见同样热爱的你！
+                    </p>
+                </div>
+            </section>
+
+            <!-- Education Background -->
+            <section class="section">
+                <h2>Education</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h3 class="timeline-title">Shanghai Jiao Tong University | 上海交通大学</h3>
+                            <p class="timeline-date">09/2023 - 06/2027 (Expected)</p>
+                            <p>Information Security - Bachelor of Engineering</p>
+                            <p>信息安全 - 工学学士（在读）</p>
+                            <p>Main Courses: Design & Analysis of Algorithms, Data Structures, Compiler Principles, Discrete Mathematics, etc.</p>
+                            <p>主修课程：算法设计与分析，数据结构，编译原理，离散数学</p>
                         </div>
                     </div>
-                </div>
-                <div class="row g-3" style="justify-content: center; margin-top: 0;">
-                    <div class="col-12 d-flex">
-                        <div class="box flex-fill">
-                            <h3 class="title3" style="text-align: center">Other Projects</h3>
-                            <h4 class="title3-subtitle" style="text-align: center">SJTU</h4>
-                                <!-- <p><b>2024.03 - 2024.06:</b> Developed a web application for managing personal finances using Flask and SQLite. Implemented features such as expense tracking, budget planning, and data visualization.</p>
-                                <p><b>2023.09 - 2023.12:</b> Created a simple chat application using Socket.IO and Node.js, allowing real-time communication between users. Implemented user authentication and message history storage.</p> -->
-                                <p><b>Vulnerability Analysis System Based on Vector Databases and Artificial Intelligence</b>, <i>Sep.2025 - Oct.2025</i></p>
-                                <p>I was responsible for dealing with generating SQL queries from natural language, automatically analyzing and constructing slices of input programs using Tree-Sitter, embedding slices into high-dimensional vectors with GraphCodeBERT and CodeT5+, and performing vulnerability matching to identify potential CVEs and CWEs in a vectorized vulnerability database.</p>
-                                <br>
-                                <p><b>Kernel-Module-Based Packet Filtering Firewall</b>, <i>Jun.2025 - Jul.2025</i></p>
-                                <p>As the team leader, I designed and implemented the kernel module using Netfilter via C++ and built the rule management system backed by SQLite.</p>
-                                <br>
-                                <p><b>Design of a New Distributed Power Coordinated Controller</b>, <i>Oct.2023 - Oct.2024</i></p>
-                                <p>I was responsible for the coordination of multiple generators and loads by the consensus algorithm and the optimization of the communication topology by the genetic algorithm via Python.</p>
+                    <!-- <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h3 class="timeline-title">[High School Name]</h3>
+                            <p class="timeline-date">09/2017 - 06/2020</p>
+                            <p>Science Stream</p>
                         </div>
+                    </div> -->
+                </div>
+            </section>
+
+            <!-- Skills & Specialties -->
+            <section class="section">
+                <h2>Skills & Specialties | 专业技能</h2>
+                <div class="card-grid">
+                    <div class="card">
+                        <h3>PLs | 编程语言</h3>
+                        <!-- <h3>💻 Programming Languages</h3> -->
+                        <!-- <h3>编程语言</h3> -->
+                        <p>Python, C, C++</p>
                     </div>
-                </div>
-            </div>
-            
-        <h2 class="title2" id="life">Personal Life</h2>
-
-            <div class="container">
-                <div class="row g-3" style="justify-content: center">
-                    <div class="col-12 col-sm-6 d-flex">
-                        <div class="box flex-fill">
-                            <h3 class="title3" style="text-align: center">Badminton</h3>
-                                <p>I learned how to play badminton in primary school. Apart from playing on court, I also watch badminton matches.</p>
-                                <p>Here are my favourite players — guess who they are!</p>
-                                <div class="image-container">
-                                    <img src="static/zheng_huang.jpg" class="image" style="max-width: 350px;"/>
-                                    <div class="content">Zheng Siwei and Huang Yaqiong! They are the mixed doubles champions at the Paris Olympics. In China we simply call them "Ya-Si" (雅思), which means "IELTS" in Chinese!</div>
-                                </div>
-                        </div>
+                    <div class="card">
+                        <h3>Tools | 常用软件</h3>
+                        <p>Git, VS Code, Docker, IDA Pro</p>
                     </div>
-                    
-                    <div class="col-12 col-sm-6 d-flex">
-                        <div class="box flex-fill">
-                            <h3 class="title3" style="text-align: center">Music</h3>
-                            <p>I like playing the piano in my spare time. I prefer classical music and pop music, <i>Chopin</i> and <i>Mayday</i> for example. 
-                            I enjoy going to concerts! Click <a href="music_studio.html">here</a> to go to my music studio!</p>
-                            <div class="image-container">
-                                <img src="static/mayday_concert.jpg" class="image" style="max-width: 350px;"/>
-                                <div class="content">I went to the Mayday concert in Shanghai in September 2025! Their live shows are really impressive and the atmosphere is electrifying!</div>
-                            </div>
-                        </div>
+                    <div class="card">
+                        <h3>Research Areas | 研究方向</h3>
+                        <p>Artificial Intelligence | 人工智能</p>
+                        <p>Program Analysis | 程序分析</p>
+                        <p>Compilation | 编译原理</p>
                     </div>
+                    <!-- <div class="card">
+                        <h3>Web Development</h3>
+                        <p>HTML, CSS, JavaScript, React, Node.js</p>
+                    </div> -->
                 </div>
-            </div>
+            </section>
 
-            
-        <!-- <h2 class="title2">Blogs & Notes</h2> -->
-
-        <h2 class="title2" id="awards">Honors & Awards</h2>
-            <div class="awards-container">
-
-                <div class="award-card">
-                    <i class="fa-solid fa-certificate" style="color:#007bff;"></i>
-                    <span class="award-title">SJTU “Premier Cybersecurity” Scholarship</span>
-                    <span class="award-subtitle">上海交通大学“一流网安”奖学金</span>
-                    <span class="award-date">December 2024</span>
-                    <!-- <div class="award-desc">For those who demonstrate outstanding academic performance, innovative achievements in cybersecurity, and exemplary contributions to social service and personal development.</div> -->
-                    <div class="award-desc">I am <b>the only sophomore</b> who won the 6,000 CNY scholarship!</div>
+            <!-- Recent Updates -->
+            <section class="section">
+                <h2>Recent Updates | 近期更新</h2>
+                <div class="card">
+                    <h3>🎉 Welcome to My Personal Website</h3>
+                    <p class="timeline-date">February 2026</p>
+                    <p>
+                        This is my personal website where I share my learning insights, research experiences, and life reflections.
+                        The website is continuously being updated. Stay tuned for more exciting content!
+                    </p>
                 </div>
+            </section>
+        </div>
+    </main>
 
-                <div class="award-card">
-                    <i class="fa-solid fa-certificate" style="color:#007bff;"></i>
-                    <span class="award-title">SJTU Class C Excellence Scholarship</span>
-                    <span class="award-subtitle">上海交通大学C等奖学金</span>
-                    <span class="award-date">December 2024</span>
-                    <!-- <div class="award-desc">For those who demonstrate outstanding academic performance, innovative achievements in cybersecurity, and exemplary contributions to social service and personal development.</div> -->
-                    <div class="award-desc">This 500-CNY scholarship recognizes students who have demonstrated <b>exceptional academic performance</b> and a commitment to excellence.</div>
-                </div>
+    <!-- 页脚占位符 -->
+    <div id="footer-placeholder"></div>
 
-                <div class="award-card">
-                    <i class="fa-solid fa-trophy" style="color:silver;"></i>
-                    <span class="award-title">Electrical & Electronic Engineering Innovation Competition for College Students</span>
-                    <span class="award-subtitle">全国大学生电子电气工程创新竞赛</span>
-                    <span class="award-date">July 2024</span>
-                    <div class="award-desc">Our project <b>"Design of a New Distributed Power Coordinated Controller"</b> won the second prize!</div>
-                </div>
-
-                <div class="award-card">
-                    <i class="fa-solid fa-trophy" style="color:gold;"></i>
-                    <span class="award-title">Shanghai Nanhui Senior High School Badminton Team Championship</span>
-                    <span class="award-subtitle">上海南汇中学“汇羽杯”羽毛球团体赛</span>
-                    <span class="award-date">October 2022</span>
-                    <div class="award-desc">I played men's doubles in the match and my partner and I won the final match together, contributing to our team's victory!</div>
-                </div>
-                <!-- 可继续添加更多奖项 -->
-            </div>
-    
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    </body>
+    <script src="js/components.js"></script>
+    <script src="js/main.js"></script>
+</body>
 </html>

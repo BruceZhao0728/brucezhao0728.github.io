@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="description" content="My Blog Posts">
+    <title>Blog - Zichen's Website</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 导航栏占位符 -->
+    <div id="navbar-placeholder"></div>
+
+    <!-- 主内容 -->
+    <main class="main-content">
+        <div class="container">
+            <section class="section">
+                <h1 class="text-center">Blog Posts | 我的博客</h1>
+                <p class="text-center hero-subtitle">Record learning, share thoughts, deliver value</p>
+            </section>
+
+            <!-- Blog Categories -->
+            <section class="section">
+                <div class="text-center">
+                    <div class="btn-group" style="justify-content: center;">
+                        <button class="btn btn-primary" onclick="filterBlogs('all')">All</button>
+                        <button class="btn btn-outline" onclick="filterBlogs('tech')">Tech</button>
+                        <button class="btn btn-outline" onclick="filterBlogs('life')">Life</button>
+                        <button class="btn btn-outline" onclick="filterBlogs('study')">Study</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Blog List -->
+            <section class="section">
+                <div id="blog-list" class="blog-list">
+                    <!-- Blogs will be loaded dynamically via JavaScript -->
+                    <div class="text-center">
+                        <div class="loading"></div>
+                        <p>Loading blog posts...</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- 页脚占位符 -->
+    <div id="footer-placeholder"></div>
+
+    <script src="js/components.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Blog filtering functionality
+        let allBlogs = [];
+
+        function getBlogText(value) {
+            if (value && typeof value === 'object') {
+                return value.en || value.zh || '';
+            }
+            return value || '';
+        }
+
+        function getBlogTitleBoth(value) {
+            if (value && typeof value === 'object') {
+                const en = value.en || '';
+                const zh = value.zh || '';
+                if (en && zh) {
+                    return `${en} | ${zh}`;
+                }
+                return en || zh;
+            }
+            return value || '';
+        }
+        
+        async function initBlogList() {
+            allBlogs = await loadBlogList();
+            displayBlogs(allBlogs);
+        }
+        
+        function displayBlogs(blogs) {
+            const blogListContainer = document.getElementById('blog-list');
+            
+            if (blogs.length === 0) {
+                blogListContainer.innerHTML = '<div class="text-center"><p>No blog posts available</p></div>';
+                return;
+            }
+            
+            blogListContainer.innerHTML = blogs.map(blog => {
+                const title = getBlogTitleBoth(blog.title);
+                const excerpt = getBlogText(blog.excerpt);
+                const readTime = getBlogText(blog.readTime) || '5 min read';
+                return `
+                <div class="blog-card" onclick="location.href='blog-detail.html?id=${blog.id}'">
+                    <div class="blog-header">
+                        <h3 class="blog-title">${title}</h3>
+                        <div class="blog-meta">
+                            <span>📅 ${blog.date}</span>
+                            <span>⏱️ ${readTime}</span>
+                            ${blog.category ? `<span>📁 ${blog.category}</span>` : ''}
+                        </div>
+                    </div>
+                    <div class="blog-excerpt">
+                        ${excerpt}
+                    </div>
+                    ${blog.tags ? `
+                        <div class="blog-tags">
+                            ${blog.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+            }).join('');
+        }
+        
+        function filterBlogs(category) {
+            // 更新按钮样式
+            document.querySelectorAll('.btn-group button').forEach(btn => {
+                btn.classList.remove('btn-primary');
+                btn.classList.add('btn-outline');
+            });
+            event.target.classList.remove('btn-outline');
+            event.target.classList.add('btn-primary');
+            
+            // 筛选博客
+            if (category === 'all') {
+                displayBlogs(allBlogs);
+            } else {
+                const filtered = allBlogs.filter(blog => 
+                    blog.category === category || 
+                    (blog.tags && blog.tags.includes(category))
+                );
+                displayBlogs(filtered);
+            }
+        }
+        
+        // 页面加载时初始化
+        window.addEventListener('DOMContentLoaded', initBlogList);
+    </script>
+</body>
+</html>

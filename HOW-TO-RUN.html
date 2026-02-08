@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>启动说明</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2563eb;
+        }
+        .method {
+            background: #f8fafc;
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 4px solid #2563eb;
+            border-radius: 4px;
+        }
+        code {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+        .warning {
+            background: #fef2f2;
+            border-left: 4px solid #ef4444;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .button {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px 5px 0 0;
+        }
+        .button:hover {
+            background: #1e40af;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>🚀 如何运行个人网站</h1>
+        
+        <div class="warning">
+            <strong>⚠️ 重要提示</strong><br>
+            由于浏览器安全限制，此网站必须通过本地服务器运行，不能直接双击HTML文件打开。
+        </div>
+
+        <h2>方法一：使用启动脚本（推荐）</h2>
+        <div class="method">
+            <strong>Windows用户：</strong><br>
+            双击运行 <code>start.bat</code> 文件
+        </div>
+
+        <h2>方法二：使用Python</h2>
+        <div class="method">
+            <strong>步骤：</strong><br>
+            1. 打开命令提示符（CMD）或PowerShell<br>
+            2. 进入网站目录<br>
+            3. 运行命令：<code>python -m http.server 8000</code><br>
+            4. 在浏览器访问：<code>http://localhost:8000</code>
+        </div>
+
+        <h2>方法三：使用VS Code</h2>
+        <div class="method">
+            <strong>步骤：</strong><br>
+            1. 用VS Code打开网站文件夹<br>
+            2. 安装 "Live Server" 扩展<br>
+            3. 右键点击 <code>index.html</code><br>
+            4. 选择 "Open with Live Server"
+        </div>
+
+        <h2>方法四：使用Node.js</h2>
+        <div class="method">
+            <strong>步骤：</strong><br>
+            1. 安装http-server：<code>npm install -g http-server</code><br>
+            2. 运行：<code>http-server -p 8000</code><br>
+            3. 在浏览器访问：<code>http://localhost:8000</code>
+        </div>
+
+        <h2>检查是否成功</h2>
+        <p>如果成功运行，你应该能看到：</p>
+        <ul>
+            <li>✅ 页面顶部有完整的导航栏</li>
+            <li>✅ 页面底部有页脚信息</li>
+            <li>✅ 博客页面能够正常加载文章列表</li>
+        </ul>
+
+        <h2>常见问题</h2>
+        <div class="method">
+            <strong>Q: 为什么必须使用本地服务器？</strong><br>
+            A: 浏览器的CORS安全策略不允许直接从文件系统加载其他文件。本地服务器可以绕过这个限制。
+        </div>
+
+        <div class="method">
+            <strong>Q: 我没有安装Python怎么办？</strong><br>
+            A: 可以使用VS Code的Live Server扩展，或者安装Python（访问 python.org）
+        </div>
+
+        <a href="README.md" class="button">查看完整文档</a>
+        <a href="QUICKSTART.md" class="button">快速开始指南</a>
+    </div>
+
+    <script>
+        // 如果在本地服务器环境下，自动跳转到主页
+        if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
+            setTimeout(() => {
+                const goHome = confirm('检测到你正在使用服务器运行，是否跳转到主页？');
+                if (goHome) {
+                    window.location.href = 'index.html';
+                }
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

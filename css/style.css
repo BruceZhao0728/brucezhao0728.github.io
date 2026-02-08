@@ -750,6 +750,95 @@ h3 {
 }
 
 /* ========================================
+   照片墙样式
+   ======================================== */
+
+.photo-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-auto-rows: 200px;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+/* 照片项目基础样式 */
+.photo-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.photo-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+/* 不同尺寸的照片项目 */
+.photo-item-2x2 {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+
+.photo-item-2x1 {
+    grid-column: span 2;
+    grid-row: span 1;
+}
+
+.photo-item-1x1 {
+    grid-column: span 1;
+    grid-row: span 1;
+}
+
+.photo-item-1x2 {
+    grid-column: span 1;
+    grid-row: span 2;
+}
+
+/* 照片悬停效果 */
+.photo-item:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-8px);
+}
+
+.photo-item:hover img {
+    transform: scale(1.1);
+    filter: brightness(0.7);
+}
+
+/* 照片叠加层 */
+.photo-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(37, 99, 235, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.photo-overlay p {
+    color: var(--white);
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-align: center;
+    padding: 1rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.photo-item:hover .photo-overlay {
+    opacity: 1;
+}
+
+/* ========================================
    页脚样式
    ======================================== */
 
@@ -902,6 +991,23 @@ h3 {
         gap: 1.5rem;
     }
     
+    /* 照片墙响应式 */
+    .photo-gallery {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        grid-auto-rows: 150px;
+        gap: 1rem;
+    }
+    
+    .photo-item-2x2 {
+        grid-column: span 2;
+        grid-row: span 2;
+    }
+    
+    .photo-item-2x1 {
+        grid-column: span 2;
+        grid-row: span 1;
+    }
+    
     /* 标题 */
     h1 {
         font-size: 2rem;
@@ -1008,6 +1114,18 @@ h3 {
         width: 60px;
         height: 60px;
         font-size: 2rem;
+    }
+    
+    /* 照片墙小屏优化 */
+    .photo-gallery {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        grid-auto-rows: 120px;
+        gap: 0.75rem;
+    }
+    
+    .photo-item-2x2,
+    .photo-item-2x1 {
+        grid-column: span 1;
     }
     
     .award-icon {

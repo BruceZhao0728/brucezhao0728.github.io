@@ -59,39 +59,32 @@
             <section class="section">
                 <h2>Research Projects | 研究项目</h2>
                 <div class="timeline">
-                    <!-- <div class="timeline-item">
-                        <div class="timeline-content">
-                            <h3 class="timeline-title">AI Software Protection System Based on Code Obfuscation</h3>
-                            <h4 class="timeline-subtitle">基于代码混淆的人工智能软件保护系统</h4>
-                            <p class="timeline-date">04/2024 - Present</p>
-                            <p><strong>Project Description</strong></p>
-                            <ul>
-                                <li>Designed an automated code protection based on TVM and LLVM IR to shield localized AI models from reverse engineering.</li>
-                                <li>Applied obfuscation schemes to prevent unauthorized extraction of proprietary model architecture.</li>
-                                <li>Engineered a custom LLVM Pass to implement multi-level obfuscation, balancing performance overhead and security strength.</li>
-                                <li>Quantified protection efficacy by developing a standardized metric system.</li>
-                            </ul>
-                            <p><strong>Tech Stack:</strong> TVM, LLVM, C++, IDA Pro</p>
-                            <div class="btn-group mt-2">
-                                <a href="#" class="btn btn-primary">View Paper</a>
-                                <a href="#" class="btn btn-outline">GitHub</a>
-                            </div>
-                        </div>
-                    </div> -->
 
                     <div class="timeline-item">
                         <div class="timeline-content">
                             <h3 class="timeline-title">AI-Powered Vulnerability Analysis System Based on Vector Databases</h3>
                             <h4 class="timeline-subtitle">基于向量数据库和人工智能的智能漏洞分析系统</h4>
                             <p class="timeline-date">09/2025 - 10/2025</p>
-                            <p><strong>Project Description:</strong></p>
+                            <p><strong>Project Description | 项目简介</strong></p>
                             <ul>
-                                <li>Architected a hybrid vulnerability detection system utilizing Chroma (Vector DB) and MySQL (Relational DB).</li>
-                                <li>Implemented program slicing and static analysis to parse ASTs and extract data-flow/control-flow dependencies.</li>
-                                <li>Developed a semantic-structural embedding engine utilizing CodeT5+ and GraphCodeBERT to export vectors of program slices.</li>
-                                <li>Engineered a natural language interface that automates SQL query generation via cloud-based LLM APIs.</li>
+                                <li>
+                                    Architected a hybrid vulnerability detection system utilizing Chroma (Vector DB) and MySQL (Relational DB).<br>
+                                    采用双模数据库架构，结合关系型数据库 MySQL 和向量数据库 Chroma 的优势，实现结构化数据管理和语义相似性检索的完美结合。
+                                </li>
+                                <li>
+                                    Implemented program slicing and static analysis to parse ASTs and extract data-flow/control-flow dependencies.<br>
+                                    结合程序切片技术，使用 Tree-Sitter 解析不同程序语言，对抽象语法树（AST）进行程序切片，提取程序中的数据流和控制流依赖关系。
+                                </li>
+                                <li>
+                                    Developed a semantic-structural embedding engine utilizing CodeT5+ and GraphCodeBERT to export vectors of program slices.<br>
+                                    利用 CodeT5+ 模型捕捉程序深层语义，利用 GraphCodeBERT 模型捕捉程序结构，生成含语义与结构双重特征的切片向量，识别潜在漏洞。
+                                </li>
+                                <li>
+                                    Engineered a natural language interface that automates SQL query generation via cloud-based LLM APIs.<br>
+                                    构建自然语言接口，用户输入查询需求，系统通过云端 LLM API 自动生成 SQL 查询语句，实现对关系型数据库的智能查询。
+                                </li>
                             </ul>
-                            <p><strong>Tech Stack:</strong> Python, SQL, Chroma, Tree-Sitter, GraphCodeBERT, CodeT5+</p>
+                            <p><strong>Tech Stack | 技术栈：</strong> Python, SQL, Chroma, Tree-Sitter, GraphCodeBERT, CodeT5+</p>
                         </div>
                     </div>
 
@@ -100,14 +93,26 @@
                             <h3 class="timeline-title">Linux Kernel-Module-Based Packet Filtering Firewall</h3>
                             <h4 class="timeline-subtitle">基于Linux内核模块的包过滤防火墙</h4>
                             <p class="timeline-date">06/2025 - 07/2025</p>
-                            <p><strong>Project Description:</strong></p>
+                            <p><strong>Project Description | 项目简介</strong></p>
                             <ul>
-                                <li>Designed and implemented a kernel-level firewall leveraging the Netfilter framework to intercept and analyze network traffic at key hooks.</li>
-                                <li>Developed a Linux Kernel Module to enforce stateful filtering and protocol-based access control.</li>
-                                <li>Architected a cross-layer communication system using Netlink sockets and character devices to synchronize security events and update rules.</li>
-                                <li>Built a management suite including a CLI tool with iptables-like syntax and a GUI dashboard for anomaly visualization.</li>
+                                <li>
+                                    Designed and implemented a kernel-level firewall leveraging the Netfilter framework to intercept and analyze network traffic at key hooks.<br>
+                                    基于 Linux Netfilter 框架，设计并实现一个内核级包过滤防火墙，旨在为内部网络提供接近线速的实时流量控制与基础入侵防护。
+                                </li>
+                                <li>
+                                    Developed a Linux Kernel Module to enforce stateful filtering and protocol-based access control.<br>
+                                    开发 Linux 内核模块，实现有状态过滤和基于协议的访问控制。
+                                </li>
+                                <li>
+                                    Architected a cross-layer communication system using Netlink sockets and character devices to synchronize security events and update rules.<br>
+                                    通过 Netlink 套接字和字符设备设计跨层通信系统，实现安全事件同步和规则更新。
+                                </li>
+                                <li>
+                                    Built a management suite including a CLI tool with iptables-like syntax and a GUI dashboard for anomaly visualization.<br>
+                                    开发了提供类 iptables 语法的命令行工具，支持图形化界面直观展示实时流量、拦截日志与报警信息，提升系统易用性。
+                                </li>
                             </ul>
-                            <p><strong>Tech Stack:</strong> C, Linux Kernel, Netfilter, Netlink</p>
+                            <p><strong>Tech Stack | 技术栈：</strong> C, Linux Kernel, Netfilter, Netlink</p>
                         </div>
                     </div>
 
@@ -116,14 +121,26 @@
                             <h3 class="timeline-title">Design of a New Distributed Power Coordinated Controller</h3>
                             <h4 class="timeline-subtitle">新型电力系统分布式协调控制器设计</h4>
                             <p class="timeline-date">10/2023 - 10/2024</p>
-                            <p><strong>Project Description:</strong></p>
+                            <p><strong>Project Description | 项目简介</strong></p>
                             <ul>
-                                <li>Architected a decentralized "Cloud-Edge" collaborative control framework to address modeling complexities in modern power systems .</li>
-                                <li>Developed a distributed consensus algorithm based on Multi-Agent Systems and Graph Theory, featuring global convergence and power balancing.</li>
-                                <li>Optimized communication network reliability by implementing a Genetic Algorithm (GA) to evolve adjacency matrices.</li>
-                                <li>Implemented the distributed architecture on Raspberry Pi hardware using TCP/IP protocols for real-time data exchange.</li>
+                                <li>
+                                    Architected a decentralized "Cloud-Edge" collaborative control framework to address modeling complexities in modern power systems.<br>
+                                    设计一套去中心化的“云-边”协同控制架构，应对新型电力系统中海量分布式资源与电/气/热多能流耦合带来的建模与控制复杂性挑战。
+                                </li>
+                                <li>
+                                    Developed a distributed consensus algorithm based on Multi-Agent Systems and Graph Theory, featuring global convergence and power balancing.<br>
+                                    基于图论与多智能体系统理论设计了一致性变量的更新律，保证一致性算法收敛性和功率平衡特性，提升系统稳定性与鲁棒性。
+                                </li>
+                                <li>
+                                    Optimized communication network reliability by implementing a Genetic Algorithm (GA) to evolve adjacency matrices.<br>
+                                    基于遗传算法，以通信拓扑网络的连接矩阵为染色体，筛选出抗延时能力最强、可靠性最强的上层网络拓扑结构，提高网络性能。
+                                </li>
+                                <li>
+                                    Implemented the distributed architecture on Raspberry Pi hardware using TCP/IP protocols for real-time data exchange.<br>
+                                    使用树莓派开发基于 TCP 协议的通信网络，实现上层云平台、下层微电网控制器的分布式架构。
+                                </li>
                             </ul>
-                            <p><strong>Tech Stack:</strong> Python, Graph Theory, Genetic Algorithm, Raspberry Pi, TCP/IP</p>
+                            <p><strong>Tech Stack | 技术栈：</strong> Python, Graph Theory, Genetic Algorithm, Raspberry Pi, TCP/IP</p>
                         </div>
                     </div>
                 </div>

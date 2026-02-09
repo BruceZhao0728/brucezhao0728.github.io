@@ -410,19 +410,31 @@ h3 {
 .timeline-date {
     color: var(--text-light);
     font-size: 0.9rem;
-
-    .timeline-content ul {
-        padding-left: 0.5rem;
-        margin: 0 0 1rem 0;
-        list-style-position: inside;
-    }
-
-    .timeline-content li {
-        margin-bottom: 0.5rem;
-        line-height: 1.6;
-        padding-left: 0.5rem;
-    }
     margin-bottom: 1rem;
+}
+
+/* 列表样式调整 */
+ul {
+    padding-left: 1.5rem;
+    margin: 1rem 0;
+}
+
+li {
+    margin-bottom: 0.75rem;
+    line-height: 1.6;
+    color: var(--text-color);
+}
+
+.timeline-content ul {
+    padding-left: 1.5rem;
+    margin: 1rem 0 1.5rem 0;
+    list-style-position: outside;
+}
+
+.timeline-content li {
+    margin-bottom: 0.75rem;
+    line-height: 1.6;
+    color: var(--text-color);
 }
 
 /* Timeline Photos */
@@ -730,7 +742,7 @@ h3 {
     width: 80px;
     height: 80px;
     margin: 0 auto 1rem;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    background: linear-gradient(135deg, #dbeafe, #eff6ff);
     border-radius: 50%;
     display: flex;
     align-items: center;

@@ -93,5 +93,43 @@
       "en": "As 2025 comes to an end, I reflect on this year filled with gains and regrets. Here I document my thoughts and insights."
     },
     "file": "blog/life-reflection.md"
+  },
+  {
+    "id": "cs231n-01-introduction",
+    "title": {
+      "zh": "深度学习与计算机视觉：前言",
+      "en": "Deep Learning and Computer Vision: Introduction" 
+    },
+    "date": "2026-02-12",
+    "category": "tech",
+    "tags": ["CS231n", "Deep Learning", "Computer Vision"],
+    "readTime": {
+      "zh": "5分钟阅读",
+      "en": "5 min read"
+    },
+    "excerpt": {
+      "zh": "什么是计算机视觉？",
+      "en": "What is Computer Vision?"
+    },
+    "file": "blog/cs231n-01-introduction.md"
+  },
+  {
+    "id": "cs231n-02-nearest-neighbor-classifier",
+    "title": {
+      "zh": "深度学习与计算机视觉：最近邻分类器",
+      "en": "Deep Learning and Computer Vision: Nearest Neighbor Classifier"
+    },
+    "date": "2026-02-15",
+    "category": "tech",
+    "tags": ["CS231n", "Deep Learning", "Computer Vision"],
+    "readTime": {
+      "zh": "8分钟阅读",
+      "en": "8 min read"
+    },
+    "excerpt": {
+      "zh": "什么是机器学习？最近邻分类器的基本原理和实现方法是什么？",
+      "en": "What is Machine Learning? What are the basic principles and implementation methods of the Nearest Neighbor Classifier?"
+    },
+    "file": "blog/cs231n-02-nearest-neighbor-classifier.md"
   }
 ]

@@ -68,95 +68,113 @@ document.addEventListener('DOMContentLoaded', () => {
 // Markdown processing functions
 // ========================================
 
-// Simple Markdown to HTML parser
-class MarkdownParser {
-    constructor() {
-        this.rules = [
-            // 标题
-            { pattern: /^### (.*$)/gim, replacement: '<h3>$1</h3>' },
-            { pattern: /^## (.*$)/gim, replacement: '<h2>$1</h2>' },
-            { pattern: /^# (.*$)/gim, replacement: '<h1>$1</h1>' },
-            
-            // 粗体和斜体
-            { pattern: /\*\*\*(.+?)\*\*\*/g, replacement: '<strong><em>$1</em></strong>' },
-            { pattern: /\*\*(.+?)\*\*/g, replacement: '<strong>$1</strong>' },
-            { pattern: /\*(.+?)\*/g, replacement: '<em>$1</em>' },
-            { pattern: /___(.+?)___/g, replacement: '<strong><em>$1</em></strong>' },
-            { pattern: /__(.+?)__/g, replacement: '<strong>$1</strong>' },
-            { pattern: /_(.+?)_/g, replacement: '<em>$1</em>' },
-            
-            // 链接
-            { pattern: /\[([^\]]+)\]\(([^)]+)\)/g, replacement: '<a href="$2">$1</a>' },
-            
-            // 图片
-            { pattern: /!\[([^\]]*)\]\(([^)]+)\)/g, replacement: '<img src="$2" alt="$1" />' },
-            
-            // 行内代码
-            { pattern: /`([^`]+)`/g, replacement: '<code>$1</code>' },
-            
-            // 分割线
-            { pattern: /^\s*---\s*$/gim, replacement: '<hr />' },
-            { pattern: /^\s*\*\*\*\s*$/gim, replacement: '<hr />' },
-            
-            // 无序列表
-            { pattern: /^\s*[\*\-]\s+(.+)$/gim, replacement: '<li>$1</li>' },
-            
-            // 有序列表
-            { pattern: /^\s*\d+\.\s+(.+)$/gim, replacement: '<li>$1</li>' },
-            
-            // 引用
-            { pattern: /^>\s+(.+)$/gim, replacement: '<blockquote>$1</blockquote>' },
-            
-            // 段落
-            { pattern: /\n\n/g, replacement: '</p><p>' }
-        ];
-    }
-    
-    parse(markdown) {
-        let html = markdown;
-        
-        // 处理代码块
-        html = html.replace(/```(\w+)?\n([\s\S]*?)```/g, (match, lang, code) => {
-            return `<pre><code class="language-${lang || 'text'}">${this.escapeHtml(code.trim())}</code></pre>`;
+function resolveRelativeUrl(basePath, url) {
+    if (!url) return url;
+    if (/^(https?:)?\/\//i.test(url)) return url;
+    if (url.startsWith('/') || url.startsWith('#') || url.startsWith('data:')) return url;
+    if (!basePath) return url;
+    const baseDir = basePath.substring(0, basePath.lastIndexOf('/') + 1);
+    return `${baseDir}${url}`;
+}
+
+const CALLOUT_TITLES = {
+    note: 'Note',
+    tip: 'Tip',
+    important: 'Important',
+    caution: 'Caution',
+    warning: 'Warning'
+};
+
+function transformCallouts(html) {
+    const container = document.createElement('div');
+    container.innerHTML = html;
+
+    const blockquotes = Array.from(container.querySelectorAll('blockquote'));
+    blockquotes.forEach(blockquote => {
+        const markerNode = findCalloutMarkerNode(blockquote);
+        if (!markerNode) return;
+
+        const rawText = markerNode.textContent || '';
+        const firstLine = rawText.split(/\r?\n/, 1)[0].trim();
+        const match = firstLine.match(/^\[!([a-zA-Z]+)\]\s*(.*)$/);
+        if (!match) return;
+
+        const type = match[1].toLowerCase();
+        const titleText = match[2].trim() || CALLOUT_TITLES[type] || match[1];
+
+        markerNode.textContent = markerNode.textContent.replace(/^\s*\[!([a-zA-Z]+)\][^\n\r]*[\n\r]?/, '');
+
+        const alert = document.createElement('div');
+        alert.className = `md-alert md-alert-${type}`;
+
+        const title = document.createElement('div');
+        title.className = 'md-alert-title';
+        title.textContent = titleText;
+
+        const body = document.createElement('div');
+        body.className = 'md-alert-body';
+
+        while (blockquote.firstChild) {
+            body.appendChild(blockquote.firstChild);
+        }
+
+        Array.from(body.querySelectorAll('p')).forEach(p => {
+            if (!p.textContent.trim() && p.children.length === 0) {
+                p.remove();
+            }
         });
-        
-        // 应用所有规则
-        this.rules.forEach(rule => {
-            html = html.replace(rule.pattern, rule.replacement);
+
+        alert.appendChild(title);
+        alert.appendChild(body);
+        blockquote.replaceWith(alert);
+    });
+
+    return container.innerHTML;
+}
+
+function findFirstTextNode(node) {
+    if (!node) return null;
+    if (node.nodeType === Node.TEXT_NODE && node.textContent.trim()) {
+        return node;
+    }
+    for (const child of Array.from(node.childNodes)) {
+        const result = findFirstTextNode(child);
+        if (result) return result;
+    }
+    return null;
+}
+
+function findCalloutMarkerNode(root) {
+    const nodes = [];
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null);
+    let current = walker.nextNode();
+    while (current) {
+        if (current.textContent && current.textContent.trim().startsWith('[!')) {
+            nodes.push(current);
+        }
+        current = walker.nextNode();
+    }
+    return nodes.find(node => /^\s*\[!([a-zA-Z]+)\]/.test(node.textContent)) || null;
+}
+
+function parseMarkdown(markdown, basePath) {
+    if (window.marked) {
+        window.marked.use({
+            walkTokens(token) {
+                if (token.type === 'image') {
+                    token.href = resolveRelativeUrl(basePath, token.href);
+                }
+                if (token.type === 'link') {
+                    token.href = resolveRelativeUrl(basePath, token.href);
+                }
+            }
         });
-        
-        // 包装列表
-        html = html.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
-        
-        // 包装段落
-        html = '<p>' + html + '</p>';
-        
-        // 清理多余的段落标签
-        html = html.replace(/<p><\/p>/g, '');
-        html = html.replace(/<p>(<h[1-6]>)/g, '$1');
-        html = html.replace(/(<\/h[1-6]>)<\/p>/g, '$1');
-        html = html.replace(/<p>(<pre>)/g, '$1');
-        html = html.replace(/(<\/pre>)<\/p>/g, '$1');
-        html = html.replace(/<p>(<ul>)/g, '$1');
-        html = html.replace(/(<\/ul>)<\/p>/g, '$1');
-        html = html.replace(/<p>(<blockquote>)/g, '$1');
-        html = html.replace(/(<\/blockquote>)<\/p>/g, '$1');
-        html = html.replace(/<p>(<hr \/>)/g, '$1');
-        html = html.replace(/(<hr \/>)<\/p>/g, '$1');
-        
-        return html;
+        const html = window.marked.parse(markdown);
+        return transformCallouts(html);
     }
-    
-    escapeHtml(text) {
-        const map = {
-            '&': '&amp;',
-            '<': '&lt;',
-            '>': '&gt;',
-            '"': '&quot;',
-            "'": '&#039;'
-        };
-        return text.replace(/[&<>"']/g, m => map[m]);
-    }
+
+    // Fallback if marked is not available
+    return `<pre><code>${markdown}</code></pre>`;
 }
 
 // 加载并解析Markdown文件
@@ -167,8 +185,7 @@ async function loadMarkdownFile(filePath) {
             throw new Error('文件加载失败');
         }
         const markdown = await response.text();
-        const parser = new MarkdownParser();
-        return parser.parse(markdown);
+        return parseMarkdown(markdown, filePath);
     } catch (error) {
         console.error('加载Markdown文件出错:', error);
         return '<p>内容加载失败</p>';
@@ -293,6 +310,16 @@ async function loadBlogDetail() {
             </div>
         </div>
     `;
+
+    if (window.hljs) {
+        document.querySelectorAll('.markdown-content pre code').forEach(block => {
+            window.hljs.highlightElement(block);
+        });
+    }
+
+    if (window.MathJax && window.MathJax.typesetPromise) {
+        window.MathJax.typesetPromise();
+    }
 }
 
 // 平滑滚动到顶部

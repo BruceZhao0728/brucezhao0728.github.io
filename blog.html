@@ -32,6 +32,20 @@
                 </div>
             </section>
 
+            <section class="section">
+                <div class="text-center">
+                    <label for="blog-sort" class="sr-only">Sort blogs</label>
+                    <select id="blog-sort" class="btn btn-outline" onchange="applySort()">
+                        <option value="date-desc">Time (newest first)</option>
+                        <option value="date-asc">Time (oldest first)</option>
+                        <option value="zh-asc">Chinese title (A-Z)</option>
+                        <option value="zh-desc">Chinese title (Z-A)</option>
+                        <option value="en-asc">English title (A-Z)</option>
+                        <option value="en-desc">English title (Z-A)</option>
+                    </select>
+                </div>
+            </section>
+
             <!-- Blog List -->
             <section class="section">
                 <div id="blog-list" class="blog-list">
@@ -53,6 +67,8 @@
     <script>
         // Blog filtering functionality
         let allBlogs = [];
+        let activeCategory = 'all';
+        let activeSort = 'date-desc';
 
         function getBlogText(value) {
             if (value && typeof value === 'object') {
@@ -75,7 +91,7 @@
         
         async function initBlogList() {
             allBlogs = await loadBlogList();
-            displayBlogs(allBlogs);
+            applySort();
         }
         
         function displayBlogs(blogs) {
@@ -112,6 +128,50 @@
             `;
             }).join('');
         }
+
+        function applySort() {
+            const sortSelect = document.getElementById('blog-sort');
+            if (sortSelect) {
+                activeSort = sortSelect.value;
+            }
+
+            const filtered = getFilteredBlogs();
+            const sorted = sortBlogs(filtered, activeSort);
+            displayBlogs(sorted);
+        }
+
+        function getFilteredBlogs() {
+            if (activeCategory === 'all') {
+                return [...allBlogs];
+            }
+            return allBlogs.filter(blog =>
+                blog.category === activeCategory ||
+                (blog.tags && blog.tags.includes(activeCategory))
+            );
+        }
+
+        function sortBlogs(blogs, sortKey) {
+            const [field, direction] = sortKey.split('-');
+            const multiplier = direction === 'desc' ? -1 : 1;
+            const dateValue = value => new Date(value).getTime() || 0;
+
+            return [...blogs].sort((a, b) => {
+                if (field === 'date') {
+                    return (dateValue(a.date) - dateValue(b.date)) * multiplier;
+                }
+                if (field === 'zh') {
+                    const aText = (a.title && a.title.zh) ? a.title.zh : '';
+                    const bText = (b.title && b.title.zh) ? b.title.zh : '';
+                    return aText.localeCompare(bText, 'zh-Hans-CN') * multiplier;
+                }
+                if (field === 'en') {
+                    const aText = (a.title && a.title.en) ? a.title.en : '';
+                    const bText = (b.title && b.title.en) ? b.title.en : '';
+                    return aText.localeCompare(bText, 'en') * multiplier;
+                }
+                return 0;
+            });
+        }
         
         function filterBlogs(category) {
             // 更新按钮样式
@@ -123,15 +183,8 @@
             event.target.classList.add('btn-primary');
             
             // 筛选博客
-            if (category === 'all') {
-                displayBlogs(allBlogs);
-            } else {
-                const filtered = allBlogs.filter(blog => 
-                    blog.category === category || 
-                    (blog.tags && blog.tags.includes(category))
-                );
-                displayBlogs(filtered);
-            }
+            activeCategory = category;
+            applySort();
         }
         
         // 页面加载时初始化

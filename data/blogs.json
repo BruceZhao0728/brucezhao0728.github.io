@@ -119,7 +119,7 @@
       "zh": "深度学习与计算机视觉：最近邻分类器",
       "en": "Deep Learning and Computer Vision: Nearest Neighbor Classifier"
     },
-    "date": "2026-02-15",
+    "date": "2026-02-12",
     "category": "tech",
     "tags": ["CS231n", "Deep Learning", "Computer Vision"],
     "readTime": {
@@ -131,5 +131,24 @@
       "en": "What is Machine Learning? What are the basic principles and implementation methods of the Nearest Neighbor Classifier?"
     },
     "file": "blog/cs231n-02-nearest-neighbor-classifier.md"
+  },
+  {
+    "id": "cs231n-03-linear-classifier",
+    "title": {
+      "zh": "深度学习与计算机视觉：线性分类器",
+      "en": "Deep Learning and Computer Vision: Linear Classifier"
+    },
+    "date": "2026-02-13",
+    "category": "tech",
+    "tags": ["CS231n", "Deep Learning", "Computer Vision"],
+    "readTime": {
+      "zh": "10分钟阅读",
+      "en": "10 min read"
+    },
+    "excerpt": {
+      "zh": "什么是线性分类器？线性分类器的基本原理和实现方法是什么？",
+      "en": "What is a Linear Classifier? What are the basic principles and implementation methods of a Linear Classifier?"
+    },
+    "file": "blog/cs231n-03-linear-classifier.md"
   }
 ]

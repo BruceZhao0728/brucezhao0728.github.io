@@ -53,7 +53,7 @@ def predict(model, image):
 
 在接下来的内容中，我们将从最简单的最近邻分类器（Nearest Neighbor Classifier）开始，逐步引入更复杂的线性分类器（Linear Classifier）和非线性分类器，并最终过渡到深度学习模型。通过这些步骤，我们将逐渐理解计算机视觉中的分类任务是如何实现的，以及深度学习在其中扮演的角色。
 
-## 最近邻分类器（Nearest Neighbor Classifier）
+### 最近邻分类器（Nearest Neighbor Classifier）
 
 最简单的机器学习模型就是最近邻分类器。它的基本思想是：对于一张新的图片，我们找到训练集中与它最相似的图片，然后将这张图片的标签作为新图片的预测标签。
 

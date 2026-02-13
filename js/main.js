@@ -157,8 +157,37 @@ function findCalloutMarkerNode(root) {
     return nodes.find(node => /^\s*\[!([a-zA-Z]+)\]/.test(node.textContent)) || null;
 }
 
+function extractMath(markdown) {
+    const replacements = [];
+    let text = markdown;
+
+    const pushReplacement = (value) => {
+        const token = `@@MATH_${replacements.length}@@`;
+        replacements.push({ token, value });
+        return token;
+    };
+
+    text = text.replace(/\$\$([\s\S]+?)\$\$/g, (_, content) => pushReplacement(`$$${content}$$`));
+
+    text = text.replace(/(^|[^$])\$(?!\$)([^$\n]+?)\$(?!\$)/g, (match, prefix, content) => {
+        const token = pushReplacement(`$${content}$`);
+        return `${prefix}${token}`;
+    });
+
+    return { text, replacements };
+}
+
+function restoreMath(html, replacements) {
+    let output = html;
+    replacements.forEach(({ token, value }) => {
+        output = output.split(token).join(value);
+    });
+    return output;
+}
+
 function parseMarkdown(markdown, basePath) {
     if (window.marked) {
+        const { text, replacements } = extractMath(markdown);
         window.marked.use({
             walkTokens(token) {
                 if (token.type === 'image') {
@@ -169,12 +198,32 @@ function parseMarkdown(markdown, basePath) {
                 }
             }
         });
-        const html = window.marked.parse(markdown);
-        return transformCallouts(html);
+        const html = window.marked.parse(text);
+        return restoreMath(transformCallouts(html), replacements);
     }
 
     // Fallback if marked is not available
     return `<pre><code>${markdown}</code></pre>`;
+}
+
+function typesetMath(container) {
+    if (!container || !window.MathJax) return;
+
+    const runTypeset = () => {
+        if (window.MathJax.typesetPromise) {
+            return window.MathJax.typesetPromise([container]);
+        }
+        if (window.MathJax.typeset) {
+            window.MathJax.typeset([container]);
+        }
+    };
+
+    if (window.MathJax.startup && window.MathJax.startup.promise) {
+        window.MathJax.startup.promise.then(runTypeset);
+        return;
+    }
+
+    runTypeset();
 }
 
 // 加载并解析Markdown文件
@@ -317,9 +366,8 @@ async function loadBlogDetail() {
         });
     }
 
-    if (window.MathJax && window.MathJax.typesetPromise) {
-        window.MathJax.typesetPromise();
-    }
+    const markdownContainer = document.querySelector('.markdown-content');
+    typesetMath(markdownContainer);
 }
 
 // 平滑滚动到顶部

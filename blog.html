@@ -16,18 +16,18 @@
     <main class="main-content">
         <div class="container">
             <section class="section">
-                <h1 class="text-center">Blog Posts | 我的博客</h1>
-                <p class="text-center hero-subtitle">Record learning, share thoughts, deliver value</p>
+                <h1 class="text-center" id="page-title">Blog Posts | 我的博客</h1>
+                <p class="text-center hero-subtitle" id="page-subtitle">Record learning, share thoughts, deliver value</p>
             </section>
 
             <!-- Blog Categories -->
             <section class="section">
                 <div class="text-center">
                     <div class="btn-group" style="justify-content: center;">
-                        <button class="btn btn-primary" onclick="filterBlogs('all')">All</button>
-                        <button class="btn btn-outline" onclick="filterBlogs('tech')">Tech</button>
-                        <button class="btn btn-outline" onclick="filterBlogs('life')">Life</button>
-                        <button class="btn btn-outline" onclick="filterBlogs('study')">Study</button>
+                        <button class="btn btn-primary" onclick="filterBlogs('all')" id="btn-all">All</button>
+                        <button class="btn btn-outline" onclick="filterBlogs('tech')" id="btn-tech">Tech</button>
+                        <button class="btn btn-outline" onclick="filterBlogs('life')" id="btn-life">Life</button>
+                        <button class="btn btn-outline" onclick="filterBlogs('study')" id="btn-study">Study</button>
                     </div>
                 </div>
             </section>
@@ -36,12 +36,12 @@
                 <div class="text-center">
                     <label for="blog-sort" class="sr-only">Sort blogs</label>
                     <select id="blog-sort" class="btn btn-outline" onchange="applySort()">
-                        <option value="date-desc">Time (newest first)</option>
-                        <option value="date-asc">Time (oldest first)</option>
-                        <option value="zh-asc">Chinese title (A-Z)</option>
-                        <option value="zh-desc">Chinese title (Z-A)</option>
-                        <option value="en-asc">English title (A-Z)</option>
-                        <option value="en-desc">English title (Z-A)</option>
+                        <option value="date-desc" id="opt-date-desc">Time (newest first)</option>
+                        <option value="date-asc" id="opt-date-asc">Time (oldest first)</option>
+                        <option value="zh-asc" id="opt-zh-asc">Chinese title (A-Z)</option>
+                        <option value="zh-desc" id="opt-zh-desc">Chinese title (Z-A)</option>
+                        <option value="en-asc" id="opt-en-asc">English title (A-Z)</option>
+                        <option value="en-desc" id="opt-en-desc">English title (Z-A)</option>
                     </select>
                 </div>
             </section>
@@ -52,7 +52,7 @@
                     <!-- Blogs will be loaded dynamically via JavaScript -->
                     <div class="text-center">
                         <div class="loading"></div>
-                        <p>Loading blog posts...</p>
+                        <p id="loading-text">Loading blog posts...</p>
                     </div>
                 </div>
             </section>
@@ -62,6 +62,7 @@
     <!-- 页脚占位符 -->
     <div id="footer-placeholder"></div>
 
+    <script src="js/language.js"></script>
     <script src="js/components.js"></script>
     <script src="js/main.js"></script>
     <script>
@@ -71,25 +72,38 @@
         let activeSort = 'date-desc';
 
         function getBlogText(value) {
-            if (value && typeof value === 'object') {
-                return value.en || value.zh || '';
-            }
-            return value || '';
+            return getLocalizedText(value);
         }
 
         function getBlogTitleBoth(value) {
-            if (value && typeof value === 'object') {
-                const en = value.en || '';
-                const zh = value.zh || '';
-                if (en && zh) {
-                    return `${en} | ${zh}`;
-                }
-                return en || zh;
-            }
-            return value || '';
+            return getLocalizedBlogTitle(value);
+        }
+        
+        function updateBlogPageLanguage() {
+            // Update page title and subtitle
+            document.getElementById('page-title').textContent = translateBlog('pageTitle') + ' | ' + blogTranslations['zh']['pageTitle'];
+            document.getElementById('page-subtitle').textContent = translateBlog('pageSubtitle');
+            
+            // Update category buttons
+            document.getElementById('btn-all').textContent = translateBlog('btnAll');
+            document.getElementById('btn-tech').textContent = translateBlog('btnTech');
+            document.getElementById('btn-life').textContent = translateBlog('btnLife');
+            document.getElementById('btn-study').textContent = translateBlog('btnStudy');
+            
+            // Update sort options
+            document.getElementById('opt-date-desc').textContent = translateBlog('sortTime');
+            document.getElementById('opt-date-asc').textContent = translateBlog('sortTimeOld');
+            document.getElementById('opt-zh-asc').textContent = translateBlog('sortZhAsc');
+            document.getElementById('opt-zh-desc').textContent = translateBlog('sortZhDesc');
+            document.getElementById('opt-en-asc').textContent = translateBlog('sortEnAsc');
+            document.getElementById('opt-en-desc').textContent = translateBlog('sortEnDesc');
+            
+            // Update loading text
+            document.getElementById('loading-text').textContent = translateBlog('loading');
         }
         
         async function initBlogList() {
+            updateBlogPageLanguage();
             allBlogs = await loadBlogList();
             applySort();
         }
@@ -98,7 +112,7 @@
             const blogListContainer = document.getElementById('blog-list');
             
             if (blogs.length === 0) {
-                blogListContainer.innerHTML = '<div class="text-center"><p>No blog posts available</p></div>';
+                blogListContainer.innerHTML = `<div class="text-center"><p>${translateBlog('noBlogs')}</p></div>`;
                 return;
             }
             
@@ -154,6 +168,7 @@
             const [field, direction] = sortKey.split('-');
             const multiplier = direction === 'desc' ? -1 : 1;
             const dateValue = value => new Date(value).getTime() || 0;
+            const currentLang = getCurrentLanguage();
 
             return [...blogs].sort((a, b) => {
                 if (field === 'date') {

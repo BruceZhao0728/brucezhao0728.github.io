@@ -62,6 +62,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     // 加载导航栏
     const navbarLoaded = await loadComponent('navbar-placeholder', 'components/navbar.html');
     
+    // 导航栏加载完成后立即翻译
+    if (navbarLoaded) {
+        translateNavItems();
+        setActiveNav();
+        setupNavbarLanguageSelector();
+    }
+    
     // 加载页脚
     const footerLoaded = await loadComponent('footer-placeholder', 'components/footer.html');
     
@@ -89,6 +96,26 @@ function initNavbar() {
     setActiveNav();
     
     // 移动端菜单切换
+    setupMobileMenu();
+    
+    // 导航栏滚动效果
+    setupNavbarScroll();
+}
+
+// 设置语言选择器
+function setupNavbarLanguageSelector() {
+    // 使用 setTimeout 确保 DOM 已完全更新
+    setTimeout(() => {
+        const languageSelect = document.getElementById('language-select');
+        if (languageSelect) {
+            const currentLang = getCurrentLanguage();
+            languageSelect.value = currentLang;
+        }
+    }, 0);
+}
+
+// 设置移动端菜单
+function setupMobileMenu() {
     const navToggle = document.querySelector('.nav-toggle');
     const navMenu = document.querySelector('.nav-menu');
     
@@ -107,8 +134,10 @@ function initNavbar() {
             });
         });
     }
-    
-    // 导航栏滚动效果
+}
+
+// 设置导航栏滚动效果
+function setupNavbarScroll() {
     window.addEventListener('scroll', () => {
         const navbar = document.querySelector('.navbar');
         if (navbar) {
@@ -118,6 +147,15 @@ function initNavbar() {
                 navbar.classList.remove('scrolled');
             }
         }
+    });
+}
+
+// 翻译导航项
+function translateNavItems() {
+    const navLinks = document.querySelectorAll('.nav-link[data-i18n]');
+    navLinks.forEach(link => {
+        const key = link.getAttribute('data-i18n');
+        link.textContent = translateNav(key);
     });
 }
 

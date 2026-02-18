@@ -100,7 +100,7 @@
       "zh": "深度学习与计算机视觉：前言",
       "en": "Deep Learning and Computer Vision: Introduction" 
     },
-    "date": "2026-02-12",
+    "date": "2026-02-11",
     "category": "tech",
     "tags": ["CS231n", "Deep Learning", "Computer Vision"],
     "readTime": {
@@ -150,5 +150,24 @@
       "en": "What is a Linear Classifier? What are the basic principles and implementation methods of a Linear Classifier?"
     },
     "file": "blog/cs231n-03-linear-classifier.md"
+  },
+  {
+    "id": "cs231n-04-regularization-and-optimization",
+    "title": {
+      "zh": "深度学习与计算机视觉：正则化与优化",
+      "en": "Deep Learning and Computer Vision: Regularization and Optimization"
+    },
+    "date": "2026-02-18",
+    "category": "tech",
+    "tags": ["CS231n", "Deep Learning", "Computer Vision"],
+    "readTime": {
+      "zh": "15分钟阅读",
+      "en": "15 min read"
+    },
+    "excerpt": {
+      "zh": "什么是正则化？优化算法的基本原理和实现方法是什么？",
+      "en": "What is Regularization? What are the basic principles and implementation methods of Optimization Algorithms?"
+    },
+    "file": "blog/cs231n-04-regularization-and-optimization.md"
   }
 ]

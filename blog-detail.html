@@ -32,13 +32,13 @@
                     <!-- Blog content will be loaded dynamically via JavaScript -->
                     <div class="text-center">
                         <div class="loading"></div>
-                        <p>Loading blog content...</p>
+                        <p id="blog-loading-text">Loading blog content...</p>
                     </div>
                 </div>
                 
                 <!-- Back Button -->
                 <div class="section">
-                    <a href="blog.html" class="btn btn-outline">← Back to Blog</a>
+                    <a href="blog.html" class="btn btn-outline" id="back-to-blog">← Back to Blog</a>
                 </div>
             </div>
         </div>
@@ -48,13 +48,32 @@
     <div id="footer-placeholder"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="js/language.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/highlight.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="js/components.js"></script>
     <script src="js/main.js"></script>
     <script>
-        // 页面加载时加载博客详情
-        window.addEventListener('DOMContentLoaded', loadBlogDetail);
+        // 更新博客详情页面的国际化文本
+        function updateBlogDetailLanguage() {
+            const loadingEl = document.getElementById('blog-loading-text');
+            if (loadingEl) {
+                loadingEl.textContent = 'Loading...';
+            }
+            const backBtn = document.getElementById('back-to-blog');
+            if (backBtn) {
+                backBtn.textContent = translateBlog('backToBlog');
+            }
+        }
+        
+        // 延迟调用，确保 setupNavbarLanguageSelector 被执行
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                updateBlogDetailLanguage();
+                setupNavbarLanguageSelector();
+                loadBlogDetail();
+            }, 100);
+        });
     </script>
 </body>
 </html>

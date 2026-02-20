@@ -65,6 +65,20 @@ const blogTranslations = {
     }
 };
 
+// Updates section translations
+const updatesTranslations = {
+    'en': {
+        'sectionTitle': 'Recent Updates',
+        'loading': 'Loading updates...',
+        'noUpdates': 'No updates available'
+    },
+    'zh': {
+        'sectionTitle': '近期更新',
+        'loading': '正在加载更新...',
+        'noUpdates': '暂无更新'
+    }
+};
+
 // Get current language preference
 function getCurrentLanguage() {
     let lang = localStorage.getItem(LANGUAGE_STORAGE_KEY);
@@ -82,6 +96,8 @@ function getCurrentLanguage() {
 function setLanguage(lang) {
     if (SUPPORTED_LANGUAGES[lang]) {
         localStorage.setItem(LANGUAGE_STORAGE_KEY, lang);
+        // Dispatch custom event for language change
+        window.dispatchEvent(new CustomEvent('languageChanged', { detail: { language: lang } }));
         // Reload components and content with new language
         location.reload();
     }
@@ -128,6 +144,12 @@ function translateNav(key) {
 function translateBlog(key) {
     const currentLang = getCurrentLanguage();
     return blogTranslations[currentLang]?.[key] || blogTranslations['en'][key] || key;
+}
+
+// Translate updates section text
+function translateUpdates(key) {
+    const currentLang = getCurrentLanguage();
+    return updatesTranslations[currentLang]?.[key] || updatesTranslations['en'][key] || key;
 }
 
 // Change language (called from navbar)

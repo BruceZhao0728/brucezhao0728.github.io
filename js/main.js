@@ -43,6 +43,11 @@ function setActiveNav() {
 document.addEventListener('DOMContentLoaded', () => {
     setActiveNav();
     
+    // Render updates if on index page
+    if (typeof renderUpdates === 'function') {
+        renderUpdates();
+    }
+    
     // Add fade-in animation to all sections
     const sections = document.querySelectorAll('.section');
     const observer = new IntersectionObserver((entries) => {

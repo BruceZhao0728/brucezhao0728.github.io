@@ -1,0 +1,28 @@
+[
+  {
+    "id": "website-launch",
+    "title": {
+      "en": "Welcome to My Personal Website",
+      "zh": "欢迎访问我的个人网站"
+    },
+    "date": "2026-02-07",
+    "emoji": "🎉",
+    "content": {
+      "en": "This is my personal website where I share my learning insights, research experiences, and life reflections. The website is continuously being updated. Stay tuned for more exciting content!",
+      "zh": "这是我的个人网站，我在这里分享我的学习心得、研究经历和人生感悟。网站正在不断更新中，敬请期待更多精彩内容！"
+    }
+  },
+  {
+    "id": "new-blog-series-cs231n",
+    "title": {
+        "en": "New Blog Series: CS231n Deep Learning Course Notes",
+        "zh": "新博客系列：CS231n深度学习课程笔记"
+    },
+    "date": "2026-02-20",
+    "emoji": "📚",
+    "content": {
+        "en": "I have started a new blog series where I will share my notes and insights from the CS231n Deep Learning course. Stay tuned for the upcoming posts in this series!",
+        "zh": "我开始了一个新的博客系列，在这里我将分享我从CS231n深度学习课程中整理的笔记和心得。敬请期待这个系列的后续文章！"
+    }
+  }
+]

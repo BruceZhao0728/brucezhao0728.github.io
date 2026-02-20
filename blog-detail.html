@@ -14,8 +14,27 @@
                 inlineMath: [['$', '$'], ['\\(', '\\)']],
                 displayMath: [['$$', '$$'], ['\\[', '\\]']]
             },
+            chtml: {
+                linebreaks: {
+                    automatic: true,
+                    width: '90vw'
+                },
+                scale: 1,
+                minScaleAdjust: 70
+            },
+            svg: {
+                linebreaks: {
+                    automatic: true,
+                    width: '90vw'
+                },
+                scale: 1,
+                minScaleAdjust: 70
+            },
             options: {
-                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+                renderActions: {
+                    addMenu: []
+                }
             }
         };
     </script>

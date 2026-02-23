@@ -27,8 +27,8 @@
                         欢迎来到我的个人网站！我是一名对人工智能、程序分析以及相关领域感兴趣的学生。
                     </p>
                     <div class="btn-group">
-                        <a href="blog.html" class="btn btn-primary">View Blog</a>
-                        <a href="research.html" class="btn btn-outline">Research</a>
+                        <a href="blog.html" class="btn btn-primary" id="btn-view-blog">View Blog</a>
+                        <a href="research.html" class="btn btn-outline" id="btn-research">Research</a>
                     </div>
                 </div>
                 <div class="hero-avatar">
@@ -135,5 +135,25 @@
     <script src="js/updates.js"></script>
     <script src="js/components.js"></script>
     <script src="js/main.js"></script>
+    <script>
+        // Update home page button text based on language
+        function updateHomePageLanguage() {
+            const btnViewBlog = document.getElementById('btn-view-blog');
+            const btnResearch = document.getElementById('btn-research');
+            
+            if (btnViewBlog) {
+                btnViewBlog.textContent = translateHome('viewBlog');
+            }
+            if (btnResearch) {
+                btnResearch.textContent = translateHome('research');
+            }
+        }
+        
+        // Initialize language on page load
+        window.addEventListener('DOMContentLoaded', updateHomePageLanguage);
+        
+        // Update when language changes
+        window.addEventListener('languageChanged', updateHomePageLanguage);
+    </script>
 </body>
 </html>

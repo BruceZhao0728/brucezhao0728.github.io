@@ -80,9 +80,7 @@
         }
         
         function updateBlogPageLanguage() {
-            // Update page title and subtitle
-            document.getElementById('page-title').textContent = translateBlog('pageTitle') + ' | ' + blogTranslations['zh']['pageTitle'];
-            document.getElementById('page-subtitle').textContent = translateBlog('pageSubtitle');
+            // Keep title and subtitle fixed
             
             // Update category buttons
             document.getElementById('btn-all').textContent = translateBlog('btnAll');

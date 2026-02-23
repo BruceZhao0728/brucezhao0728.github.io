@@ -100,69 +100,50 @@
             <!-- Favorite Albums -->
             <section class="section">
                 <h2>Favorite Music | 音乐收藏</h2>
-                <div class="card-grid">
-                    <div class="card">
-                        <img src="img/interests/music/mayday_poetry_of_the_day_after.webp" alt="后青春的诗 album cover" class="album-cover">
-                        <h3>突然好想你</h3>
-                        <h4>Suddenly Missing You So Bad</h4>
-                        <p><strong>Artist:</strong> 五月天 | Mayday</p>
-                        <p><strong>Genre:</strong> Rock / Pop</p>
+                <div class="music-player-container">
+                    <!-- 左侧：选择区域 -->
+                    <div class="music-controls">
+                        <div class="control-group">
+                            <label for="genre-select">流派 | Genre</label>
+                            <select id="genre-select" class="music-select">
+                                <option value="all">全部 | All</option>
+                                <option value="classical">古典音乐 | Classical</option>
+                                <option value="mandopop">国语流行 | Mandopop</option>
+                                <option value="cantopop">粤语流行 | Cantopop</option>
+                            </select>
+                        </div>
+                        <div class="control-group">
+                            <label for="song-select">歌曲 | Song</label>
+                            <select id="song-select" class="music-select">
+                                <!-- 动态填充 -->
+                            </select>
+                        </div>
+                        <button id="random-btn" class="random-button">
+                            🎲 随机播放 | Shuffle
+                        </button>
                     </div>
-                    <div class="card">
-                        <img src="img/interests/music/cheer_chen_groupies.webp" alt="太聪明 album cover" class="album-cover">
-                        <h3>太聪明</h3>
-                        <h4>Too Smart</h4>
-                        <p><strong>Artist:</strong> 陈绮贞 | Cheer Chen</p>
-                        <p><strong>Genre:</strong> Pop</p>
+
+                    <!-- 中间：专辑封面 -->
+                    <div class="music-cover">
+                        <img id="album-cover" src="img/interests/music/mayday_poetry_of_the_day_after.webp" alt="Album cover">
                     </div>
-                    <div class="card">
-                        <img src="img/interests/music/jj_lin_genisis.webp" alt="新地球 album cover" class="album-cover">
-                        <h3>浪漫血液</h3>
-                        <h4>Romantic</h4>
-                        <p><strong>Artist:</strong> 林俊杰 | JJ Lin</p>
-                        <p><strong>Genre:</strong> Pop</p>
-                    </div>
-                    <div class="card">
-                        <img src="img/interests/music/kay_tse_binary.webp" alt="Binary album cover" class="album-cover">
-                        <h3>喜帖街</h3>
-                        <h4>Wedding Card Street</h4>
-                        <p><strong>Artist:</strong> 谢安琪 | Kay Tse</p>
-                        <p><strong>Genre:</strong> Pop</p>
-                    </div>
-                    <div class="card">
-                        <img src="img/interests/music/eason_chan_the_line_up.webp" alt="The Line Up album cover" class="album-cover">
-                        <h3>人来人往</h3>
-                        <h4>People Come and Go</h4>
-                        <p><strong>Artist:</strong> 陈奕迅 | Eason Chan</p>
-                        <p><strong>Genre:</strong> Pop</p>
-                    </div>
-                    <div class="card">
-                        <img src="img/interests/music/sammi_cheung_shocking_pink.webp" alt="Shocking Pink album cover" class="album-cover">
-                        <h3>终身美丽</h3>
-                        <h4>Beautiful Life</h4>
-                        <p><strong>Artist:</strong> 郑秀文 | Sammi Cheng</p>
-                        <p><strong>Genre:</strong> Pop</p>
-                    </div>
-                    <div class="card">
-                        <img src="img/interests/music/anne_sophie_mutter_vivaldi_the_four_seasons.webp" alt="Vivaldi: The Four Seasons album cover" class="album-cover">
-                        <h3>Vivaldi: The Four Seasons</h3>
-                        <h4>维瓦尔第：四季</h4>
-                        <p><strong>Artist:</strong> Anne-Sophie Mutter</p>
-                        <p><strong>Genre:</strong> Classical</p>
-                    </div>
-                    <div class="card">
-                        <img src="img/interests/music/yuja_wang_rachmaninoff.webp" alt="Rachmaninoff album cover" class="album-cover">
-                        <h3>Rachmaninoff Piano Concerto No.3</h3>
-                        <h4>拉赫玛尼诺夫第三钢琴协奏曲</h4>
-                        <p><strong>Artist:</strong> 王羽佳 | Yuja Wang</p>
-                        <p><strong>Genre:</strong> Classical</p>
-                    </div>
-                    <div class="card">
-                        <img src="img/interests/music/krystian_zimerman_beethoven.webp" alt="Beethoven album cover" class="album-cover">
-                        <h3>Beethoven Piano Concerto No.1</h3>
-                        <h4>贝多芬第一钢琴协奏曲</h4>
-                        <p><strong>Artist:</strong> Krystian Zimerman</p>
-                        <p><strong>Genre:</strong> Classical</p>
+
+                    <!-- 右侧：歌曲信息 -->
+                    <div class="music-info">
+                        <h3 id="song-title-cn">突然好想你</h3>
+                        <h4 id="song-title-en">Suddenly Missing You So Bad</h4>
+                        <p class="music-artist">
+                            <strong>艺术家 | Artist:</strong>
+                            <span id="artist-name">五月天 | Mayday</span>
+                        </p>
+                        <div class="music-lyrics">
+                            <p id="lyrics-text">
+                                最怕空气突然安静<br>
+                                最怕朋友突然的关心<br>
+                                最怕回忆突然翻滚绞痛着不平息<br>
+                                最怕突然听到你的消息
+                            </p>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -426,5 +407,6 @@
     <script src="js/language.js"></script>
     <script src="js/components.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/music-player.js"></script>
 </body>
 </html>

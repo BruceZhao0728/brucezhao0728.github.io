@@ -84,7 +84,7 @@
                                     构建自然语言接口，用户输入查询需求，系统通过云端 LLM API 自动生成 SQL 查询语句，实现对关系型数据库的智能查询。
                                 </li>
                             </ul>
-                            <p><strong>Tech Stack | 技术栈：</strong> Python, SQL, Chroma, Tree-Sitter, GraphCodeBERT, CodeT5+</p>
+                            <p><strong>Tech Stack | 技术栈</strong><br>Python, SQL, Chroma, Tree-Sitter, GraphCodeBERT, CodeT5+</p>
                         </div>
                     </div>
 
@@ -112,7 +112,7 @@
                                     开发了提供类 iptables 语法的命令行工具，支持图形化界面直观展示实时流量、拦截日志与报警信息，提升系统易用性。
                                 </li>
                             </ul>
-                            <p><strong>Tech Stack | 技术栈：</strong> C, Linux Kernel, Netfilter, Netlink</p>
+                            <p><strong>Tech Stack | 技术栈</strong><br>C, Linux Kernel, Netfilter, Netlink</p>
                         </div>
                     </div>
 
@@ -140,7 +140,7 @@
                                     使用树莓派开发基于 TCP 协议的通信网络，实现上层云平台、下层微电网控制器的分布式架构。
                                 </li>
                             </ul>
-                            <p><strong>Tech Stack | 技术栈：</strong> Python, Graph Theory, Genetic Algorithm, Raspberry Pi, TCP/IP</p>
+                            <p><strong>Tech Stack | 技术栈</strong><br>Python, Graph Theory, Genetic Algorithm, Raspberry Pi, TCP/IP</p>
                         </div>
                     </div>
                 </div>
@@ -226,8 +226,8 @@
                         欢迎通过电子邮件或其他方式与我联系。
                     </p>
                     <div class="btn-group mt-2">
-                        <a href="mailto:bruce0728@sjtu.edu.cn" class="btn btn-primary">Send Email</a>
-                        <a href="#" class="btn btn-outline">View Resume</a>
+                        <a href="mailto:bruce0728@sjtu.edu.cn" class="btn btn-primary" id="btn-send-email">Send Email</a>
+                        <a href="#" class="btn btn-outline" id="btn-view-resume">View Resume</a>
                     </div>
                 </div>
             </section>
@@ -240,5 +240,25 @@
     <script src="js/language.js"></script>
     <script src="js/components.js"></script>
     <script src="js/main.js"></script>
+    <script>
+        // Update research page button text based on language
+        function updateResearchPageLanguage() {
+            const btnSendEmail = document.getElementById('btn-send-email');
+            const btnViewResume = document.getElementById('btn-view-resume');
+            
+            if (btnSendEmail) {
+                btnSendEmail.textContent = translateResearch('sendEmail');
+            }
+            if (btnViewResume) {
+                btnViewResume.textContent = translateResearch('viewResume');
+            }
+        }
+        
+        // Initialize language on page load
+        window.addEventListener('DOMContentLoaded', updateResearchPageLanguage);
+        
+        // Update when language changes
+        window.addEventListener('languageChanged', updateResearchPageLanguage);
+    </script>
 </body>
 </html>

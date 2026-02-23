@@ -30,8 +30,6 @@ const navTranslations = {
 // Blog page translations
 const blogTranslations = {
     'en': {
-        'pageTitle': 'Blog Posts',
-        'pageSubtitle': 'Record learning, share thoughts, deliver value',
         'btnAll': 'All',
         'btnTech': 'Tech',
         'btnLife': 'Life',
@@ -47,8 +45,6 @@ const blogTranslations = {
         'backToBlog': '← Back to Blog'
     },
     'zh': {
-        'pageTitle': '博客文章',
-        'pageSubtitle': '记录学习，分享思考，传递价值',
         'btnAll': '全部',
         'btnTech': '技术',
         'btnLife': '生活',
@@ -76,6 +72,30 @@ const updatesTranslations = {
         'sectionTitle': '近期更新',
         'loading': '正在加载更新...',
         'noUpdates': '暂无更新'
+    }
+};
+
+// Home page translations
+const homeTranslations = {
+    'en': {
+        'viewBlog': 'View Blog',
+        'research': 'Research'
+    },
+    'zh': {
+        'viewBlog': '查看博客',
+        'research': '研究经历'
+    }
+};
+
+// Research page translations
+const researchTranslations = {
+    'en': {
+        'sendEmail': 'Send Email',
+        'viewResume': 'View Resume'
+    },
+    'zh': {
+        'sendEmail': '发送邮件',
+        'viewResume': '查看简历'
     }
 };
 
@@ -150,6 +170,18 @@ function translateBlog(key) {
 function translateUpdates(key) {
     const currentLang = getCurrentLanguage();
     return updatesTranslations[currentLang]?.[key] || updatesTranslations['en'][key] || key;
+}
+
+// Translate home page text
+function translateHome(key) {
+    const currentLang = getCurrentLanguage();
+    return homeTranslations[currentLang]?.[key] || homeTranslations['en'][key] || key;
+}
+
+// Translate research page text
+function translateResearch(key) {
+    const currentLang = getCurrentLanguage();
+    return researchTranslations[currentLang]?.[key] || researchTranslations['en'][key] || key;
 }
 
 // Change language (called from navbar)

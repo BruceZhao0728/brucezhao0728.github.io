@@ -66,12 +66,8 @@
 
 > [!Important] 多类SVM损失函数的定义
 > 给定一个数据集 $\{(x_1, y_1), (x_2, y_2), \ldots, (x_N, y_N)\}$，其中 $x_i$ 是第 $i$ 张图片，$y_i$ 是对应的标签。对于一个线性分类器，我们可以定义多类SVM损失函数 $L_i$ 来衡量模型对第 $i$ 张图片的预测结果与真实标签之间的差距：
-> ```math
-> \begin{aligned}
-> L_i (f(x_i; W), y_i) &= \sum_{j \neq y_i} \max(0, f_j(x_i) - f_{y_i}(x_i) + 1) \\
-> &= \sum_{j \neq y_i} \max(0, s_j - s_{y_i} + 1)
-> \end{aligned}
-> ```
+> 
+> $$\begin{aligned} L_i (f(x_i; W), y_i) &= \sum_{j \neq y_i} \max(0, f_j(x_i) - f_{y_i}(x_i) + 1) \\ &= \sum_{j \neq y_i} \max(0, s_j - s_{y_i} + 1) \end{aligned}$$
 
 这种损失函数的含义是：对于每个错误分类的类别 $j$，我们希望模型的得分 $s_j$ 与正确分类的得分 $s_{y_i}$ 之间至少有一个间隔（margin）为1。如果 $s_j$ 的得分比 $s_{y_i}$ 的得分高出1以上，那么这个错误分类就不会对损失函数产生贡献；如果 $s_j$ 的得分比 $s_{y_i}$ 的得分高出不足1，那么这个错误分类就会对损失函数产生贡献，损失函数的值会增加。因此，通过最小化这个损失函数，我们可以让模型学会将正确分类的得分与错误分类的得分之间保持一个足够的间隔，从而提高模型的分类性能。
 
@@ -96,12 +92,11 @@
 > [!Important] 交叉熵损失函数的定义
 > 给定一个数据集 $\{(x_1, y_1), (x_2, y_2), \ldots, (x_N, y_N)\}$，其中 $x_i$ 是第 $i$ 张图片，$y_i$ 是对应的标签。对于一个线性分类器，我们可以定义交叉熵损失函数 $L(W)$ 来衡量模型的性能：
 > $$ L(W) = -\frac{1}{N} \sum_{i=1}^{N} L_i (W) $$
-> $$
-> \begin{aligned}
-> L_i (W) &= -\log P(Y = y_i | X = x_i; W) \\
-> &= -\log \left(\frac{e^{s_{y_i}}}{\sum_{j=1}^{K} e^{s_j}}\right)
-> \end{aligned}
-> $$
+> 其中，$L_i (W)$ 是单个样本的交叉熵损失函数，用来衡量模型对第 $i$ 张图片的预测结果与真实标签之间的差距：
+> $$\begin{aligned}
+L_i (f(x_i; W), y_i) &= -\log P(Y = y_i | X = x_i; W) \\
+&= -\log \left(\frac{e^{s_{y_i}}}{\sum_{j=1}^{K} e^{s_j}}\right)
+\end{aligned}$$
 
 由此，我们就可以使用交叉熵损失函数来衡量不同的权重矩阵 $W$ 和偏置向量 $b$ 的好坏了。我们希望通过最小化这个损失函数来找到一个好的线性分类器，使得模型能够更准确地进行分类。
 
@@ -118,21 +113,17 @@ $$ L(W) = \frac{1}{N} \sum_{i=1}^{N} L_i (f(x_i; W), y_i) $$
 
 最后，我们介绍了两种常用的损失函数，分别是多类SVM损失函数：
 
-```math
-\begin{aligned}
-L_i (f(x_i; W), y_i) &= \sum_{j \neq y_i} \max(0, f_j(x_i) - f_{y_i}(x_i) + 1) \\
-&= \sum_{j \neq y_i} \max(0, s_j - s_{y_i} + 1)
-\end{aligned}
-```
+$$\begin{aligned}
+    L_i (f(x_i; W), y_i) &= \sum_{j \neq y_i} \max(0, f_j(x_i) - f_{y_i}(x_i) + 1) \\
+    &= \sum_{j \neq y_i} \max(0, s_j - s_{y_i} + 1)
+\end{aligned}$$
 
 和交叉熵损失函数：
 
-```math
-\begin{aligned}
+$$\begin{aligned}
 L_i (f(x_i; W), y_i) &= -\log P(Y = y_i | X = x_i; W) \\
 &= -\log \left(\frac{e^{s_{y_i}}}{\sum_{j=1}^{K} e^{s_j}}\right)
-\end{aligned}
-```
+\end{aligned}$$
 
 那么怎么找到一组好的权重矩阵和偏置向量呢？这就涉及到正则化（Regularization）和优化（Optimization）的问题了。欲知后事如何，请看下回分解……
 

@@ -115,11 +115,28 @@ const musicDatabase = {
 // 当前选中的歌曲
 let currentSong = null;
 
+// 预加载所有专辑封面图片
+function preloadAlbumCovers() {
+    const allSongs = [...musicDatabase.mandopop, ...musicDatabase.cantopop, ...musicDatabase.classical];
+    const loadedImages = [];
+    
+    allSongs.forEach(song => {
+        const img = new Image();
+        img.src = song.cover;
+        loadedImages.push(img);
+    });
+    
+    console.log(`预加载了 ${loadedImages.length} 张专辑封面`);
+}
+
 // 初始化音乐播放器
 function initMusicPlayer() {
     const genreSelect = document.getElementById('genre-select');
     const songSelect = document.getElementById('song-select');
     const randomBtn = document.getElementById('random-btn');
+
+    // 预加载所有专辑封面
+    preloadAlbumCovers();
 
     // 随机选择一首歌作为初始显示
     currentSong = getRandomSong();
@@ -201,15 +218,33 @@ function updateSongOptions(genre) {
 
 // 更新显示
 function updateDisplay(song) {
-    document.getElementById('album-cover').src = song.cover;
-    document.getElementById('album-cover').alt = `${song.titleCn} album cover`;
+    const albumCover = document.getElementById('album-cover');
+    const container = document.querySelector('.music-player-container');
+    
+    // 添加加载状态
+    albumCover.style.opacity = '0.5';
+    
+    // 创建新图片对象以确保图片已加载
+    const img = new Image();
+    img.onload = function() {
+        albumCover.src = song.cover;
+        albumCover.alt = `${song.titleCn} album cover`;
+        albumCover.style.opacity = '1';
+    };
+    img.onerror = function() {
+        // 如果图片加载失败，仍然显示并恢复透明度
+        albumCover.src = song.cover;
+        albumCover.style.opacity = '1';
+        console.error('专辑封面加载失败:', song.cover);
+    };
+    img.src = song.cover;
+    
     document.getElementById('song-title-cn').textContent = song.titleCn;
     document.getElementById('song-title-en').textContent = song.titleEn;
     document.getElementById('artist-name').textContent = song.artist;
     document.getElementById('lyrics-text').innerHTML = song.description;
 
     // 添加淡入动画
-    const container = document.querySelector('.music-player-container');
     container.style.opacity = '0';
     setTimeout(() => {
         container.style.opacity = '1';

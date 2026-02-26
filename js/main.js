@@ -234,7 +234,16 @@ function typesetMath(container) {
 // 加载并解析Markdown文件
 async function loadMarkdownFile(filePath) {
     try {
-        const response = await fetch(filePath);
+        // 添加时间戳参数防止缓存，同时设置 no-cache 选项
+        const timestamp = new Date().getTime();
+        const response = await fetch(`${filePath}?t=${timestamp}`, {
+            cache: 'no-store',  // 强制不使用缓存
+            headers: {
+                'Cache-Control': 'no-cache, no-store, must-revalidate',
+                'Pragma': 'no-cache',
+                'Expires': '0'
+            }
+        });
         if (!response.ok) {
             throw new Error('文件加载失败');
         }

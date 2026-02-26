@@ -6,8 +6,9 @@
     <meta name="description" content="Blog Detail">
     <title>Blog Post - Zichen's Website</title>
     <link rel="icon" type="image/webp" href="img/index/avatar.webp">
-    <link rel="stylesheet" href="css/style.css">
+    <!-- 先加载 highlight.js 的 CSS，再加载自定义 CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark.min.css">
+    <link rel="stylesheet" href="css/style.css">
     <script>
         window.MathJax = {
             tex: {
@@ -69,6 +70,15 @@
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="js/language.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/highlight.min.js"></script>
+    <script>
+        // 验证 highlight.js 已加载
+        if (window.hljs) {
+            console.log('✓ highlight.js 已加载');
+            console.log('支持的语言:', window.hljs.listLanguages().join(', '));
+        } else {
+            console.error('✗ highlight.js 未加载');
+        }
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="js/components.js"></script>
     <script src="js/main.js"></script>

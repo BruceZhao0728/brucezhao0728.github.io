@@ -1441,7 +1441,7 @@ li {
     object-fit: cover;
     border: 3px solid var(--border-color);
     box-shadow: var(--shadow-lg);
-    transition: var(--transition);
+    transition: opacity 0.3s ease, transform var(--transition), box-shadow var(--transition);
 }
 
 .music-cover img:hover {

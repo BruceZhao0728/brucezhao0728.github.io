@@ -188,5 +188,24 @@
       "en": "What is a Neural Network? Why do we transition from Linear Classifiers to Neural Networks?"
     },
     "file": "blog/cs231n-05-neural-networks.md"
+  },
+  {
+    "id": "cs231n-06-back-propagation",
+    "title": {
+      "zh": "深度学习与计算机视觉：反向传播",
+      "en": "Deep Learning and Computer Vision: Backpropagation"
+    },
+    "date": "2026-02-25",
+    "category": "tech",
+    "tags": ["CS231n", "Deep Learning", "Computer Vision"],
+    "readTime": {
+      "zh": "15分钟阅读",
+      "en": "15 min read"
+    },
+    "excerpt": {
+      "zh": "什么是反向传播算法？它是如何计算神经网络中每个参数的梯度的？",
+      "en": "What is the Backpropagation Algorithm? How does it compute the gradients of each parameter in a Neural Network?"
+    },
+    "file": "blog/cs231n-06-back-propagation.md"
   }
 ]

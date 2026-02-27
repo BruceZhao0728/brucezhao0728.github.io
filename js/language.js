@@ -42,7 +42,18 @@ const blogTranslations = {
         'sortEnDesc': 'English title (Z-A)',
         'loading': 'Loading blog posts...',
         'noBlogs': 'No blog posts available',
-        'backToBlog': '← Back to Blog'
+        'backToBlog': '← Back to Blog',
+        'categoryLabel': 'Category: ',
+        'tagsLabel': 'Tags: ',
+        'searchLabel': 'Search: ',
+        'sortLabel': 'Sort: ',
+        'searchPlaceholder': 'Search...',
+        'allTags': 'All Tags',
+        'clearSearch': 'Clear',
+        'catAll': 'All',
+        'catTech': 'Tech',
+        'catLife': 'Life',
+        'catStudy': 'Study'
     },
     'zh': {
         'btnAll': '全部',
@@ -57,7 +68,18 @@ const blogTranslations = {
         'sortEnDesc': '英文标题（Z-A）',
         'loading': '正在加载博客文章...',
         'noBlogs': '暂无博客文章',
-        'backToBlog': '← 返回博客'
+        'backToBlog': '← 返回博客',
+        'categoryLabel': '分类: ',
+        'tagsLabel': '标签: ',
+        'searchLabel': '搜索: ',
+        'sortLabel': '排序: ',
+        'searchPlaceholder': '搜索文章...',
+        'allTags': '全部标签',
+        'clearSearch': '清空',
+        'catAll': '全部',
+        'catTech': '技术',
+        'catLife': '生活',
+        'catStudy': '学习'
     }
 };
 

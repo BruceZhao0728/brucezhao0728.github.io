@@ -112,12 +112,15 @@ $$ \sigma'(z) = \sigma(z) (1 - \sigma(z)) $$
 
 由此可见，计算图不一定是唯一的。我们可以通过引入新的变量或者函数来简化计算图的结构，从而使得反向传播算法的计算过程更加清晰和高效。
 
-不过，上面的例子都是关于标量（Scalar）的计算的，而在实际的神经网络中，我们处理的往往是向量（Vector）或者张量（Tensor）。那么当反向传播算法遇上标量、向量、张量的时候，我们又该如何计算梯度呢？回答这个问题，需要我们首先复习一下标量、向量、张量的偏导数。
+
+### 高维变量的反向传播算法
+
+上面的例子都是关于标量（Scalar）的计算的，而在实际的神经网络中，我们处理的往往是向量（Vector）或者张量（Tensor）。那么当反向传播算法遇上标量、向量、张量的时候，我们又该如何计算梯度呢？回答这个问题，需要我们首先复习一下标量、向量、张量的偏导数。
 
 > [!Note] 标量、向量、张量的偏导数
 > ![high-dimentional-derivatives](images/06/high-dimentional-derivatives.png)
 
-我们首先来看一下反向传播算法中的向量变量导数如何计算。比如说有一个函数 $z = f(x, y)$，其中 $x, y, z$ 分别是维度为 $D_x, D_y, D_z$ 的向量，那么我们可以定义 $z$ 关于 $x$ 的雅可比矩阵（Jacobian Matrix）：
+我们首先来看一下反向传播算法中的向量变量的梯度如何计算。比如说有一个函数 $z = f(x, y)$，其中 $x, y, z$ 分别是维度为 $D_x, D_y, D_z$ 的向量，那么我们可以定义 $z$ 关于 $x$ 的雅可比矩阵（Jacobian Matrix）：
 
 $$ J_{z, x} = \frac{\partial z}{\partial x} = \begin{bmatrix}
 \frac{\partial z_1}{\partial x_1} & \frac{\partial z_1}{\partial x_2} & \cdots & \frac{\partial z_1}{\partial x_{D_x}} \\
@@ -132,7 +135,7 @@ $$ \frac{\partial L}{\partial x} = \frac{\partial L}{\partial z} \cdot \frac{\pa
 
 其中 $\frac{\partial L}{\partial z}$ 是一个维度为 $D_z$ 的向量，$J_{z, x}$ 是一个维度为 $D_z \times D_x$ 的矩阵，所以最终的结果 $\frac{\partial L}{\partial x}$ 是一个维度为 $D_x$ 的向量，这也符合标量对向量的导数的定义。
 
-同理，我们也可以定义 $z$ 关于 $y$ 的雅可比矩阵：
+同理，我们也可以定义 $z$ 关于 $y$ 的 Jacobian 矩阵：
 
 $$ J_{z, y} = \frac{\partial z}{\partial y} = \begin{bmatrix}
 \frac{\partial z_1}{\partial y_1} & \frac{\partial z_1}{\partial y_2} & \cdots & \frac{\partial z_1}{\partial y_{D_y}} \\
@@ -148,6 +151,93 @@ $$ \frac{\partial L}{\partial y} = \frac{\partial L}{\partial z} \cdot \frac{\pa
 我们用计算图来表示上述过程：
 
 ![backpropagation-computation-graph-vectors](images/06/backpropagation-computation-graph-vectors.png)
+
+我们来举一个ReLU函数的例子。我们前面讲过 ReLU 函数的形式：
+
+$$ \text{ReLU}(x) = \max(0, x) $$
+
+我们假设输入向量 $x$ 是一个四维向量：
+
+$$ x = \begin{bmatrix}
+    1 \\ -2 \\ 3 \\ -1 
+\end{bmatrix} $$
+
+经过 ReLU 函数的变换以后，我们得到输出向量 $z$：
+
+$$ z = \text{ReLU}(x) = \begin{bmatrix}
+    1 \\ 0 \\ 3 \\ 0
+\end{bmatrix} $$
+
+我们后续计算得到损失函数 $L$ 关于输出向量 $z$ 的梯度：
+
+$$ \frac{\partial L}{\partial z} = \begin{bmatrix}
+    4 \\ -1 \\ 5 \\ 9
+\end{bmatrix} $$
+
+接下来我们需要计算损失函数 $L$ 关于输入向量 $x$ 的梯度 $\frac{\partial L}{\partial x}$。我们可以通过链式法则来计算：
+
+$$ \frac{\partial L}{\partial x} = \frac{\partial L}{\partial z} \cdot \frac{\partial z}{\partial x} $$
+
+由于ReLU函数的定义，我们可以知道：
+
+$$ \frac{\partial z_i}{\partial x_i} = \begin{cases}
+    1 & \text{if } x_i > 0 \\
+    0 & \text{if } x_i \leq 0
+\end{cases} $$
+
+由此我们得到针对当前输入的 Jacobian 矩阵：
+
+$$ J_{z, x} = \begin{bmatrix}
+    1 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 0 \\
+    0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 0
+\end{bmatrix} $$
+
+最终我们可以计算得到损失函数 $L$ 关于输入向量 $x$ 的梯度：
+
+$$ \frac{\partial L}{\partial x} = \frac{\partial L}{\partial z} \cdot J_{z, x} = \begin{bmatrix}
+    4 \\ 0 \\ 5 \\ 0
+\end{bmatrix} $$
+
+我们可以总结一下ReLU函数的反向传播过程中更加通用的Jacobian矩阵的形式：
+
+$$ J_{z, x} = \text{diag}(\mathbf{1}_{x > 0}) $$
+
+既然这个 Jacobian 矩阵是一个对角矩阵，我们可以化简ReLU函数的反向传播算法的计算过程：
+
+$$ (\frac{\partial L}{\partial x})_i = \begin{cases}
+    (\frac{\partial L}{\partial z})_i & \text{if } x_i > 0 \\
+    0 & \text{if } x_i \leq 0
+\end{cases} $$
+
+
+我们再来看看反向传播算法遇上矩阵或者更高维的张量的时候该如何计算。和向量的情况类似，我们可以定义矩阵或者张量的 Jacobian 矩阵来计算反向传播算法中的梯度。
+
+比如说有一个函数 $z = f(x, y)$，其中 $x$ 是一个维度为 $D_x \times M_x$ 的矩阵，$y$ 是一个维度为 $D_y \times M_y$ 的矩阵，$z$ 是一个维度为 $D_z \times M_z$ 的矩阵，那么我们可以定义 $z$ 关于 $x$ 的 Jacobian 矩阵，它的大小是 $(D_z \times M_z) \times (D_x \times M_x)$：
+
+$$ J_{z, x} = \frac{\partial z}{\partial x} = \begin{bmatrix}
+\frac{\partial z_{1, 1}}{\partial x_{1, 1}} & \cdots & \frac{\partial z_{1, 1}}{\partial x_{D_x, M_x}} \\
+\vdots & \ddots & \vdots \\
+\frac{\partial z_{D_z, M_z}}{\partial x_{1, 1}} & \cdots & \frac{\partial z_{D_z, M_z}}{\partial x_{D_x, M_x}}
+\end{bmatrix} $$
+
+同样的，我们也可以定义 $z$ 关于 $y$ 的 Jacobian 矩阵：
+
+$$ J_{z, y} = \frac{\partial z}{\partial y} = \begin{bmatrix}
+\frac{\partial z_{1, 1}}{\partial y_{1, 1}} & \cdots & \frac{\partial z_{1, 1}}{\partial y_{D_y, M_y}} \\
+\vdots & \ddots & \vdots \\
+\frac{\partial z_{D_z, M_z}}{\partial y_{1, 1}} & \cdots & \frac{\partial z_{D_z, M_z}}{\partial y_{D_y, M_y}}
+\end{bmatrix} $$
+
+由此我们可以计算损失函数 $L$ 关于输入矩阵 $x$ 和 $y$ 的梯度：
+
+$$ \frac{\partial L}{\partial x} = \frac{\partial L}{\partial z} \cdot J_{z, x} $$
+$$ \frac{\partial L}{\partial y} = \frac{\partial L}{\partial z} \cdot J_{z, y} $$
+
+我们可以用下面的计算图来表示上述过程：
+
+![backpropagation-computation-graph-tensors](images/06/backpropagation-computation-graph-tensors.png)
 
 我们来举一个矩阵乘法的例子：
 
@@ -173,6 +263,7 @@ $$\begin{aligned}
 
     \frac{\partial L}{\partial W} &= x^T \cdot (\frac{\partial L}{\partial y})
 \end{aligned}$$
+
 
 ### 反向传播算法的实现
 

@@ -345,8 +345,8 @@ async function loadBlogDetail() {
         return;
     }
     
-    const titleText = getBlogTitleBoth(blog.title);
-    const readTimeText = getBlogText(blog.readTime) || '5 min read';
+    const titleText = getLocalizedBlogTitle(blog.title);
+    const readTimeText = getLocalizedText(blog.readTime) || '5 min read';
 
     // 更新页面标题
     document.title = titleText || document.title;
@@ -382,6 +382,23 @@ async function loadBlogDetail() {
 
     const markdownContainer = document.querySelector('.markdown-content');
     typesetMath(markdownContainer);
+    
+    // 监听语言变化事件，更新博客标题
+    window.addEventListener('languageChanged', async (event) => {
+        const newTitleText = getLocalizedBlogTitle(blog.title);
+        const newReadTimeText = getLocalizedText(blog.readTime) || '5 min read';
+        const titleElement = document.querySelector('.blog-content h1');
+        if (titleElement) {
+            titleElement.textContent = newTitleText;
+        }
+        // 更新阅读时间
+        const metaElements = document.querySelectorAll('.blog-meta span');
+        if (metaElements[1]) {
+            metaElements[1].textContent = `⏱️ ${newReadTimeText}`;
+        }
+        // 更新页面标题
+        document.title = newTitleText || document.title;
+    });
 }
 
 // 平滑滚动到顶部

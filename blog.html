@@ -7,6 +7,102 @@
     <title>Blog - Zichen's Website</title>
     <link rel="icon" type="image/webp" href="img/index/avatar.webp">
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Blog filters responsive layout */
+        #blog-filters-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .filter-group select,
+        .filter-group input,
+        .filter-group button {
+            cursor: pointer;
+        }
+
+        /* Large screens: search on left, others on right */
+        @media (min-width: 1200px) {
+            #blog-filters-container {
+                gap: 1.5rem;
+            }
+            
+            .search-group {
+                order: 1;
+                flex: 1;
+                min-width: 300px;
+            }
+
+            .filter-group:not(.search-group):not(.clear-group) {
+                order: 2;
+                flex-shrink: 0;
+            }
+
+            .clear-group {
+                display: none;
+            }
+        }
+
+        /* Medium screens: search on first row, others on second */
+        @media (min-width: 768px) and (max-width: 1199px) {
+            #blog-filters-container {
+                gap: 1rem;
+            }
+
+            .search-group {
+                flex-basis: 100%;
+                order: 1;
+            }
+
+            .filter-group:not(.search-group):not(.clear-group) {
+                flex-basis: calc(33.33% - 0.67rem);
+                order: 2;
+            }
+
+            .clear-group {
+                display: none;
+            }
+        }
+
+        /* Small screens: search, clear, then dropdowns */
+        @media (max-width: 767px) {
+            #blog-filters-container {
+                gap: 0.6rem;
+            }
+
+            .search-group {
+                flex-basis: 100%;
+                order: 1;
+            }
+
+            .clear-group {
+                flex-basis: 100%;
+                order: 2;
+                justify-content: center;
+            }
+
+            .filter-group:not(.search-group):not(.clear-group) {
+                flex-basis: calc(33.33% - 0.4rem);
+                order: 3;
+            }
+
+            .filter-group select {
+                width: 100%;
+            }
+
+            #search-input {
+                width: 100% !important;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- 导航栏占位符 -->
@@ -20,29 +116,47 @@
                 <p class="text-center hero-subtitle" id="page-subtitle">Record learning, share thoughts, deliver value</p>
             </section>
 
-            <!-- Blog Categories -->
+            <!-- Blog Categories, Tags, Search and Sort -->
             <section class="section">
-                <div class="text-center">
-                    <div class="btn-group" style="justify-content: center;">
-                        <button class="btn btn-primary" onclick="filterBlogs('all')" id="btn-all">All</button>
-                        <button class="btn btn-outline" onclick="filterBlogs('tech')" id="btn-tech">Tech</button>
-                        <button class="btn btn-outline" onclick="filterBlogs('life')" id="btn-life">Life</button>
-                        <button class="btn btn-outline" onclick="filterBlogs('study')" id="btn-study">Study</button>
+                <div id="blog-filters-container">
+                    <!-- Search Box -->
+                    <div class="filter-group search-group">
+                        <input type="text" id="search-input" class="btn btn-outline" style="flex: 1; padding: 0.5rem; background: var(--input-bg, #f0f0f0); border: 1px solid var(--border-color, #ddd); border-radius: 4px;" placeholder="Search..." title="Search by title or content" onkeyup="performSearch()">
                     </div>
-                </div>
-            </section>
 
-            <section class="section">
-                <div class="text-center">
-                    <label for="blog-sort" class="sr-only">Sort blogs</label>
-                    <select id="blog-sort" class="btn btn-outline" onchange="applySort()">
-                        <option value="date-desc" id="opt-date-desc">Time (newest first)</option>
-                        <option value="date-asc" id="opt-date-asc">Time (oldest first)</option>
-                        <option value="zh-asc" id="opt-zh-asc">Chinese title (A-Z)</option>
-                        <option value="zh-desc" id="opt-zh-desc">Chinese title (Z-A)</option>
-                        <option value="en-asc" id="opt-en-asc">English title (A-Z)</option>
-                        <option value="en-desc" id="opt-en-desc">English title (Z-A)</option>
-                    </select>
+                    <!-- Category Dropdown -->
+                    <div class="filter-group">
+                        <select id="category-select" class="btn btn-outline" title="Category" onchange="filterByCategory()">
+                            <option value="all" id="opt-cat-all">All</option>
+                            <option value="tech" id="opt-cat-tech">Tech</option>
+                            <option value="life" id="opt-cat-life">Life</option>
+                            <option value="study" id="opt-cat-study">Study</option>
+                        </select>
+                    </div>
+
+                    <!-- Tags Filter -->
+                    <div class="filter-group">
+                        <select id="tags-select" class="btn btn-outline" title="Tags" onchange="filterByTags()">
+                            <option value="" id="opt-all-tags" selected>All Tags</option>
+                        </select>
+                    </div>
+
+                    <!-- Sort Dropdown -->
+                    <div class="filter-group">
+                        <select id="blog-sort" class="btn btn-outline" title="Sort" onchange="applySort()">
+                            <option value="date-desc" id="opt-date-desc">Time (newest first)</option>
+                            <option value="date-asc" id="opt-date-asc">Time (oldest first)</option>
+                            <option value="zh-asc" id="opt-zh-asc">Chinese title (A-Z)</option>
+                            <option value="zh-desc" id="opt-zh-desc">Chinese title (Z-A)</option>
+                            <option value="en-asc" id="opt-en-asc">English title (A-Z)</option>
+                            <option value="en-desc" id="opt-en-desc">English title (Z-A)</option>
+                        </select>
+                    </div>
+
+                    <!-- Clear Search Button -->
+                    <div class="filter-group clear-group">
+                        <button class="btn btn-outline" id="clear-search-btn" style="padding: 0.5rem 1rem;" onclick="clearSearch()">Clear</button>
+                    </div>
                 </div>
             </section>
 
@@ -70,6 +184,8 @@
         let allBlogs = [];
         let activeCategory = 'all';
         let activeSort = 'date-desc';
+        let activeTag = '';
+        let searchQuery = '';
 
         function getBlogText(value) {
             return getLocalizedText(value);
@@ -78,15 +194,50 @@
         function getBlogTitleBoth(value) {
             return getLocalizedBlogTitle(value);
         }
+
+        // 获取所有唯一标签
+        function getAllUniqueTags() {
+            const tagsSet = new Set();
+            allBlogs.forEach(blog => {
+                if (blog.tags && Array.isArray(blog.tags)) {
+                    blog.tags.forEach(tag => tagsSet.add(tag));
+                }
+            });
+            return Array.from(tagsSet).sort();
+        }
+
+        // 初始化标签选择框
+        function initializeTagsSelect() {
+            const tagsSelect = document.getElementById('tags-select');
+            const allTags = getAllUniqueTags();
+            
+            // 清空现有选项（保留"All Tags"）
+            const allTagsOption = tagsSelect.querySelector('[id="opt-all-tags"]');
+            tagsSelect.innerHTML = '';
+            tagsSelect.appendChild(allTagsOption);
+            
+            // 添加所有标签
+            allTags.forEach(tag => {
+                const option = document.createElement('option');
+                option.value = tag;
+                option.textContent = tag;
+                tagsSelect.appendChild(option);
+            });
+        }
         
         function updateBlogPageLanguage() {
-            // Keep title and subtitle fixed
+            // Update category options
+            document.getElementById('opt-cat-all').textContent = translateBlog('catAll');
+            document.getElementById('opt-cat-tech').textContent = translateBlog('catTech');
+            document.getElementById('opt-cat-life').textContent = translateBlog('catLife');
+            document.getElementById('opt-cat-study').textContent = translateBlog('catStudy');
             
-            // Update category buttons
-            document.getElementById('btn-all').textContent = translateBlog('btnAll');
-            document.getElementById('btn-tech').textContent = translateBlog('btnTech');
-            document.getElementById('btn-life').textContent = translateBlog('btnLife');
-            document.getElementById('btn-study').textContent = translateBlog('btnStudy');
+            // Update tags label
+            document.getElementById('opt-all-tags').textContent = translateBlog('allTags');
+            
+            // Update search label and placeholder
+            document.getElementById('search-input').placeholder = translateBlog('searchPlaceholder');
+            document.getElementById('clear-search-btn').textContent = translateBlog('clearSearch');
             
             // Update sort options
             document.getElementById('opt-date-desc').textContent = translateBlog('sortTime');
@@ -103,7 +254,14 @@
         async function initBlogList() {
             updateBlogPageLanguage();
             allBlogs = await loadBlogList();
+            initializeTagsSelect();
             applySort();
+            
+            // 监听语言变化
+            window.addEventListener('languageChanged', () => {
+                updateBlogPageLanguage();
+                applySort();
+            });
         }
         
         function displayBlogs(blogs) {
@@ -147,19 +305,43 @@
                 activeSort = sortSelect.value;
             }
 
-            const filtered = getFilteredBlogs();
+            const filtered = getFilteredAndSearchedBlogs();
             const sorted = sortBlogs(filtered, activeSort);
             displayBlogs(sorted);
         }
 
-        function getFilteredBlogs() {
-            if (activeCategory === 'all') {
-                return [...allBlogs];
+        function getFilteredAndSearchedBlogs() {
+            let filtered = allBlogs;
+
+            // 按类别过滤
+            if (activeCategory !== 'all') {
+                filtered = filtered.filter(blog =>
+                    blog.category === activeCategory
+                );
             }
-            return allBlogs.filter(blog =>
-                blog.category === activeCategory ||
-                (blog.tags && blog.tags.includes(activeCategory))
-            );
+
+            // 按标签过滤
+            if (activeTag) {
+                filtered = filtered.filter(blog =>
+                    blog.tags && blog.tags.includes(activeTag)
+                );
+            }
+
+            // 按搜索词过滤
+            if (searchQuery.trim()) {
+                const query = searchQuery.toLowerCase();
+                filtered = filtered.filter(blog => {
+                    const titleText = (blog.title && typeof blog.title === 'object' 
+                        ? `${blog.title.en || ''} ${blog.title.zh || ''}` 
+                        : String(blog.title)).toLowerCase();
+                    const excerptText = (blog.excerpt && typeof blog.excerpt === 'object'
+                        ? `${blog.excerpt.en || ''} ${blog.excerpt.zh || ''}`
+                        : String(blog.excerpt)).toLowerCase();
+                    return titleText.includes(query) || excerptText.includes(query);
+                });
+            }
+
+            return filtered;
         }
 
         function sortBlogs(blogs, sortKey) {
@@ -186,17 +368,27 @@
             });
         }
         
-        function filterBlogs(category) {
-            // 更新按钮样式
-            document.querySelectorAll('.btn-group button').forEach(btn => {
-                btn.classList.remove('btn-primary');
-                btn.classList.add('btn-outline');
-            });
-            event.target.classList.remove('btn-outline');
-            event.target.classList.add('btn-primary');
-            
-            // 筛选博客
-            activeCategory = category;
+        function filterByCategory() {
+            const categorySelect = document.getElementById('category-select');
+            activeCategory = categorySelect.value;
+            applySort();
+        }
+
+        function filterByTags() {
+            const tagsSelect = document.getElementById('tags-select');
+            activeTag = tagsSelect.value;
+            applySort();
+        }
+
+        function performSearch() {
+            const searchInput = document.getElementById('search-input');
+            searchQuery = searchInput.value;
+            applySort();
+        }
+
+        function clearSearch() {
+            document.getElementById('search-input').value = '';
+            searchQuery = '';
             applySort();
         }
         

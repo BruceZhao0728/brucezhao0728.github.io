@@ -73,10 +73,10 @@ body {
 .nav-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0.4rem 2rem;
+    padding: 0.5rem 2rem;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: baseline;
 }
 
 .nav-logo {
@@ -85,9 +85,8 @@ body {
     color: var(--primary-color);
     text-decoration: none;
     transition: var(--transition);
-    display: flex;
-    align-items: center;
-    line-height: 1;
+    line-height: 1.2;
+    padding-top: 0.15rem;
 }
 
 .nav-logo:hover {
@@ -99,6 +98,7 @@ body {
     display: flex;
     list-style: none;
     gap: 2rem;
+    align-items: baseline;
 }
 
 .nav-item {
@@ -159,7 +159,8 @@ body {
     border: 1px solid var(--primary-color);
     transition: var(--transition);
     cursor: pointer;
-    font-size: 0.9rem;
+    font-size: 1rem;
+    line-height: 1;
 }
 
 .language-select:hover {
@@ -1441,7 +1442,9 @@ li {
     object-fit: cover;
     border: 3px solid var(--border-color);
     box-shadow: var(--shadow-lg);
-    transition: opacity 0.3s ease, transform var(--transition), box-shadow var(--transition);
+    transition: opacity 0.3s ease,
+        transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+        box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .music-cover img:hover {

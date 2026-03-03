@@ -29,7 +29,7 @@
             cursor: pointer;
         }
 
-        /* Large screens: search on left, others on right */
+        /* Large screens: search on left, dropdowns on right in one row */
         @media (min-width: 1200px) {
             #blog-filters-container {
                 gap: 1.5rem;
@@ -44,6 +44,7 @@
             .filter-group:not(.search-group):not(.clear-group) {
                 order: 2;
                 flex-shrink: 0;
+                flex: 0 1 auto;
             }
 
             .clear-group {
@@ -51,7 +52,7 @@
             }
         }
 
-        /* Medium screens: search on first row, others on second */
+        /* Medium/Tablet screens: search first, then three dropdowns evenly spaced */
         @media (min-width: 768px) and (max-width: 1199px) {
             #blog-filters-container {
                 gap: 1rem;
@@ -63,8 +64,13 @@
             }
 
             .filter-group:not(.search-group):not(.clear-group) {
-                flex-basis: calc(33.33% - 0.67rem);
+                flex-basis: calc(33.333% - 0.67rem);
                 order: 2;
+                min-width: 110px;
+            }
+
+            .filter-group:not(.search-group):not(.clear-group) select {
+                width: 100%;
             }
 
             .clear-group {
@@ -72,7 +78,7 @@
             }
         }
 
-        /* Small screens: search, clear, then dropdowns */
+        /* Small screens: search, clear, then three dropdowns */
         @media (max-width: 767px) {
             #blog-filters-container {
                 gap: 0.6rem;
@@ -83,6 +89,10 @@
                 order: 1;
             }
 
+            .search-group input {
+                width: 100%;
+            }
+
             .clear-group {
                 flex-basis: 100%;
                 order: 2;
@@ -90,16 +100,13 @@
             }
 
             .filter-group:not(.search-group):not(.clear-group) {
-                flex-basis: calc(33.33% - 0.4rem);
+                flex-basis: calc(33.333% - 0.4rem);
                 order: 3;
+                min-width: 90px;
             }
 
-            .filter-group select {
+            .filter-group:not(.search-group):not(.clear-group) select {
                 width: 100%;
-            }
-
-            #search-input {
-                width: 100% !important;
             }
         }
     </style>

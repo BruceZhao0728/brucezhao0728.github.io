@@ -1,4 +1,7 @@
 // 音乐数据库
+// 说明：cover字段支持两种格式
+// 1. 本地路径：'img/interests/music/filename.webp'
+// 2. 网络链接：'https://...' 或 'http://...'
 const musicDatabase = {
     mandopop: [
         {
@@ -226,16 +229,20 @@ function updateDisplay(song) {
     
     // 创建新图片对象以确保图片已加载
     const img = new Image();
+    img.crossOrigin = 'anonymous'; // 支持跨域图片
+    
     img.onload = function() {
         albumCover.src = song.cover;
         albumCover.alt = `${song.titleCn} album cover`;
+        albumCover.crossOrigin = 'anonymous';
         albumCover.style.opacity = '1';
     };
     img.onerror = function() {
         // 如果图片加载失败，仍然显示并恢复透明度
         albumCover.src = song.cover;
+        albumCover.crossOrigin = 'anonymous';
         albumCover.style.opacity = '1';
-        console.error('专辑封面加载失败:', song.cover);
+        console.error('专辑封面加载失败，可能是网络问题或链接无效:', song.cover);
     };
     img.src = song.cover;
     

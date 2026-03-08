@@ -92,7 +92,7 @@ const musicDatabase = {
             id: 'vivaldi-four-seasons',
             titleCn: '维瓦尔第：四季',
             titleEn: 'Vivaldi: The Four Seasons',
-            artist: 'Anne-Sophie Mutter',
+            artist: 'Anne-Sophie Mutter & Herbert von Karajan',
             cover: 'img/interests/music/anne_sophie_mutter_vivaldi_the_four_seasons.webp',
             description: '巴洛克时期的经典之作，用音乐描绘四季的变化与美景，辅之以小提琴的悠扬音色，堪称经典中的经典'
         },
@@ -100,7 +100,7 @@ const musicDatabase = {
             id: 'rachmaninoff-piano-concerto-no3',
             titleCn: '拉赫玛尼诺夫第三钢琴协奏曲',
             titleEn: 'Rachmaninoff Piano Concerto No.3',
-            artist: '王羽佳 | Yuja Wang',
+            artist: '王羽佳 & 杜达梅尔 | Yuja Wang & Gustavo Dudamel',
             cover: 'img/interests/music/yuja_wang_rachmaninoff.webp',
             description: '技术难度极高的钢琴协奏曲，充满激情与浪漫主义色彩'
         },
@@ -108,9 +108,37 @@ const musicDatabase = {
             id: 'beethoven-piano-concerto-no1',
             titleCn: '贝多芬第一钢琴协奏曲',
             titleEn: "Beethoven Piano Concerto No.1",
-            artist: 'Krystian Zimerman',
+            artist: 'Krystian Zimerman & Simon Rattle',
             cover: 'img/interests/music/krystian_zimerman_beethoven.webp',
             description: '贝多芬早期代表作，展现了古典主义的优雅与力量'
+        }
+    ],
+    'western-pop': [
+        {
+            id: 'taylor-swift-say-dont-go',
+            titleCn: '',
+            titleEn: 'Say Don\'t Go',
+            artist: 'Taylor Swift',
+            cover: 'img/interests/music/taylor_swift_1989_taylors_version.webp',
+            description: '<i>The waiting is a sadness<br>Fading into madness<br>Oh no oh no it won\'t stop</i>'
+        },
+        {
+            id: 'taylor-swift-cruel-summer',
+            titleCn: '',
+            titleEn: 'Cruel Summer',
+            artist: 'Taylor Swift',
+            cover: 'img/interests/music/taylor_swift_lover.webp',
+            description: '<i>Devils roll the dice, angels roll their eyes<br>And if I bleed, you\'ll be the last to know</i>'
+        }
+    ],
+    'soundtrack': [
+        {
+            id: 'la-la-land-city-of-stars',
+            titleCn: '繁星之城',
+            titleEn: 'City of Stars',
+            artist: 'Ryan Gosling & Emma Stone',
+            cover: 'img/interests/music/la_la_land_soundtrack.webp',
+            description: '<i>City of stars<br>Are you shining just for me?</i>'
         }
     ]
 };
@@ -118,9 +146,25 @@ const musicDatabase = {
 // 当前选中的歌曲
 let currentSong = null;
 
+// 标题显示策略：中文缺失时回退英文，英文缺失时回退中文
+function getSongTitleByLanguage(song, lang) {
+    const titleCn = (song.titleCn || '').trim();
+    const titleEn = (song.titleEn || '').trim();
+
+    if (lang === 'zh') {
+        return titleCn || titleEn;
+    }
+    return titleEn || titleCn;
+}
+
+// 汇总所有流派歌曲，避免新增流派后遗漏到随机/全部列表
+function getAllSongs() {
+    return Object.values(musicDatabase).flat();
+}
+
 // 预加载所有专辑封面图片
 function preloadAlbumCovers() {
-    const allSongs = [...musicDatabase.mandopop, ...musicDatabase.cantopop, ...musicDatabase.classical];
+    const allSongs = getAllSongs();
     const loadedImages = [];
     
     allSongs.forEach(song => {
@@ -194,7 +238,7 @@ function updateSongOptions(genre) {
 
     let songs = [];
     if (genre === 'all') {
-        songs = [...musicDatabase.mandopop, ...musicDatabase.cantopop, ...musicDatabase.classical];
+        songs = getAllSongs();
     } else {
         songs = musicDatabase[genre] || [];
     }
@@ -205,8 +249,8 @@ function updateSongOptions(genre) {
     songs.forEach(song => {
         const option = document.createElement('option');
         option.value = song.id;
-        // 根据语言设置显示歌曲名称，不显示艺术家
-        option.textContent = currentLang === 'zh' ? song.titleCn : song.titleEn;
+        // 根据语言设置显示歌曲名称，缺失时自动回退
+        option.textContent = getSongTitleByLanguage(song, currentLang);
         songSelect.appendChild(option);
     });
 
@@ -223,6 +267,7 @@ function updateSongOptions(genre) {
 function updateDisplay(song) {
     const albumCover = document.getElementById('album-cover');
     const container = document.querySelector('.music-player-container');
+    const currentLang = typeof getCurrentLanguage === 'function' ? getCurrentLanguage() : 'en';
     
     // 添加加载状态
     albumCover.style.opacity = '0.5';
@@ -246,8 +291,17 @@ function updateDisplay(song) {
     };
     img.src = song.cover;
     
-    document.getElementById('song-title-cn').textContent = song.titleCn;
-    document.getElementById('song-title-en').textContent = song.titleEn;
+    const titleCn = (song.titleCn || '').trim();
+    const titleEn = (song.titleEn || '').trim();
+
+    // 中文名缺失时，主标题回退到英文，副标题保留英文原名
+    document.getElementById('song-title-cn').textContent = titleCn || titleEn;
+    document.getElementById('song-title-en').textContent = titleEn || titleCn;
+
+    // 如果当前为中文界面，进一步保证下拉与显示一致
+    if (currentLang === 'zh' && !titleCn) {
+        document.getElementById('song-title-cn').textContent = titleEn;
+    }
     document.getElementById('artist-name').textContent = song.artist;
     document.getElementById('lyrics-text').innerHTML = song.description;
 
@@ -279,7 +333,7 @@ function getSongGenre(song) {
 
 // 获取随机歌曲
 function getRandomSong() {
-    const allSongs = [...musicDatabase.mandopop, ...musicDatabase.cantopop, ...musicDatabase.classical];
+    const allSongs = getAllSongs();
     const randomIndex = Math.floor(Math.random() * allSongs.length);
     return allSongs[randomIndex];
 }

@@ -5,7 +5,7 @@
 
 比如说，我们有左下图这样的一个数据集：
 
-![circular-dataset](images/05/circular-dataset.png)
+![circular-dataset](images/cs231n-05/circular-dataset.png)
 
 图中基本上两类数据形成了一个同心圆的结构。这个数据集看起来非常好区分：只需要一个圆形的决策边界就可以把两类数据分开了。但是如果我们使用一个线性分类器来拟合这个数据集，那么它就无法找到一个合适的决策边界来区分这两类数据了。
 
@@ -38,7 +38,7 @@
 >
 > **Tanh**：$f(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}$，输出范围在-1到1之间，常用于隐藏层的激活函数。
 >
-> ![activation-functions](images/05/activation-functions.png)
+> ![activation-functions](images/cs231n-05/activation-functions.png)
 
 回到前面的简单非线性分类器，我们来分析一下它的结构。这个模型由两层线性变换和一个非线性激活函数组成。第一层线性变换将输入数据从 $D$ 维映射到 $H$ 维，第二层线性变换将 $H$ 维的特征映射到 $C$ 维的输出空间，其中 $C$ 是类别数。
 
@@ -60,7 +60,7 @@
 
 而简单非线性分类器就像是把这个过程分成了两步。第一步先从输入图片中提取出一些特征图，这些特征图可以看作是一些“基础元素”，它们可能并不直接对应于某个类别，但它们能够捕捉到输入图片中的一些重要特征，比如颜色、条纹、边框等等。权重矩阵 $W_1$ 的每一行可以看作是一个“中间模板”，而非线性激活函数可以过滤掉一些不重要的模板，从而让模型更专注于那些重要的特征图。第二部再根据这些基础元素进行逻辑组合，进行更高级的特征提取，最终得到每个类别的得分。权重矩阵 $W_2$ 的每一行可以看作是一个“最终模板”，它们根据第一层提取的特征图进行组合，从而得到每个类别的得分。
 
-![non-linear-classifier-visual-perspective](images/05/non-linear-classifier-visual-perspective.png)
+![non-linear-classifier-visual-perspective](images/cs231n-05/non-linear-classifier-visual-perspective.png)
 
 ### 从几何角度理解简单非线性分类器
 
@@ -86,11 +86,11 @@
 > [!Important] 神经网络的定义
 > 神经网络，又称全连接网络 (fully connected network) 或者多层感知机 (multi-layer perceptron, MLP)，是一种由多层线性变换和非线性激活函数组成的模型。它通过堆叠多个层次来学习更复杂的特征表示和决策边界，从而能够更好地拟合复杂的数据集。神经网络的每一层都可以看作是一个非线性分类器，通过不断地堆叠这些非线性分类器，我们就得到了一个强大的模型，能够处理各种各样的复杂任务。
 >
-> ![neural-network-architecture](images/05/neural-network-architecture.png)
+> ![neural-network-architecture](images/cs231n-05/neural-network-architecture.png)
 
 正如我们前面所说的，神经网络的表达能力非常强大，它能够学习到非常复杂的决策边界，从而在很多任务上都取得了很好的表现。神经网络的层数越多，模型的表达能力就越强。下图中，我们依次增加了神经网络的层数，随着层数的增加，模型能够学习到更复杂的决策边界，从而更好地拟合数据集。
 
-![neural-network-simple-to-complex](images/05/neural-network-simple-to-complex.png)
+![neural-network-simple-to-complex](images/cs231n-05/neural-network-simple-to-complex.png)
 
 ### 什么是一个好的神经网络
 
@@ -108,7 +108,7 @@
 >
 > 需要注意的是，**我们的正则化项不应该是模型的大小，而应该是模型参数的大小**。也就是说，我们应该对模型的权重矩阵进行正则化，而不是对模型的层数进行正则化。因为增加层数并不一定会导致模型过拟合，反而可能会提高模型的表达能力；而增加权重矩阵的大小则更有可能导致模型过拟合，因此我们应该对权重矩阵进行正则化。
 >
-> ![neural-network-regularization](images/05/neural-network-regularization.png)
+> ![neural-network-regularization](images/cs231n-05/neural-network-regularization.png)
 
 ### 下一步，优化
 

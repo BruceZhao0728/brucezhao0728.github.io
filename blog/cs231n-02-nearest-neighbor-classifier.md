@@ -74,7 +74,7 @@ def predict(model, image):
 >
 > 这里，$\text{dist}(X, X_i)$ 是衡量两张图片相似度的距离函数，他的定义域和值域分别是 $\mathbb{R}^{H \times W \times C} \times \mathbb{R}^{H \times W \times C}$ 和 $\mathbb{R}$。
 
-![nearest_neighbor_classifier](images/02/nearest_neighbor_classifier.png)
+![nearest_neighbor_classifier](images/cs231n-02/nearest_neighbor_classifier.png)
 
 一个新的问题：这个距离函数该怎么定义呢？一般常见的有两种：曼哈顿距离（Manhattan Distance）和欧几里得距离（Euclidean Distance）。我们在最近邻分类器中一般用的是曼哈顿距离。
 
@@ -86,13 +86,13 @@ def predict(model, image):
 > **欧几里得距离**：
 > $$ \text{dist}_{\text{E}}(X, Y) = \sqrt{\sum_{h, w, c} (X_{h,w,c} - Y_{h,w,c})^2} $$
 >
-> ![distance_metric](images/02/distance_metric.png)
+> ![distance_metric](images/cs231n-02/distance_metric.png)
 
 这就是最近邻分类器的基本原理。它的算法复杂度怎么样呢？它在训练阶段的复杂度是 $O(1)$，因为它不需要进行任何训练；而在预测阶段的复杂度是 $O(N)$，因为它需要计算新图片与所有训练图片的距离。欸，这个复杂度有点高啊……毕竟我们更希望模型的预测阶段复杂度更低一些，因为你有更多的时间来训练模型，但是预测阶段需要更快地给出结果，否则模型的用户就要等很久。想象一下，你用手机拍了一张照片，想要识别里面的物体，如果模型需要花费几分钟甚至更长时间来给出结果，那你的第一反应肯定就是把这个软件卸载了，然后挂到社交媒体上吐槽它。
 
 尽管如此，最近邻分类器依然是一个很好的起点。它简单易懂，容易实现，并且在某些情况下表现还不错。如果你的数据量比较少的话，最近邻分类器甚至可以达到不错的效果。比如下面这个，是我们用曼哈顿距离分类得到的：
 
-![nearest_neighbor_classifier_example](images/02/1_nearest_neighbor.png)
+![nearest_neighbor_classifier_example](images/cs231n-02/1_nearest_neighbor.png)
 
 但是这个图片里面有一个不太和谐的点，就是中间那一块绿色区域中间冒出来那个黄色的东西。这个黄色的东西是什么呢？它是一个错误分类的例子。我们可以看到，在这个绿色区域中，最近邻分类器错误地将一些图片分类为黄色类别了。这就是最近邻分类器的一个缺点：它对噪声和异常值非常敏感，因为它只考虑了最近的一个邻居，而没有考虑其他邻居的信息。
 
@@ -123,9 +123,9 @@ def predict(model, image):
 
 好了，讲了这么多K近邻分类器，我们来看看它的效果怎么样吧。下面这个图片展示了K近邻分类器在不同K值和不同距离函数下的分类结果：
 
-![k_nearest_neighbor](images/02/k_nearest_neighbor.png)
+![k_nearest_neighbor](images/cs231n-02/k_nearest_neighbor.png)
 
-![k_nearest_neighbor_different_distance_metric](images/02/k_nearest_neighbor_different_distance_metric.png)
+![k_nearest_neighbor_different_distance_metric](images/cs231n-02/k_nearest_neighbor_different_distance_metric.png)
 
 可以看到，随着K值的增加，分类结果变得更加平滑，错误分类的情况也减少了。这是因为K近邻分类器考虑了更多的邻居信息，能够更好地抵抗噪声和异常值的影响。而不同的距离函数也会对分类结果产生影响，欧几里得距离在这个例子中表现得更好一些，边界也更加平滑。
 
@@ -136,17 +136,17 @@ def predict(model, image):
 
 像K值和距离函数这种提前设定的参数，我们称之为**超参数（Hyperparameter）**。选择合适的超参数是机器学习中的一个重要问题。一般来说，我们可以通过交叉验证（Cross-Validation）来选择最优的超参数。具体来说，我们可以将数据集划分为训练集（Training Set）、验证集（Validation Set）和测试集（Test Set）。我们使用训练集来训练模型，然后在验证集上评估不同超参数的表现，选择表现最好的超参数，最后在测试集上评估最终模型的性能。
 
-![setting_hyperparameter](images/02/setting_hyperparameters.png)
+![setting_hyperparameter](images/cs231n-02/setting_hyperparameters.png)
 
 还有一种更加合适的方法，叫做**交叉验证（Cross-Validation）**。它的基本思想是：将数据集划分为K个子集，然后进行K次训练和验证。每次选择一个子集作为验证集，剩下的子集作为训练集。这样一来，我们就可以充分利用数据集中的所有数据，同时也能更好地评估模型的性能。
 
-![cross_validation](images/02/cross_validation.png)
+![cross_validation](images/cs231n-02/cross_validation.png)
 
 不过对于K近邻分类器来说，交叉验证的作用并不是特别大，因为它本身没有训练阶段，超参数的选择主要影响的是预测阶段的性能。但是对于其他有训练阶段的机器学习模型来说，交叉验证是一个非常重要的技术手段。
 
 实际上，K近邻分类器虽然简单易懂，但在实际应用中并不常用。它的预测阶段复杂度较高，尤其是当数据集较大时，计算距离的时间会变得非常长。此外，它对高维数据表现不佳，容易受到“维度灾难”的影响。对于图像分类，这种基于像素的距离计算方法往往效果不佳，因为它没有考虑到图像中的结构和语义信息。
 
-![pixel_distance_problem](images/02/pixel_distance_problem.png)
+![pixel_distance_problem](images/cs231n-02/pixel_distance_problem.png)
 
 上图中，有遮掩（occlusion）、偏移、调色后的图片与原图的像素距离完全一致，但它们的语义距离却完全不同。这就是K近邻分类器在图像分类任务中面临的一个重要问题：它只考虑了像素级别的距离，而没有考虑到图像中的结构和语义信息。因此，虽然K近邻分类器是一个很好的起点，但我们需要更复杂的模型来解决图像分类问题，这就是我们接下来要介绍的线性分类器（Linear Classifier）。
 

@@ -1047,6 +1047,11 @@ li {
     /* 导航栏 */
     .nav-container {
         padding: 1rem;
+        align-items: center;
+    }
+
+    .nav-logo {
+        padding-top: 0;
     }
     
     .nav-menu {
@@ -1068,6 +1073,8 @@ li {
     
     .nav-toggle {
         display: flex;
+        align-items: center;
+        justify-content: center;
     }
     
     .nav-link {

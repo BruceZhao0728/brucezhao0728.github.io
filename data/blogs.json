@@ -207,5 +207,62 @@
       "en": "What is the Backpropagation Algorithm? How does it compute the gradients of each parameter in a Neural Network?"
     },
     "file": "blog/cs231n-06-back-propagation.md"
+  },
+  {
+    "id": "cryptography-01-cryptography-and-computer-security",
+    "title": {
+      "zh": "密码学：密码学与计算机安全",
+      "en": "Cryptography: Cryptography and Computer Security"
+    },
+    "date": "2026-04-04",
+    "category": "tech",
+    "tags": ["Cryptography", "Computer Security"],
+    "readTime": {
+      "zh": "10分钟阅读",
+      "en": "10 min read"
+    },
+    "excerpt": {
+      "zh": "什么是密码学？计算机安全的基本概念和挑战是什么？",
+      "en": "What is Cryptography? What are the basic concepts and challenges of Computer Security?"
+    },
+    "file": "blog/cryptography-01-cryptography-and-computer-security.md"
+  },
+  {
+    "id": "cryptography-02-classical-ciphers",
+    "title": {
+      "zh": "密码学：古典密码",
+      "en": "Cryptography: Classical Ciphers"
+    },
+    "date": "2026-04-06",
+    "category": "tech",
+    "tags": ["Cryptography", "Classical Ciphers"],
+    "readTime": {
+      "zh": "8分钟阅读",
+      "en": "8 min read"
+    },
+    "excerpt": {
+      "zh": "什么是古典密码？常见的古典密码有哪些？它们的加密和解密方法是什么？",
+      "en": "What are Classical Ciphers? What are some common Classical Ciphers? What are their encryption and decryption methods?"
+    },
+    "file": "blog/cryptography-02-classical-ciphers.md"
+  },
+  {
+    "id": "cryptography-03-block-cipher-SPN-Feistel-Lucifer",
+    "title": {
+      "zh": "密码学：分组密码 - SPN、Feistel、Lucifer",
+      "en": "Cryptography: Block Ciphers - SPN, Feistel, Lucifer"
+    },
+    "date": "2026-04-08",
+    "category": "tech",
+    "tags": ["Cryptography", "Block Ciphers", "SPN", "Feistel", "Lucifer"],
+    "readTime": {
+      "zh": "8分钟阅读",
+      "en": "8 min read"
+    },
+    "excerpt": {
+      "zh": "什么是分组密码？SPN、Feistel和Lucifer分组密码的基本原理和实现方法是什么？",
+      "en": "What are Block Ciphers? What are the basic principles and implementation methods of SPN, Feistel, and Lucifer Block Ciphers?"
+    },
+    "file": "blog/cryptography-03-block-cipher-SPN-Feistel-Lucifer.md"
   }
 ]

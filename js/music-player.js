@@ -85,6 +85,13 @@ const musicDatabase = {
             artist: 'Twins',
             cover: 'img/interests/music/twins_touch_of_love.webp',
             description: '<i>再下个车站 到天后 当然最好</i>'
+        },        {
+            id: 'miriam-yeung-a-maidens-prayer',
+            titleCn: '少女的祈祷',
+            titleEn: 'A Maiden\'s Prayer',
+            artist: '杨千嬅 | Miriam Yeung',
+            cover: 'img/interests/music/miriam_yeung_play_it_loud_kiss_me_soft.webp',
+            description: '<i>唯求与他车厢中可抵达未来 到车毁都不放开<br>无论路上历尽任何的伤害 任由我决定爱不爱</i>'
         }
     ],
     classical: [
@@ -139,6 +146,22 @@ const musicDatabase = {
             artist: 'Ryan Gosling & Emma Stone',
             cover: 'img/interests/music/la_la_land_soundtrack.webp',
             description: '<i>City of stars<br>Are you shining just for me?</i>'
+        },
+        {
+            id: 'a-love-before-time-crouching-tiger-hidden-dragon',
+            titleCn: '月光爱人',
+            titleEn: 'A Love Before Time',
+            artist: '李玟 | Coco Lee',
+            cover: 'img/interests/music/crouching_tiger_hidden_dragon_soundtrack.webp',
+            description: '李玟演唱的《月光爱人》是电影《卧虎藏龙》的主题曲，旋律优美，歌词充满诗意，完美诠释了电影中那段跨越时空的爱情故事'
+        },
+        {
+            id: 'pirates-of-the-caribbean-theme',
+            titleCn: '加勒比海盗主题曲',
+            titleEn: 'Pirates of the Caribbean Theme',
+            artist: 'Hans Zimmer',
+            cover: 'img/interests/music/pirates_of_the_caribbean_soundtrack.webp',
+            description: '汉斯·季默为《加勒比海盗》系列电影创作的主题曲，充满冒险和英雄主义的气息，是电影配乐中的经典之作'
         }
     ]
 };

@@ -49,7 +49,7 @@ $$\nabla f = \left( \frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}
 
 那么我们可以先画出它的计算图：
 
-![backpropagation-example](images/06/backpropagation-example.png)
+![backpropagation-example](images/cs231n-06/backpropagation-example.png)
 
 其中的中间变量 $q, f$：
 
@@ -69,7 +69,7 @@ $$\begin{aligned}
 
 随后我们将 $x, y, z$ 代入计算图，得到每个变量的值：
 
-![backpropagation-example-forward](images/06/backpropagation-example-forward.png)
+![backpropagation-example-forward](images/cs231n-06/backpropagation-example-forward.png)
 
 接下来我们从 $f$ 开始，**逐层**向前计算每个变量的梯度：
 
@@ -85,18 +85,18 @@ $$\begin{aligned}
 
 $$ \nabla f = \left( -4, -4, 3 \right) $$
 
-![backpropagation-example-backward](images/06/backpropagation-example-backward.png)
+![backpropagation-example-backward](images/cs231n-06/backpropagation-example-backward.png)
 
 如果我们总结一下这里的计算步骤，我们会发现：我们每一步计算一个变量的梯度的时候，都是通过它的直接输出变量的梯度乘以它对于直接输出变量的偏导数来计算的。比如说，我们计算 $\frac{\partial f}{\partial q}$ 的时候，是通过 $\frac{\partial f}{\partial f} \cdot \frac{\partial f}{\partial q}$ 来计算的；我们计算 $\frac{\partial f}{\partial x}$ 的时候，是通过 $\frac{\partial f}{\partial q} \cdot \frac{\partial q}{\partial x}$ 来计算的。这个计算过程就是反向传播算法的核心思想：**每一层的梯度都是通过它的直接输出变量的梯度乘以它对于直接输出变量的偏导数来计算的**。我们只需要从输出层向输入层一层层反向计算每一层的梯度，就可以得到整个函数的梯度了。
 
-![backpropagation-computation-graph](images/06/backpropagation-computation-graph.png)
+![backpropagation-computation-graph](images/cs231n-06/backpropagation-computation-graph.png)
 
 我们再举一个复杂一点的函数的例子：
 $$ f(w, x) = \frac{1}{1 + e^{-(w_0 x_0 + w_1 x_1 + w_2)}} $$
 
 和上面的推导过程类似，我们可以先进行正向传播计算每个变量的值，然后反向传播计算每个变量的梯度。这个过程就比较麻烦了，我们就不在这里进行详细的推导了，直接给出完整的计算图：
 
-![backpropagation-complex-example](images/06/backpropagation-complex-example.png)
+![backpropagation-complex-example](images/cs231n-06/backpropagation-complex-example.png)
 
 这里我们可以定义一个新的函数：
 
@@ -118,7 +118,7 @@ $$ \sigma'(z) = \sigma(z) (1 - \sigma(z)) $$
 上面的例子都是关于标量（Scalar）的计算的，而在实际的神经网络中，我们处理的往往是向量（Vector）或者张量（Tensor）。那么当反向传播算法遇上标量、向量、张量的时候，我们又该如何计算梯度呢？回答这个问题，需要我们首先复习一下标量、向量、张量的偏导数。
 
 > [!Note] 标量、向量、张量的偏导数
-> ![high-dimentional-derivatives](images/06/high-dimentional-derivatives.png)
+> ![high-dimentional-derivatives](images/cs231n-06/high-dimentional-derivatives.png)
 
 我们首先来看一下反向传播算法中的向量变量的梯度如何计算。比如说有一个函数 $z = f(x, y)$，其中 $x, y, z$ 分别是维度为 $D_x, D_y, D_z$ 的向量，那么我们可以定义 $z$ 关于 $x$ 的雅可比矩阵（Jacobian Matrix）：
 
@@ -150,7 +150,7 @@ $$ \frac{\partial L}{\partial y} = \frac{\partial L}{\partial z} \cdot \frac{\pa
 
 我们用计算图来表示上述过程：
 
-![backpropagation-computation-graph-vectors](images/06/backpropagation-computation-graph-vectors.png)
+![backpropagation-computation-graph-vectors](images/cs231n-06/backpropagation-computation-graph-vectors.png)
 
 我们来举一个ReLU函数的例子。我们前面讲过 ReLU 函数的形式：
 
@@ -237,7 +237,7 @@ $$ \frac{\partial L}{\partial y} = \frac{\partial L}{\partial z} \cdot J_{z, y} 
 
 我们可以用下面的计算图来表示上述过程：
 
-![backpropagation-computation-graph-tensors](images/06/backpropagation-computation-graph-tensors.png)
+![backpropagation-computation-graph-tensors](images/cs231n-06/backpropagation-computation-graph-tensors.png)
 
 我们来举一个矩阵乘法的例子：
 
@@ -269,7 +269,7 @@ $$\begin{aligned}
 
 在实际编程中，我们只需要对于计算图中的每一个节点（对应我们表达式中的每一个中间变量）实现它的正向传播和反向传播函数，就可以通过反向传播算法来计算整个函数的梯度了。这个节点有一个更常见的名字：**算子**（Operator）。每个算子都有一个正向传播函数和一个反向传播函数，正向传播函数用来计算输出变量的值，反向传播函数用来计算输入变量的梯度。如果你熟悉电子工程、数模电路的话，你可以把它理解成一个一个的门函数（Gate Function），整个计算图就是由这些门函数组成的电路图一样的结构。
 
-![patterns-in-gradient-flow](images/06/patterns-in-gradient-flow.png)
+![patterns-in-gradient-flow](images/cs231n-06/patterns-in-gradient-flow.png)
 
 如果我们用一个python函数来实现反向传播算法的话，我们可以写出如下的算子伪代码API：
 

@@ -29,7 +29,7 @@
 
 从代数角度来说，线性分类器的权重矩阵 $W$ 可以看作是一个变换矩阵，它将输入向量 $x$ 映射到一个新的空间中。在这个新的空间中，每个类别对应一个维度，权重矩阵中的每一行可以看作是一个类别的特征权重。当我们将输入向量 $x$ 与权重矩阵 $W$ 相乘时，我们实际上是在计算输入向量在每个类别特征上的加权和，这些加权和就是每个类别的得分。
 
-![linear-classifier-algebraic-viewpoint](images/03/linear-classifier-algebraic-viewpoint.png)
+![linear-classifier-algebraic-viewpoint](images/cs231n-03/linear-classifier-algebraic-viewpoint.png)
 
 ### 从视觉角度理解线性分类器：模板匹配
 
@@ -37,17 +37,17 @@
 
 也就是说，权重矩阵的每一行可以看作是一个类别的“模板”，当输入图片与这个模板越相似时，得分就越高，分类结果就越倾向于这个类别。
 
-![linear-classifier-visual-viewpoint](images/03/linear-classifier-visual-viewpoint.png)
+![linear-classifier-visual-viewpoint](images/cs231n-03/linear-classifier-visual-viewpoint.png)
 
 ### 从几何角度理解线性分类器：超平面划分
 
 从几何角度来说，线性分类器可以看作是在输入空间中划分不同类别的超平面。每个类别对应一个超平面，当输入向量落在某个类别的超平面的一侧时，就被分类为该类别。权重矩阵中的每一行定义了一个超平面的法向量，这些超平面将输入空间划分成不同的区域，每个区域对应一个类别。当输入向量落在某个类别的区域内时，线性分类器就会将其分类为该类别。
 
-![linear-classifier-geometric-viewpoint](images/03/linear-classifier-geometric-viewpoint.png)
+![linear-classifier-geometric-viewpoint](images/cs231n-03/linear-classifier-geometric-viewpoint.png)
 
 欸，看到这张图片，不知道你有没有发现一个问题：线性分类器，顾名思义，是一个线性的模型，那么它只能划分出线性可分的类别吗？如果两个类别在输入空间中是线性不可分的，那么线性分类器就无法正确地将它们区分开来。这就是线性分类器的一个重要限制。比如说，下面图中的这些情况，就是没办法使用线性分类器进行分类的：
 
-![linear-classifier-hard-cases](images/03/linear-classifier-hard-cases.png)
+![linear-classifier-hard-cases](images/cs231n-03/linear-classifier-hard-cases.png)
 
 ### 什么是一个好的线性分类器：损失函数
 

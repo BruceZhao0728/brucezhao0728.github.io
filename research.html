@@ -37,11 +37,6 @@
                             <p>利用自然语言处理技术，进行文本生成、情感分析、程序向量化等研究</p>
                         </div>
                         <div class="card">
-                            <h3>👁️ Computer Vision</h3>
-                            <p>Research of CV techniques such as image recognition, object detection, and image generation</p>
-                            <p>研究图像识别、目标检测、图像生成等计算机视觉技术</p>
-                        </div>
-                        <div class="card">
                             <h3>🖥️ Program Analysis</h3>
                             <p>Study of techniques for analyzing and understanding program behavior, including static and dynamic analysis methods</p>
                             <p>利用静态分析和动态分析方法，研究程序行为分析与理解的技术</p>
@@ -59,6 +54,38 @@
             <section class="section">
                 <h2>Research Projects | 研究项目</h2>
                 <div class="timeline">
+
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h3 class="timeline-title">AI Software Protection System Based on Code Obfuscation</h3>
+                            <h4 class="timeline-subtitle">基于代码混淆的人工智能软件保护系统</h4>
+                            <p class="timeline-date">04/2024 - 05/2026</p>
+                            <p><strong>Project Description | 项目简介</strong></p>
+                            <ul>
+                                <li>
+                                    Designed an automated code protection based on TVM and LLVM IR to shield localized AI models from reverse engineering, preventing unauthorized extraction of proprietary model architecture.<br>
+                                    针对 AI 模型本地部署后，其二进制文件易被逆向工程提取模型结构与权重，导致知识产权泄露的行业痛点，开发基于混淆的代码保护系统，在不影响模型精度和性能的前提下，将逆向工程成本提升至经济不可行，使本地人工智能软件免受逆向分析等手段的攻击，保护模型开发者的知识产权。
+                                </li>
+                                <li>
+                                    Pioneered the theoretical expansion of Mixed Boolean-Arithmetic (MBA) from the integer domain to the floating-point domain, successfully obfuscating core AI operations (e.g., Conv) while maintaining 100% numerical consistency.<br>
+                                    将传统混合布林代数（MBA）从整数域突破性拓展至浮点数域，攻克了传统方法无法保护AI模型核心浮点计算的难题，提出并证明了混淆变换的正确性，确保混淆前后模型输出100%一致。
+                                </li>
+                                <li>
+                                    Engineered a custom LLVM Pass to implement multi-level obfuscation during TVM compilation, allowing for tunable parameters such as recursion depth and MBA complexity to balance performance overhead and security strength.<br>
+                                    基于 TVM 机器学习编译器和 LLVM 编译器架构，在 LLVM IR 中间表示层设计并实现了自动化混淆 Pass ，支持用户自定义混淆参数，生成可直接部署的混淆版二进制库/可执行文件，实现了性能开销与安全强度的灵活平衡。
+                                </li>
+                                <li>
+                                    Quantified efficacy by developing a standardized metric system; experimental results showed a >30% decrease in de-obfuscation success rates and a >40% decrease in reverse engineering success rates compared to SOTA works.<br>
+                                    浮点数表达式和 AI 模型运算结果在混淆前后100%一致，反混淆工具成功率下降30%以上，逆向工程成功率下降40%以上，同时提出统一的混淆效果量化指标体系，衡量代码混淆的强度和安全性。
+                                </li>
+                                <li>
+                                    Authored a research paper detailing the implementation.<br>
+                                    作为共同第一作者和项目负责人完成论文。
+                                </li>
+                            </ul>
+                            <p><strong>Tech Stack | 技术栈</strong><br>C++, LLVM, TVM, Reverse Engineering, Code Obfuscation</p>
+                        </div>
+                    </div>
 
                     <div class="timeline-item">
                         <div class="timeline-content">
@@ -84,7 +111,7 @@
                                     构建自然语言接口，用户输入查询需求，系统通过云端 LLM API 自动生成 SQL 查询语句，实现对关系型数据库的智能查询。
                                 </li>
                             </ul>
-                            <p><strong>Tech Stack | 技术栈</strong><br>Python, SQL, Chroma, Tree-Sitter, GraphCodeBERT, CodeT5+</p>
+                            <p><strong>Tech Stack | 技术栈</strong><br>Python, SQL, Chroma, Tree-Sitter, Program Analysis</p>
                         </div>
                     </div>
 

@@ -264,5 +264,24 @@
       "en": "What are Block Ciphers? What are the basic principles and implementation methods of SPN, Feistel, and Lucifer Block Ciphers?"
     },
     "file": "blog/cryptography-03-block-cipher-SPN-Feistel-Lucifer.md"
+  },
+  {
+    "id": "cryptography-04-block-cipher-SDES-DES-IDEA",
+    "title": {
+      "zh": "密码学：分组密码 - S-DES、DES、IDEA",
+      "en": "Cryptography: Block Ciphers - S-DES, DES, IDEA"
+    },
+    "date": "2026-04-10",
+    "category": "tech",
+    "tags": ["Cryptography", "Block Ciphers", "S-DES", "DES", "IDEA"],
+    "readTime": {
+      "zh": "10分钟阅读",
+      "en": "10 min read"
+    },
+    "excerpt": {
+      "zh": "什么是S-DES、DES和IDEA分组密码？它们的加密和解密方法是什么？",
+      "en": "What are S-DES, DES, and IDEA Block Ciphers? What are their encryption and decryption methods?"
+    },
+    "file": "blog/cryptography-04-block-cipher-SDES-DES-IDEA.md"
   }
 ]

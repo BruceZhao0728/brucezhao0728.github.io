@@ -1441,9 +1441,77 @@ li {
     align-items: center;
 }
 
-.music-cover img {
+.music-cover-link {
+    position: relative;
+    display: block;
     width: 100%;
     max-width: 280px;
+    border-radius: 12px;
+    overflow: hidden;
+    text-decoration: none;
+}
+
+.music-cover-link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.55);
+    opacity: 0;
+    transition: opacity 0.28s ease;
+    pointer-events: none;
+}
+
+.music-cover-link:hover::after,
+.music-cover-link:focus-visible::after {
+    opacity: 1;
+}
+
+.music-cover-link--inactive {
+    cursor: default;
+}
+
+.music-cover-link--inactive:hover::after,
+.music-cover-link--inactive:focus-visible::after {
+    opacity: 1;
+}
+
+.music-cover-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    opacity: 0;
+    transition: opacity 0.28s ease;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.music-cover-link:hover .music-cover-overlay,
+.music-cover-link:focus-visible .music-cover-overlay {
+    opacity: 1;
+}
+
+.music-cover-overlay span {
+    color: var(--white);
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-align: center;
+    background: rgba(15, 23, 42, 0.72);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 999px;
+    padding: 0.65rem 1rem;
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.2);
+}
+
+.music-cover-link--inactive .music-cover-overlay span {
+    background: rgba(15, 23, 42, 0.6);
+}
+
+.music-cover img {
+    width: 100%;
     height: 280px;
     border-radius: 12px;
     object-fit: cover;
@@ -1518,15 +1586,21 @@ li {
         order: -1;
     }
 
-    .music-cover img {
+    .music-cover-link {
         max-width: 240px;
+    }
+
+    .music-cover img {
         height: 240px;
     }
 }
 
 @media (max-width: 768px) {
-    .music-cover img {
+    .music-cover-link {
         max-width: 200px;
+    }
+
+    .music-cover img {
         height: 200px;
     }
 

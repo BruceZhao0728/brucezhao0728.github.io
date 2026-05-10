@@ -283,5 +283,24 @@
       "en": "What are S-DES, DES, and IDEA Block Ciphers? What are their encryption and decryption methods?"
     },
     "file": "blog/cryptography-04-block-cipher-SDES-DES-IDEA.md"
+  },
+  {
+    "id": "cs231n-07-convolution-and-pooling",
+    "title": {
+      "zh": "深度学习与计算机视觉：卷积与池化",
+      "en": "Deep Learning and Computer Vision: Convolution and Pooling"
+    },
+    "date": "2026-05-10",
+    "category": "tech",
+    "tags": ["CS231n", "Deep Learning", "Computer Vision"],
+    "readTime": {
+      "zh": "12分钟阅读",
+      "en": "12 min read"
+    },
+    "excerpt": {
+      "zh": "什么是卷积操作？什么是池化操作？它们在卷积神经网络中的作用是什么？",
+      "en": "What is Convolution? What is Pooling? What are their roles in Convolutional Neural Networks?"
+    },
+    "file": "blog/cs231n-07-convolution-and-pooling.md"
   }
 ]

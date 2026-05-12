@@ -105,6 +105,15 @@ const musicDatabase = {
             cover: 'img/interests/music/miriam_yeung_play_it_loud_kiss_me_soft.webp',
             description: '<i>唯求与他车厢中可抵达未来 到车毁都不放开<br>无论路上历尽任何的伤害 任由我决定爱不爱</i>',
             videoUrl: 'https://www.bilibili.com/video/BV1sK411J74T'
+        },
+        {
+            id: 'joey-yung-hacken-lee-cannot-delay',
+            titleCn: '刻不容缓',
+            titleEn: 'Cannot Delay',
+            artist: '容祖儿 & 李克勤 | Joey Yung & Hacken Lee',
+            cover: 'img/interests/music/joey_yung_hacken_lee_concert_2015.webp',
+            description: '<i>明明在附近 又不告诉你 太多恋爱这样告终<br>怕在离场后接到迟来情信 其时和旁人在抱拥</i>',
+            videoUrl: 'https://www.bilibili.com/video/BV1Zr4y1T7jE'
         }
     ],
     classical: [
@@ -172,6 +181,7 @@ const musicDatabase = {
             artist: '李玟 | Coco Lee',
             cover: 'img/interests/music/crouching_tiger_hidden_dragon_soundtrack.webp',
             description: '李玟演唱的《月光爱人》是电影《卧虎藏龙》的主题曲，旋律优美，歌词充满诗意，完美诠释了电影中那段跨越时空的爱情故事',
+            videoUrl: 'https://www.bilibili.com/video/BV1SY411U7rG'
         },
         {
             id: 'pirates-of-the-caribbean-theme',
@@ -179,7 +189,8 @@ const musicDatabase = {
             titleEn: 'Pirates of the Caribbean Theme',
             artist: 'Hans Zimmer',
             cover: 'img/interests/music/pirates_of_the_caribbean_soundtrack.webp',
-            description: '汉斯·季默为《加勒比海盗》系列电影创作的主题曲，充满冒险和英雄主义的气息，是电影配乐中的经典之作'
+            description: '汉斯·季默为《加勒比海盗》系列电影创作的主题曲，充满冒险和英雄主义的气息，是电影配乐中的经典之作',
+            videoUrl: 'https://www.bilibili.com/video/BV13x411e7xP'
         }
     ]
 };

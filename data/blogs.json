@@ -302,5 +302,24 @@
       "en": "What is Convolution? What is Pooling? What are their roles in Convolutional Neural Networks?"
     },
     "file": "blog/cs231n-07-convolution-and-pooling.md"
+  },
+  {
+    "id": "back-to-mirror-lake-20260526",
+    "title": {
+      "zh": "从思源湖回到镜湖",
+      "en": "Back to Mirror Lake from Siyuan Lake"
+    },
+    "date": "2026-05-26",
+    "category": "personal",
+    "tags": ["Memory", "Nostalgia"],
+    "readTime": {
+      "zh": "10分钟阅读",
+      "en": "10 min read"
+    },
+    "excerpt": {
+      "zh": "回到母校，回忆往昔，感受时光的流转。",
+      "en": "Returning to the alma mater, reminiscing about the past and feeling the flow of time."
+    },
+    "file": "blog/back-to-mirror-lake-20260526.md"
   }
 ]

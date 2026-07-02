@@ -58,6 +58,33 @@ const musicDatabase = {
             cover: 'img/interests/music/stephanie_sun_against_the_light.webp',
             description: '<i>有一束光 那瞬间 是什么痛得刺眼<br>你的视线 是谅解 为什么舍不得熄灭</i>',
             videoUrl: 'https://www.bilibili.com/video/BV1RioiYVEVu'
+        },
+        {
+            id: 'crowd-lu-your-name-engraved-herein',
+            titleCn: '刻在我心底的名字',
+            titleEn: 'Your Name Engraved Herein',
+            artist: '卢广仲 | Crowd Lu',
+            cover: 'img/interests/music/crowd_lu_your_name_engraved_herein.webp',
+            description: '<i>刻在我心底的名字<br>你藏在尘封的位置<br>要不是这样我怎么过一辈子</i>',
+            videoUrl: 'https://www.bilibili.com/video/BV1nj411T7sT'
+        },
+        {
+            id: 'david-tao-just-love-you',
+            titleCn: '就是爱你',
+            titleEn: 'Just Love You',
+            artist: '陶喆 | David Tao',
+            cover: 'img/interests/music/david_tao_the_great_leap.webp',
+            description: '<i>我 一直都想对你说<br>你给我想不到的快乐<br>像绿洲给了沙漠</i>',
+            videoUrl: 'https://www.bilibili.com/video/BV1hS4y1e7TD'
+        },
+        {
+            id: 'khalil-fong-this-love',
+            titleCn: '爱爱爱',
+            titleEn: 'This Love',
+            artist: '方大同 | Khalil Fong',
+            cover: 'img/interests/music/khalil_fong_this_love.webp',
+            description: '<i>爱 还是会期待<br>还是觉得孤单太失败<br>我爱故我在</i>',
+            videoUrl: 'https://www.bilibili.com/video/BV1N9XXYAEqp'
         }
     ],
     cantopop: [

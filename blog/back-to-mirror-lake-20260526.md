@@ -12,7 +12,7 @@
 
 <div style="text-align: center; font-size: 1em; margin-top: 20px; margin-bottom: 20px;">
 
-<img style="display: block; margin: 0 auto; max-width: 85%; height: auto;" src="blog/images/back-to-mirror-lake-20260526/school-gate.jpg" alt="南中大门">
+<img style="display: block; margin: 0 auto; max-width: 85%; height: auto;" src="blog/images/back-to-mirror-lake-20260526/school-gate.webp" alt="南中大门">
 
 南中大门
 
@@ -24,7 +24,7 @@
 
 <div style="text-align: center; font-size: 1em; margin-top: 20px; margin-bottom: 20px;">
 
-<img style="display: block; margin: 0 auto; max-width: 85%; height: auto;" src="blog/images/back-to-mirror-lake-20260526/sjtu-folders.jpg" alt="交大文件夹">
+<img style="display: block; margin: 0 auto; max-width: 85%; height: auto;" src="blog/images/back-to-mirror-lake-20260526/sjtu-folders.webp" alt="交大文件夹">
 
 纪念品商店里的交大文件夹
 
@@ -38,7 +38,7 @@
 
 <div style="text-align: center; font-size: 1em; margin-top: 20px; margin-bottom: 20px;">
 
-<img style="display: block; margin: 0 auto; max-width: 85%; height: auto;" src="blog/images/back-to-mirror-lake-20260526/zhuangyuan-bridge.jpg" alt="状元桥">
+<img style="display: block; margin: 0 auto; max-width: 85%; height: auto;" src="blog/images/back-to-mirror-lake-20260526/zhuangyuan-bridge.webp" alt="状元桥">
 
 教学楼前的状元桥
 
@@ -58,7 +58,7 @@
 
 <div style="text-align: center; font-size: 1em; margin-top: 20px; margin-bottom: 20px;">
 
-<img style="display: block; margin: 0 auto; max-width: 85%; height: auto;" src="blog/images/back-to-mirror-lake-20260526/metro.jpg" alt="16号线地铁车厢">
+<img style="display: block; margin: 0 auto; max-width: 85%; height: auto;" src="blog/images/back-to-mirror-lake-20260526/metro.webp" alt="16号线地铁车厢">
 
 16号线地铁车厢里，耳边响起《如烟》的旋律
 

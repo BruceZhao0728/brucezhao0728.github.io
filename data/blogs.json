@@ -321,5 +321,24 @@
       "en": "Returning to the alma mater, reminiscing about the past and feeling the flow of time."
     },
     "file": "blog/back-to-mirror-lake-20260526.md"
+  },
+  {
+    "id": "cryptography-05-block-cipher-AES-work-modes-cryptanalysis",
+    "title": {
+      "zh": "密码学：分组密码 - AES、分组密码的工作模式、密码分析",
+      "en": "Cryptography: Block Ciphers - AES, Block Cipher Modes of Operation, Cryptanalysis"
+    },
+    "date": "2026-07-17",
+    "category": "tech",
+    "tags": ["Cryptography", "Block Ciphers", "AES", "Modes of Operation", "Cryptanalysis"],
+    "readTime": {
+      "zh": "12分钟阅读",
+      "en": "12 min read"
+    },
+    "excerpt": {
+      "zh": "什么是AES分组密码？分组密码的工作模式有哪些？密码分析的基本方法是什么？",
+      "en": "What is AES Block Cipher? What are the modes of operation for block ciphers? What are the basic methods of cryptanalysis?"
+    },
+    "file": "blog/cryptography-05-block-cipher-AES-work-modes-cryptanalysis.md"
   }
 ]

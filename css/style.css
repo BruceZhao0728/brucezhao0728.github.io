@@ -289,6 +289,49 @@ h3 {
 }
 
 /* ========================================
+   论文卡片样式
+   ======================================== */
+
+.paper-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1.5rem;
+}
+
+.paper-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary-dark);
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+}
+
+.paper-authors {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    margin-bottom: 0.35rem;
+}
+
+.paper-venue {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-bottom: 0.75rem;
+    font-style: italic;
+}
+
+.paper-abstract {
+    font-size: 0.88rem;
+    color: var(--text-light);
+    line-height: 1.6;
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ========================================
    个人简介样式
    ======================================== */
 
@@ -970,243 +1013,6 @@ li {
 }
 
 /* ========================================
-   Bilibili 视频卡片样式
-   ======================================== */
-
-.bilibili-video-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-    margin-top: 1.5rem;
-}
-
-.bilibili-video-card {
-    background: var(--white);
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: var(--shadow);
-    transition: var(--transition);
-    cursor: pointer;
-    outline: none;
-}
-
-.bilibili-video-card:hover,
-.bilibili-video-card:focus-visible {
-    box-shadow: var(--shadow-lg);
-    transform: translateY(-6px);
-}
-
-.bilibili-video-card:focus-visible {
-    outline: 2px solid var(--primary-color);
-    outline-offset: 2px;
-}
-
-/* 封面容器 */
-.bilibili-video-cover-wrapper {
-    position: relative;
-    width: 100%;
-    padding-top: 56.25%; /* 16:9 宽高比 */
-    overflow: hidden;
-    background: #e2e8f0;
-}
-
-.bilibili-video-cover {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.4s ease;
-}
-
-.bilibili-video-card:hover .bilibili-video-cover {
-    transform: scale(1.05);
-}
-
-/* 时长标签 */
-.bilibili-video-duration {
-    position: absolute;
-    bottom: 8px;
-    right: 8px;
-    background: rgba(0, 0, 0, 0.75);
-    color: #fff;
-    font-size: 0.75rem;
-    font-weight: 500;
-    padding: 2px 6px;
-    border-radius: 4px;
-    letter-spacing: 0.5px;
-    pointer-events: none;
-}
-
-/* 播放按钮悬浮层 */
-.bilibili-video-play-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(0, 0, 0, 0.3);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.bilibili-video-card:hover .bilibili-video-play-overlay {
-    opacity: 1;
-}
-
-.bilibili-video-play-overlay svg {
-    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4));
-    transition: transform 0.2s ease;
-}
-
-.bilibili-video-card:hover .bilibili-video-play-overlay svg {
-    transform: scale(1.1);
-}
-
-/* 视频信息 */
-.bilibili-video-info {
-    padding: 0.875rem 1rem;
-}
-
-.bilibili-video-title {
-    font-size: 0.95rem;
-    font-weight: 600;
-    line-height: 1.4;
-    color: var(--text-color);
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    margin-bottom: 0.5rem;
-    min-height: 2.6em;
-}
-
-/* 元信息 */
-.bilibili-video-meta {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-    font-size: 0.8rem;
-    color: var(--text-light);
-}
-
-.bilibili-video-stat {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.15rem;
-    white-space: nowrap;
-}
-
-.bilibili-video-date {
-    margin-left: auto;
-    white-space: nowrap;
-    color: var(--text-light);
-    font-size: 0.78rem;
-}
-
-/* 加载状态 */
-.bilibili-loading {
-    text-align: center;
-    padding: 3rem 1rem;
-    color: var(--text-light);
-}
-
-.bilibili-spinner {
-    width: 36px;
-    height: 36px;
-    border: 3px solid var(--border-color);
-    border-top-color: var(--primary-color);
-    border-radius: 50%;
-    animation: bilibili-spin 0.8s linear infinite;
-    margin: 0 auto 1rem;
-}
-
-@keyframes bilibili-spin {
-    to { transform: rotate(360deg); }
-}
-
-.bilibili-loading-sub {
-    font-size: 0.85rem;
-    margin-top: 0.25rem;
-    opacity: 0.7;
-}
-
-/* 空状态 / 占位符 */
-.bilibili-empty,
-.bilibili-placeholder {
-    text-align: center;
-    padding: 2.5rem 1rem;
-    color: var(--text-light);
-    background: var(--bg-color);
-    border-radius: 12px;
-    border: 2px dashed var(--border-color);
-}
-
-.bilibili-placeholder p:first-child {
-    font-weight: 600;
-    font-size: 1.1rem;
-}
-
-.bilibili-placeholder-sub {
-    font-size: 0.9rem;
-    margin-top: 0.75rem;
-}
-
-.bilibili-placeholder-sub code {
-    background: var(--border-color);
-    padding: 0.15em 0.4em;
-    border-radius: 3px;
-    font-size: 0.88em;
-    color: var(--primary-dark);
-    font-weight: 500;
-}
-
-.bilibili-placeholder-hint {
-    font-size: 0.82rem;
-    margin-top: 0.75rem;
-    opacity: 0.7;
-    line-height: 1.6;
-}
-
-.bilibili-placeholder-hint strong {
-    color: var(--primary-color);
-}
-
-.bilibili-empty-sub {
-    font-size: 0.85rem;
-    margin-top: 0.25rem;
-    opacity: 0.7;
-}
-
-/* 错误状态 */
-.bilibili-error {
-    text-align: center;
-    padding: 2.5rem 1rem;
-    color: var(--text-light);
-    background: var(--bg-color);
-    border-radius: 12px;
-    border: 2px dashed var(--border-color);
-}
-
-.bilibili-error p:first-child {
-    font-weight: 600;
-    font-size: 1.1rem;
-    color: var(--text-color);
-}
-
-.bilibili-error-sub {
-    font-size: 0.85rem;
-    margin-top: 0.25rem;
-    opacity: 0.7;
-}
-
-/* ========================================
    页脚样式
    ======================================== */
 
@@ -1274,8 +1080,7 @@ li {
     }
     
     .card-grid,
-    .interest-grid,
-    .bilibili-video-grid {
+    .interest-grid {
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     }
 }
@@ -1362,8 +1167,7 @@ li {
     
     /* 卡片网格 */
     .card-grid,
-    .interest-grid,
-    .bilibili-video-grid {
+    .interest-grid {
         grid-template-columns: 1fr;
         gap: 1.5rem;
     }

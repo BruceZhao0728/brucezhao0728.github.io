@@ -8,21 +8,7 @@ echo.
 REM 检查Python是否安装
 python --version >nul 2>&1
 if %errorlevel% == 0 (
-    echo ✓ 检测到Python
-    echo.
-
-    REM 刷新Bilibili视频数据
-    echo [1/2] 正在获取 Bilibili 视频数据...
-    python fetch_bilibili.py
-    if %errorlevel% == 0 (
-        echo ✓ Bilibili 数据更新完成
-    ) else (
-        echo ⚠ Bilibili 数据获取失败，将使用缓存数据
-    )
-    echo.
-
-    REM 启动本地服务器
-    echo [2/2] 正在启动服务器...
+    echo ✓ 检测到Python，正在启动服务器...
     echo.
     echo 服务器地址: http://localhost:8000
     echo 按 Ctrl+C 停止服务器

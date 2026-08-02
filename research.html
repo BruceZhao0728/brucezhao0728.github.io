@@ -50,7 +50,7 @@
                 <h2>Research Projects | 研究项目</h2>
                 <div class="timeline">
 
-                    <div class="timeline-item">
+                    <div class="timeline-item" id="project-mba-obfuscation">
                         <div class="timeline-content">
                             <h3 class="timeline-title">AI Software Protection System Based on Code Obfuscation</h3>
                             <h4 class="timeline-subtitle">基于代码混淆的人工智能软件保护系统</h4>
@@ -82,7 +82,7 @@
                         </div>
                     </div>
 
-                    <div class="timeline-item">
+                    <div class="timeline-item" id="project-vuln-vector-db">
                         <div class="timeline-content">
                             <h3 class="timeline-title">AI-Powered Vulnerability Analysis System Based on Vector Databases</h3>
                             <h4 class="timeline-subtitle">基于向量数据库和人工智能的智能漏洞分析系统</h4>
@@ -110,7 +110,7 @@
                         </div>
                     </div>
 
-                    <div class="timeline-item">
+                    <div class="timeline-item" id="project-kernel-firewall">
                         <div class="timeline-content">
                             <h3 class="timeline-title">Linux Kernel-Module-Based Packet Filtering Firewall</h3>
                             <h4 class="timeline-subtitle">基于Linux内核模块的包过滤防火墙</h4>
@@ -138,7 +138,7 @@
                         </div>
                     </div>
 
-                    <div class="timeline-item">
+                    <div class="timeline-item" id="project-distributed-power">
                         <div class="timeline-content">
                             <h3 class="timeline-title">Design of a New Distributed Power Coordinated Controller</h3>
                             <h4 class="timeline-subtitle">新型电力系统分布式协调控制器设计</h4>
@@ -169,38 +169,15 @@
             </section>
 
             <!-- Academic Papers -->
-            <!-- <section class="section">
-                <h2>Academic Papers</h2>
-                <div class="card-grid">
-                    <div class="card">
-                        <h3>[Paper Title]</h3>
-                        <p class="timeline-date">2025</p>
-                        <p>
-                            <strong>Authors:</strong> [Your Name], [Collaborators]<br>
-                            <strong>Published at:</strong> [Conference/Journal Name]<br>
-                            <strong>Abstract:</strong> This paper proposes a novel approach to...
-                        </p>
-                        <div class="btn-group">
-                            <a href="#" class="btn btn-primary">PDF</a>
-                            <a href="#" class="btn btn-outline">Code</a>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <h3>[Paper Title]</h3>
-                        <p class="timeline-date">2024</p>
-                        <p>
-                            <strong>Authors:</strong> [Your Name], [Collaborators]<br>
-                            <strong>Published at:</strong> [Conference/Journal Name]<br>
-                            <strong>Abstract:</strong> This paper investigates...
-                        </p>
-                        <div class="btn-group">
-                            <a href="#" class="btn btn-primary">PDF</a>
-                            <a href="#" class="btn btn-outline">Code</a>
-                        </div>
-                    </div>
+            <section class="section">
+                <h2>Publications | 论文发表</h2>
+                <p class="text-center" style="margin-bottom: 2rem; color: var(--text-light);">
+                    My academic publications and preprints | 我的学术论文与预印本
+                </p>
+                <div id="papers-container">
+                    <!-- 由 JS 动态填充 -->
                 </div>
-            </section> -->
+            </section>
 
             <!-- Academic Activities -->
             <!-- <section class="section">
@@ -262,6 +239,159 @@
     <script src="js/language.js"></script>
     <script src="js/components.js"></script>
     <script src="js/main.js"></script>
+    <script>
+        // ========================================
+        // Papers Rendering
+        // ========================================
+
+        function renderPapers(papers) {
+            var container = document.getElementById('papers-container');
+            if (!container) return;
+
+            if (!papers || papers.length === 0) {
+                container.innerHTML =
+                    '<div class="card" style="text-align:center;padding:3rem;color:var(--text-light);">' +
+                        '<p>No publications yet. Stay tuned!</p>' +
+                        '<p style="margin-top:0.5rem;">暂无论文发表，敬请期待！</p>' +
+                    '</div>';
+                return;
+            }
+
+            // 按年份降序排列
+            papers.sort(function (a, b) { return (b.year || 0) - (a.year || 0); });
+
+            // 先清除所有项目中的旧 paper 链接（支持语言切换后重新渲染）
+            var oldLinks = document.querySelectorAll('.paper-link-inline');
+            for (var o = 0; o < oldLinks.length; o++) {
+                oldLinks[o].remove();
+            }
+
+            var html = '<div class="card-grid">';
+            for (var i = 0; i < papers.length; i++) {
+                var p = papers[i];
+                var title = getLocalizedText(p.title);
+                var abstract = getLocalizedText(p.abstract);
+                var authors = p.authors || '';
+                var venue = p.venue || '';
+                var year = p.year || '';
+                var links = p.links || {};
+                var relatedProject = p.relatedProject || '';
+
+                html += '<div class="card paper-card">';
+                html += '<h3 class="paper-title">' + escapeHtml(title) + '</h3>';
+                html += '<p class="paper-authors">' + escapeHtml(authors) + '</p>';
+                html += '<p class="paper-venue">';
+                if (venue) html += escapeHtml(venue);
+                if (venue && year) html += ' &middot; ';
+                if (year) html += year;
+                html += '</p>';
+                if (abstract) {
+                    html += '<p class="paper-abstract">' + escapeHtml(abstract) + '</p>';
+                }
+
+                // External links + optional related-project link
+                var hasLinks = links.arxiv || links.pdf || links.code || links.project || relatedProject;
+                if (hasLinks) {
+                    html += '<div class="btn-group" style="margin-top:1rem;">';
+                    if (links.arxiv) {
+                        html += '<a href="' + escapeHtml(links.arxiv) + '" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">arXiv</a>';
+                    }
+                    if (links.pdf) {
+                        html += '<a href="' + escapeHtml(links.pdf) + '" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">PDF</a>';
+                    }
+                    if (links.code) {
+                        html += '<a href="' + escapeHtml(links.code) + '" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">Code</a>';
+                    }
+                    if (links.project) {
+                        html += '<a href="' + escapeHtml(links.project) + '" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">Project</a>';
+                    }
+                    // Paper → Project: scroll to related project on the same page
+                    if (relatedProject) {
+                        html += '<a href="#' + escapeHtml(relatedProject) + '" class="btn btn-primary btn-sm">📎 Related Project</a>';
+                    }
+                    html += '</div>';
+                }
+
+                html += '</div>';
+
+                // Project → Paper: add a paper link back to the related project card
+                if (relatedProject) {
+                    var projectEl = document.getElementById(relatedProject);
+                    if (projectEl) {
+                        var btnGroup = projectEl.querySelector('.btn-group');
+                        if (!btnGroup) {
+                            // Create a btn-group if the project doesn't already have one
+                            btnGroup = document.createElement('div');
+                            btnGroup.className = 'btn-group mt-2';
+                            projectEl.querySelector('.timeline-content').appendChild(btnGroup);
+                        }
+                        var paperLink = document.createElement('a');
+                        paperLink.href = '#';
+                        paperLink.className = 'btn btn-primary btn-sm paper-link-inline';
+                        paperLink.textContent = '📄 Paper';
+                        paperLink.title = title;
+                        paperLink.addEventListener('click', function (e) {
+                            e.preventDefault();
+                            // Scroll up to the papers section
+                            var papersSection = document.getElementById('papers-container').closest('section');
+                            if (papersSection) {
+                                papersSection.scrollIntoView({ behavior: 'smooth' });
+                            }
+                        });
+                        btnGroup.appendChild(paperLink);
+                    }
+                }
+            }
+            html += '</div>';
+            container.innerHTML = html;
+        }
+
+        function loadPapers() {
+            var container = document.getElementById('papers-container');
+            if (!container) return;
+
+            container.innerHTML =
+                '<div class="card" style="text-align:center;padding:3rem;color:var(--text-light);">' +
+                    '<p>Loading publications...</p>' +
+                    '<p style="margin-top:0.5rem;">正在加载论文...</p>' +
+                '</div>';
+
+            fetch('data/papers.json')
+                .then(function (resp) {
+                    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+                    return resp.json();
+                })
+                .then(renderPapers)
+                .catch(function (err) {
+                    console.warn('Failed to load papers:', err.message);
+                    container.innerHTML =
+                        '<div class="card" style="text-align:center;padding:3rem;color:var(--text-light);">' +
+                            '<p>Failed to load publications.</p>' +
+                            '<p style="margin-top:0.5rem;">论文加载失败</p>' +
+                        '</div>';
+                });
+        }
+
+        // 辅助函数（复用 language.js 中的 getLocalizedText）
+        function escapeHtml(str) {
+            if (!str) return '';
+            var div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        // 初始化
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', loadPapers);
+        } else {
+            loadPapers();
+        }
+
+        // 语言切换时刷新
+        window.addEventListener('languageChanged', function () {
+            loadPapers();
+        });
+    </script>
     <script>
         // Update research page button text based on language
         function updateResearchPageLanguage() {

@@ -1,0 +1,22 @@
+[
+  {
+    "title": {
+      "en": "Protecting Floating-Point Computation for DNN Binaries with MBA Obfuscation",
+      "zh": "Protecting Floating-Point Computation for DNN Binaries with MBA Obfuscation"
+    },
+    "authors": "Yikun Hu, Zichen Zhao, Peixiang Qin, Ziyi Zhou, Jiaping Gui, Yuandao Cai, Wensheng Tang",
+    "venue": "arXiv preprint",
+    "year": 2026,
+    "abstract": {
+      "en": "To be filled",
+      "zh": "尚未公开"
+    },
+    "relatedProject": "project-mba-obfuscation",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2607.17603",
+      "pdf": "",
+      "code": "",
+      "project": ""
+    }
+  }
+]

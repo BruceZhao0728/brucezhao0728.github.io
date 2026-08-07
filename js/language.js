@@ -113,11 +113,13 @@ const homeTranslations = {
 const researchTranslations = {
     'en': {
         'sendEmail': 'Send Email',
-        'viewResume': 'View Resume'
+        'resumeZh': '📄 中文简历',
+        'resumeEn': '📄 English Resume'
     },
     'zh': {
         'sendEmail': '发送邮件',
-        'viewResume': '查看简历'
+        'resumeZh': '📄 中文简历',
+        'resumeEn': '📄 English Resume'
     }
 };
 

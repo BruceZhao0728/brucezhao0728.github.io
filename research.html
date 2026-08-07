@@ -226,7 +226,8 @@
                     </p>
                     <div class="btn-group mt-2">
                         <a href="mailto:bruce0728@sjtu.edu.cn" class="btn btn-primary" id="btn-send-email">Send Email</a>
-                        <a href="#" class="btn btn-outline" id="btn-view-resume">View Resume</a>
+                        <a href="files/resume-chinese.pdf" target="_blank" class="btn btn-outline" id="btn-resume-zh">📄 中文简历</a>
+                        <a href="files/resume-english.pdf" target="_blank" class="btn btn-outline" id="btn-resume-en">📄 English Resume</a>
                     </div>
                 </div>
             </section>
@@ -396,13 +397,17 @@
         // Update research page button text based on language
         function updateResearchPageLanguage() {
             const btnSendEmail = document.getElementById('btn-send-email');
-            const btnViewResume = document.getElementById('btn-view-resume');
-            
+            const btnResumeZh = document.getElementById('btn-resume-zh');
+            const btnResumeEn = document.getElementById('btn-resume-en');
+
             if (btnSendEmail) {
                 btnSendEmail.textContent = translateResearch('sendEmail');
             }
-            if (btnViewResume) {
-                btnViewResume.textContent = translateResearch('viewResume');
+            if (btnResumeZh) {
+                btnResumeZh.textContent = translateResearch('resumeZh');
+            }
+            if (btnResumeEn) {
+                btnResumeEn.textContent = translateResearch('resumeEn');
             }
         }
         

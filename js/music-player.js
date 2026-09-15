@@ -85,6 +85,24 @@ const musicDatabase = {
             cover: 'img/interests/music/khalil_fong_this_love.webp',
             description: '<i>爱 还是会期待<br>还是觉得孤单太失败<br>我爱故我在</i>',
             videoUrl: 'https://www.bilibili.com/video/BV1N9XXYAEqp'
+        },
+        {
+            id: 'yoyo-sham-light-chaser',
+            titleCn: '追光者',
+            titleEn: 'Light Chaser',
+            artist: '岑宁儿 | Yoyo Sham',
+            cover: 'img/interests/music/rush_to_the_dead_summer_soundtrack.webp',
+            description: '<i>我可以跟在你身后 像影子追着光梦游<br>我可以等在这路口 不管你会不会经过</i>',
+            videoUrl: 'https://www.bilibili.com/video/BV1KU4y1U7Ax'
+        },
+        {
+            id: 'escape-plan-the-brightest-star-in-the-night-sky',
+            titleCn: '夜空中最亮的星',
+            titleEn: 'The Brightest Star in the Night Sky',
+            artist: '逃跑计划 | Escape Plan',
+            cover: 'img/interests/music/escape_plan_earth.webp',
+            description: '<i>每当我找不到存在的意义 每当我迷失在黑夜里<br>Oh 夜空中最亮的星     请指引我靠近你</i>',
+            videoUrl: 'https://www.bilibili.com/video/BV1xv411V7aN/'
         }
     ],
     cantopop: [

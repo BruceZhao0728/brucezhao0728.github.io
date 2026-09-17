@@ -268,5 +268,16 @@
             "description": "汉斯·季默为《加勒比海盗》系列电影创作的主题曲，充满冒险和英雄主义的气息，是电影配乐中的经典之作",
             "videoUrl": "https://www.bilibili.com/video/BV13x411e7xP"
         }
+    ],
+    "hokkien": [
+        {
+            "id": "mayday-peter-and-mary",
+            "titleCn": "志明与春娇",
+            "titleEn": "Peter and Mary",
+            "artist": "五月天 | Mayday",
+            "cover": "img/interests/music/mayday_maydays_first_album.webp",
+            "description": "<i>我跟你 最好就到这<br>你对我 已经没感觉<br>麦阁伤心 麦阁我这爱你 你没爱我</i>",
+            "videoUrl": "https://www.bilibili.com/video/BV1dieUeGEob/"
+        }
     ]
 }

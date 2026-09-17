@@ -32,6 +32,9 @@ async function renderUpdates() {
     const container = document.getElementById('updates-container');
     if (!container) return;
 
+    // 确保翻译字典已加载
+    await loadTranslations();
+
     // Show loading state
     container.innerHTML = `<div class="timeline"><p class="loading-text">${translateUpdates('loading')}</p></div>`;
 

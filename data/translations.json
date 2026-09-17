@@ -1,0 +1,106 @@
+{
+    "nav": {
+        "en": {
+            "home": "Home",
+            "interests": "Interests",
+            "research": "Research",
+            "blog": "Blog",
+            "awards": "Awards"
+        },
+        "zh": {
+            "home": "主页",
+            "interests": "兴趣",
+            "research": "研究",
+            "blog": "博客",
+            "awards": "荣誉"
+        }
+    },
+    "blog": {
+        "en": {
+            "btnAll": "All",
+            "btnTech": "Tech",
+            "btnLife": "Life",
+            "btnStudy": "Study",
+            "sortTime": "Time (newest first)",
+            "sortTimeOld": "Time (oldest first)",
+            "sortZhAsc": "Chinese title (A-Z)",
+            "sortZhDesc": "Chinese title (Z-A)",
+            "sortEnAsc": "English title (A-Z)",
+            "sortEnDesc": "English title (Z-A)",
+            "loading": "Loading blog posts...",
+            "noBlogs": "No blog posts available",
+            "backToBlog": "← Back to Blog",
+            "categoryLabel": "Category: ",
+            "tagsLabel": "Tags: ",
+            "searchLabel": "Search: ",
+            "sortLabel": "Sort: ",
+            "searchPlaceholder": "Search...",
+            "allTags": "All Tags",
+            "clearSearch": "Clear",
+            "catAll": "All",
+            "catTech": "Tech",
+            "catLife": "Life",
+            "catStudy": "Study"
+        },
+        "zh": {
+            "btnAll": "全部",
+            "btnTech": "技术",
+            "btnLife": "生活",
+            "btnStudy": "学习",
+            "sortTime": "时间（最新优先）",
+            "sortTimeOld": "时间（最旧优先）",
+            "sortZhAsc": "中文标题（A-Z）",
+            "sortZhDesc": "中文标题（Z-A）",
+            "sortEnAsc": "英文标题（A-Z）",
+            "sortEnDesc": "英文标题（Z-A）",
+            "loading": "正在加载博客文章...",
+            "noBlogs": "暂无博客文章",
+            "backToBlog": "← 返回博客",
+            "categoryLabel": "分类: ",
+            "tagsLabel": "标签: ",
+            "searchLabel": "搜索: ",
+            "sortLabel": "排序: ",
+            "searchPlaceholder": "搜索文章...",
+            "allTags": "全部标签",
+            "clearSearch": "清空",
+            "catAll": "全部",
+            "catTech": "技术",
+            "catLife": "生活",
+            "catStudy": "学习"
+        }
+    },
+    "updates": {
+        "en": {
+            "sectionTitle": "Recent Updates",
+            "loading": "Loading updates...",
+            "noUpdates": "No updates available"
+        },
+        "zh": {
+            "sectionTitle": "近期更新",
+            "loading": "正在加载更新...",
+            "noUpdates": "暂无更新"
+        }
+    },
+    "home": {
+        "en": {
+            "viewBlog": "View Blog",
+            "research": "Research"
+        },
+        "zh": {
+            "viewBlog": "查看博客",
+            "research": "研究经历"
+        }
+    },
+    "research": {
+        "en": {
+            "sendEmail": "Send Email",
+            "resumeZh": "📄 中文简历",
+            "resumeEn": "📄 English Resume"
+        },
+        "zh": {
+            "sendEmail": "发送邮件",
+            "resumeZh": "📄 中文简历",
+            "resumeEn": "📄 English Resume"
+        }
+    }
+}

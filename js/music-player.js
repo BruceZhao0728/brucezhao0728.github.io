@@ -1,280 +1,21 @@
-// 音乐数据库
+// 音乐数据库从 data/music.json 加载
 // 说明：cover字段支持两种格式
 // 1. 本地路径：'img/interests/music/filename.webp'
 // 2. 网络链接：'https://...' 或 'http://...'
 // videoUrl为可选字段，用来配置歌曲对应的MV / LIVE外链
-const musicDatabase = {
-    mandopop: [
-        {
-            id: 'mayday-suddenly-missing-you-so-bad',
-            titleCn: '突然好想你',
-            titleEn: 'Suddenly Missing You So Bad',
-            artist: '五月天 | Mayday',
-            cover: 'img/interests/music/mayday_poetry_of_the_day_after.webp',
-            description: '<i>突然好想你<br>你会在哪里<br>过得快乐或委屈</i>',
-            videoUrl: 'https://www.bilibili.com/video/BV16Q4y1S7AQ'
-        },
-        {
-            id: 'cheer-chen-too-smart',
-            titleCn: '太聪明',
-            titleEn: 'Too Smart',
-            artist: '陈绮贞 | Cheer Chen',
-            cover: 'img/interests/music/cheer_chen_groupies.webp',
-            description: '<i>我开始后悔不应该太聪明地卖弄<br>只是怕亲手将我的真心葬送</i>',
-            videoUrl: 'https://www.bilibili.com/video/BV1sDx1eoEMw'
-        },
-        {
-            id: 'jj-lin-romantic',
-            titleCn: '浪漫血液',
-            titleEn: 'Romantic',
-            artist: '林俊杰 | JJ Lin',
-            cover: 'img/interests/music/jj_lin_genisis.webp',
-            description: '<i>什么伤口都会痊愈 炽热的渴望是勇气<br>在我身上流着浪漫血液</i>',
-            videoUrl: 'https://www.bilibili.com/video/BV1wg4y1i7Hr'
-        },
-        {
-            id: 'hebe-tien-a-little-happiness',
-            titleCn: '小幸运',
-            titleEn: 'A Little Happiness',
-            artist: '田馥甄 | Hebe Tien',
-            cover: 'img/interests/music/hebe_tien_our_times.webp',
-            description: '<i>也许当时忙着微笑和哭泣 忙着追逐天空中的流星<br>人理所当然的忘记<br>是谁一直风里雨里默默守护在原地</i>',
-            videoUrl: 'https://www.bilibili.com/video/BV1QL4y1t7z4'
-        },
-        {
-            id: 'she-wings-of-my-words',
-            titleCn: '你曾是少年',
-            titleEn: 'Wings of My Words',
-            artist: 'S.H.E',
-            cover: 'img/interests/music/she_wings_of_my_words.webp',
-            description: '<i>想看遍这世界 去最遥远的远方<br>感觉有双翅膀 能飞越高山和海洋</i>',
-            videoUrl: 'https://www.bilibili.com/video/BV1Xj411Q77q'
-        },
-        {
-            id: 'stephanie-sun-against-the-light',
-            titleCn: '逆光',
-            titleEn: 'Against the Light',
-            artist: '孙燕姿 | Stephanie Sun',
-            cover: 'img/interests/music/stephanie_sun_against_the_light.webp',
-            description: '<i>有一束光 那瞬间 是什么痛得刺眼<br>你的视线 是谅解 为什么舍不得熄灭</i>',
-            videoUrl: 'https://www.bilibili.com/video/BV1RioiYVEVu'
-        },
-        {
-            id: 'crowd-lu-your-name-engraved-herein',
-            titleCn: '刻在我心底的名字',
-            titleEn: 'Your Name Engraved Herein',
-            artist: '卢广仲 | Crowd Lu',
-            cover: 'img/interests/music/crowd_lu_your_name_engraved_herein.webp',
-            description: '<i>刻在我心底的名字<br>你藏在尘封的位置<br>要不是这样我怎么过一辈子</i>',
-            videoUrl: 'https://www.bilibili.com/video/BV1nj411T7sT'
-        },
-        {
-            id: 'david-tao-just-love-you',
-            titleCn: '就是爱你',
-            titleEn: 'Just Love You',
-            artist: '陶喆 | David Tao',
-            cover: 'img/interests/music/david_tao_the_great_leap.webp',
-            description: '<i>我 一直都想对你说<br>你给我想不到的快乐<br>像绿洲给了沙漠</i>',
-            videoUrl: 'https://www.bilibili.com/video/BV1hS4y1e7TD'
-        },
-        {
-            id: 'khalil-fong-this-love',
-            titleCn: '爱爱爱',
-            titleEn: 'This Love',
-            artist: '方大同 | Khalil Fong',
-            cover: 'img/interests/music/khalil_fong_this_love.webp',
-            description: '<i>爱 还是会期待<br>还是觉得孤单太失败<br>我爱故我在</i>',
-            videoUrl: 'https://www.bilibili.com/video/BV1N9XXYAEqp'
-        },
-        {
-            id: 'yoyo-sham-light-chaser',
-            titleCn: '追光者',
-            titleEn: 'Light Chaser',
-            artist: '岑宁儿 | Yoyo Sham',
-            cover: 'img/interests/music/rush_to_the_dead_summer_soundtrack.webp',
-            description: '<i>我可以跟在你身后 像影子追着光梦游<br>我可以等在这路口 不管你会不会经过</i>',
-            videoUrl: 'https://www.bilibili.com/video/BV1KU4y1U7Ax'
-        },
-        {
-            id: 'escape-plan-the-brightest-star-in-the-night-sky',
-            titleCn: '夜空中最亮的星',
-            titleEn: 'The Brightest Star in the Night Sky',
-            artist: '逃跑计划 | Escape Plan',
-            cover: 'img/interests/music/escape_plan_earth.webp',
-            description: '<i>每当我找不到存在的意义 每当我迷失在黑夜里<br>Oh 夜空中最亮的星     请指引我靠近你</i>',
-            videoUrl: 'https://www.bilibili.com/video/BV1xv411V7aN/'
-        },
-        {
-            id: 'mayday-half-of-my-life',
-            titleCn: '一半人生',
-            titleEn: 'Half of My Life',
-            artist: '五月天 | Mayday',
-            cover: 'img/interests/music/mayday_half_of_my_life.webp',
-            description: '<i>想要唱首歌 去唱哭别人<br>最后却是我 满脸泪痕</i>',
-            videoUrl: 'https://www.bilibili.com/video/BV1zt411H7Xz'
-        },
-        {
-            id: 'mayday-cheers',
-            titleCn: '干杯',
-            titleEn: 'Cheers',
-            artist: '五月天 | Mayday',
-            cover: 'img/interests/music/mayday_second_round.webp',
-            description: '<i>会不会 有一天 时间真的能倒退<br>退回 你的我的 回不去的 悠悠的岁月<br>也许会 有一天 世界真的有终点<br>也要和你举起回忆酿的甜 和你再干一杯</i>',
-            videoUrl: 'https://www.bilibili.com/video/BV1ay4y1Y7a9'
-        },
-        {
-            id: 'sandy-lam-at-least-ive-got-you',
-            titleCn: '至少还有你',
-            titleEn: 'At Least I\'ve Got You',
-            artist: '林忆莲 | Sandy Lam',
-            cover: 'img/interests/music/sandy_lam_sandy_lams.webp',
-            description: '<i>如果全世界我也可以放弃<br>至少还有你值得我去珍惜<br>而你在这里 就是生命的奇迹</i>',
-            videoUrl: 'https://www.bilibili.com/video/BV1DS4y1M7n1'
-        },
-        {
-            id: 'she-mayday',
-            titleCn: '五月天',
-            titleEn: 'Mayday',
-            artist: 'S.H.E',
-            cover: 'img/interests/music/she_play.webp',
-            description: '<i>五月的天 刚诞生的夏天<br>我们之间 才完成的爱恋<br>紧握的手里面 有好多明天</i>',
-            videoUrl: 'https://www.bilibili.com/video/BV1NK4y1P7zA/'
-        }
-    ],
-    cantopop: [
-        {
-            id: 'kay-tse-wedding-card-street',
-            titleCn: '喜帖街',
-            titleEn: 'Wedding Card Street',
-            artist: '谢安琪 | Kay Tse',
-            cover: 'img/interests/music/kay_tse_binary.webp',
-            description: '<i>忘掉砌过的沙<br>回忆的堡垒 刹那已倒下</i>',
-            videoUrl: 'https://www.bilibili.com/video/BV1PE411P7Qu'
-        },
-        {
-            id: 'eason-chan-people-come-and-go',
-            titleCn: '人来人往',
-            titleEn: 'People Come and Go',
-            artist: '陈奕迅 | Eason Chan',
-            cover: 'img/interests/music/eason_chan_the_line_up.webp',
-            description: '<i>拥不拥有也会记住谁<br>快不快乐留在身体里</i>',
-            videoUrl: 'https://www.bilibili.com/video/BV1kT4y1L7vZ'
-        },
-        {
-            id: 'sammi-cheng-beautiful-life',
-            titleCn: '终身美丽',
-            titleEn: 'Beautiful Life',
-            artist: '郑秀文 | Sammi Cheng',
-            cover: 'img/interests/music/sammi_cheung_shocking_pink.webp',
-            description: '充满力量的励志歌曲，向身边所有人展现自信与美丽的态度',
-            videoUrl: 'https://www.bilibili.com/video/BV1KK411V77S'
-        },
-        {
-            id: 'twins-next-station-tin-hau',
-            titleCn: '下一站天后',
-            titleEn: 'Next Station: Tin Hau',
-            artist: 'Twins',
-            cover: 'img/interests/music/twins_touch_of_love.webp',
-            description: '<i>再下个车站 到天后 当然最好</i>',
-            videoUrl: 'https://www.bilibili.com/video/BV1KA411T7bU'
-        },
-        {
-            id: 'miriam-yeung-a-maidens-prayer',
-            titleCn: '少女的祈祷',
-            titleEn: 'A Maiden\'s Prayer',
-            artist: '杨千嬅 | Miriam Yeung',
-            cover: 'img/interests/music/miriam_yeung_play_it_loud_kiss_me_soft.webp',
-            description: '<i>唯求与他车厢中可抵达未来 到车毁都不放开<br>无论路上历尽任何的伤害 任由我决定爱不爱</i>',
-            videoUrl: 'https://www.bilibili.com/video/BV1sK411J74T'
-        },
-        {
-            id: 'joey-yung-hacken-lee-cannot-delay',
-            titleCn: '刻不容缓',
-            titleEn: 'Cannot Delay',
-            artist: '容祖儿 & 李克勤 | Joey Yung & Hacken Lee',
-            cover: 'img/interests/music/joey_yung_hacken_lee_concert_2015.webp',
-            description: '<i>明明在附近 又不告诉你 太多恋爱这样告终<br>怕在离场后接到迟来情信 其时和旁人在抱拥</i>',
-            videoUrl: 'https://www.bilibili.com/video/BV1Zr4y1T7jE'
-        }
-    ],
-    classical: [
-        {
-            id: 'vivaldi-four-seasons',
-            titleCn: '维瓦尔第：四季',
-            titleEn: 'Vivaldi: The Four Seasons',
-            artist: 'Anne-Sophie Mutter & Herbert von Karajan',
-            cover: 'img/interests/music/anne_sophie_mutter_vivaldi_the_four_seasons.webp',
-            description: '巴洛克时期的经典之作，用音乐描绘四季的变化与美景，辅之以小提琴的悠扬音色，堪称经典中的经典',
-            videoUrl: 'https://www.bilibili.com/video/BV1EG4y1V7fJ'
-        },
-        {
-            id: 'rachmaninoff-piano-concerto-no3',
-            titleCn: '拉赫玛尼诺夫第三钢琴协奏曲',
-            titleEn: 'Rachmaninoff Piano Concerto No.3',
-            artist: '王羽佳 & 杜达梅尔 | Yuja Wang & Gustavo Dudamel',
-            cover: 'img/interests/music/yuja_wang_rachmaninoff.webp',
-            description: '技术难度极高的钢琴协奏曲，充满激情与浪漫主义色彩',
-            videoUrl: 'https://www.bilibili.com/video/BV1MN411Q7Vb'
-        },
-        {
-            id: 'beethoven-piano-concerto-no1',
-            titleCn: '贝多芬第一钢琴协奏曲',
-            titleEn: "Beethoven Piano Concerto No.1",
-            artist: 'Krystian Zimerman & Simon Rattle',
-            cover: 'img/interests/music/krystian_zimerman_beethoven.webp',
-            description: '贝多芬早期代表作，展现了古典主义的优雅与力量',
-            videoUrl: 'https://www.bilibili.com/video/BV1mp4y1q7cG'
-        }
-    ],
-    'western-pop': [
-        {
-            id: 'taylor-swift-say-dont-go',
-            titleCn: '',
-            titleEn: 'Say Don\'t Go',
-            artist: 'Taylor Swift',
-            cover: 'img/interests/music/taylor_swift_1989_taylors_version.webp',
-            description: '<i>The waiting is a sadness<br>Fading into madness<br>Oh no oh no it won\'t stop</i>'
-        },
-        {
-            id: 'taylor-swift-cruel-summer',
-            titleCn: '',
-            titleEn: 'Cruel Summer',
-            artist: 'Taylor Swift',
-            cover: 'img/interests/music/taylor_swift_lover.webp',
-            description: '<i>Devils roll the dice, angels roll their eyes<br>And if I bleed, you\'ll be the last to know</i>',
-            videoUrl: 'https://www.bilibili.com/video/BV1MC4y1c7Kv'
-        }
-    ],
-    'soundtrack': [
-        {
-            id: 'la-la-land-city-of-stars',
-            titleCn: '繁星之城',
-            titleEn: 'City of Stars',
-            artist: 'Ryan Gosling & Emma Stone',
-            cover: 'img/interests/music/la_la_land_soundtrack.webp',
-            description: '<i>City of stars<br>Are you shining just for me?</i>',
-            videoUrl: 'https://www.bilibili.com/video/BV1Q4411A7Q6'
-        },
-        {
-            id: 'a-love-before-time-crouching-tiger-hidden-dragon',
-            titleCn: '月光爱人',
-            titleEn: 'A Love Before Time',
-            artist: '李玟 | Coco Lee',
-            cover: 'img/interests/music/crouching_tiger_hidden_dragon_soundtrack.webp',
-            description: '李玟演唱的《月光爱人》是电影《卧虎藏龙》的主题曲，旋律优美，歌词充满诗意，完美诠释了电影中那段跨越时空的爱情故事',
-            videoUrl: 'https://www.bilibili.com/video/BV1SY411U7rG'
-        },
-        {
-            id: 'pirates-of-the-caribbean-theme',
-            titleCn: '加勒比海盗主题曲',
-            titleEn: 'Pirates of the Caribbean Theme',
-            artist: 'Hans Zimmer',
-            cover: 'img/interests/music/pirates_of_the_caribbean_soundtrack.webp',
-            description: '汉斯·季默为《加勒比海盗》系列电影创作的主题曲，充满冒险和英雄主义的气息，是电影配乐中的经典之作',
-            videoUrl: 'https://www.bilibili.com/video/BV13x411e7xP'
-        }
-    ]
-};
+let musicDatabase = {};
+
+async function loadMusicDatabase() {
+    try {
+        const res = await fetch('data/music.json');
+        if (!res.ok) throw new Error('Failed to load music data');
+        musicDatabase = await res.json();
+    } catch (e) {
+        console.error('Error loading music data:', e);
+        musicDatabase = {};
+    }
+}
+
 
 // 当前选中的歌曲
 let currentSong = null;
@@ -519,9 +260,12 @@ function getRandomSong() {
     return allSongs[randomIndex];
 }
 
-// 页面加载时初始化
+// 页面加载时先加载数据，再初始化
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initMusicPlayer);
+    document.addEventListener('DOMContentLoaded', async () => {
+        await loadMusicDatabase();
+        initMusicPlayer();
+    });
 } else {
-    initMusicPlayer();
+    loadMusicDatabase().then(initMusicPlayer);
 }

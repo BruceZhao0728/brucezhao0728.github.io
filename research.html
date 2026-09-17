@@ -395,7 +395,8 @@
     </script>
     <script>
         // Update research page button text based on language
-        function updateResearchPageLanguage() {
+        async function updateResearchPageLanguage() {
+            await loadTranslations();
             const btnSendEmail = document.getElementById('btn-send-email');
             const btnResumeZh = document.getElementById('btn-resume-zh');
             const btnResumeEn = document.getElementById('btn-resume-en');

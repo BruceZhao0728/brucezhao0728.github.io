@@ -9,119 +9,32 @@ const SUPPORTED_LANGUAGES = {
     'zh': '中文'
 };
 
-// Navigation translations
-const navTranslations = {
-    'en': {
-        'home': 'Home',
-        'interests': 'Interests',
-        'research': 'Research',
-        'blog': 'Blog',
-        'awards': 'Awards'
-    },
-    'zh': {
-        'home': '主页',
-        'interests': '兴趣',
-        'research': '研究',
-        'blog': '博客',
-        'awards': '荣誉'
-    }
-};
+// 翻译字典从 data/translations.json 加载（缓存 Promise，避免重复请求）
+let translations = null;
+let translationsPromise = null;
 
-// Blog page translations
-const blogTranslations = {
-    'en': {
-        'btnAll': 'All',
-        'btnTech': 'Tech',
-        'btnLife': 'Life',
-        'btnStudy': 'Study',
-        'sortTime': 'Time (newest first)',
-        'sortTimeOld': 'Time (oldest first)',
-        'sortZhAsc': 'Chinese title (A-Z)',
-        'sortZhDesc': 'Chinese title (Z-A)',
-        'sortEnAsc': 'English title (A-Z)',
-        'sortEnDesc': 'English title (Z-A)',
-        'loading': 'Loading blog posts...',
-        'noBlogs': 'No blog posts available',
-        'backToBlog': '← Back to Blog',
-        'categoryLabel': 'Category: ',
-        'tagsLabel': 'Tags: ',
-        'searchLabel': 'Search: ',
-        'sortLabel': 'Sort: ',
-        'searchPlaceholder': 'Search...',
-        'allTags': 'All Tags',
-        'clearSearch': 'Clear',
-        'catAll': 'All',
-        'catTech': 'Tech',
-        'catLife': 'Life',
-        'catStudy': 'Study'
-    },
-    'zh': {
-        'btnAll': '全部',
-        'btnTech': '技术',
-        'btnLife': '生活',
-        'btnStudy': '学习',
-        'sortTime': '时间（最新优先）',
-        'sortTimeOld': '时间（最旧优先）',
-        'sortZhAsc': '中文标题（A-Z）',
-        'sortZhDesc': '中文标题（Z-A）',
-        'sortEnAsc': '英文标题（A-Z）',
-        'sortEnDesc': '英文标题（Z-A）',
-        'loading': '正在加载博客文章...',
-        'noBlogs': '暂无博客文章',
-        'backToBlog': '← 返回博客',
-        'categoryLabel': '分类: ',
-        'tagsLabel': '标签: ',
-        'searchLabel': '搜索: ',
-        'sortLabel': '排序: ',
-        'searchPlaceholder': '搜索文章...',
-        'allTags': '全部标签',
-        'clearSearch': '清空',
-        'catAll': '全部',
-        'catTech': '技术',
-        'catLife': '生活',
-        'catStudy': '学习'
+function loadTranslations() {
+    if (!translationsPromise) {
+        translationsPromise = fetch('data/translations.json')
+            .then(r => {
+                if (!r.ok) throw new Error('Failed to load translations');
+                return r.json();
+            })
+            .then(data => { translations = data; })
+            .catch(err => {
+                console.error('Error loading translations:', err);
+                translations = {};
+            });
     }
-};
+    return translationsPromise;
+}
 
-// Updates section translations
-const updatesTranslations = {
-    'en': {
-        'sectionTitle': 'Recent Updates',
-        'loading': 'Loading updates...',
-        'noUpdates': 'No updates available'
-    },
-    'zh': {
-        'sectionTitle': '近期更新',
-        'loading': '正在加载更新...',
-        'noUpdates': '暂无更新'
-    }
-};
-
-// Home page translations
-const homeTranslations = {
-    'en': {
-        'viewBlog': 'View Blog',
-        'research': 'Research'
-    },
-    'zh': {
-        'viewBlog': '查看博客',
-        'research': '研究经历'
-    }
-};
-
-// Research page translations
-const researchTranslations = {
-    'en': {
-        'sendEmail': 'Send Email',
-        'resumeZh': '📄 中文简历',
-        'resumeEn': '📄 English Resume'
-    },
-    'zh': {
-        'sendEmail': '发送邮件',
-        'resumeZh': '📄 中文简历',
-        'resumeEn': '📄 English Resume'
-    }
-};
+// 根据字典名与 key 取翻译文本（未加载时回退为 key）
+function getTranslation(dictKey, key) {
+    const currentLang = getCurrentLanguage();
+    const dict = (translations && translations[dictKey]) || {};
+    return dict[currentLang]?.[key] || dict['en']?.[key] || key;
+}
 
 // Get current language preference
 function getCurrentLanguage() {
@@ -180,32 +93,27 @@ function getLocalizedBlogTitle(titleObj) {
 
 // Translate navigation text
 function translateNav(key) {
-    const currentLang = getCurrentLanguage();
-    return navTranslations[currentLang]?.[key] || navTranslations['en'][key] || key;
+    return getTranslation('nav', key);
 }
 
 // Translate blog page text
 function translateBlog(key) {
-    const currentLang = getCurrentLanguage();
-    return blogTranslations[currentLang]?.[key] || blogTranslations['en'][key] || key;
+    return getTranslation('blog', key);
 }
 
 // Translate updates section text
 function translateUpdates(key) {
-    const currentLang = getCurrentLanguage();
-    return updatesTranslations[currentLang]?.[key] || updatesTranslations['en'][key] || key;
+    return getTranslation('updates', key);
 }
 
 // Translate home page text
 function translateHome(key) {
-    const currentLang = getCurrentLanguage();
-    return homeTranslations[currentLang]?.[key] || homeTranslations['en'][key] || key;
+    return getTranslation('home', key);
 }
 
 // Translate research page text
 function translateResearch(key) {
-    const currentLang = getCurrentLanguage();
-    return researchTranslations[currentLang]?.[key] || researchTranslations['en'][key] || key;
+    return getTranslation('research', key);
 }
 
 // Change language (called from navbar)

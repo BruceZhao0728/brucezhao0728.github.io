@@ -259,6 +259,7 @@
         }
         
         async function initBlogList() {
+            await loadTranslations();
             updateBlogPageLanguage();
             allBlogs = await loadBlogList();
             initializeTagsSelect();

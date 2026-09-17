@@ -84,7 +84,8 @@
     <script src="js/main.js"></script>
     <script>
         // 更新博客详情页面的国际化文本
-        function updateBlogDetailLanguage() {
+        async function updateBlogDetailLanguage() {
+            await loadTranslations();
             const loadingEl = document.getElementById('blog-loading-text');
             if (loadingEl) {
                 loadingEl.textContent = 'Loading...';

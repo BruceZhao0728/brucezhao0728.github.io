@@ -61,6 +61,7 @@ function showComponentError(elementId) {
 document.addEventListener('DOMContentLoaded', async () => {
     // 加载导航栏
     const navbarLoaded = await loadComponent('navbar-placeholder', 'components/navbar.html');
+    await loadTranslations();
     
     // 导航栏加载完成后立即翻译
     if (navbarLoaded) {

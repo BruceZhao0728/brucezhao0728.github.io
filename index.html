@@ -140,7 +140,8 @@
     <script src="js/main.js"></script>
     <script>
         // Update home page button text based on language
-        function updateHomePageLanguage() {
+        async function updateHomePageLanguage() {
+            await loadTranslations();
             const btnViewBlog = document.getElementById('btn-view-blog');
             const btnResearch = document.getElementById('btn-research');
             

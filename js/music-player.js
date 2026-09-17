@@ -103,6 +103,42 @@ const musicDatabase = {
             cover: 'img/interests/music/escape_plan_earth.webp',
             description: '<i>每当我找不到存在的意义 每当我迷失在黑夜里<br>Oh 夜空中最亮的星     请指引我靠近你</i>',
             videoUrl: 'https://www.bilibili.com/video/BV1xv411V7aN/'
+        },
+        {
+            id: 'mayday-half-of-my-life',
+            titleCn: '一半人生',
+            titleEn: 'Half of My Life',
+            artist: '五月天 | Mayday',
+            cover: 'img/interests/music/mayday_half_of_my_life.webp',
+            description: '<i>想要唱首歌 去唱哭别人<br>最后却是我 满脸泪痕</i>',
+            videoUrl: 'https://www.bilibili.com/video/BV1zt411H7Xz'
+        },
+        {
+            id: 'mayday-cheers',
+            titleCn: '干杯',
+            titleEn: 'Cheers',
+            artist: '五月天 | Mayday',
+            cover: 'img/interests/music/mayday_second_round.webp',
+            description: '<i>会不会 有一天 时间真的能倒退<br>退回 你的我的 回不去的 悠悠的岁月<br>也许会 有一天 世界真的有终点<br>也要和你举起回忆酿的甜 和你再干一杯</i>',
+            videoUrl: 'https://www.bilibili.com/video/BV1ay4y1Y7a9'
+        },
+        {
+            id: 'sandy-lam-at-least-ive-got-you',
+            titleCn: '至少还有你',
+            titleEn: 'At Least I\'ve Got You',
+            artist: '林忆莲 | Sandy Lam',
+            cover: 'img/interests/music/sandy_lam_sandy_lams.webp',
+            description: '<i>如果全世界我也可以放弃<br>至少还有你值得我去珍惜<br>而你在这里 就是生命的奇迹</i>',
+            videoUrl: 'https://www.bilibili.com/video/BV1DS4y1M7n1'
+        },
+        {
+            id: 'she-mayday',
+            titleCn: '五月天',
+            titleEn: 'Mayday',
+            artist: 'S.H.E',
+            cover: 'img/interests/music/she_play.webp',
+            description: '<i>五月的天 刚诞生的夏天<br>我们之间 才完成的爱恋<br>紧握的手里面 有好多明天</i>',
+            videoUrl: 'https://www.bilibili.com/video/BV1NK4y1P7zA/'
         }
     ],
     cantopop: [

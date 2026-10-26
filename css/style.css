@@ -500,6 +500,13 @@ h3 {
     margin-bottom: 0.5rem;
 }
 
+.timeline-subtitle {
+    color: var(--text-light);
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
 .timeline-date {
     color: var(--text-light);
     font-size: 0.9rem;

@@ -23,6 +23,13 @@ for (const file of generated) {
   check($('link[rel="canonical"]').length === 1 && $('link[hreflang="en"]').length === 1 && $('link[hreflang="zh-CN"]').length === 1, `${file}: canonical and language links`);
   check(!html.includes('To be filled') && !html.includes('尚未公开'), `${file}: publication placeholder`);
   check(!html.includes('>undefined<'), `${file}: missing translated label`);
+  if (file.includes('/blog/')) {
+    const blog = blogs.find(item => file.endsWith(`/blog/${item.id}.html`));
+    const source = $('article .markdown-content').attr('data-markdown-src');
+    check(source === `/${blog.file}`, `${file}: Markdown source`);
+    check($('script[src="/js/vendor/marked.umd.js"]').length === 1, `${file}: browser Markdown renderer`);
+    check($('article .markdown-content h1, article .markdown-content h2, article .markdown-content pre').length === 0, `${file}: article body must load from Markdown`);
+  }
   $('a[href],img[src],script[src],link[href]').each((_,el) => {
     const value = $(el).attr('href') || $(el).attr('src');
     if (!value || !value.startsWith('/')) return;
@@ -35,6 +42,16 @@ for (const file of generated) {
     const sources = ($(el).attr('srcset') || '').split(',').map(item => item.trim().split(' ')[0]).filter(Boolean);
     for (const source of sources) if (source.startsWith('/')) check(fs.existsSync(path.join(root, source.slice(1))), `${file}: missing ${source}`);
   });
+}
+for (const blog of blogs) {
+  const source = path.join(root, blog.file);
+  check(fs.existsSync(source), `${blog.id}: missing Markdown file`);
+  if (!fs.existsSync(source)) continue;
+  const markdown = fs.readFileSync(source, 'utf8');
+  for (const [, image] of markdown.matchAll(/!\[[^\]]*\]\(([^)\s]+)(?:\s+[^)]*)?\)/g)) {
+    if (/^(?:https?:|data:|\/\/)/i.test(image)) continue;
+    check(fs.existsSync(path.resolve(path.dirname(source), image)), `${blog.id}: missing Markdown image ${image}`);
+  }
 }
 for (const lang of ['en','zh']) {
   const home = cheerio.load(fs.readFileSync(path.join(root,lang,'index.html'),'utf8'));

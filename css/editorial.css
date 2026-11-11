@@ -106,6 +106,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .markdown-content img { max-width: 100%; height: auto; }
 .markdown-content pre { max-width: 100%; overflow-x: auto; background: #263238; color: #f6f1e8; padding: 1rem; border-radius: 4px; }
 .markdown-content table { display: block; max-width: 100%; overflow-x: auto; }
+.markdown-content mjx-assistive-mml { width: 1px !important; max-width: 1px !important; height: 1px !important; overflow: hidden !important; }
 .md-alert { margin: 1.3rem 0; padding: 1rem 1.2rem; border-left: 4px solid #aa674b; background: #f5eee2; }
 .md-alert strong { display: block; margin-bottom: .4rem; }
 .travel-photo, .photo-gallery img, .athlete-image img { height: auto; }

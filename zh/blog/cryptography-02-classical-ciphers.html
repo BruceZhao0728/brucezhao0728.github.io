@@ -17,7 +17,7 @@
   <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/css/editorial.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/styles/atom-one-dark.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/styles/atom-one-dark.min.css" media="print" onload="this.media='all'">
   <script>document.documentElement.classList.add('js')</script>
 </head>
 <body data-page="blog" data-lang="zh">
@@ -28,94 +28,7 @@
     <nav id="site-nav" class="site-nav" aria-label="主导航"><ul><li><a href="/zh/">主页</a></li><li><a href="/zh/research.html">研究</a></li><li><a href="/zh/blog.html" aria-current="page">博客</a></li><li><a href="/zh/interests.html">兴趣</a></li><li><a href="/zh/awards.html">荣誉</a></li></ul></nav>
     <a class="language-link" href="/en/blog/cryptography-02-classical-ciphers.html" data-language="en" lang="en" aria-label="语言: English">EN</a>
   </div></header>
-  <main id="main" class="site-main"><div class="container article-layout"><a class="text-link" href="/zh/blog.html">← 所有文章</a><article class="article"><header class="article-header"><p class="eyebrow"><time datetime="2026-04-06">2026年4月6日</time> · 技术 · 中文原文</p><h1>密码学：古典密码</h1><p>什么是古典密码？常见的古典密码有哪些？它们的加密和解密方法是什么？</p></header><div class="markdown-content" lang="zh-CN"><aside class="md-alert md-alert-caution"><strong>声明</strong>
-<p>
-笔记内容基于上海交通大学的《现代密码学1》课程，主要内容是关于密码学和计算机安全的相关知识。文中使用的代码示例和图像均来自课程资料，版权归原作者所有。本笔记旨在帮助学习者更好地理解课程内容，任何转载或引用请注明出处，不涉及商业用途。如有任何版权问题，请联系我进行处理。</p>
-</aside>
-<p>古典密码可以分为两大类：代换密码和置换密码。代换密码是将明文中的每个字母替换为另一个字母，而置换密码则是重新排列明文中的字母顺序。</p>
-<h2>古典代换密码</h2>
-<h3>凯撒密码</h3>
-<p>凯撒密码的加密方法是将字母表中的每个字母替换为其后面第n个字母。例如，如果n=3，那么A将被替换为D，B将被替换为E，以此类推。凯撒密码的解密方法是将加密后的字母表中的每个字母替换回原来的字母。</p>
-<p>凯撒密码的一般形式为移位密码，密码体制如下：</p>
-<p>令 $\mathcal{P} = \mathcal{C} = \mathcal{K} = \{0, 1, 2, \ldots, 25\}$，其中 $0$ 表示字母A，$1$ 表示字母B，以此类推。对于每个密钥 $k \in \mathcal{K}$，定义加密算法 </p>
-<p>$E_k(p) = (p + k) \mod 26$ </p>
-<p>和解密算法 </p>
-<p>$D_k(c) = (c - k) \mod 26$</p>
-<p>当 $k=3$ 时，即为经典的凯撒密码。</p>
-<h3>混合单表代换密码</h3>
-<p>混合单表代换密码将每一个字母替换为另一个字母，但替换规则不再是简单的移位，而是通过一个混乱的映射来实现。例如，A可能被替换为Q，B可能被替换为W，以此类推。混合单表代换密码的加密和解密算法与凯撒密码类似，但使用了一个更复杂的替换规则，因而他的密钥长度为26个字母。</p>
-<p>例如我们有如下规则：</p>
-<div style="text-align: center;">
-明文： ABCDEFGHIJKLMNOPQRSTUVWXYZ <p>密文： DKVQFIBJWPESCXHTMYAUOLRGZN </p>
-</div><p>假如我们有这段密文： </p>
-<div style="text-align: center;">
-WIRFRWAJUHYFTSDVFSFUUFYA
-</div>
-那么我们可以通过上述替换规则将其解密为明文
-<div style="text-align: center;">
-IFWEWISHTOREPLACELETTERS
-</div><h3>简单代表代换密码</h3>
-<p>混合单表代换密码需要有26位的密钥来描述替换规则，我们需要一种更简洁的方式来描述替换规则。简单代表代换密码通过使用一个较短的关键词来生成完整的替换规则。一种简单方法是写没有重复字母的“密钥字”，其他字母按顺序写在密钥字最后字母后。</p>
-<p>例如给定密钥字“JULISCAER”，那么它对应的完整版混合单表代换密码的密钥就是：</p>
-<div style="text-align: center;">
-明文： ABCDEFGHIJKLMNOPQRSTUVWXYZ<p>密文： JULISCAERTVWXYZBDFGHKMNOPQ</p>
-</div><h3>维吉尼亚密码</h3>
-<p>维吉尼亚密码使用一个关键词来控制每个字母的替换方式。对于每个明文字母，使用关键词中对应位置的字母来确定替换规则。因此，每个字母可以被多种字母进行替换。</p>
-<p>他的密码体制定义如下：</p>
-<p>设 $m$ 是一个正整数。定义 $\mathcal{P} = \mathcal{C} = \mathcal{K} = \mathbb{Z}_{26}$。对任意的密钥 $K = (k_1, k_2, \dots, k_m)$，定义：</p>
-<p>$e_K(x_1, x_2, \dots, x_m) = (x_1 + k_1, x_2 + k_2, \dots, x_m + k_m)$</p>
-<p>和</p>
-<p>$d_K(y_1, y_2, \dots, y_m) = (y_1 - k_1, y_2 - k_2, \dots, y_m - k_m)$</p>
-<p>以上所有运算都是在 $\mathbb{Z}_{26}$ 上进行。每次加密 $m$ 个字母时，使用密钥中的 $m$ 个字母进行加密。对于明文中的第 $i$ 个字母，使用密钥中的第 $((i-1) \mod m) + 1$ 个字母来确定替换规则。</p>
-<h2>古典置换密码</h2>
-<p>置换密码的本质就是对明文中的字母进行重新排列。他的密码体制可以归纳如下：</p>
-<p>令 $m$ 为一正整数。$\mathcal{P} = \mathcal{C} = (\mathbb{Z}_{26})^m$，$\mathcal{K}$ 是由所有定义在集合 $\{1, 2, \dots, m\}$ 上的置换组成。对任意的密钥（即置换）$\pi$，定义：</p>
-<p>$e_{\pi}(x_1, x_2, \dots, x_m) = (x_{\pi(1)}, x_{\pi(2)}, \dots, x_{\pi(m)})$</p>
-<p>和</p>
-<p>$d_{\pi}(y_1, y_2, \dots, y_m) = (y_{\pi^{-1}(1)}, y_{\pi^{-1}(2)}, \dots, y_{\pi^{-1}(m)})$</p>
-<h3>轨道栅栏密码</h3>
-<p>轨道栅栏密码通过将明文中的字母按照一定的规则重新排列来实现加密。例如，如果我们使用一个2轨道的栅栏，那么我们将明文中的字母分成两行，第一行包含第1、3、5...个字母，第二行包含第2、4、6...个字母。然后我们将两行的字母连接起来形成密文。</p>
-<p>比如说明文是“ICAMEISAWICONQUERED”，分成两行以后变成：</p>
-<div style="text-align: center;">
-I A E S W C N U R D<p>C M I A I O Q E E</p>
-</div><p>密文也就是“IAESW CNURD CMIAI OQEE”。</p>
-<h3>几何图形密码</h3>
-<p>几何图形密码通过将明文中的字母按照一定的几何图形进行排列来实现加密。例如，我们可以将明文中的字母按照一个矩形的方式排列，然后按照一定的顺序读取这些字母来形成密文。</p>
-<p><img src="/blog/images/cryptography-02/geometric-figure-cipher.png" alt="geometric-figure-cipher" loading="lazy" decoding="async" width="703" height="259"></p>
-<h3>行变换密码</h3>
-<p>行变换密码是置换密码的一种典型实现。它的核心逻辑是不改变字母的“身份”，只打乱字母的“位置”：将明文按固定长度分组并按行书写，随后按预设密钥的顺序打乱每一行，最后读取形成密文。</p>
-<p>令分组长度（周期）为 $m$。定义明文和密文空间为 $\mathcal{P} = \mathcal{C} = (\mathbb{Z}_{26})^m$。密钥 $\pi$ 是定义在集合 $\{1, 2, \dots, m\}$ 上的一个置换。</p>
-<ul>
-<li>加密运算：$e_{\pi}(x_1, x_2, \dots, x_m) = (x_{\pi(1)}, x_{\pi(2)}, \dots, x_{\pi(m)})$</li>
-<li>解密运算：$d_{\pi}(y_1, y_2, \dots, y_m) = (y_{\pi^{-1}(1)}, y_{\pi^{-1}(2)}, \dots, y_{\pi^{-1}(m)})$</li>
-</ul>
-<p>对于加密运算，有两种给出加密密钥的方法，一种是直接给出数字密钥，比如说下面这个例子：</p>
-<p>明文：THESIMPLESTPOSSIBLETRANSPOSITIONSXX</p>
-<p>加密密钥 $W$：4 1 5 3 2 （即第1个位置放原第4个字符，第2个放原第1个...）</p>
-<p>解密密钥 $R$：2 5 4 1 3</p>
-<pre><code>[原始行]       [按 W 变换后的行]
-T H E S I  --&gt;  S T I E H
-M P L E S  --&gt;  E M S L P
-T P O S S  --&gt;  S T S O P
-I B L E T  --&gt;  E I T L B
-R A N S P  --&gt;  S R P N A
-O S I T I  --&gt;  T O I I S
-O N S X X  --&gt;  X O X S N
-</code></pre>
-<p>密文：STIEH EMSLP STSOP EITLB SRPNA TOIIS XOXSN</p>
-<p>第二个方法是直接给出字母密钥，比如说下面这个例子：</p>
-<p>明文：ACONVENIENTWAYTOEXPRESSTHEPERMUTATION</p>
-<p>密钥单词：COMPUTER ($W = 1,4,3,5,8,7,2,6$)</p>
-<p>如果最后一组长度不足，通常需要进行填充（Padding），例如补充 Z 来使得最后一组达到 $m$ 的长度。</p>
-<pre><code>[原始行]              [按 W 变换后的行]
-A C O N V E N I  --&gt;  A N O V I N C E
-E W T A O T N Y  --&gt;  E W T A O T N Y
-E R P E T S X S  --&gt;  E R P E T S X S
-H E P R T U E M  --&gt;  H E P R T U E M
-A O I N Z Z T Z  --&gt;  A O I N Z Z T Z
-</code></pre>
-<p>密文: ANOVI NCEEW TAOTN YERPE TSXSH EPRTU EMAOI NZZTZ </p>
-</div></article></div></main>
+  <main id="main" class="site-main"><div class="container article-layout"><a class="text-link" href="/zh/blog.html">← 所有文章</a><article class="article"><header class="article-header"><p class="eyebrow"><time datetime="2026-04-06">2026年4月6日</time> · 技术 · 中文原文</p><h1>密码学：古典密码</h1><p>什么是古典密码？常见的古典密码有哪些？它们的加密和解密方法是什么？</p></header><div class="markdown-content" lang="zh-CN" data-markdown-src="/blog/cryptography-02-classical-ciphers.md" aria-busy="true"><p>正在加载文章…</p></div><noscript><p><a href="/blog/cryptography-02-classical-ciphers.md">阅读 Markdown 原文</a></p></noscript></article></div></main>
   <footer class="site-footer"><div class="container footer-inner"><p>© 2026 Zichen Zhao · 感谢来访</p><div><a href="mailto:brucezhaozichen@126.com">Email</a><a href="https://github.com/BruceZhao0728" rel="noopener noreferrer">GitHub</a></div></div></footer>
-  <script src="/js/site.js" defer></script><script>window.MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]],displayMath:[["$$","$$"],["\\[","\\]"]]}}</script><script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/highlight.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script defer src="/js/article.js"></script>
+  <script src="/js/site.js" defer></script><script>window.MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]],displayMath:[["$$","$$"],["\\[","\\]"]]}}</script><script defer src="/js/vendor/marked.umd.js"></script><script defer src="/js/article.js"></script><script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/highlight.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </body></html>

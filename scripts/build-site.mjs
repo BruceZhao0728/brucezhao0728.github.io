@@ -2,7 +2,6 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import * as cheerio from 'cheerio';
-import { marked } from 'marked';
 import sharp from 'sharp';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -63,7 +62,7 @@ function shell({ lang, page, title, description, body, id, scripts = '' }) {
   <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/css/editorial.css">
-  ${id ? '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/styles/atom-one-dark.min.css">' : ''}
+  ${id ? '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/styles/atom-one-dark.min.css" media="print" onload="this.media=\'all\'">' : ''}
   <script>document.documentElement.classList.add('js')</script>
 </head>
 <body data-page="${page}" data-lang="${lang}">
@@ -260,57 +259,14 @@ function blogIndex(lang) {
   return `<div class="container"><header class="page-intro"><h1 class="text-center">${L.blog}</h1><p class="text-center hero-subtitle">${lang === 'zh' ? '写下我所学，也写下我所见。文章保留创作时的原文语言。' : 'What I learn, make, and notice. Articles remain in their original language.'}</p></header><section class="blog-tools" aria-label="${lang === 'zh' ? '文章筛选' : 'Article filters'}"><label>${L.search}<input id="blog-search" type="search" placeholder="${L.search}"></label><label>${L.categories}<select id="blog-category">${categories.map(c => `<option value="${c}">${L[c] || c}</option>`).join('')}</select></label><label>${L.tags}<select id="blog-tag"><option value="">${L.all}</option>${[...new Set(blogs.flatMap(b => b.tags || []))].sort().map(t => `<option value="${esc(t)}">${esc(t)}</option>`).join('')}</select></label><label>${L.sort}<select id="blog-sort"><option value="newest">${L.newest}</option><option value="oldest">${L.oldest}</option></select></label></section><p id="blog-count" class="result-count" aria-live="polite"></p><div id="blog-grid" class="blog-grid">${cards}</div><p id="blog-empty" hidden>${lang === 'zh' ? '没有找到匹配的文章。' : 'No matching articles.'}</p></div>`;
 }
 
-function extractMath(markdown) {
-  const saved = [];
-  let text = markdown.replace(/\$\$([\s\S]+?)\$\$/g, match => { const token = `@@MATH_${saved.length}@@`; saved.push([token, match]); return token; });
-  text = text.replace(/(^|[^$])\$(?!\$)([^$\n]+?)\$(?!\$)/g, (_, prefix, content) => { const token = `@@MATH_${saved.length}@@`; saved.push([token, `$${content}$`]); return prefix + token; });
-  return { text, saved };
-}
-async function articleHtml(markdown) {
-  const { text, saved } = extractMath(markdown);
-  const renderer = new marked.Renderer();
-  renderer.image = ({ href, title, text: alt }) => `<img src="${esc(href.startsWith('images/') ? '/blog/' + href : href)}" alt="${esc(alt)}" loading="lazy" decoding="async"${title ? ` title="${esc(title)}"` : ''}>`;
-  let html = marked.parse(text, { renderer });
-  for (const [token, value] of saved) html = html.replaceAll(token, value);
-  const $ = cheerio.load(`<div id="article-body">${html}</div>`);
-  const body = $('#article-body');
-  body.find('blockquote').each((_, node) => {
-    const marker = $(node).text().trim().match(/^\[!([a-z]+)\]\s*([^\n]*)/i);
-    if (!marker) return;
-    const title = marker[2] || marker[1];
-    const inner = $(node).html().replace(/\[![a-z]+\]\s*[^<\n]*/i, '');
-    $(node).replaceWith(`<aside class="md-alert md-alert-${marker[1].toLowerCase()}"><strong>${esc(title)}</strong>${inner}</aside>`);
-  });
-  const first = body.children().first();
-  if (first.is('h1')) first.remove();
-  body.find('[src],[href]').each((_, node) => {
-    for (const attr of ['src','href']) {
-      const value = $(node).attr(attr);
-      if (!value || /^(https?:|\/|#|data:|mailto:)/i.test(value)) continue;
-      if (value.startsWith('blog/')) $(node).attr(attr, '/' + value);
-      else if (value.startsWith('images/')) $(node).attr(attr, '/blog/' + value);
-      else if (value.endsWith('.md')) $(node).attr(attr, '/blog/' + value);
-    }
-  });
-  for (const node of body.find('img').toArray()) {
-    const image = $(node);
-    const src = image.attr('src');
-    if (!src?.startsWith('/')) continue;
-    const input = path.join(root, src.slice(1));
-    try {
-      const { width, height } = await sharp(input).metadata();
-      if (width && height) image.attr('width', String(width)).attr('height', String(height));
-    } catch {
-      // The link checker reports missing local image files separately.
-    }
-  }
-  return body.html() || '';
-}
-function articlePage(lang, blog, html) {
+function articlePage(lang, blog) {
   const L = labels[lang];
   const title = localized(blog.title, lang);
   const desc = localized(blog.excerpt, lang);
-  return shell({ lang, page: 'blog', id: blog.id, title: `${title} — Zichen Zhao`, description: desc, scripts: '<script>window.MathJax={tex:{inlineMath:[["$","$"],["\\\\(","\\\\)"]],displayMath:[["$$","$$"],["\\\\[","\\\\]"]]}}</script><script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/highlight.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script defer src="/js/article.js"></script>', body: `<div class="container article-layout"><a class="text-link" href="${navPath(lang,'blog')}">← ${L.back}</a><article class="article"><header class="article-header"><p class="eyebrow"><time datetime="${blog.date}">${displayDate(blog.date,lang)}</time> · ${esc(L[blog.category] || blog.category)} · ${lang === 'zh' ? '中文原文' : 'Original in Chinese'}</p><h1>${esc(title)}</h1><p>${esc(desc)}</p></header><div class="markdown-content" lang="zh-CN">${html}</div></article></div>` });
+  const source = '/' + blog.file;
+  const loading = lang === 'zh' ? '正在加载文章…' : 'Loading article…';
+  const viewSource = lang === 'zh' ? '阅读 Markdown 原文' : 'Read the original Markdown';
+  return shell({ lang, page: 'blog', id: blog.id, title: `${title} — Zichen Zhao`, description: desc, scripts: '<script>window.MathJax={tex:{inlineMath:[["$","$"],["\\\\(","\\\\)"]],displayMath:[["$$","$$"],["\\\\[","\\\\]"]]}}</script><script defer src="/js/vendor/marked.umd.js"></script><script defer src="/js/article.js"></script><script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/highlight.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>', body: `<div class="container article-layout"><a class="text-link" href="${navPath(lang,'blog')}">← ${L.back}</a><article class="article"><header class="article-header"><p class="eyebrow"><time datetime="${blog.date}">${displayDate(blog.date,lang)}</time> · ${esc(L[blog.category] || blog.category)} · ${lang === 'zh' ? '中文原文' : 'Original in Chinese'}</p><h1>${esc(title)}</h1><p>${esc(desc)}</p></header><div class="markdown-content" lang="zh-CN" data-markdown-src="${esc(source)}" aria-busy="true"><p>${loading}</p></div><noscript><p><a href="${esc(source)}">${viewSource}</a></p></noscript></article></div>` });
 }
 
 function redirectPage(page) {
@@ -370,9 +326,7 @@ for (const lang of ['en','zh']) {
   }
 }
 for (const blog of blogs) {
-  const raw = await read(blog.file);
-  const html = await articleHtml(raw);
-  for (const lang of ['en','zh']) await write(`${lang}/blog/${blog.id}.html`, articlePage(lang, blog, html));
+  for (const lang of ['en','zh']) await write(`${lang}/blog/${blog.id}.html`, articlePage(lang, blog));
 }
 for (const page of [...pages, 'blog-detail']) await write(`${page}.html`, redirectPage(page));
 const sitemapPaths = [...['en','zh'].flatMap(lang => [...pages.map(page => navPath(lang,page)), ...blogs.map(blog => articlePath(lang,blog.id))])];

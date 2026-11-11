@@ -16,9 +16,10 @@ Open `http://localhost:8000/`. The root route chooses English or Chinese from th
 ## Where to edit
 
 - `site-src/legacy/` contains the original page content used to generate the localized home, research, interests, and awards pages. Keep English and Chinese passages paired; the build extracts one language per edition.
-- `data/blogs.json` contains the bilingual titles and summaries of the 18 original-language articles. Article bodies remain in `blog/*.md`.
+- `data/blogs.json` contains the bilingual titles and summaries of the 18 original-language articles. Article pages fetch their bodies directly from `blog/*.md` when opened. Editing an existing article body only requires publishing the changed Markdown file; adding an article or changing its title, summary, or date also requires `npm run build`.
 - `data/papers.json`, `data/updates.json`, and `data/music.json` contain research, updates, and music data.
-- `scripts/build-site.mjs` creates the `/en/` and `/zh/` pages, static article pages, root compatibility redirects, sitemap, and optimized image variants. Commit generated output with source changes so GitHub Pages can serve it without a build service.
+- `scripts/build-site.mjs` creates the `/en/` and `/zh/` pages, article shells with distinct metadata, root compatibility redirects, sitemap, and optimized image variants. Commit generated output with source changes so GitHub Pages can serve it without a build service.
+- `js/article.js` fetches and renders each article's Markdown in the browser. `js/vendor/marked.umd.js` is the locally served Markdown parser (MIT license in the same directory).
 - `css/editorial.css` contains the new visual layer; `css/style.css` provides legacy content layout rules.
 - `js/photo-gallery.js` opens Interests photos in a keyboard-accessible viewer. Photo links still open the original image without JavaScript.
 - `img/illustrations/research-and-life.webp` is the original generated homepage illustration. The existing bridge photo remains in the homepage About section.

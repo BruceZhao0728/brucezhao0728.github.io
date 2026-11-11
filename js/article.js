@@ -15,6 +15,7 @@ function extractMath(markdown) {
 
 function resolveMarkdownUrl(href, markdownUrl) {
     if (!href || /^(?:#|data:|mailto:|https?:|\/\/)/i.test(href)) return href;
+    if (href.startsWith('blog/')) return new URL('/' + href, markdownUrl).href;
     return new URL(href, markdownUrl).href;
 }
 
@@ -32,6 +33,13 @@ function renderMarkdown(markdown, source) {
 
     const draft = document.createElement('div');
     draft.innerHTML = html;
+    // Marked's token walker does not rewrite URLs inside raw HTML in a Markdown file.
+    for (const element of draft.querySelectorAll('[src], [href]')) {
+        for (const attribute of ['src', 'href']) {
+            const value = element.getAttribute(attribute);
+            if (value) element.setAttribute(attribute, resolveMarkdownUrl(value, markdownUrl));
+        }
+    }
     if (draft.firstElementChild?.tagName === 'H1') draft.firstElementChild.remove();
     for (const blockquote of draft.querySelectorAll('blockquote')) {
         const first = blockquote.firstElementChild;

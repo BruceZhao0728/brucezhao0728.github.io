@@ -170,7 +170,10 @@ function localizeLegacy(name, lang) {
         if (match) $(node).text(`${match[2]}年${Number(match[1])}月－${match[4]}年${Number(match[3])}月`);
       });
     }
-    main.find('#papers-container').html(papers.map(p => `<article class="paper-card card"><p class="eyebrow">${esc(p.venue)} · ${p.year}</p><h3>${esc(localized(p.title,lang))}</h3><p>${esc(p.authors)}</p><p>${esc(localized(p.abstract,lang))}</p><a class="text-link" href="${esc(p.links.arxiv)}" target="_blank" rel="noopener noreferrer">arXiv ↗</a></article>`).join(''));
+    main.find('#papers-container').html(papers.map(p => {
+      const originalTitle = lang === 'zh' ? `<p class="paper-original">英文原题：<span lang="en">${esc(localized(p.title,'en'))}</span></p>` : '';
+      return `<article class="paper-card card"><p class="eyebrow">${esc(localized(p.venue,lang))} · ${p.year}</p><h3>${esc(localized(p.title,lang))}</h3>${originalTitle}<p>${esc(p.authors)}</p><p>${esc(localized(p.abstract,lang))}</p><a class="text-link" href="${esc(p.links.arxiv)}" target="_blank" rel="noopener noreferrer">arXiv ↗</a></article>`;
+    }).join(''));
     main.find('#btn-send-email').text(lang === 'zh' ? '发送邮件' : 'Send email');
     main.find('#btn-resume-en').text(labels[lang].cvEn);
     main.find('#btn-resume-zh').text(labels[lang].cvZh);

@@ -74,6 +74,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .paper-card { max-width: 900px; }
 .paper-card h3 { margin: .6rem 0; }
 .paper-card p { margin-bottom: .7rem; }
+.paper-card .paper-original { margin-top: -.35rem; color: var(--text-light); font-size: .85rem; overflow-wrap: anywhere; }
+.paper-card .text-link { align-self: flex-start; }
 .update-row { display: grid; grid-template-columns: 140px 1fr; gap: 1.5rem; max-width: 900px; padding: 1.3rem 0; border-bottom: 1px solid var(--border-color); }
 .update-row time { color: #a4593d; font-size: .82rem; font-weight: 700; }
 .update-row h3 { font-size: 1.2rem; }

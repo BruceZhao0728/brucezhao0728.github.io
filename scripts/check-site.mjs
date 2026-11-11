@@ -40,6 +40,11 @@ for (const lang of ['en','zh']) {
   const home = cheerio.load(fs.readFileSync(path.join(root,lang,'index.html'),'utf8'));
   check(home('.hero-art img[src="/img/illustrations/research-and-life.webp"]').length === 1, `${lang}: homepage illustration`);
   check(home('.about-photo img[loading="lazy"]').length === 1, `${lang}: existing photo retained`);
+  const research = cheerio.load(fs.readFileSync(path.join(root,lang,'research.html'),'utf8'));
+  if (lang === 'zh') {
+    check(/[\u3400-\u9fff]/.test(research('.paper-card h3').first().text()), 'zh: translated paper heading');
+    check(/[\u3400-\u9fff]/.test(research('.paper-card .eyebrow').first().text()), 'zh: translated publication type');
+  }
   const $ = cheerio.load(fs.readFileSync(path.join(root,lang,'blog.html'),'utf8'));
   check($('.blog-card a[href]').length === blogs.length, `${lang}: article links`);
   check($('#blog-category option[value="personal"]').length === 1, `${lang}: Personal category`);

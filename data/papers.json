@@ -2,10 +2,13 @@
   {
     "title": {
       "en": "Protecting Floating-Point Computation for DNN Binaries with MBA Obfuscation",
-      "zh": "Protecting Floating-Point Computation for DNN Binaries with MBA Obfuscation"
+      "zh": "利用 MBA 混淆保护深度神经网络二进制程序中的浮点计算"
     },
     "authors": "Yikun Hu, Zichen Zhao, Peixiang Qin, Ziyi Zhou, Jiaping Gui, Yuandao Cai, Wensheng Tang",
-    "venue": "arXiv preprint",
+    "venue": {
+      "en": "arXiv preprint",
+      "zh": "arXiv 预印本"
+    },
     "year": 2026,
     "abstract": {
       "en": "FLOB protects floating-point operations in compiled deep neural networks by lifting values to a higher-precision representation and applying mixed Boolean-arithmetic transformations. The paper reports preserved computational correctness and an average operator recovery rate of 4.51%, 32.82 percentage points lower than existing methods.",

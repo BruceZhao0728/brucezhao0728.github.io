@@ -37,6 +37,9 @@ for (const file of generated) {
   });
 }
 for (const lang of ['en','zh']) {
+  const home = cheerio.load(fs.readFileSync(path.join(root,lang,'index.html'),'utf8'));
+  check(home('.hero-art img[src="/img/illustrations/research-and-life.webp"]').length === 1, `${lang}: homepage illustration`);
+  check(home('.about-photo img[loading="lazy"]').length === 1, `${lang}: existing photo retained`);
   const $ = cheerio.load(fs.readFileSync(path.join(root,lang,'blog.html'),'utf8'));
   check($('.blog-card a[href]').length === blogs.length, `${lang}: article links`);
   check($('#blog-category option[value="personal"]').length === 1, `${lang}: Personal category`);

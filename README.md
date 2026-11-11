@@ -20,6 +20,7 @@ Open `http://localhost:8000/`. The root route chooses English or Chinese from th
 - `data/papers.json`, `data/updates.json`, and `data/music.json` contain research, updates, and music data.
 - `scripts/build-site.mjs` creates the `/en/` and `/zh/` pages, static article pages, root compatibility redirects, sitemap, and optimized image variants. Commit generated output with source changes so GitHub Pages can serve it without a build service.
 - `css/editorial.css` contains the new visual layer; `css/style.css` provides legacy content layout rules.
+- `img/illustrations/research-and-life.webp` is the original generated homepage illustration. The existing bridge photo remains in the homepage About section.
 
 The two CV PDFs in `files/` are linked from Research. They are maintained separately by the site owner.
 

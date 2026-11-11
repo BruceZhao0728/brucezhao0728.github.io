@@ -60,7 +60,7 @@ function shell({ lang, page, title, description, body, id, scripts = '' }) {
   <meta property="og:url" content="${canonical}">
   <meta property="og:locale" content="${locale}">
   <meta name="twitter:card" content="summary">
-  <link rel="icon" href="/img/index/avatar.webp" type="image/webp">
+  <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/css/editorial.css">
   ${id ? '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/styles/atom-one-dark.min.css">' : ''}
@@ -144,7 +144,16 @@ function localizeLegacy(name, lang) {
   });
   if (name === 'index') {
     const hero = main.find('.hero-section');
-    hero.html(`<div class="hero-copy"><p class="eyebrow">${lang === 'zh' ? '你好，我是' : 'Hello, I’m'}</p><h1>${lang === 'zh' ? '赵子辰' : 'Zichen Zhao'}<span class="hero-name-secondary">${lang === 'zh' ? ' Zichen Zhao' : ' 赵子辰'}</span></h1><p class="hero-lede">${lang === 'zh' ? '上海交通大学信息安全专业四年级本科生，关注程序分析、人工智能与软件保护。这里也记录我的写作和生活。' : 'I’m a fourth-year information security student at Shanghai Jiao Tong University, exploring program analysis, AI, and software protection. I also write about what I learn and the life around it.'}</p><p class="hero-email"><a href="mailto:brucezhaozichen@126.com">brucezhaozichen@126.com</a><span>·</span><a href="mailto:bruce0728@sjtu.edu.cn">bruce0728@sjtu.edu.cn</a></p><div class="hero-paths">${['research','blog','interests'].map((p, i) => `<a class="path-card" href="${navPath(lang,p)}"><span class="path-number">0${i+1}</span><strong>${labels[lang][p]}</strong><span aria-hidden="true">↗</span></a>`).join('')}</div></div><div class="hero-avatar"><img src="/img/index/avatar.webp" alt="${lang === 'zh' ? '黄昏时的跨河大桥' : 'Bridge over a river at dusk'}" width="1920" height="1920" fetchpriority="high"></div>`);
+    hero.html(`<div class="hero-copy">
+      <p class="eyebrow">${lang === 'zh' ? '你好，我是' : 'Hello, I’m'}</p>
+      <h1>${lang === 'zh' ? '赵子辰' : 'Zichen Zhao'}<span class="hero-name-secondary">${lang === 'zh' ? ' Zichen Zhao' : ' 赵子辰'}</span></h1>
+      <p class="hero-lede">${lang === 'zh' ? '上海交通大学信息安全专业四年级本科生，关注程序分析、人工智能与软件保护。这里也记录我的写作和生活。' : 'I’m a fourth-year information security student at Shanghai Jiao Tong University, exploring program analysis, AI, and software protection. I also write about what I learn and the life around it.'}</p>
+      <p class="hero-email"><a href="mailto:brucezhaozichen@126.com">brucezhaozichen@126.com</a><span>·</span><a href="mailto:bruce0728@sjtu.edu.cn">bruce0728@sjtu.edu.cn</a></p>
+      <div class="hero-paths">${['research','blog','interests'].map((p, i) => `<a class="path-card" href="${navPath(lang,p)}"><span class="path-number">0${i+1}</span><strong>${labels[lang][p]}</strong><span aria-hidden="true">↗</span></a>`).join('')}</div>
+    </div><div class="hero-art"><img src="/img/illustrations/research-and-life.webp" alt="${lang === 'zh' ? '坐在书桌前的学生，周围有科研、音乐、旅行与羽毛球元素' : 'Student at a desk surrounded by research, music, travel, and badminton motifs'}" width="1182" height="815" fetchpriority="high" decoding="async"></div>`);
+    const aboutCard = hero.nextAll('.section').first().find('.card').first();
+    aboutCard.after(`<figure class="about-photo"><img src="/img/index/avatar.webp" alt="${lang === 'zh' ? '黄昏时的跨河大桥' : 'Bridge over a river at dusk'}" loading="lazy"><figcaption>${lang === 'zh' ? '镜头中的一刻 · 摄影' : 'A moment through my lens · Photography'}</figcaption></figure>`);
+    aboutCard.add(aboutCard.next('.about-photo')).wrapAll('<div class="about-layout"></div>');
     main.find('#updates-container').html(updates.map(u => `<article class="update-row"><time datetime="${u.date}">${displayDate(u.date,lang)}</time><div><h3>${esc(localized(u.title,lang))}</h3><p>${esc(localized(u.content,lang))}</p></div></article>`).join(''));
   }
   if (name === 'research') {

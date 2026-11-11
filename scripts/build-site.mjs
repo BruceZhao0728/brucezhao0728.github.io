@@ -29,20 +29,19 @@ const metadata = {
   awards: { en: ['Awards — Zichen Zhao', 'Selected scholarships, competitions, and honors.'], zh: ['荣誉 — 赵子辰', '奖学金、竞赛与其他荣誉记录。'] }
 };
 const navPath = (lang, page) => `/${lang}/${page === 'index' ? '' : page + '.html'}`;
-const articlePath = (lang, id) => `/${lang}/blog/${encodeURIComponent(id)}.html`;
-const switchPath = (lang, page, id) => id ? articlePath(lang, id) : navPath(lang, page);
+const articlePath = (lang, id) => `/${lang}/blog-detail.html?id=${encodeURIComponent(id)}`;
 const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 function displayDate(value, lang) {
   const [year, month, day] = value.split('-').map(Number);
   return lang === 'zh' ? `${year}年${month}月${day}日` : `${monthNames[month - 1]} ${day}, ${year}`;
 }
 
-function shell({ lang, page, title, description, body, id, scripts = '' }) {
+function shell({ lang, page, title, description, body, scripts = '' }) {
   const L = labels[lang];
-  const canonical = `${base}${switchPath(lang, page, id)}`;
+  const canonical = `${base}${navPath(lang, page)}`;
   const other = lang === 'en' ? 'zh' : 'en';
   const locale = lang === 'zh' ? 'zh_CN' : 'en_US';
-  const nav = pages.map(name => `<li><a href="${navPath(lang, name)}"${name === page ? ' aria-current="page"' : ''}>${L[name === 'index' ? 'home' : name]}</a></li>`).join('');
+  const nav = pages.map(name => `<li><a href="${navPath(lang, name)}"${name === (page === 'blog-detail' ? 'blog' : page) ? ' aria-current="page"' : ''}>${L[name === 'index' ? 'home' : name]}</a></li>`).join('');
   return `<!doctype html>
 <html lang="${lang === 'zh' ? 'zh-CN' : 'en'}">
 <head>
@@ -51,9 +50,9 @@ function shell({ lang, page, title, description, body, id, scripts = '' }) {
   <title>${esc(title)}</title>
   <meta name="description" content="${esc(description)}">
   <link rel="canonical" href="${canonical}">
-  <link rel="alternate" hreflang="en" href="${base}${switchPath('en', page, id)}">
-  <link rel="alternate" hreflang="zh-CN" href="${base}${switchPath('zh', page, id)}">
-  <meta property="og:type" content="${id ? 'article' : 'website'}">
+  <link rel="alternate" hreflang="en" href="${base}${navPath('en', page)}">
+  <link rel="alternate" hreflang="zh-CN" href="${base}${navPath('zh', page)}">
+  <meta property="og:type" content="${page === 'blog-detail' ? 'article' : 'website'}">
   <meta property="og:title" content="${esc(title)}">
   <meta property="og:description" content="${esc(description)}">
   <meta property="og:url" content="${canonical}">
@@ -62,7 +61,7 @@ function shell({ lang, page, title, description, body, id, scripts = '' }) {
   <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/css/editorial.css">
-  ${id ? '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/styles/atom-one-dark.min.css" media="print" onload="this.media=\'all\'">' : ''}
+  ${page === 'blog-detail' ? '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/styles/atom-one-dark.min.css" media="print" onload="this.media=\'all\'">' : ''}
   <script>document.documentElement.classList.add('js')</script>
 </head>
 <body data-page="${page}" data-lang="${lang}">
@@ -71,7 +70,7 @@ function shell({ lang, page, title, description, body, id, scripts = '' }) {
     <a class="site-brand" href="/${lang}/" aria-label="Zichen Zhao — ${L.home}">Zichen <span>Zhao</span><small>赵子辰</small></a>
     <button class="nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="${L.menu}"><span></span><span></span><span></span></button>
     <nav id="site-nav" class="site-nav" aria-label="${lang === 'zh' ? '主导航' : 'Main navigation'}"><ul>${nav}</ul></nav>
-    <a class="language-link" href="${switchPath(other, page, id)}" data-language="${other}" lang="${other === 'zh' ? 'zh-CN' : 'en'}" aria-label="${L.language}: ${other === 'zh' ? '中文' : 'English'}">${other === 'zh' ? '中文' : 'EN'}</a>
+    <a class="language-link" href="${navPath(other, page)}" data-language="${other}" lang="${other === 'zh' ? 'zh-CN' : 'en'}" aria-label="${L.language}: ${other === 'zh' ? '中文' : 'English'}">${other === 'zh' ? '中文' : 'EN'}</a>
   </div></header>
   <main id="main" class="site-main">${body}</main>
   <footer class="site-footer"><div class="container footer-inner"><p>© 2026 Zichen Zhao · ${lang === 'zh' ? '感谢来访' : 'Thanks for visiting'}</p><div><a href="mailto:brucezhaozichen@126.com">Email</a><a href="https://github.com/BruceZhao0728" rel="noopener noreferrer">GitHub</a></div></div></footer>
@@ -259,20 +258,20 @@ function blogIndex(lang) {
   return `<div class="container"><header class="page-intro"><h1 class="text-center">${L.blog}</h1><p class="text-center hero-subtitle">${lang === 'zh' ? '写下我所学，也写下我所见。文章保留创作时的原文语言。' : 'What I learn, make, and notice. Articles remain in their original language.'}</p></header><section class="blog-tools" aria-label="${lang === 'zh' ? '文章筛选' : 'Article filters'}"><label>${L.search}<input id="blog-search" type="search" placeholder="${L.search}"></label><label>${L.categories}<select id="blog-category">${categories.map(c => `<option value="${c}">${L[c] || c}</option>`).join('')}</select></label><label>${L.tags}<select id="blog-tag"><option value="">${L.all}</option>${[...new Set(blogs.flatMap(b => b.tags || []))].sort().map(t => `<option value="${esc(t)}">${esc(t)}</option>`).join('')}</select></label><label>${L.sort}<select id="blog-sort"><option value="newest">${L.newest}</option><option value="oldest">${L.oldest}</option></select></label></section><p id="blog-count" class="result-count" aria-live="polite"></p><div id="blog-grid" class="blog-grid">${cards}</div><p id="blog-empty" hidden>${lang === 'zh' ? '没有找到匹配的文章。' : 'No matching articles.'}</p></div>`;
 }
 
-function articlePage(lang, blog) {
+function articlePage(lang) {
   const L = labels[lang];
-  const title = localized(blog.title, lang);
-  const desc = localized(blog.excerpt, lang);
-  const source = '/' + blog.file;
+  const title = lang === 'zh' ? '博客文章 — 赵子辰' : 'Blog article — Zichen Zhao';
+  const description = lang === 'zh' ? '阅读赵子辰的博客文章。' : 'Read an article from Zichen Zhao’s blog.';
   const loading = lang === 'zh' ? '正在加载文章…' : 'Loading article…';
-  const viewSource = lang === 'zh' ? '阅读 Markdown 原文' : 'Read the original Markdown';
-  return shell({ lang, page: 'blog', id: blog.id, title: `${title} — Zichen Zhao`, description: desc, scripts: '<script>window.MathJax={tex:{inlineMath:[["$","$"],["\\\\(","\\\\)"]],displayMath:[["$$","$$"],["\\\\[","\\\\]"]]}}</script><script defer src="/js/vendor/marked.umd.js"></script><script defer src="/js/article.js"></script><script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/highlight.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>', body: `<div class="container article-layout"><a class="text-link" href="${navPath(lang,'blog')}">← ${L.back}</a><article class="article"><header class="article-header"><p class="eyebrow"><time datetime="${blog.date}">${displayDate(blog.date,lang)}</time> · ${esc(L[blog.category] || blog.category)} · ${lang === 'zh' ? '中文原文' : 'Original in Chinese'}</p><h1>${esc(title)}</h1><p>${esc(desc)}</p></header><div class="markdown-content" lang="zh-CN" data-markdown-src="${esc(source)}" aria-busy="true"><p>${loading}</p></div><noscript><p><a href="${esc(source)}">${viewSource}</a></p></noscript></article></div>` });
+  const noScript = lang === 'zh' ? '查看文章列表' : 'Browse articles';
+  const scripts = '<script>window.MathJax={tex:{inlineMath:[["$","$"],["\\\\(","\\\\)"]],displayMath:[["$$","$$"],["\\\\[","\\\\]"]]}}</script><script defer src="/js/vendor/marked.umd.js"></script><script defer src="/js/article.js"></script><script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/highlight.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>';
+  const body = `<div class="container article-layout"><a class="text-link" href="${navPath(lang,'blog')}">← ${L.back}</a><article class="article"><header class="article-header"><p class="eyebrow" id="article-meta"></p><h1 id="article-title">${lang === 'zh' ? '博客文章' : 'Blog article'}</h1><p id="article-summary"></p></header><div class="markdown-content" lang="zh-CN" aria-busy="true"><p>${loading}</p></div><noscript><p><a href="${navPath(lang,'blog')}">${noScript}</a></p></noscript></article></div>`;
+  return shell({ lang, page: 'blog-detail', title, description, scripts, body });
 }
-
 function redirectPage(page) {
   const target = page === 'index' ? '' : `${page}.html`;
   const fallback = page === 'blog-detail' ? 'blog.html' : target;
-  const extra = page === 'blog-detail' ? `const id=new URLSearchParams(location.search).get('id');const valid=${JSON.stringify(blogs.map(b=>b.id))};const dest=id&&valid.includes(id)?'blog/'+encodeURIComponent(id)+'.html':'blog.html';` : `const dest=${JSON.stringify(target)};`;
+  const extra = page === 'blog-detail' ? `const id=new URLSearchParams(location.search).get('id');const dest=id?'blog-detail.html?id='+encodeURIComponent(id):'blog.html';` : `const dest=${JSON.stringify(target)};`;
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Zichen Zhao</title>${page === 'blog-detail' ? '' : `<link rel="canonical" href="${base}/en/${target}">`}<script>try{const saved=localStorage.getItem('site-language');const lang=saved==='en'||saved==='zh'?saved:(navigator.language||'en').toLowerCase().startsWith('zh')?'zh':'en';${extra}location.replace('/'+lang+'/'+dest+location.hash)}catch(e){location.replace('/en/${fallback}')}</script></head><body><main><h1>Zichen Zhao · 赵子辰</h1><p>Choose a language / 选择语言</p><a href="/en/${fallback}">English</a> · <a href="/zh/${fallback}">中文</a></main></body></html>\n`;
 }
 
@@ -325,12 +324,10 @@ for (const lang of ['en','zh']) {
     await write(`${lang}/${page === 'index' ? 'index' : page}.html`, shell({ lang, page, title, description, body, scripts }));
   }
 }
-for (const blog of blogs) {
-  for (const lang of ['en','zh']) await write(`${lang}/blog/${blog.id}.html`, articlePage(lang, blog));
-}
+for (const lang of ['en','zh']) await write(`${lang}/blog-detail.html`, articlePage(lang));
 for (const page of [...pages, 'blog-detail']) await write(`${page}.html`, redirectPage(page));
-const sitemapPaths = [...['en','zh'].flatMap(lang => [...pages.map(page => navPath(lang,page)), ...blogs.map(blog => articlePath(lang,blog.id))])];
+const sitemapPaths = [...['en','zh'].flatMap(lang => pages.map(page => navPath(lang,page)))];
 await write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${sitemapPaths.map(url => `<url><loc>${base}${url}</loc></url>`).join('')}</urlset>\n`);
 await write('robots.txt', `User-agent: *\nAllow: /\nSitemap: ${base}/sitemap.xml\n`);
 await write('.nojekyll', '');
-console.log(`Generated ${sitemapPaths.length} localized pages and ${imagePaths.size} responsive image sets.`);
+console.log(`Generated ${sitemapPaths.length} localized pages, 2 shared article viewers, and ${imagePaths.size} responsive image sets.`);

@@ -11,7 +11,7 @@ const check = (condition, message) => { if (!condition) failures.push(message); 
 const generated = [];
 for (const lang of ['en','zh']) {
   for (const page of pages) generated.push(`${lang}/${page}.html`);
-  for (const blog of blogs) generated.push(`${lang}/blog/${blog.id}.html`);
+  generated.push(`${lang}/blog-detail.html`);
 }
 for (const file of generated) {
   const html = fs.readFileSync(path.join(root,file), 'utf8');
@@ -23,12 +23,10 @@ for (const file of generated) {
   check($('link[rel="canonical"]').length === 1 && $('link[hreflang="en"]').length === 1 && $('link[hreflang="zh-CN"]').length === 1, `${file}: canonical and language links`);
   check(!html.includes('To be filled') && !html.includes('尚未公开'), `${file}: publication placeholder`);
   check(!html.includes('>undefined<'), `${file}: missing translated label`);
-  if (file.includes('/blog/')) {
-    const blog = blogs.find(item => file.endsWith(`/blog/${item.id}.html`));
-    const source = $('article .markdown-content').attr('data-markdown-src');
-    check(source === `/${blog.file}`, `${file}: Markdown source`);
+  if (file.endsWith('/blog-detail.html')) {
+    check($('article .markdown-content[aria-busy="true"]').length === 1, `${file}: shared article viewer`);
     check($('script[src="/js/vendor/marked.umd.js"]').length === 1, `${file}: browser Markdown renderer`);
-    check($('article .markdown-content h1, article .markdown-content h2, article .markdown-content pre').length === 0, `${file}: article body must load from Markdown`);
+    check($('script[src="/js/article.js"]').length === 1, `${file}: article loader`);
   }
   $('a[href],img[src],script[src],link[href]').each((_,el) => {
     const value = $(el).attr('href') || $(el).attr('src');
@@ -64,6 +62,11 @@ for (const lang of ['en','zh']) {
   }
   const $ = cheerio.load(fs.readFileSync(path.join(root,lang,'blog.html'),'utf8'));
   check($('.blog-card a[href]').length === blogs.length, `${lang}: article links`);
+  for (const blog of blogs) {
+    const href = `/${lang}/blog-detail.html?id=${encodeURIComponent(blog.id)}`;
+    check($('.blog-card-link').filter((_, el) => $(el).attr('href') === href).length === 1, `${lang}: missing article link ${blog.id}`);
+  }
+  check(!fs.existsSync(path.join(root, lang, 'blog')), `${lang}: obsolete article HTML directory`);
   check($('#blog-category option[value="personal"]').length === 1, `${lang}: Personal category`);
   check($('.blog-card time[datetime]').length === blogs.length, `${lang}: localized article dates`);
   const interests = cheerio.load(fs.readFileSync(path.join(root,lang,'interests.html'),'utf8'));
@@ -81,7 +84,10 @@ for (const lang of ['en','zh']) {
 for (const name of [...pages,'blog-detail']) {
   check(fs.readFileSync(path.join(root,`${name}.html`),'utf8').includes('location.replace'), `${name}: legacy redirect`);
 }
-check(fs.readFileSync(path.join(root,'sitemap.xml'),'utf8').match(/<loc>/g)?.length === generated.length, 'sitemap count');
+check(fs.readFileSync(path.join(root,'blog-detail.html'),'utf8').includes("blog-detail.html?id="), 'legacy article ID redirect');
+const sitemap = fs.readFileSync(path.join(root,'sitemap.xml'),'utf8');
+check(sitemap.match(/<loc>/g)?.length === pages.length * 2, 'sitemap count');
+check(!sitemap.includes('/blog/'), 'sitemap contains deleted article pages');
 if (failures.length) {
   console.error(failures.join('\n'));
   process.exit(1);

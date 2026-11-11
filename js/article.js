@@ -54,9 +54,46 @@ function renderMarkdown(markdown, source) {
     return draft;
 }
 
-const container = document.querySelector('.markdown-content[data-markdown-src]');
+function localized(value, lang) {
+    return typeof value === 'object' && value !== null ? (value[lang] || value.en || value.zh || '') : (value || '');
+}
+
+function displayDate(value, lang) {
+    const [year, month, day] = value.split('-').map(Number);
+    if (lang === 'zh') return `${year}年${month}月${day}日`;
+    return new Date(Date.UTC(year, month - 1, day)).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+}
+
+function updateArticleMetadata(blog, lang) {
+    const title = localized(blog.title, lang);
+    const summary = localized(blog.excerpt, lang);
+    const fullTitle = `${title} — Zichen Zhao`;
+    const categories = lang === 'zh'
+        ? { tech: '技术', study: '学习', life: '生活', personal: '个人' }
+        : { tech: 'Tech', study: 'Study', life: 'Life', personal: 'Personal' };
+    const time = document.createElement('time');
+    time.dateTime = blog.date;
+    time.textContent = displayDate(blog.date, lang);
+    document.getElementById('article-meta').replaceChildren(time, document.createTextNode(` · ${categories[blog.category] || blog.category} · ${lang === 'zh' ? '中文原文' : 'Original in Chinese'}`));
+    document.getElementById('article-title').textContent = title;
+    document.getElementById('article-summary').textContent = summary;
+    document.title = fullTitle;
+    document.querySelector('meta[name="description"]').content = summary;
+    document.querySelector('meta[property="og:title"]').content = fullTitle;
+    document.querySelector('meta[property="og:description"]').content = summary;
+    const articleUrl = language => `${location.origin}/${language}/blog-detail.html?id=${encodeURIComponent(blog.id)}`;
+    document.querySelector('link[rel="canonical"]').href = articleUrl(lang);
+    document.querySelector('link[hreflang="en"]').href = articleUrl('en');
+    document.querySelector('link[hreflang="zh-CN"]').href = articleUrl('zh');
+    document.querySelector('meta[property="og:url"]').content = articleUrl(lang);
+}
+
+const container = document.querySelector('.markdown-content');
 if (container) {
-    const source = container.dataset.markdownSrc;
+    const lang = document.body.dataset.lang === 'zh' ? 'zh' : 'en';
+    const id = new URLSearchParams(location.search).get('id');
+    const languageLink = document.querySelector('.language-link');
+    if (id && languageLink) languageLink.href = `/${lang === 'zh' ? 'en' : 'zh'}/blog-detail.html?id=${encodeURIComponent(id)}`;
     let ready = false;
     let highlighted = false;
     let typesetStarted = false;
@@ -80,7 +117,17 @@ if (container) {
 
     window.addEventListener('load', enhanceArticle);
     (async () => {
+        let source = '';
         try {
+            if (!id) throw new Error('Article ID is missing');
+            const listResponse = await fetch('/data/blogs.json', { cache: 'no-cache' });
+            if (!listResponse.ok) throw new Error(`Blog list request failed: ${listResponse.status}`);
+            const blogs = await listResponse.json();
+            const blog = blogs.find(item => item.id === id);
+            if (!blog) throw new Error(`Unknown article ID: ${id}`);
+            updateArticleMetadata(blog, lang);
+            source = '/' + blog.file;
+            container.dataset.markdownSrc = source;
             const response = await fetch(`${source}?t=${Date.now()}`, { cache: 'no-store' });
             if (!response.ok) throw new Error(`Markdown request failed: ${response.status}`);
             if (!window.marked) throw new Error('Markdown renderer did not load');
@@ -89,10 +136,14 @@ if (container) {
         } catch (error) {
             console.error('Unable to load article Markdown:', error);
             const message = document.createElement('p');
-            message.textContent = document.body.dataset.lang === 'zh' ? '文章加载失败。' : 'The article could not be loaded.';
+            message.textContent = source
+                ? (lang === 'zh' ? '文章加载失败。' : 'The article could not be loaded.')
+                : (lang === 'zh' ? '找不到这篇文章。' : 'Article not found.');
             const link = document.createElement('a');
-            link.href = source;
-            link.textContent = document.body.dataset.lang === 'zh' ? '阅读 Markdown 原文' : 'Read the original Markdown';
+            link.href = source || `/${lang}/blog.html`;
+            link.textContent = source
+                ? (lang === 'zh' ? '阅读 Markdown 原文' : 'Read the original Markdown')
+                : (lang === 'zh' ? '返回文章列表' : 'Back to articles');
             container.replaceChildren(message, link);
             container.setAttribute('aria-busy', 'false');
             return;

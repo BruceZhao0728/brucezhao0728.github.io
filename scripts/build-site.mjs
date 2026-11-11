@@ -91,8 +91,8 @@ function pairedBr($, element, lang) {
   }
 }
 
-function localizeLegacy(name, lang) {
-  const source = legacy[name].replace(/<!--[\s\S]*?-->/g, '');
+function localizePageSource(name, lang) {
+  const source = pageSources[name].replace(/<!--[\s\S]*?-->/g, '');
   const $ = cheerio.load(source);
   const main = $('.main-content .container').first();
   main.find('*').contents().filter((_, node) => node.type === 'comment').remove();
@@ -247,7 +247,7 @@ function localizeLegacy(name, lang) {
   return main.html() || '';
 }
 
-const legacy = Object.fromEntries(await Promise.all(['index','research','interests','awards'].map(async name => [name, await read(`site-src/legacy/${name}.html`)])));
+const pageSources = Object.fromEntries(await Promise.all(['index','research','interests','awards'].map(async name => [name, await read(`site-src/pages/${name}.html`)])));
 const blogs = JSON.parse(await read('data/blogs.json'));
 const papers = JSON.parse(await read('data/papers.json'));
 const updates = JSON.parse(await read('data/updates.json')).sort((a,b) => b.date.localeCompare(a.date));
@@ -277,39 +277,54 @@ function redirectPage(page) {
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Zichen Zhao</title>${page === 'blog-detail' ? '' : `<link rel="canonical" href="${base}/en/${target}">`}<script>try{const saved=localStorage.getItem('site-language');const lang=saved==='en'||saved==='zh'?saved:(navigator.language||'en').toLowerCase().startsWith('zh')?'zh':'en';${extra}location.replace('/'+lang+'/'+dest+location.hash)}catch(e){location.replace('/en/${fallback}')}</script></head><body><main><h1>Zichen Zhao · 赵子辰</h1><p>Choose a language / 选择语言</p><a href="/en/${fallback}">English</a> · <a href="/zh/${fallback}">中文</a></main></body></html>\n`;
 }
 
-// Generate responsive image variants and keep every original photo in place.
+// Generate responsive image variants; originals remain available for full-size gallery links.
 const imagePaths = new Set(['/img/index/avatar.webp']);
 for (const name of ['index','interests']) {
-  const $ = cheerio.load(legacy[name]);
+  const $ = cheerio.load(pageSources[name].replace(/<!--[\s\S]*?-->/g, ''));
   $('img[src^="img/"]').each((_, el) => imagePaths.add('/' + $(el).attr('src')));
 }
 for (const songs of Object.values(music)) for (const song of songs) if (song.cover?.startsWith('img/')) imagePaths.add('/' + song.cover);
 const variants = {};
+const expectedVariants = new Set();
 for (const image of [...imagePaths].sort()) {
   const input = path.join(root, image.slice(1));
   const meta = await sharp(input).metadata();
   const out = {};
   for (const width of [480, 960]) {
+    if (width > 480 && meta.width <= 480) continue;
     const actual = Math.min(meta.width, width);
     const destination = image.replace('/img/', '/img/optimized/').replace(/\.webp$/i, `-${width}.webp`);
+    expectedVariants.add(destination);
     await fs.mkdir(path.dirname(path.join(root, destination.slice(1))), { recursive: true });
     await sharp(input).resize({ width: actual, withoutEnlargement: true }).webp({ quality: 72, effort: 4 }).toFile(path.join(root, destination.slice(1)));
     out[width] = destination;
   }
   variants[image] = { ...out, width: meta.width, height: meta.height };
 }
+// Remove only stale files under the build-owned optimized image directory.
+const optimizedRoot = path.join(root, 'img/optimized');
+async function removeStaleVariants(directory) {
+  for (const entry of await fs.readdir(directory, { withFileTypes: true })) {
+    const file = path.join(directory, entry.name);
+    if (entry.isDirectory()) await removeStaleVariants(file);
+    else if (entry.isFile() && entry.name.endsWith('.webp') && !expectedVariants.has('/' + path.relative(root, file).split(path.sep).join('/'))) await fs.rm(file);
+  }
+}
+await removeStaleVariants(optimizedRoot);
 await write('data/music-optimized.json', JSON.stringify(Object.fromEntries(Object.entries(music).map(([genre,songs]) => [genre,songs.map(song => ({ ...song, cover: variants['/'+song.cover]?.[480] || song.cover }))])), null, 2) + '\n');
 
 for (const lang of ['en','zh']) {
   for (const page of pages) {
     const [title, description] = metadata[page][lang];
-    let body = page === 'blog' ? blogIndex(lang) : `<div class="container legacy-content">${localizeLegacy(page,lang)}</div>`;
+    let body = page === 'blog' ? blogIndex(lang) : `<div class="container legacy-content">${localizePageSource(page,lang)}</div>`;
     const $ = cheerio.load(body);
     $('[src^="/img/"]').each((_, el) => {
       const image = $(el);
       const data = variants[image.attr('src')];
       if (!data) return;
-      image.attr('width', String(data.width)).attr('height', String(data.height)).attr('src', data[480]).attr('srcset', `${data[480]} 480w, ${data[960]} 960w`).attr('sizes', '(max-width: 680px) 100vw, 50vw').attr('decoding', 'async');
+      const srcset = [`${data[480]} ${Math.min(data.width, 480)}w`];
+      if (data[960]) srcset.push(`${data[960]} ${Math.min(data.width, 960)}w`);
+      image.attr('width', String(data.width)).attr('height', String(data.height)).attr('src', data[480]).attr('srcset', srcset.join(', ')).attr('sizes', '(max-width: 680px) 100vw, 50vw').attr('decoding', 'async');
       if (page === 'interests') {
         image.attr('loading', image.attr('id') === 'album-cover' ? 'eager' : 'lazy');
         if (image.hasClass('travel-photo')) image.attr('sizes', '(max-width: 600px) 45vw, (max-width: 900px) 42vw, 23vw');

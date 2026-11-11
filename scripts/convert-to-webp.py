@@ -75,5 +75,5 @@ if __name__ == "__main__":
             output_picture = os.path.splitext(source_picture)[0] + ".webp"
             convert_to_webp(source_picture, output_picture)
         else:
-            print("用法: python jpg_to_webp.py <source_dir> <output_dir>")
-            print("或: python jpg_to_webp.py <source_image>")
+            print("用法: python scripts/convert-to-webp.py <source_dir> <output_dir>")
+            print("或: python scripts/convert-to-webp.py <source_image>")

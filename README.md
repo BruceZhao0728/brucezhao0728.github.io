@@ -1,8 +1,23 @@
 # Zichen Zhao’s personal website / 赵子辰的个人网站
 
-A bilingual, static personal website for GitHub Pages. The source and generated pages stay in this repository.
+A bilingual static site served directly from this repository by GitHub Pages. The repository contains both editable source and generated pages because Pages does not run the build during deployment.
 
-## Local workflow
+## Repository map
+
+| Path | Purpose |
+| --- | --- |
+| `site-src/pages/` | Editable HTML for Home, Research, Interests, and Awards. Each file contains paired English and Chinese content; the build produces one language per page. |
+| `blog/*.md` and `blog/images/` | Original-language article bodies and their images. The browser loads Markdown directly. |
+| `data/blogs.json` | Article IDs, dates, categories, bilingual titles, and summaries. |
+| `data/papers.json`, `data/updates.json`, `data/music.json` | Research, update, and music content. |
+| `css/`, `js/` | Styles and browser scripts. `js/vendor/` contains the local Markdown parser and its license. |
+| `img/` | Original photos, album covers, illustration, and favicon. |
+| `scripts/` | Site builder, checker, and optional image conversion helper. |
+| `en/`, `zh/`, root `*.html`, `sitemap.xml`, `robots.txt` | Generated pages and compatibility redirects, committed for GitHub Pages. |
+| `img/optimized/`, `data/music-optimized.json` | Generated responsive image variants and music cover URLs, also committed. |
+| `files/` | Public CV PDFs, updated separately by the site owner. |
+
+## Edit and preview
 
 ```sh
 npm ci
@@ -11,22 +26,17 @@ npm run check
 python3 -m http.server 8000
 ```
 
-Open `http://localhost:8000/`. The root route chooses English or Chinese from the visitor’s stored choice or browser language. Direct `/en/` and `/zh/` URLs always keep their stated language.
+Open `http://localhost:8000/`. The root URL uses the visitor’s saved choice or browser language; direct `/en/` and `/zh/` URLs stay in that edition. Commit source changes **and** their generated output together before publishing.
 
-## Where to edit
+- Edit page copy in `site-src/pages/` and the data files, then run the build and check.
+- Edit an existing article body in `blog/*.md`; its shared viewer fetches the Markdown directly, so a build is unnecessary for body-only changes. Add an entry to `data/blogs.json` and rebuild when adding an article or changing its listing metadata.
+- Article URLs use `/en/blog-detail.html?id=…` and `/zh/blog-detail.html?id=…`. Root page URLs redirect for compatibility. The older per-article `/en/blog/*.html` and `/zh/blog/*.html` URLs were removed; social previews of shared viewer URLs have generic article metadata.
+- To prepare a new photo, `scripts/convert-to-webp.py` is an optional helper that requires Pillow. Add the resulting image to `img/`, reference it from the page source or music data, then rebuild.
 
-- `site-src/legacy/` contains the original page content used to generate the localized home, research, interests, and awards pages. Keep English and Chinese passages paired; the build extracts one language per edition.
-- `data/blogs.json` contains the bilingual titles and summaries of the 18 original-language articles. Article pages fetch their bodies directly from `blog/*.md` when opened. Editing an existing article body only requires publishing the changed Markdown file; adding an article or changing its title, summary, or date also requires `npm run build`.
-- `data/papers.json`, `data/updates.json`, and `data/music.json` contain research, updates, and music data.
-- `scripts/build-site.mjs` creates the `/en/` and `/zh/` pages, one shared article viewer per language, root compatibility redirects, sitemap, and optimized image variants. Commit generated output with source changes so GitHub Pages can serve it without a build service.
-- `js/article.js` reads the article ID from the viewer URL, loads its title and summary from `data/blogs.json`, then fetches and renders its Markdown. `js/vendor/marked.umd.js` is the locally served Markdown parser (MIT license in the same directory). Since the viewer is shared, social previews use generic article metadata.
-- Article links use `/en/blog-detail.html?id=…` or `/zh/blog-detail.html?id=…`. The former per-article `/en/blog/*.html` and `/zh/blog/*.html` pages were removed, so those URLs no longer work.
-- `css/editorial.css` contains the new visual layer; `css/style.css` provides legacy content layout rules.
-- `js/photo-gallery.js` opens Interests photos in a keyboard-accessible viewer. Photo links still open the original image without JavaScript.
-- `img/illustrations/research-and-life.webp` is the original generated homepage illustration. The existing bridge photo remains in the homepage About section.
+## Why `img/` has similar images
 
-The two CV PDFs in `files/` are linked from Research. They are maintained separately by the site owner.
+The originals in `img/index/` and `img/interests/` are kept for full-size gallery links. The build creates smaller 480 px and, when the source is large enough, 960 px WebP variants under `img/optimized/`. Pages use these variants in `srcset` so a phone can download a smaller image; gallery links still open the original. The build removes stale generated variants. Article illustrations live separately in `blog/images/` and are not resized by this build.
 
-## Deployment
+## Publishing
 
-GitHub Pages serves the repository root. Build and check locally before committing. Publishing requires a separate push; local builds and commits do not update the live website.
+GitHub Pages serves the repository root. A local build or commit does not change the live site; pushing the committed output updates it. The two CV PDFs remain public and are maintained separately.

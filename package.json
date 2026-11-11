@@ -1,0 +1,14 @@
+{
+  "name": "zichen-personal-website",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build-site.mjs",
+    "check": "node scripts/check-site.mjs"
+  },
+  "devDependencies": {
+    "cheerio": "1.1.2",
+    "marked": "18.2.0",
+    "sharp": "0.35.5"
+  }
+}

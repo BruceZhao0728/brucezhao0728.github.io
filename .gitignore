@@ -6,3 +6,5 @@ CLAUDE.local.md
 # Codex
 .codex/
 AGENTS.md
+.DS_Store
+node_modules/

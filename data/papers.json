@@ -8,8 +8,8 @@
     "venue": "arXiv preprint",
     "year": 2026,
     "abstract": {
-      "en": "To be filled",
-      "zh": "尚未公开"
+      "en": "FLOB protects floating-point operations in compiled deep neural networks by lifting values to a higher-precision representation and applying mixed Boolean-arithmetic transformations. The paper reports preserved computational correctness and an average operator recovery rate of 4.51%, 32.82 percentage points lower than existing methods.",
+      "zh": "FLOB 将浮点数提升至更高精度的表示空间，再应用混合布尔算术变换，以保护编译后的深度神经网络。论文报告在保持计算正确性的同时，算子平均恢复率降至 4.51%，较现有方法低 32.82 个百分点。"
     },
     "relatedProject": "project-mba-obfuscation",
     "links": {

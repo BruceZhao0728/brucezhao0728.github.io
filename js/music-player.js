@@ -7,7 +7,7 @@ let musicDatabase = {};
 
 async function loadMusicDatabase() {
     try {
-        const res = await fetch('data/music.json');
+        const res = await fetch('/data/music-optimized.json');
         if (!res.ok) throw new Error('Failed to load music data');
         musicDatabase = await res.json();
     } catch (e) {
@@ -43,29 +43,12 @@ function getAllSongs() {
     return Object.values(musicDatabase).flat();
 }
 
-// 预加载所有专辑封面图片
-function preloadAlbumCovers() {
-    const allSongs = getAllSongs();
-    const loadedImages = [];
-    
-    allSongs.forEach(song => {
-        const img = new Image();
-        img.src = song.cover;
-        loadedImages.push(img);
-    });
-    
-    console.log(`预加载了 ${loadedImages.length} 张专辑封面`);
-}
-
 // 初始化音乐播放器
 function initMusicPlayer() {
     const genreSelect = document.getElementById('genre-select');
     const songSelect = document.getElementById('song-select');
     const randomBtn = document.getElementById('random-btn');
     const coverLink = document.getElementById('music-cover-link');
-
-    // 预加载所有专辑封面
-    preloadAlbumCovers();
 
     // 随机选择一首歌作为初始显示
     currentSong = getRandomSong();

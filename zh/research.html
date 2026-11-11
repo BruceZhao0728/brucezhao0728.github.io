@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>研究 — 赵子辰</title>
+  <meta name="description" content="程序分析、人工智能软件保护与智能体系统相关的研究项目。">
+  <link rel="canonical" href="https://brucezhao0728.github.io/zh/research.html">
+  <link rel="alternate" hreflang="en" href="https://brucezhao0728.github.io/en/research.html">
+  <link rel="alternate" hreflang="zh-CN" href="https://brucezhao0728.github.io/zh/research.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="研究 — 赵子辰">
+  <meta property="og:description" content="程序分析、人工智能软件保护与智能体系统相关的研究项目。">
+  <meta property="og:url" content="https://brucezhao0728.github.io/zh/research.html">
+  <meta property="og:locale" content="zh_CN">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="/img/index/avatar.webp" type="image/webp">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/editorial.css">
+  
+  <script>document.documentElement.classList.add('js')</script>
+</head>
+<body data-page="research" data-lang="zh">
+  <a class="skip-link" href="#main">跳转到正文</a>
+  <header class="site-header"><div class="site-header-inner">
+    <a class="site-brand" href="/zh/" aria-label="Zichen Zhao — 主页">Zichen <span>Zhao</span><small>赵子辰</small></a>
+    <button class="nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="打开导航菜单"><span></span><span></span><span></span></button>
+    <nav id="site-nav" class="site-nav" aria-label="主导航"><ul><li><a href="/zh/">主页</a></li><li><a href="/zh/research.html" aria-current="page">研究</a></li><li><a href="/zh/blog.html">博客</a></li><li><a href="/zh/interests.html">兴趣</a></li><li><a href="/zh/awards.html">荣誉</a></li></ul></nav>
+    <a class="language-link" href="/en/research.html" data-language="en" lang="en" aria-label="语言: English">EN</a>
+  </div></header>
+  <main id="main" class="site-main"><div class="container legacy-content">
+            <section class="section">
+                <h1 class="text-center">研究经历</h1>
+                <p class="text-center hero-subtitle">探索程序分析、人工智能软件保护与智能体系统。</p>
+            </section>
+
+            
+            <section class="section">
+                <h2>研究兴趣</h2>
+                <div class="card">
+                    
+                    <p>
+                        我的研究兴趣主要集中在以下几个领域：
+                    </p>
+                    <div class="card-grid mt-2">
+                        <div class="card">
+                            <h3>🖥️ 程序分析</h3>
+                            
+                            <p>利用静态分析和动态分析方法，研究程序行为分析与理解的技术</p>
+                        </div>
+                        <div class="card">
+                            <h3>🤖 智能体系统</h3>
+                            
+                            <p>研究自主智能体及其在各个领域的应用</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            
+            <section class="section">
+                <h2>研究项目</h2>
+                <div class="timeline">
+
+                    <div class="timeline-item" id="project-mba-obfuscation">
+                        <div class="timeline-content">
+                            <h3 class="timeline-title">基于代码混淆的人工智能软件保护系统</h3>
+                            
+                            <p class="timeline-date">04/2024 - 09/2026</p>
+                            <p><strong>项目简介</strong></p>
+                            <ul>
+                                <li>
+                                    针对 AI 模型本地部署后，其二进制文件易被逆向工程提取模型结构与权重，导致知识产权泄露的行业痛点，开发基于混淆的代码保护系统，在不影响模型精度和性能的前提下，将逆向工程成本提升至经济不可行，使本地人工智能软件免受逆向分析等手段的攻击，保护模型开发者的知识产权。
+                                </li>
+                                <li>
+                                    将传统混合布林代数（MBA）从整数域突破性拓展至浮点数域，攻克了传统方法无法保护AI模型核心浮点计算的难题，提出并证明了混淆变换的正确性，确保混淆前后模型输出100%一致。
+                                </li>
+                                <li>
+                                    基于 TVM 机器学习编译器和 LLVM 编译器架构，在 LLVM IR 中间表示层设计并实现了自动化混淆 Pass ，支持用户自定义混淆参数，生成可直接部署的混淆版二进制库/可执行文件，实现了性能开销与安全强度的灵活平衡。
+                                </li>
+                                <li>
+                                    浮点数表达式和 AI 模型运算结果在混淆前后100%一致，反混淆工具成功率下降30%以上，逆向工程成功率下降40%以上，同时提出统一的混淆效果量化指标体系，衡量代码混淆的强度和安全性。
+                                </li>
+                                <li>
+                                    作为共同第一作者和项目负责人完成论文。
+                                </li>
+                            </ul>
+                            <p><strong>技术栈</strong></p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item" id="project-vuln-vector-db">
+                        <div class="timeline-content">
+                            <h3 class="timeline-title">基于向量数据库和人工智能的智能漏洞分析系统</h3>
+                            
+                            <p class="timeline-date">09/2025 - 10/2025</p>
+                            <p><strong>项目简介</strong></p>
+                            <ul>
+                                <li>
+                                    采用双模数据库架构，结合关系型数据库 MySQL 和向量数据库 Chroma 的优势，实现结构化数据管理和语义相似性检索的完美结合。
+                                </li>
+                                <li>
+                                    结合程序切片技术，使用 Tree-Sitter 解析不同程序语言，对抽象语法树（AST）进行程序切片，提取程序中的数据流和控制流依赖关系。
+                                </li>
+                                <li>
+                                    利用 CodeT5+ 模型捕捉程序深层语义，利用 GraphCodeBERT 模型捕捉程序结构，生成含语义与结构双重特征的切片向量，识别潜在漏洞。
+                                </li>
+                                <li>
+                                    构建自然语言接口，用户输入查询需求，系统通过云端 LLM API 自动生成 SQL 查询语句，实现对关系型数据库的智能查询。
+                                </li>
+                            </ul>
+                            <p><strong>技术栈</strong></p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item" id="project-kernel-firewall">
+                        <div class="timeline-content">
+                            <h3 class="timeline-title">基于Linux内核模块的包过滤防火墙</h3>
+                            
+                            <p class="timeline-date">06/2025 - 07/2025</p>
+                            <p><strong>项目简介</strong></p>
+                            <ul>
+                                <li>
+                                    基于 Linux Netfilter 框架，设计并实现一个内核级包过滤防火墙，旨在为内部网络提供接近线速的实时流量控制与基础入侵防护。
+                                </li>
+                                <li>
+                                    开发 Linux 内核模块，实现有状态过滤和基于协议的访问控制。
+                                </li>
+                                <li>
+                                    通过 Netlink 套接字和字符设备设计跨层通信系统，实现安全事件同步和规则更新。
+                                </li>
+                                <li>
+                                    开发了提供类 iptables 语法的命令行工具，支持图形化界面直观展示实时流量、拦截日志与报警信息，提升系统易用性。
+                                </li>
+                            </ul>
+                            <p><strong>技术栈</strong></p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item" id="project-distributed-power">
+                        <div class="timeline-content">
+                            <h3 class="timeline-title">新型电力系统分布式协调控制器设计</h3>
+                            
+                            <p class="timeline-date">10/2023 - 10/2024</p>
+                            <p><strong>项目简介</strong></p>
+                            <ul>
+                                <li>
+                                    设计一套去中心化的“云-边”协同控制架构，应对新型电力系统中海量分布式资源与电/气/热多能流耦合带来的建模与控制复杂性挑战。
+                                </li>
+                                <li>
+                                    基于图论与多智能体系统理论设计了一致性变量的更新律，保证一致性算法收敛性和功率平衡特性，提升系统稳定性与鲁棒性。
+                                </li>
+                                <li>
+                                    基于遗传算法，以通信拓扑网络的连接矩阵为染色体，筛选出抗延时能力最强、可靠性最强的上层网络拓扑结构，提高网络性能。
+                                </li>
+                                <li>
+                                    使用树莓派开发基于 TCP 协议的通信网络，实现上层云平台、下层微电网控制器的分布式架构。
+                                </li>
+                            </ul>
+                            <p><strong>技术栈</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            
+            <section class="section">
+                <h2>论文发表</h2>
+                <p class="text-center" style="margin-bottom: 2rem; color: var(--text-light);">我的学术论文与预印本
+                </p>
+                <div id="papers-container"><article class="paper-card card"><p class="eyebrow">arXiv preprint · 2026</p><h3>Protecting Floating-Point Computation for DNN Binaries with MBA Obfuscation</h3><p>Yikun Hu, Zichen Zhao, Peixiang Qin, Ziyi Zhou, Jiaping Gui, Yuandao Cai, Wensheng Tang</p><p>FLOB 将浮点数提升至更高精度的表示空间，再应用混合布尔算术变换，以保护编译后的深度神经网络。论文报告在保持计算正确性的同时，算子平均恢复率降至 4.51%，较现有方法低 32.82 个百分点。</p><a class="text-link" href="https://arxiv.org/abs/2607.17603" target="_blank" rel="noopener noreferrer">arXiv ↗</a></article></div>
+            </section>
+
+            
+            
+
+            
+            <section class="section">
+                <h2>协作与交流</h2>
+                <div class="card">
+                    
+                    
+                    <p>
+                        我很乐意与对相关领域感兴趣的同学和研究人员进行合作与交流。
+                        如果你对我的研究感兴趣，或者有任何学术问题想要讨论，
+                        欢迎通过电子邮件或其他方式与我联系。
+                    </p>
+                    <div class="btn-group mt-2">
+                        <a href="mailto:bruce0728@sjtu.edu.cn" class="btn btn-primary" id="btn-send-email">发送邮件</a>
+                        <a href="/files/resume-chinese.pdf" target="_blank" class="btn btn-outline" id="btn-resume-zh" rel="noopener noreferrer">中文简历</a>
+                        <a href="/files/resume-english.pdf" target="_blank" class="btn btn-outline" id="btn-resume-en" rel="noopener noreferrer">英文简历</a>
+                    </div>
+                </div>
+            </section>
+        </div></main>
+  <footer class="site-footer"><div class="container footer-inner"><p>© 2026 Zichen Zhao · 感谢来访</p><div><a href="mailto:brucezhaozichen@126.com">Email</a><a href="https://github.com/BruceZhao0728" rel="noopener noreferrer">GitHub</a></div></div></footer>
+  <script src="/js/site.js" defer></script>
+</body></html>

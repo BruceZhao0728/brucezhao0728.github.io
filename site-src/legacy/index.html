@@ -9,8 +9,6 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- 导航栏占位符 -->
-    <div id="navbar-placeholder"></div>
 
     <!-- 主内容 -->
     <main class="main-content">
@@ -142,34 +140,5 @@
             </section>
         </div>
     </main>
-
-    <!-- 页脚占位符 -->
-    <div id="footer-placeholder"></div>
-
-    <script src="js/language.js"></script>
-    <script src="js/updates.js"></script>
-    <script src="js/components.js"></script>
-    <script src="js/main.js"></script>
-    <script>
-        // Update home page button text based on language
-        async function updateHomePageLanguage() {
-            await loadTranslations();
-            const btnViewBlog = document.getElementById('btn-view-blog');
-            const btnResearch = document.getElementById('btn-research');
-            
-            if (btnViewBlog) {
-                btnViewBlog.textContent = translateHome('viewBlog');
-            }
-            if (btnResearch) {
-                btnResearch.textContent = translateHome('research');
-            }
-        }
-        
-        // Initialize language on page load
-        window.addEventListener('DOMContentLoaded', updateHomePageLanguage);
-        
-        // Update when language changes
-        window.addEventListener('languageChanged', updateHomePageLanguage);
-    </script>
 </body>
 </html>

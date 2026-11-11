@@ -1,12 +1,14 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createHash } from 'node:crypto';
 import * as cheerio from 'cheerio';
 import sharp from 'sharp';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const base = 'https://brucezhao0728.github.io';
 const read = async name => fs.readFile(path.join(root, name), 'utf8');
+const articleScriptVersion = createHash('sha256').update(await read('js/article.js')).digest('hex').slice(0, 12);
 const write = async (name, value) => {
   const target = path.join(root, name);
   await fs.mkdir(path.dirname(target), { recursive: true });
@@ -264,7 +266,7 @@ function articlePage(lang) {
   const description = lang === 'zh' ? '阅读赵子辰的博客文章。' : 'Read an article from Zichen Zhao’s blog.';
   const loading = lang === 'zh' ? '正在加载文章…' : 'Loading article…';
   const noScript = lang === 'zh' ? '查看文章列表' : 'Browse articles';
-  const scripts = '<script>window.MathJax={tex:{inlineMath:[["$","$"],["\\\\(","\\\\)"]],displayMath:[["$$","$$"],["\\\\[","\\\\]"]]}}</script><script defer src="/js/vendor/marked.umd.js"></script><script defer src="/js/article.js"></script><script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/highlight.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>';
+  const scripts = `<script>window.MathJax={tex:{inlineMath:[["$","$"],["\\\\(","\\\\)"]],displayMath:[["$$","$$"],["\\\\[","\\\\]"]]}}</script><script defer src="/js/vendor/marked.umd.js"></script><script defer src="/js/article.js?v=${articleScriptVersion}"></script><script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/highlight.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>`;
   const body = `<div class="container article-layout"><a class="text-link" href="${navPath(lang,'blog')}">← ${L.back}</a><article class="article"><header class="article-header"><p class="eyebrow" id="article-meta"></p><h1 id="article-title">${lang === 'zh' ? '博客文章' : 'Blog article'}</h1><p id="article-summary"></p></header><div class="markdown-content" lang="zh-CN" aria-busy="true"><p>${loading}</p></div><noscript><p><a href="${navPath(lang,'blog')}">${noScript}</a></p></noscript></article></div>`;
   return shell({ lang, page: 'blog-detail', title, description, scripts, body });
 }

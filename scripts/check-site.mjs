@@ -26,7 +26,7 @@ for (const file of generated) {
   if (file.endsWith('/blog-detail.html')) {
     check($('article .markdown-content[aria-busy="true"]').length === 1, `${file}: shared article viewer`);
     check($('script[src="/js/vendor/marked.umd.js"]').length === 1, `${file}: browser Markdown renderer`);
-    check($('script[src="/js/article.js"]').length === 1, `${file}: article loader`);
+    check($('script[src^="/js/article.js?v="]').length === 1, `${file}: versioned article loader`);
   }
   $('a[href],img[src],script[src],link[href]').each((_,el) => {
     const value = $(el).attr('href') || $(el).attr('src');

@@ -42,9 +42,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .section { margin: 2rem 0 5.5rem; animation: none; }
 .section > h2 { padding-bottom: 1rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-color); }
 .eyebrow { color: #a4593d; font-size: .76rem; font-weight: 750; letter-spacing: .13em; text-transform: uppercase; }
-.page-intro { max-width: 760px; margin: 3rem 0 3.5rem; }
-.page-intro h1 { margin: .7rem 0 1.2rem; }
-.page-intro > p:last-child { font-size: 1.14rem; color: var(--text-light); }
+.page-intro { margin: 2rem 0 4.5rem; }
 .hero-section { min-height: 610px; padding: 2.2rem 0 3rem; display: grid; grid-template-columns: minmax(0,1.55fr) minmax(250px,.7fr); align-items: center; gap: 4rem; background: transparent; }
 .hero-copy { min-width: 0; }
 .hero-copy h1 { margin: .5rem 0 1.3rem; }
@@ -219,9 +217,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   background: radial-gradient(circle at 95% 15%, rgba(113, 204, 159, .25), transparent 23%), radial-gradient(circle at 6% 84%, rgba(95, 150, 232, .2), transparent 26%), #f6fbfc;
 }
 .legacy-content > .section:first-child:not(.hero-section) { margin-top: 2rem; margin-bottom: 4.5rem; }
-.page-intro { max-width: none; }
-.page-intro h1 { max-width: 760px; }
-.page-intro > p:last-child { max-width: 760px; }
 
 @media (max-width: 850px) {
   .hero-section { min-height: 0; grid-template-columns: 1fr; }

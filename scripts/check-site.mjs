@@ -5,6 +5,7 @@ import * as cheerio from 'cheerio';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const blogs = JSON.parse(fs.readFileSync(path.join(root, 'data/blogs.json'), 'utf8'));
+const music = JSON.parse(fs.readFileSync(path.join(root, 'data/music.json'), 'utf8'));
 const pages = ['index','research','blog','interests','awards'];
 const failures = [];
 const check = (condition, message) => { if (!condition) failures.push(message); };
@@ -20,6 +21,8 @@ for (const file of generated) {
   check($('html').attr('lang') === (lang === 'zh' ? 'zh-CN' : 'en'), `${file}: HTML language`);
   check($('main h1').length === 1, `${file}: exactly one page heading`);
   check($('title').text().trim().length > 0 && $('meta[name="description"]').attr('content'), `${file}: title and description`);
+  check($('link[rel="stylesheet"][href="/css/site.css"]').length === 1, `${file}: consolidated stylesheet`);
+  check(!html.includes('/img/optimized/'), `${file}: old image directory`);
   check($('link[rel="canonical"]').length === 1 && $('link[hreflang="en"]').length === 1 && $('link[hreflang="zh-CN"]').length === 1, `${file}: canonical and language links`);
   check(!html.includes('To be filled') && !html.includes('尚未公开'), `${file}: publication placeholder`);
   check(!html.includes('>undefined<'), `${file}: missing translated label`);
@@ -49,6 +52,26 @@ for (const blog of blogs) {
   for (const [, image] of markdown.matchAll(/!\[[^\]]*\]\(([^)\s]+)(?:\s+[^)]*)?\)/g)) {
     if (/^(?:https?:|data:|\/\/)/i.test(image)) continue;
     check(fs.existsSync(path.resolve(path.dirname(source), image)), `${blog.id}: missing Markdown image ${image}`);
+  }
+}
+check(!blogs.some(blog => blog.id === 'welcome'), 'removed welcome article is still listed');
+check(!fs.existsSync(path.join(root, 'blog/welcome.md')), 'removed welcome Markdown still exists');
+check(!fs.existsSync(path.join(root, 'data/music-optimized.json')), 'duplicate music catalog still exists');
+check(!fs.existsSync(path.join(root, 'img/optimized')), 'old optimized image directory still exists');
+for (const directory of ['img/index', 'img/interests']) {
+  const pending = [path.join(root, directory)];
+  while (pending.length) {
+    const current = pending.pop();
+    for (const entry of fs.readdirSync(current, { withFileTypes: true })) {
+      if (entry.isDirectory()) pending.push(path.join(current, entry.name));
+      else if (entry.name.endsWith('.webp')) check(/-(?:480|960)\.webp$/.test(entry.name), `${directory}: unoptimized original ${entry.name}`);
+    }
+  }
+}
+for (const songs of Object.values(music)) {
+  for (const song of songs) {
+    if (!song.cover?.startsWith('/')) continue;
+    check(fs.existsSync(path.join(root, song.cover.slice(1))), `${song.id}: missing music cover ${song.cover}`);
   }
 }
 for (const lang of ['en','zh']) {

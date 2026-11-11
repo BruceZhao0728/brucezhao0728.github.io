@@ -1,79 +1,59 @@
-import os
-from PIL import Image
+#!/usr/bin/env python3
+"""Create the 480 px and 960 px WebP files used by the site.
 
-def convert_to_webp(source_image_path, output_image_path, max_width=1920, quality=75):
-    """
-    source_image_path: 原始图片路径
-    output_image_path: 转换后的保存路径
-    max_width: 图片最大宽度（等比例缩小）
-    quality: WebP 质量（0-100）
-    """
-    # 打开图片
-    img = Image.open(source_image_path)
+Requires Pillow: python3 -m pip install Pillow
+"""
 
-    # 1. 自动旋转（修正手机拍摄角度）
+import argparse
+import re
+from pathlib import Path
+
+IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".webp"}
+VARIANT_NAME = re.compile(r"-(?:480|960)\.webp$", re.IGNORECASE)
+
+
+def convert(source: Path, destination: Path, remove_source: bool, only_480: bool) -> list[Path]:
     try:
-        from PIL import ImageOps
-        img = ImageOps.exif_transpose(img)
-    except:
-        pass
+        from PIL import Image, ImageOps
+    except ImportError as error:
+        raise SystemExit("Pillow is required. Run: python3 -m pip install Pillow") from error
+    with Image.open(source) as opened:
+        image = ImageOps.exif_transpose(opened)
+        image = image.convert("RGBA" if image.mode == "RGBA" or "transparency" in image.info else "RGB")
+        widths = (480, 960) if image.width > 480 and not only_480 else (480,)
+        destination.mkdir(parents=True, exist_ok=True)
+        outputs = []
+        for width in widths:
+            resized = image.copy()
+            resized.thumbnail((width, max(1, round(width * image.height / image.width))), Image.Resampling.LANCZOS)
+            target = destination / f"{source.stem}-{width}.webp"
+            resized.save(target, "WEBP", quality=72, method=6)
+            outputs.append(target)
+    if remove_source:
+        source.unlink()
+    return outputs
 
-    # 2. 调整尺寸 (等比例缩小)
-    if img.width > max_width:
-        height = int(max_width * img.height / img.width)
-        img = img.resize((max_width, height), Image.Resampling.LANCZOS)
 
-    # 3. 转换并保存
-    img.save(output_image_path, "WEBP", quality=quality)
-    print(f"已完成: {source_image_path} -> {output_image_path}")
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("source", type=Path, help="An image or a directory of images")
+    parser.add_argument("destination", type=Path, nargs="?", help="Output directory; defaults to each source directory")
+    parser.add_argument("--only-480", action="store_true", help="Create only the small variant, for album covers")
+    parser.add_argument("--remove-source", action="store_true", help="Delete each original after the requested variants are saved")
+    args = parser.parse_args()
+    if not args.source.exists():
+        parser.error(f"Source does not exist: {args.source}")
+    sources = [args.source] if args.source.is_file() else sorted(
+        file for file in args.source.rglob("*")
+        if file.is_file() and file.suffix.lower() in IMAGE_EXTENSIONS and not VARIANT_NAME.search(file.name)
+    )
+    for source in sources:
+        if source.suffix.lower() not in IMAGE_EXTENSIONS:
+            parser.error(f"Unsupported image: {source}")
+        target_dir = (args.destination / source.relative_to(args.source).parent) if args.destination and args.source.is_dir() else (args.destination or source.parent)
+        for output in convert(source, target_dir, args.remove_source, args.only_480):
+            print(output)
 
-def batch_convert_to_webp(source_dir, output_dir, max_width=1920, quality=75):
-    """
-    source_dir: 原始图片目录
-    output_dir: 转换后的保存目录
-    max_width: 图片最大宽度（等比例缩小）
-    quality: WebP 质量（0-100）
-    """
-    if not os.path.exists(output_dir):
-        os.makedirs(output_dir)
 
-    for filename in os.listdir(source_dir):
-        if filename.lower().endswith(('.jpg', '.jpeg', '.png')):
-            # 打开图片
-            img_path = os.path.join(source_dir, filename)
-            img = Image.open(img_path)
-
-            # 1. 自动旋转（修正手机拍摄角度）
-            try:
-                img = Image.open(img_path)
-                from PIL import ImageOps
-                img = ImageOps.exif_transpose(img)
-            except:
-                pass
-
-            # 2. 调整尺寸 (等比例缩小)
-            if img.width > max_width:
-                height = int(max_width * img.height / img.width)
-                img = img.resize((max_width, height), Image.Resampling.LANCZOS)
-
-            # 3. 转换并保存
-            name_without_ext = os.path.splitext(filename)[0]
-            save_path = os.path.join(output_dir, f"{name_without_ext}.webp")
-            
-            img.save(save_path, "WEBP", quality=quality)
-            print(f"已完成: {filename} -> {name_without_ext}.webp")
-
-# 使用示例
 if __name__ == "__main__":
-    if argv := os.sys.argv:
-        if len(argv) == 3:
-            source_directory = argv[1]
-            output_directory = argv[2]
-            batch_convert_to_webp(source_directory, output_directory)
-        elif len(argv) == 2:
-            source_picture = argv[1]
-            output_picture = os.path.splitext(source_picture)[0] + ".webp"
-            convert_to_webp(source_picture, output_picture)
-        else:
-            print("用法: python scripts/convert-to-webp.py <source_dir> <output_dir>")
-            print("或: python scripts/convert-to-webp.py <source_image>")
+    main()

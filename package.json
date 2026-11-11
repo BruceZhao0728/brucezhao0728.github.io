@@ -3,11 +3,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "optimize:images": "node scripts/optimize-images.mjs",
     "check": "node scripts/check-site.mjs"
   },
   "devDependencies": {
-    "cheerio": "1.1.2",
-    "sharp": "0.35.5"
+    "cheerio": "1.1.2"
   }
 }

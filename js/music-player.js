@@ -1,13 +1,13 @@
 // 音乐数据库从 data/music.json 加载
 // 说明：cover字段支持两种格式
-// 1. 本地路径：'img/interests/music/filename.webp'
+// 1. 本地路径：'/img/interests/music/filename-480.webp'
 // 2. 网络链接：'https://...' 或 'http://...'
 // videoUrl为可选字段，用来配置歌曲对应的MV / LIVE外链
 let musicDatabase = {};
 
 async function loadMusicDatabase() {
     try {
-        const res = await fetch('/data/music-optimized.json');
+        const res = await fetch('/data/music.json');
         if (!res.ok) throw new Error('Failed to load music data');
         musicDatabase = await res.json();
     } catch (e) {

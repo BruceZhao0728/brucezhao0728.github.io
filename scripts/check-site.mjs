@@ -40,9 +40,14 @@ for (const lang of ['en','zh']) {
   const $ = cheerio.load(fs.readFileSync(path.join(root,lang,'blog.html'),'utf8'));
   check($('.blog-card a[href]').length === blogs.length, `${lang}: article links`);
   check($('#blog-category option[value="personal"]').length === 1, `${lang}: Personal category`);
+  check($('.blog-card time[datetime]').length === blogs.length, `${lang}: localized article dates`);
   const interests = cheerio.load(fs.readFileSync(path.join(root,lang,'interests.html'),'utf8'));
   check(interests('img[loading="lazy"]').length >= 35, `${lang}: lazy photos`);
   check(interests('img:not([width]),img:not([height])').length === 0, `${lang}: image dimensions`);
+  const awards = cheerio.load(fs.readFileSync(path.join(root,lang,'awards.html'),'utf8'));
+  const competition = awards('.award-card').filter((_, el) => /National Information Security Competition|全国大学生信息安全竞赛/.test(awards(el).text()));
+  check(competition.find('.award-date').text().trim() === '2026', `${lang}: competition year`);
+  check(competition.find('a[href="https://arxiv.org/abs/2607.17603"]').length === 1, `${lang}: related paper`);
 }
 for (const name of [...pages,'blog-detail']) {
   check(fs.readFileSync(path.join(root,`${name}.html`),'utf8').includes('location.replace'), `${name}: legacy redirect`);

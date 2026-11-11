@@ -32,6 +32,11 @@ const metadata = {
 const navPath = (lang, page) => `/${lang}/${page === 'index' ? '' : page + '.html'}`;
 const articlePath = (lang, id) => `/${lang}/blog/${encodeURIComponent(id)}.html`;
 const switchPath = (lang, page, id) => id ? articlePath(lang, id) : navPath(lang, page);
+const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+function displayDate(value, lang) {
+  const [year, month, day] = value.split('-').map(Number);
+  return lang === 'zh' ? `${year}年${month}月${day}日` : `${monthNames[month - 1]} ${day}, ${year}`;
+}
 
 function shell({ lang, page, title, description, body, id, scripts = '' }) {
   const L = labels[lang];
@@ -140,7 +145,7 @@ function localizeLegacy(name, lang) {
   if (name === 'index') {
     const hero = main.find('.hero-section');
     hero.html(`<div class="hero-copy"><p class="eyebrow">${lang === 'zh' ? '你好，我是' : 'Hello, I’m'}</p><h1>${lang === 'zh' ? '赵子辰' : 'Zichen Zhao'}<span class="hero-name-secondary">${lang === 'zh' ? ' Zichen Zhao' : ' 赵子辰'}</span></h1><p class="hero-lede">${lang === 'zh' ? '上海交通大学信息安全专业四年级本科生，关注程序分析、人工智能与软件保护。这里也记录我的写作和生活。' : 'I’m a fourth-year information security student at Shanghai Jiao Tong University, exploring program analysis, AI, and software protection. I also write about what I learn and the life around it.'}</p><p class="hero-email"><a href="mailto:brucezhaozichen@126.com">brucezhaozichen@126.com</a><span>·</span><a href="mailto:bruce0728@sjtu.edu.cn">bruce0728@sjtu.edu.cn</a></p><div class="hero-paths">${['research','blog','interests'].map((p, i) => `<a class="path-card" href="${navPath(lang,p)}"><span class="path-number">0${i+1}</span><strong>${labels[lang][p]}</strong><span aria-hidden="true">↗</span></a>`).join('')}</div></div><div class="hero-avatar"><img src="/img/index/avatar.webp" alt="${lang === 'zh' ? '黄昏时的跨河大桥' : 'Bridge over a river at dusk'}" width="1920" height="1920" fetchpriority="high"></div>`);
-    main.find('#updates-container').html(updates.map(u => `<article class="update-row"><time datetime="${u.date}">${u.date}</time><div><h3>${esc(localized(u.title,lang))}</h3><p>${esc(localized(u.content,lang))}</p></div></article>`).join(''));
+    main.find('#updates-container').html(updates.map(u => `<article class="update-row"><time datetime="${u.date}">${displayDate(u.date,lang)}</time><div><h3>${esc(localized(u.title,lang))}</h3><p>${esc(localized(u.content,lang))}</p></div></article>`).join(''));
   }
   if (name === 'research') {
     main.find('.section').first().find('p.hero-subtitle').text(lang === 'zh' ? '探索程序分析、人工智能软件保护与智能体系统。' : 'Exploring program analysis, AI software protection, and agent systems.');
@@ -149,6 +154,11 @@ function localizeLegacy(name, lang) {
         const text = $(node).text().trim();
         if (text.includes('Program Analysis')) $(node).text('🖥️ 程序分析');
         if (text.includes('Agent Systems')) $(node).text('🤖 智能体系统');
+      });
+      main.find('.timeline-date').each((_, node) => {
+        const value = $(node).text().trim();
+        const match = value.match(/^(\d{2})\/(\d{4}) - (\d{2})\/(\d{4})$/);
+        if (match) $(node).text(`${match[2]}年${Number(match[1])}月－${match[4]}年${Number(match[3])}月`);
       });
     }
     main.find('#papers-container').html(papers.map(p => `<article class="paper-card card"><p class="eyebrow">${esc(p.venue)} · ${p.year}</p><h3>${esc(localized(p.title,lang))}</h3><p>${esc(p.authors)}</p><p>${esc(localized(p.abstract,lang))}</p><a class="text-link" href="${esc(p.links.arxiv)}" target="_blank" rel="noopener noreferrer">arXiv ↗</a></article>`).join(''));
@@ -163,7 +173,10 @@ function localizeLegacy(name, lang) {
       main.find('.award-org').each((_, node) => { const value = $(node).text().trim(); if (organizations[value]) $(node).text(organizations[value]); });
     }
     main.find('.award-card').each((_, node) => {
-      if ($(node).text().includes('National Information Security Competition') || $(node).text().includes('全国大学生信息安全竞赛')) $(node).find('.award-date').text('2026');
+      if ($(node).text().includes('National Information Security Competition') || $(node).text().includes('全国大学生信息安全竞赛')) {
+        $(node).find('.award-date').text('2026');
+        $(node).find('.award-content').append(`<p><a class="text-link" href="https://arxiv.org/abs/2607.17603" target="_blank" rel="noopener noreferrer">${lang === 'zh' ? '相关论文 ↗' : 'Related paper ↗'}</a></p>`);
+      }
     });
   }
   if (name === 'interests') {
@@ -199,7 +212,7 @@ const music = JSON.parse(await read('data/music.json'));
 function blogIndex(lang) {
   const L = labels[lang];
   const categories = ['all','tech','study','life','personal'];
-  const cards = [...blogs].sort((a,b) => b.date.localeCompare(a.date)).map(blog => `<article class="blog-card" data-category="${esc(blog.category)}" data-tags="${esc((blog.tags || []).join('|'))}" data-date="${blog.date}" data-search="${esc(`${localized(blog.title,lang)} ${localized(blog.excerpt,lang)}`.toLowerCase())}"><a class="blog-card-link" href="${articlePath(lang,blog.id)}"><span class="eyebrow">${blog.date} · ${esc(L[blog.category] || blog.category)} · ${lang === 'zh' ? '中文原文' : 'Original in Chinese'}</span><h2>${esc(localized(blog.title,lang))}</h2><p>${esc(localized(blog.excerpt,lang))}</p><span class="text-link">${L.read} ↗</span></a></article>`).join('');
+  const cards = [...blogs].sort((a,b) => b.date.localeCompare(a.date)).map(blog => `<article class="blog-card" data-category="${esc(blog.category)}" data-tags="${esc((blog.tags || []).join('|'))}" data-date="${blog.date}" data-search="${esc(`${localized(blog.title,lang)} ${localized(blog.excerpt,lang)}`.toLowerCase())}"><a class="blog-card-link" href="${articlePath(lang,blog.id)}"><span class="eyebrow"><time datetime="${blog.date}">${displayDate(blog.date,lang)}</time> · ${esc(L[blog.category] || blog.category)} · ${lang === 'zh' ? '中文原文' : 'Original in Chinese'}</span><h2>${esc(localized(blog.title,lang))}</h2><p>${esc(localized(blog.excerpt,lang))}</p><span class="text-link">${L.read} ↗</span></a></article>`).join('');
   return `<div class="container"><header class="page-intro"><p class="eyebrow">${lang === 'zh' ? '随笔与笔记' : 'Notes & essays'}</p><h1>${L.blog}</h1><p>${lang === 'zh' ? '写下我所学，也写下我所见。文章保留创作时的原文语言。' : 'What I learn, make, and notice. Articles remain in their original language.'}</p></header><section class="blog-tools" aria-label="${lang === 'zh' ? '文章筛选' : 'Article filters'}"><label>${L.search}<input id="blog-search" type="search" placeholder="${L.search}"></label><label>${L.categories}<select id="blog-category">${categories.map(c => `<option value="${c}">${L[c] || c}</option>`).join('')}</select></label><label>${L.tags}<select id="blog-tag"><option value="">${L.all}</option>${[...new Set(blogs.flatMap(b => b.tags || []))].sort().map(t => `<option value="${esc(t)}">${esc(t)}</option>`).join('')}</select></label><label>${L.sort}<select id="blog-sort"><option value="newest">${L.newest}</option><option value="oldest">${L.oldest}</option></select></label></section><p id="blog-count" class="result-count" aria-live="polite"></p><div id="blog-grid" class="blog-grid">${cards}</div><p id="blog-empty" hidden>${lang === 'zh' ? '没有找到匹配的文章。' : 'No matching articles.'}</p></div>`;
 }
 
@@ -253,7 +266,7 @@ function articlePage(lang, blog, html) {
   const L = labels[lang];
   const title = localized(blog.title, lang);
   const desc = localized(blog.excerpt, lang);
-  return shell({ lang, page: 'blog', id: blog.id, title: `${title} — Zichen Zhao`, description: desc, scripts: '<script>window.MathJax={tex:{inlineMath:[["$","$"],["\\\\(","\\\\)"]],displayMath:[["$$","$$"],["\\\\[","\\\\]"]]}}</script><script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/highlight.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script defer src="/js/article.js"></script>', body: `<div class="container article-layout"><a class="text-link" href="${navPath(lang,'blog')}">← ${L.back}</a><article class="article"><header class="article-header"><p class="eyebrow">${blog.date} · ${esc(L[blog.category] || blog.category)} · ${lang === 'zh' ? '中文原文' : 'Original in Chinese'}</p><h1>${esc(title)}</h1><p>${esc(desc)}</p></header><div class="markdown-content" lang="zh-CN">${html}</div></article></div>` });
+  return shell({ lang, page: 'blog', id: blog.id, title: `${title} — Zichen Zhao`, description: desc, scripts: '<script>window.MathJax={tex:{inlineMath:[["$","$"],["\\\\(","\\\\)"]],displayMath:[["$$","$$"],["\\\\[","\\\\]"]]}}</script><script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/highlight.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script defer src="/js/article.js"></script>', body: `<div class="container article-layout"><a class="text-link" href="${navPath(lang,'blog')}">← ${L.back}</a><article class="article"><header class="article-header"><p class="eyebrow"><time datetime="${blog.date}">${displayDate(blog.date,lang)}</time> · ${esc(L[blog.category] || blog.category)} · ${lang === 'zh' ? '中文原文' : 'Original in Chinese'}</p><h1>${esc(title)}</h1><p>${esc(desc)}</p></header><div class="markdown-content" lang="zh-CN">${html}</div></article></div>` });
 }
 
 function redirectPage(page) {

@@ -203,11 +203,43 @@ function localizeLegacy(name, lang) {
       if (country && lang === 'zh') p.text(`国家：${({ China:'中国', Korea:'韩国', Malaysia:'马来西亚' })[country[1]] || country[1]}`);
     });
     main.find('.section').last().find('blockquote').html(lang === 'zh' ? '仰望星空，脚踏实地。<br>生活就像海洋，只有意志坚强的人才能到达彼岸。<br><em>PS：你发现彩蛋了吗？</em>' : 'Look up at the stars, and keep your feet on the ground.<br>Life is an ocean; perseverance carries us across.<br><em>PS: Did you spot the inside joke?</em>');
-    main.find('.photo-item').each((_, node) => {
-      const p = $(node).find('.photo-overlay p');
-      pairedBr($, p[0], lang);
-      $(node).find('img').attr('alt', '');
+    main.find('.timeline-photos').each((tripIndex, node) => {
+      const gallery = $(node);
+      const place = gallery.closest('.timeline-content').find('.timeline-title').first().text().trim();
+      const photos = gallery.find('img').toArray();
+      photos.forEach((photo, index) => {
+        const img = $(photo);
+        const link = $('<a></a>').addClass('travel-photo-link').attr({
+          href: img.attr('src'),
+          'data-photo-group': `travel-${tripIndex}`,
+          'data-caption': place,
+          'aria-label': lang === 'zh' ? `查看${place}的第${index + 1}张照片` : `View photo ${index + 1} from ${place}`
+        });
+        img.attr('alt', '');
+        img.replaceWith(link);
+        link.append(img).append(`<span class="photo-index" aria-hidden="true">${String(index + 1).padStart(2, '0')} / ${String(photos.length).padStart(2, '0')}</span>`);
+      });
     });
+    main.find('.athlete-card').each((_, node) => {
+      const card = $(node);
+      const img = card.find('.athlete-image img');
+      const name = card.find('.athlete-info h3').first().text().trim();
+      const link = $('<a></a>').addClass('athlete-photo-link').attr({ href: img.attr('src'), 'data-photo-group': 'athletes', 'data-caption': name, 'aria-label': lang === 'zh' ? `查看${name}的照片` : `View photo of ${name}` });
+      img.attr('alt', '');
+      img.replaceWith(link);
+      link.append(img);
+    });
+    main.find('.photo-item').each((_, node) => {
+      const item = $(node);
+      const p = item.find('.photo-overlay p');
+      pairedBr($, p[0], lang);
+      const caption = p.text().trim();
+      const img = item.find('img').attr('alt', '');
+      const link = $('<a></a>').addClass(item.attr('class')).attr({ href: img.attr('src'), 'data-photo-group': 'gallery', 'data-caption': caption, 'aria-label': lang === 'zh' ? `查看照片：${caption}` : `View photo: ${caption}` });
+      link.html(item.html());
+      item.replaceWith(link);
+    });
+    main.append(`<dialog id="photo-lightbox" class="photo-lightbox" aria-label="${lang === 'zh' ? '照片查看器' : 'Photo viewer'}"><div class="lightbox-frame"><button class="lightbox-close" type="button" aria-label="${lang === 'zh' ? '关闭照片' : 'Close photo'}">×</button><img class="lightbox-image" alt="" width="1600" height="1000"><div class="lightbox-footer"><button class="lightbox-prev" type="button" aria-label="${lang === 'zh' ? '上一张' : 'Previous photo'}">←</button><p class="lightbox-caption"></p><span class="lightbox-count"></span><button class="lightbox-next" type="button" aria-label="${lang === 'zh' ? '下一张' : 'Next photo'}">→</button></div></div></dialog>`);
   }
   return main.html() || '';
 }
@@ -318,10 +350,19 @@ for (const lang of ['en','zh']) {
       const data = variants[image.attr('src')];
       if (!data) return;
       image.attr('width', String(data.width)).attr('height', String(data.height)).attr('src', data[480]).attr('srcset', `${data[480]} 480w, ${data[960]} 960w`).attr('sizes', '(max-width: 680px) 100vw, 50vw').attr('decoding', 'async');
-      if (page === 'interests') image.attr('loading', image.attr('id') === 'album-cover' ? 'eager' : 'lazy');
+      if (page === 'interests') {
+        image.attr('loading', image.attr('id') === 'album-cover' ? 'eager' : 'lazy');
+        if (image.hasClass('travel-photo')) image.attr('sizes', '(max-width: 600px) 45vw, (max-width: 900px) 42vw, 23vw');
+        else if (image.closest('.photo-item').length) {
+          const tile = image.closest('.photo-item');
+          const wide = tile.hasClass('photo-item-2x1') || tile.hasClass('photo-item-2x2');
+          image.attr('sizes', wide ? '(max-width: 600px) 90vw, (max-width: 900px) 66vw, 50vw' : '(max-width: 600px) 45vw, (max-width: 900px) 33vw, 25vw');
+        } else if (image.closest('.athlete-image').length) image.attr('sizes', '(max-width: 600px) 90vw, (max-width: 900px) 45vw, 32vw');
+        else if (image.attr('id') === 'album-cover') image.attr('sizes', '(max-width: 600px) 90vw, 32vw');
+      }
     });
     body = $('body').html() || body;
-    const scripts = page === 'interests' ? '<script src="/js/music-player.js" defer></script>' : '';
+    const scripts = page === 'interests' ? '<script src="/js/music-player.js" defer></script><script src="/js/photo-gallery.js" defer></script>' : '';
     await write(`${lang}/${page === 'index' ? 'index' : page}.html`, shell({ lang, page, title, description, body, scripts }));
   }
 }

@@ -47,6 +47,10 @@ for (const lang of ['en','zh']) {
   const interests = cheerio.load(fs.readFileSync(path.join(root,lang,'interests.html'),'utf8'));
   check(interests('img[loading="lazy"]').length >= 35, `${lang}: lazy photos`);
   check(interests('img:not([width]),img:not([height])').length === 0, `${lang}: image dimensions`);
+  check(interests('.travel-photo-link[href]').length === 25, `${lang}: travel photo links`);
+  check(interests('.athlete-photo-link[href]').length === 3, `${lang}: badminton photo links`);
+  check(interests('.photo-gallery a.photo-item[href][data-caption]').length === 14, `${lang}: gallery links and captions`);
+  check(interests('#photo-lightbox').length === 1, `${lang}: photo viewer`);
   const awards = cheerio.load(fs.readFileSync(path.join(root,lang,'awards.html'),'utf8'));
   const competition = awards('.award-card').filter((_, el) => /National Information Security Competition|全国大学生信息安全竞赛/.test(awards(el).text()));
   check(competition.find('.award-date').text().trim() === '2026', `${lang}: competition year`);

@@ -1,42 +1,42 @@
 # Zichen Zhao’s personal website / 赵子辰的个人网站
 
-A bilingual static site served directly from this repository by GitHub Pages. The repository contains both editable source and generated pages because Pages does not run the build during deployment.
+A bilingual static website served directly from this GitHub Pages repository. The public HTML files are the editable pages; there is no page-generation step.
 
-## Repository map
+## Where to edit
 
 | Path | Purpose |
 | --- | --- |
-| `site-src/pages/` | Editable HTML for Home, Research, Interests, and Awards. Each file contains paired English and Chinese content; the build produces one language per page. |
-| `blog/*.md` and `blog/images/` | Original-language article bodies and their images. The browser loads Markdown directly. |
-| `data/blogs.json` | Article IDs, dates, categories, bilingual titles, and summaries. |
-| `data/papers.json`, `data/updates.json`, `data/music.json` | Research, update, and music content. |
-| `css/`, `js/` | Styles and browser scripts. `js/vendor/` contains the local Markdown parser and its license. |
-| `img/` | Original photos, album covers, illustration, and favicon. |
-| `scripts/` | Site builder, checker, and optional image conversion helper. |
-| `en/`, `zh/`, root `*.html`, `sitemap.xml`, `robots.txt` | Generated pages and compatibility redirects, committed for GitHub Pages. |
-| `img/optimized/`, `data/music-optimized.json` | Generated responsive image variants and music cover URLs, also committed. |
-| `files/` | Public CV PDFs, updated separately by the site owner. |
+| `en/` and `zh/` | English and Chinese pages. Edit both editions directly when changing shared content. |
+| `blog/*.md` and `blog/images/` | Article bodies in their original language and their images. The shared article viewers load Markdown directly. |
+| `data/blogs.json` | Article IDs, Markdown paths, dates, categories, bilingual titles, and summaries used by the article viewers. |
+| `data/music.json` | Editable music collection. `data/music-optimized.json` is its generated, browser-ready copy. |
+| `css/` and `js/` | Site styling and browser behavior. `js/vendor/` contains the Markdown parser and its license. |
+| `img/` | Original photos, album covers, the illustration, and favicon. `img/optimized/` contains generated smaller versions. |
+| `files/` | Public CV PDFs, maintained separately by the site owner. |
+| Root `*.html`, `sitemap.xml`, `robots.txt` | Language redirects, sitemap, and crawl rules. Edit these only when routes change. |
+| `scripts/` | Site checker, image optimizer, and an optional image conversion helper. |
 
-## Edit and preview
+## Local preview and checks
 
 ```sh
 npm ci
-npm run build
 npm run check
 python3 -m http.server 8000
 ```
 
-Open `http://localhost:8000/`. The root URL uses the visitor’s saved choice or browser language; direct `/en/` and `/zh/` URLs stay in that edition. Commit source changes **and** their generated output together before publishing.
+Open `http://localhost:8000/`. The root URL uses the visitor’s saved choice or browser language. Direct `/en/` and `/zh/` URLs stay in their respective language. Nothing in `npm run check` rewrites the pages.
 
-- Edit page copy in `site-src/pages/` and the data files, then run the build and check.
-- Edit an existing article body in `blog/*.md`; its shared viewer fetches the Markdown directly, so a build is unnecessary for body-only changes. Add an entry to `data/blogs.json` and rebuild when adding an article or changing its listing metadata.
-- Article URLs use `/en/blog-detail.html?id=…` and `/zh/blog-detail.html?id=…`. Root page URLs redirect for compatibility. The older per-article `/en/blog/*.html` and `/zh/blog/*.html` URLs were removed; social previews of shared viewer URLs have generic article metadata.
-- To prepare a new photo, `scripts/convert-to-webp.py` is an optional helper that requires Pillow. Add the resulting image to `img/`, reference it from the page source or music data, then rebuild.
+- Edit content and markup directly in the matching `en/*.html` and `zh/*.html` files. There is no `site-src/` directory or site build that can overwrite those edits.
+- Edit an existing article body in `blog/*.md`. When adding an article or changing its listing details, update `data/blogs.json` and the cards in both `en/blog.html` and `zh/blog.html`; `npm run check` verifies that the cards match the article IDs.
+- Article links use `/en/blog-detail.html?id=…` and `/zh/blog-detail.html?id=…`. Root page URLs redirect for compatibility. The older per-article `/en/blog/*.html` and `/zh/blog/*.html` URLs were removed, and shared viewer URLs have generic social-preview metadata.
+- When `js/article.js` changes, update its `?v=` value in both article viewer HTML files so browsers fetch the new script.
 
-## Why `img/` has similar images
+## Images
 
-The originals in `img/index/` and `img/interests/` are kept for full-size gallery links. The build creates smaller 480 px and, when the source is large enough, 960 px WebP variants under `img/optimized/`. Pages use these variants in `srcset` so a phone can download a smaller image; gallery links still open the original. The build removes stale generated variants. Article illustrations live separately in `blog/images/` and are not resized by this build.
+Original photos in `img/index/` and `img/interests/` remain available for full-size gallery links. Pages use smaller WebP files in `img/optimized/` through `src` and `srcset`. To add an image, put the original in `img/`, reference it in the page, run `npm run optimize:images`, then use the generated 480 px and (when applicable) 960 px paths in the page HTML. The image optimizer reads the public pages and music data; it **does not modify `en/` or `zh/`**. It removes stale files only from `img/optimized/`.
+
+`scripts/convert-to-webp.py` is an optional preparation helper that requires Pillow. Article images live in `blog/images/` and are not processed by the image optimizer.
 
 ## Publishing
 
-GitHub Pages serves the repository root. A local build or commit does not change the live site; pushing the committed output updates it. The two CV PDFs remain public and are maintained separately.
+GitHub Pages serves the repository root. A local edit or commit does not change the live site; pushing the committed files updates it. The two CV PDFs remain public and are maintained separately.

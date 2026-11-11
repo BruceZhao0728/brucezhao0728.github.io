@@ -71,7 +71,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .timeline-date, .award-date { color: #a4593d; font-weight: 700; }
 .award-card { align-items: flex-start; }
 .award-icon { background: #f3ece0; }
-.paper-card { max-width: 900px; }
+.paper-card { width: 100%; max-width: none; }
 .paper-card h3 { margin: .6rem 0; }
 .paper-card p { margin-bottom: .7rem; }
 .paper-card .paper-original { margin-top: -.35rem; color: var(--text-light); font-size: .85rem; overflow-wrap: anywhere; }

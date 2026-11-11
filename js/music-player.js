@@ -50,8 +50,10 @@ function initMusicPlayer() {
     const randomBtn = document.getElementById('random-btn');
     const coverLink = document.getElementById('music-cover-link');
 
-    // 随机选择一首歌作为初始显示
-    currentSong = getRandomSong();
+    // Match the first song shown in the static HTML, so opening the page
+    // does not download a second album cover before the visitor interacts.
+    currentSong = getAllSongs()[0];
+    if (!currentSong) return;
     updateDisplay(currentSong);
     
     // 更新流派选择框到当前歌曲的流派
@@ -152,18 +154,16 @@ function updateDisplay(song) {
     
     // 创建新图片对象以确保图片已加载
     const img = new Image();
-    img.crossOrigin = 'anonymous'; // 支持跨域图片
-    
     img.onload = function() {
+        albumCover.removeAttribute('srcset');
         albumCover.src = song.cover;
-        albumCover.alt = `${song.titleCn} album cover`;
-        albumCover.crossOrigin = 'anonymous';
+        albumCover.alt = `${getSongTitleByLanguage(song, currentLang)} ${currentLang === 'zh' ? '专辑封面' : 'album cover'}`;
         albumCover.style.opacity = '1';
     };
     img.onerror = function() {
         // 如果图片加载失败，仍然显示并恢复透明度
+        albumCover.removeAttribute('srcset');
         albumCover.src = song.cover;
-        albumCover.crossOrigin = 'anonymous';
         albumCover.style.opacity = '1';
         console.error('专辑封面加载失败，可能是网络问题或链接无效:', song.cover);
     };

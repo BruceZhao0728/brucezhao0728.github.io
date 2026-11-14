@@ -12,7 +12,14 @@ IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".webp"}
 VARIANT_NAME = re.compile(r"-(?:480|960)\.webp$", re.IGNORECASE)
 
 
-def convert(source: Path, destination: Path, remove_source: bool, only_480: bool) -> list[Path]:
+def convert(
+    source: Path,
+    destination: Path,
+    remove_source: bool,
+    only_480: bool,
+    *,
+    both_sizes: bool = False,
+) -> list[Path]:
     try:
         from PIL import Image, ImageOps
     except ImportError as error:
@@ -20,7 +27,7 @@ def convert(source: Path, destination: Path, remove_source: bool, only_480: bool
     with Image.open(source) as opened:
         image = ImageOps.exif_transpose(opened)
         image = image.convert("RGBA" if image.mode == "RGBA" or "transparency" in image.info else "RGB")
-        widths = (480, 960) if image.width > 480 and not only_480 else (480,)
+        widths = (480, 960) if not only_480 and (both_sizes or image.width > 480) else (480,)
         destination.mkdir(parents=True, exist_ok=True)
         outputs = []
         for width in widths:

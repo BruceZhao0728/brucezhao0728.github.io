@@ -52,7 +52,8 @@ document.addEventListener('DOMContentLoaded', () => {
             ? a.dataset.date.localeCompare(b.dataset.date)
             : b.dataset.date.localeCompare(a.dataset.date));
         grid.append(...ordered);
-        count.textContent = getCurrentLanguage() === 'zh' ? `找到 ${shown} 篇文章` : `${shown} article${shown === 1 ? '' : 's'}`;
+        const message = shown === 1 ? count.dataset.single : count.dataset.plural;
+        count.textContent = message.replace('{count}', shown);
         empty.hidden = shown !== 0;
     };
     for (const control of [search, category, tag, sort]) control.addEventListener(control === search ? 'input' : 'change', update);

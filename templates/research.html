@@ -1,0 +1,96 @@
+<main id="main" class="site-main"><div class="container legacy-content">
+<section class="section">
+    <h1 class="text-center">{{text:intro.title}}</h1>
+    <p class="text-center hero-subtitle">{{text:intro.description}}</p>
+</section>
+<section class="section">
+    <h2>{{text:interests.heading}}</h2>
+    <div class="card">
+        <p>{{text:interests.description}}</p>
+        <div class="card-grid mt-2">
+            <div class="card">
+                <h3>{{text:interests.programAnalysis.title}}</h3>
+                <p>{{text:interests.programAnalysis.description}}</p>
+            </div>
+            <div class="card">
+                <h3>{{text:interests.agentSystems.title}}</h3>
+                <p>{{text:interests.agentSystems.description}}</p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section">
+    <h2>{{text:projects.heading}}</h2>
+    <div class="timeline">
+        <div class="timeline-item" id="project-mba-obfuscation">
+            <div class="timeline-content">
+                <h3 class="timeline-title">{{text:projects.softwareProtection.title}}</h3>
+                <p class="timeline-date">{{text:projects.softwareProtection.date}}</p>
+                <p><strong>{{text:projects.softwareProtection.strong}}</strong></p>
+                <ul>
+                    <li>{{text:projects.softwareProtection.detail}}</li>
+                    <li>{{text:projects.softwareProtection.detail2}}</li>
+                    <li>{{text:projects.softwareProtection.detail3}}</li>
+                    <li>{{text:projects.softwareProtection.detail4}}</li>
+                    <li>{{text:projects.softwareProtection.detail5}}</li>
+                </ul>
+            </div>
+        </div>
+        <div class="timeline-item" id="project-vuln-vector-db">
+            <div class="timeline-content">
+                <h3 class="timeline-title">{{text:projects.vulnerabilityAnalysis.title}}</h3>
+                <p class="timeline-date">{{text:projects.vulnerabilityAnalysis.date}}</p>
+                <p><strong>{{text:projects.vulnerabilityAnalysis.strong}}</strong></p>
+                <ul>
+                    <li>{{text:projects.vulnerabilityAnalysis.detail}}</li>
+                    <li>{{text:projects.vulnerabilityAnalysis.detail2}}</li>
+                    <li>{{text:projects.vulnerabilityAnalysis.detail3}}</li>
+                    <li>{{text:projects.vulnerabilityAnalysis.detail4}}</li>
+                </ul>
+            </div>
+        </div>
+        <div class="timeline-item" id="project-kernel-firewall">
+            <div class="timeline-content">
+                <h3 class="timeline-title">{{text:projects.firewall.title}}</h3>
+                <p class="timeline-date">{{text:projects.firewall.date}}</p>
+                <p><strong>{{text:projects.firewall.strong}}</strong></p>
+                <ul>
+                    <li>{{text:projects.firewall.detail}}</li>
+                    <li>{{text:projects.firewall.detail2}}</li>
+                    <li>{{text:projects.firewall.detail3}}</li>
+                    <li>{{text:projects.firewall.detail4}}</li>
+                </ul>
+            </div>
+        </div>
+        <div class="timeline-item" id="project-distributed-power">
+            <div class="timeline-content">
+                <h3 class="timeline-title">{{text:projects.powerController.title}}</h3>
+                <p class="timeline-date">{{text:projects.powerController.date}}</p>
+                <p><strong>{{text:projects.powerController.strong}}</strong></p>
+                <ul>
+                    <li>{{text:projects.powerController.detail}}</li>
+                    <li>{{text:projects.powerController.detail2}}</li>
+                    <li>{{text:projects.powerController.detail3}}</li>
+                    <li>{{text:projects.powerController.detail4}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section">
+    <h2>{{text:publication.heading}}</h2>
+    <p class="text-center" style="margin-bottom: 2rem; color: var(--text-light);">{{text:publication.description}}</p>
+    <div id="papers-container"><article class="paper-card card"><p class="eyebrow">{{text:publication.eyebrow}}</p><h3>{{text:publication.title}}</h3>{{optional:publication.originalTitle}}<p class="paper-original">{{html:publication.originalTitle}}</p>{{end}}<p>{{text:publication.description2}}</p><p>{{text:publication.description3}}</p><a class="text-link" href="https://arxiv.org/abs/2607.17603" target="_blank" rel="noopener noreferrer">{{text:publication.link}}</a></article></div>
+</section>
+<section class="section">
+    <h2>{{text:collaboration.heading}}</h2>
+    <div class="card">
+        <p>{{text:collaboration.description}}</p>
+        <div class="btn-group mt-2">
+            <a href="mailto:bruce0728@sjtu.edu.cn" class="btn btn-primary" id="btn-send-email">{{text:collaboration.email}}</a>
+            <a href="/files/resume-chinese.pdf" target="_blank" class="btn btn-outline" id="btn-resume-zh" rel="noopener noreferrer">{{text:collaboration.chineseCv}}</a>
+            <a href="/files/resume-english.pdf" target="_blank" class="btn btn-outline" id="btn-resume-en" rel="noopener noreferrer">{{text:collaboration.englishCv}}</a>
+        </div>
+    </div>
+</section>
+        </div></main>

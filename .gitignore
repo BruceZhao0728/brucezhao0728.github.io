@@ -8,3 +8,8 @@ CLAUDE.local.md
 AGENTS.md
 .DS_Store
 node_modules/
+
+# Generated site files
+/en/*.html
+/zh/*.html
+/_site/

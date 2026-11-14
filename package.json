@@ -3,6 +3,8 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "build": "node scripts/build-site.mjs",
+    "package:pages": "node scripts/package-pages.mjs",
     "check": "node scripts/check-site.mjs"
   },
   "devDependencies": {

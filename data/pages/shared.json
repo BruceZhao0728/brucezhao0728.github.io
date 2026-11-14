@@ -1,0 +1,31 @@
+{
+  "nav": {
+    "skip": { "zh": "跳转到正文", "en": "Skip to content" },
+    "brandLabel": { "zh": "Zichen Zhao — 主页", "en": "Zichen Zhao — Home" },
+    "open": { "zh": "打开导航菜单", "en": "Open navigation" },
+    "label": { "zh": "主导航", "en": "Main navigation" },
+    "index": { "zh": "主页", "en": "Home" },
+    "research": { "zh": "研究", "en": "Research" },
+    "blog": { "zh": "博客", "en": "Blog" },
+    "interests": { "zh": "兴趣", "en": "Interests" },
+    "awards": { "zh": "荣誉", "en": "Awards" },
+    "languageLabel": { "zh": "语言: English", "en": "Language: 中文" },
+    "languageLink": { "zh": "EN", "en": "中文" }
+  },
+  "footer": {
+    "credit": { "zh": "© 2026 Zichen Zhao · 感谢来访", "en": "© 2026 Zichen Zhao · Thanks for visiting" },
+    "email": { "zh": "Email", "en": "Email" }
+  },
+  "filters": {
+    "all": { "zh": "全部", "en": "All" }
+  },
+  "blog": {
+    "categories": {
+      "tech": { "zh": "技术", "en": "Tech" },
+      "study": { "zh": "学习", "en": "Study" },
+      "life": { "zh": "生活", "en": "Life" },
+      "personal": { "zh": "个人", "en": "Personal" }
+    },
+    "originalLanguage": { "zh": "中文原文", "en": "Original in Chinese" }
+  }
+}

@@ -31,13 +31,6 @@ function getSongTitleByLanguage(song, lang) {
     return titleEn || titleCn;
 }
 
-function getMusicVideoOverlayText(lang, hasVideo) {
-    if (lang === 'zh') {
-        return hasVideo ? '点击查看 MV / Live' : '暂无 MV / Live';
-    }
-    return hasVideo ? 'Click to view MV / Live' : 'No MV / Live available';
-}
-
 // 汇总所有流派歌曲，避免新增流派后遗漏到随机/全部列表
 function getAllSongs() {
     return Object.values(musicDatabase).flat();
@@ -157,7 +150,7 @@ function updateDisplay(song) {
     img.onload = function() {
         albumCover.removeAttribute('srcset');
         albumCover.src = song.cover;
-        albumCover.alt = `${getSongTitleByLanguage(song, currentLang)} ${currentLang === 'zh' ? '专辑封面' : 'album cover'}`;
+        albumCover.alt = container.dataset.coverDescription.replace('{title}', () => getSongTitleByLanguage(song, currentLang));
         albumCover.style.opacity = '1';
     };
     img.onerror = function() {
@@ -203,7 +196,7 @@ function updateDisplay(song) {
     }
 
     if (coverOverlayText) {
-        const overlayText = getMusicVideoOverlayText(currentLang, Boolean(videoUrl));
+        const overlayText = videoUrl ? container.dataset.videoAvailable : container.dataset.videoUnavailable;
         coverOverlayText.textContent = overlayText;
         if (coverLink) {
             coverLink.setAttribute('aria-label', overlayText);

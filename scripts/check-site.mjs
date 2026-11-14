@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import * as cheerio from 'cheerio';
+import { renderSite } from './build-site.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const blogs = JSON.parse(fs.readFileSync(path.join(root, 'data/blogs.json'), 'utf8'));
@@ -9,13 +10,10 @@ const music = JSON.parse(fs.readFileSync(path.join(root, 'data/music.json'), 'ut
 const pages = ['index','research','blog','interests','awards'];
 const failures = [];
 const check = (condition, message) => { if (!condition) failures.push(message); };
-const generated = [];
-for (const lang of ['en','zh']) {
-  for (const page of pages) generated.push(`${lang}/${page}.html`);
-  generated.push(`${lang}/blog-detail.html`);
-}
-for (const file of generated) {
+const generated = renderSite();
+for (const [file, expected] of generated) {
   const html = fs.readFileSync(path.join(root,file), 'utf8');
+  check(html === expected, `${file}: generated HTML is out of date. Run npm run build.`);
   const $ = cheerio.load(html);
   const lang = file.slice(0,2);
   check($('html').attr('lang') === (lang === 'zh' ? 'zh-CN' : 'en'), `${file}: HTML language`);
@@ -115,4 +113,4 @@ if (failures.length) {
   console.error(failures.join('\n'));
   process.exit(1);
 }
-console.log(`Checked ${generated.length} localized pages, legacy routes, and local assets.`);
+console.log(`Checked ${generated.size} localized pages, legacy routes, and local assets.`);

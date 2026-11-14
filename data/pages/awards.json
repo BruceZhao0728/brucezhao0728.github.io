@@ -1,0 +1,91 @@
+{
+  "meta": {
+    "title": { "zh": "荣誉 — 赵子辰", "en": "Awards — Zichen Zhao" },
+    "description": { "zh": "奖学金、竞赛与其他荣誉记录。", "en": "Selected scholarships, competitions, and honors." }
+  },
+  "intro": {
+    "title": { "zh": "个人荣誉", "en": "Honors & Awards" },
+    "description": { "zh": "记录学习与探索路上的几个里程碑。", "en": "Selected milestones from study, research, and the things I love." }
+  },
+  "scholarships": {
+    "heading": { "zh": "学术奖学金", "en": "Academic Scholarships" },
+    "excellence2026": {
+      "title": { "zh": "C等奖学金", "en": "Class C Excellence Scholarship" },
+      "organization": { "zh": "上海交通大学", "en": "Shanghai Jiao Tong University" },
+      "date": { "zh": "2025", "en": "2025" },
+      "description": { "zh": "很高兴在大三这一年再次获得这个奖学金！", "en": "I was excited to win this scholarship again as a junior!" }
+    },
+    "cybersecurity": {
+      "title": { "zh": "一流网安奖学金", "en": "Premier Cybersecurity Scholarship" },
+      "organization": { "zh": "上海交通大学", "en": "Shanghai Jiao Tong University" },
+      "date": { "zh": "2024", "en": "2024" },
+      "description": { "zh": "我是全校唯一一名获得6000元奖学金的大二学生！", "en": "I was <b>the sole sophomore</b> who won the 6,000 CNY scholarship!" }
+    },
+    "excellence2024": {
+      "title": { "zh": "C等奖学金", "en": "Class C Excellence Scholarship" },
+      "organization": { "zh": "上海交通大学", "en": "Shanghai Jiao Tong University" },
+      "date": { "zh": "2024", "en": "2024" },
+      "description": { "zh": "很高兴获得大一学年的奖学金！", "en": "It's great to win this scholarship for my freshman year!" }
+    }
+  },
+  "competitions": {
+    "heading": { "zh": "竞赛奖项", "en": "Competition Awards" },
+    "informationSecurity": {
+      "title": { "zh": "全国大学生信息安全竞赛作品赛三等奖", "en": "Third Prize, National Information Security Competition" },
+      "organization": { "zh": "中国信息安全评测中心", "en": "China Information Technology Security Evaluation Center" },
+      "date": { "zh": "2026", "en": "2026" },
+      "description": {
+        "zh": "我们的项目<b>《面向神经网络的浮点计算混淆方法》</b>获得了三等奖！",
+        "en": "Our project <b>\"FLOB: Protecting Floating-Point Computation for Deep Neural Network Binaries with Obfuscation\"</b> won the third prize!"
+      },
+      "link": { "zh": "相关论文 ↗", "en": "Related paper ↗" }
+    },
+    "electricalEngineering": {
+      "title": { "zh": "第三届电气电子工程创新大赛二等奖", "en": "Second Prize, 3rd Electrical & Electronic Engineering Innovation Competition" },
+      "organization": { "zh": "中国电工技术协会", "en": "China Electrotechnical Society" },
+      "date": { "zh": "2024", "en": "2024" },
+      "description": { "zh": "我们的项目<b>《新型电力系统分布式协调控制器设计》</b>获得了二等奖！", "en": "Our project <b>\"Design of a New Distributed Power Coordinated Controller\"</b> won the second prize!" }
+    },
+    "english": {
+      "title": { "zh": "2024年全国大学生英语竞赛三等奖", "en": "Third Prize, 2024 National English Competition for College Students" },
+      "organization": { "zh": "高等学校大学外语教学研究会", "en": "Foreign Language Teaching and Research Association of Chinese Universities" },
+      "date": { "zh": "2024", "en": "2024" },
+      "description": { "zh": "耶！我大学生涯的第一个奖项！", "en": "Yay! My first award in my college journey!" }
+    }
+  },
+  "honors": {
+    "heading": { "zh": "荣誉称号", "en": "Honors & Titles" },
+    "sjtuMerit": {
+      "title": { "zh": "上海交通大学三好学生", "en": "SJTU Merit Student" },
+      "organization": { "zh": "上海交通大学", "en": "Shanghai Jiao Tong University" },
+      "date": { "zh": "2025", "en": "2025" },
+      "description": { "zh": "很荣幸在大二这一年因表现优异和贡献突出被评为三好学生！", "en": "I was honored to be recognized as a merit student for my outstanding performance and contributions in my sophomore year!" }
+    },
+    "shanghaiMerit": {
+      "title": { "zh": "上海市三好学生", "en": "Shanghai Merit Student" },
+      "organization": { "zh": "上海市教育委员会", "en": "Shanghai Municipal Education Commission" },
+      "date": { "zh": "2022", "en": "2022" },
+      "description": { "zh": "很荣幸在高中阶段得到大家的认可，成为上海市三好学生！", "en": "I was recognized for my exemplary performance and contributions as a merit student in senior high school!" }
+    }
+  },
+  "achievements": {
+    "heading": { "zh": "其他成就", "en": "Other Achievements" },
+    "badminton": {
+      "title": { "zh": "“汇羽杯”羽毛球团体赛冠军", "en": "🏸 Champion, SNSHS Badminton Team Championship" },
+      "date": { "zh": "2022", "en": "2022" },
+      "description": {
+        "zh": "我在比赛中打男双，和搭档一起赢下了决赛的决胜局，最终赢得了冠军！",
+        "en": "I played men's doubles in the matches, and my partner and I won the final decisive match together, contributing to our team's victory!"
+      }
+    },
+    "robotics": {
+      "title": { "zh": "MATE中国区水下机器人竞赛亚军", "en": "🤖 Runner Up, MATE China Regional ROV Competition" },
+      "date": { "zh": "2021", "en": "2021" },
+      "description": { "zh": "很开心能代表母校带领水下机器人团队获得全国亚军！", "en": "I led the team and won the runner up in the MATE China Regional ROV Competition!" }
+    }
+  },
+  "certificates": {
+    "heading": { "zh": "证书与资格", "en": "Certificates & Qualifications" },
+    "detail": { "zh": "大学英语六级证书 - 616分", "en": "English Level 6 Certificate (CET-6) - 616 points" }
+  }
+}

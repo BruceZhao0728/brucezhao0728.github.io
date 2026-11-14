@@ -1,0 +1,135 @@
+{
+  "meta": {
+    "title": { "zh": "研究 — 赵子辰", "en": "Research — Zichen Zhao" },
+    "description": { "zh": "程序分析、人工智能软件保护与智能体系统相关的研究项目。", "en": "Research projects in program analysis, AI software protection, and agent systems." }
+  },
+  "publication": {
+    "originalTitle": {
+      "zh": "英文原题：<span lang=\"en\">Protecting Floating-Point Computation for DNN Binaries with MBA Obfuscation</span>"
+    },
+    "heading": { "zh": "论文发表", "en": "Publications" },
+    "description": { "zh": "我的学术论文与预印本", "en": "My academic publications and preprints" },
+    "eyebrow": { "zh": "arXiv 预印本 · 2026", "en": "arXiv preprint · 2026" },
+    "title": { "zh": "利用 MBA 混淆保护深度神经网络二进制程序中的浮点计算", "en": "Protecting Floating-Point Computation for DNN Binaries with MBA Obfuscation" },
+    "description2": {
+      "zh": "Yikun Hu, Zichen Zhao, Peixiang Qin, Ziyi Zhou, Jiaping Gui, Yuandao Cai, Wensheng Tang",
+      "en": "Yikun Hu, Zichen Zhao, Peixiang Qin, Ziyi Zhou, Jiaping Gui, Yuandao Cai, Wensheng Tang"
+    },
+    "description3": {
+      "zh": "FLOB 将浮点数提升至更高精度的表示空间，再应用混合布尔算术变换，以保护编译后的深度神经网络。论文报告在保持计算正确性的同时，算子平均恢复率降至 4.51%，较现有方法低 32.82 个百分点。",
+      "en": "FLOB protects floating-point operations in compiled deep neural networks by lifting values to a higher-precision representation and applying mixed Boolean-arithmetic transformations. The paper reports preserved computational correctness and an average operator recovery rate of 4.51%, 32.82 percentage points lower than existing methods."
+    },
+    "link": { "zh": "arXiv ↗", "en": "arXiv ↗" }
+  },
+  "intro": {
+    "title": { "zh": "研究经历", "en": "Research Experience" },
+    "description": { "zh": "探索程序分析、人工智能软件保护与智能体系统。", "en": "Exploring program analysis, AI software protection, and agent systems." }
+  },
+  "interests": {
+    "heading": { "zh": "研究兴趣", "en": "Research Interests" },
+    "description": { "zh": "我的研究兴趣主要集中在以下几个领域：", "en": "My research interests are mainly focused on the following areas:" },
+    "programAnalysis": {
+      "title": { "zh": "🖥️ 程序分析", "en": "🖥️ Program Analysis" },
+      "description": { "zh": "利用静态分析和动态分析方法，研究程序行为分析与理解的技术", "en": "Study of techniques for analyzing and understanding program behavior, including static and dynamic analysis methods" }
+    },
+    "agentSystems": {
+      "title": { "zh": "🤖 智能体系统", "en": "🤖 Agent Systems" },
+      "description": { "zh": "研究自主智能体及其在各个领域的应用", "en": "Exploration of autonomous agents and their applications in various domains" }
+    }
+  },
+  "projects": {
+    "heading": { "zh": "研究项目", "en": "Research Projects" },
+    "softwareProtection": {
+      "title": { "zh": "基于代码混淆的人工智能软件保护系统", "en": "AI Software Protection System Based on Code Obfuscation" },
+      "date": { "zh": "2024年4月－2026年9月", "en": "04/2024 - 09/2026" },
+      "strong": { "zh": "项目简介", "en": "Project Description" },
+      "detail": {
+        "zh": "针对 AI 模型本地部署后，其二进制文件易被逆向工程提取模型结构与权重，导致知识产权泄露的行业痛点，开发基于混淆的代码保护系统，在不影响模型精度和性能的前提下，将逆向工程成本提升至经济不可行，使本地人工智能软件免受逆向分析等手段的攻击，保护模型开发者的知识产权。",
+        "en": "Designed an automated code protection based on TVM and LLVM IR to shield localized AI models from reverse engineering, preventing unauthorized extraction of proprietary model architecture."
+      },
+      "detail2": {
+        "zh": "将传统混合布林代数（MBA）从整数域突破性拓展至浮点数域，攻克了传统方法无法保护AI模型核心浮点计算的难题，提出并证明了混淆变换的正确性，确保混淆前后模型输出100%一致。",
+        "en": "Pioneered the theoretical expansion of Mixed Boolean-Arithmetic (MBA) from the integer domain to the floating-point domain, successfully obfuscating core AI operations (e.g., Conv) while maintaining 100% numerical consistency."
+      },
+      "detail3": {
+        "zh": "基于 TVM 机器学习编译器和 LLVM 编译器架构，在 LLVM IR 中间表示层设计并实现了自动化混淆 Pass ，支持用户自定义混淆参数，生成可直接部署的混淆版二进制库/可执行文件，实现了性能开销与安全强度的灵活平衡。",
+        "en": "Engineered a custom LLVM Pass to implement multi-level obfuscation during TVM compilation, allowing for tunable parameters such as recursion depth and MBA complexity to balance performance overhead and security strength."
+      },
+      "detail4": {
+        "zh": "浮点数表达式和 AI 模型运算结果在混淆前后100%一致，反混淆工具成功率下降30%以上，逆向工程成功率下降40%以上，同时提出统一的混淆效果量化指标体系，衡量代码混淆的强度和安全性。",
+        "en": "Quantified efficacy by developing a standardized metric system; experimental results showed a >30% decrease in de-obfuscation success rates and a >40% decrease in reverse engineering success rates compared to SOTA works."
+      },
+      "detail5": { "zh": "作为共同第一作者和项目负责人完成论文。", "en": "Authored a research paper detailing the implementation." }
+    },
+    "vulnerabilityAnalysis": {
+      "title": { "zh": "基于向量数据库和人工智能的智能漏洞分析系统", "en": "AI-Powered Vulnerability Analysis System Based on Vector Databases" },
+      "date": { "zh": "2025年9月－2025年10月", "en": "09/2025 - 10/2025" },
+      "strong": { "zh": "项目简介", "en": "Project Description" },
+      "detail": {
+        "zh": "采用双模数据库架构，结合关系型数据库 MySQL 和向量数据库 Chroma 的优势，实现结构化数据管理和语义相似性检索的完美结合。",
+        "en": "Architected a hybrid vulnerability detection system utilizing Chroma (Vector DB) and MySQL (Relational DB)."
+      },
+      "detail2": {
+        "zh": "结合程序切片技术，使用 Tree-Sitter 解析不同程序语言，对抽象语法树（AST）进行程序切片，提取程序中的数据流和控制流依赖关系。",
+        "en": "Implemented program slicing and static analysis to parse ASTs and extract data-flow/control-flow dependencies."
+      },
+      "detail3": {
+        "zh": "利用 CodeT5+ 模型捕捉程序深层语义，利用 GraphCodeBERT 模型捕捉程序结构，生成含语义与结构双重特征的切片向量，识别潜在漏洞。",
+        "en": "Developed a semantic-structural embedding engine utilizing CodeT5+ and GraphCodeBERT to export vectors of program slices."
+      },
+      "detail4": {
+        "zh": "构建自然语言接口，用户输入查询需求，系统通过云端 LLM API 自动生成 SQL 查询语句，实现对关系型数据库的智能查询。",
+        "en": "Engineered a natural language interface that automates SQL query generation via cloud-based LLM APIs."
+      }
+    },
+    "firewall": {
+      "title": { "zh": "基于Linux内核模块的包过滤防火墙", "en": "Linux Kernel-Module-Based Packet Filtering Firewall" },
+      "date": { "zh": "2025年6月－2025年7月", "en": "06/2025 - 07/2025" },
+      "strong": { "zh": "项目简介", "en": "Project Description" },
+      "detail": {
+        "zh": "基于 Linux Netfilter 框架，设计并实现一个内核级包过滤防火墙，旨在为内部网络提供接近线速的实时流量控制与基础入侵防护。",
+        "en": "Designed and implemented a kernel-level firewall leveraging the Netfilter framework to intercept and analyze network traffic at key hooks."
+      },
+      "detail2": { "zh": "开发 Linux 内核模块，实现有状态过滤和基于协议的访问控制。", "en": "Developed a Linux Kernel Module to enforce stateful filtering and protocol-based access control." },
+      "detail3": {
+        "zh": "通过 Netlink 套接字和字符设备设计跨层通信系统，实现安全事件同步和规则更新。",
+        "en": "Architected a cross-layer communication system using Netlink sockets and character devices to synchronize security events and update rules."
+      },
+      "detail4": {
+        "zh": "开发了提供类 iptables 语法的命令行工具，支持图形化界面直观展示实时流量、拦截日志与报警信息，提升系统易用性。",
+        "en": "Built a management suite including a CLI tool with iptables-like syntax and a GUI dashboard for anomaly visualization."
+      }
+    },
+    "powerController": {
+      "title": { "zh": "新型电力系统分布式协调控制器设计", "en": "Design of a New Distributed Power Coordinated Controller" },
+      "date": { "zh": "2023年10月－2024年10月", "en": "10/2023 - 10/2024" },
+      "strong": { "zh": "项目简介", "en": "Project Description" },
+      "detail": {
+        "zh": "设计一套去中心化的“云-边”协同控制架构，应对新型电力系统中海量分布式资源与电/气/热多能流耦合带来的建模与控制复杂性挑战。",
+        "en": "Architected a decentralized \"Cloud-Edge\" collaborative control framework to address modeling complexities in modern power systems."
+      },
+      "detail2": {
+        "zh": "基于图论与多智能体系统理论设计了一致性变量的更新律，保证一致性算法收敛性和功率平衡特性，提升系统稳定性与鲁棒性。",
+        "en": "Developed a distributed consensus algorithm based on Multi-Agent Systems and Graph Theory, featuring global convergence and power balancing."
+      },
+      "detail3": {
+        "zh": "基于遗传算法，以通信拓扑网络的连接矩阵为染色体，筛选出抗延时能力最强、可靠性最强的上层网络拓扑结构，提高网络性能。",
+        "en": "Optimized communication network reliability by implementing a Genetic Algorithm (GA) to evolve adjacency matrices."
+      },
+      "detail4": {
+        "zh": "使用树莓派开发基于 TCP 协议的通信网络，实现上层云平台、下层微电网控制器的分布式架构。",
+        "en": "Implemented the distributed architecture on Raspberry Pi hardware using TCP/IP protocols for real-time data exchange."
+      }
+    }
+  },
+  "collaboration": {
+    "heading": { "zh": "协作与交流", "en": "Collaboration & Communication" },
+    "description": {
+      "zh": "我很乐意与对相关领域感兴趣的同学和研究人员进行合作与交流。 如果你对我的研究感兴趣，或者有任何学术问题想要讨论， 欢迎通过电子邮件或其他方式与我联系。",
+      "en": "I am always happy to collaborate and communicate with students and researchers interested in related fields. If you are interested in my research or have any academic questions you'd like to discuss, feel free to reach out to me via email or other means."
+    },
+    "email": { "zh": "发送邮件", "en": "Send email" },
+    "chineseCv": { "zh": "中文简历", "en": "Chinese CV" },
+    "englishCv": { "zh": "英文简历", "en": "English CV" }
+  }
+}

@@ -76,13 +76,12 @@ function updateArticleMetadata(blog, lang) {
     const title = localized(blog.title, lang);
     const summary = localized(blog.excerpt, lang);
     const fullTitle = `${title} — Zichen Zhao`;
-    const categories = lang === 'zh'
-        ? { tech: '技术', study: '学习', life: '生活', personal: '个人' }
-        : { tech: 'Tech', study: 'Study', life: 'Life', personal: 'Personal' };
+    const { originalLanguage } = container.dataset;
+    const categories = JSON.parse(container.dataset.categories);
     const time = document.createElement('time');
     time.dateTime = blog.date;
     time.textContent = displayDate(blog.date, lang);
-    document.getElementById('article-meta').replaceChildren(time, document.createTextNode(` · ${categories[blog.category] || blog.category} · ${lang === 'zh' ? '中文原文' : 'Original in Chinese'}`));
+    document.getElementById('article-meta').replaceChildren(time, document.createTextNode(` · ${categories[blog.category] || blog.category} · ${originalLanguage}`));
     document.getElementById('article-title').textContent = title;
     document.getElementById('article-summary').textContent = summary;
     document.title = fullTitle;
@@ -144,14 +143,10 @@ if (container) {
         } catch (error) {
             console.error('Unable to load article Markdown:', error);
             const message = document.createElement('p');
-            message.textContent = source
-                ? (lang === 'zh' ? '文章加载失败。' : 'The article could not be loaded.')
-                : (lang === 'zh' ? '找不到这篇文章。' : 'Article not found.');
+            message.textContent = source ? container.dataset.loadError : container.dataset.notFound;
             const link = document.createElement('a');
             link.href = source || `/${lang}/blog.html`;
-            link.textContent = source
-                ? (lang === 'zh' ? '阅读 Markdown 原文' : 'Read the original Markdown')
-                : (lang === 'zh' ? '返回文章列表' : 'Back to articles');
+            link.textContent = source ? container.dataset.readMarkdown : container.dataset.backToList;
             container.replaceChildren(message, link);
             container.setAttribute('aria-busy', 'false');
             return;

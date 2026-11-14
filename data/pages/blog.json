@@ -1,0 +1,22 @@
+{
+  "meta": {
+    "title": { "zh": "博客 — 赵子辰", "en": "Blog — Zichen Zhao" },
+    "description": { "zh": "记录计算机视觉、密码学、学习与生活的文章。", "en": "Notes on computer vision, cryptography, learning, and life." }
+  },
+  "description": { "zh": "写下我所学，也写下我所见。文章保留创作时的原文语言。", "en": "What I learn, make, and notice. Articles remain in their original language." },
+  "label": { "zh": "文章筛选", "en": "Article filters" },
+  "filters": {
+    "search": { "zh": "搜索标题与摘要", "en": "Search titles and summaries" },
+    "category": { "zh": "分类", "en": "Category" },
+    "tag": { "zh": "标签", "en": "Tag" },
+    "sort": { "zh": "排序", "en": "Sort" },
+    "newest": { "zh": "最新优先", "en": "Newest first" },
+    "oldest": { "zh": "最早优先", "en": "Oldest first" }
+  },
+  "empty": { "zh": "没有找到匹配的文章。", "en": "No matching articles." },
+  "readArticle": { "zh": "阅读文章 ↗", "en": "Read article ↗" },
+  "count": {
+    "single": { "zh": "找到 {count} 篇文章", "en": "{count} article" },
+    "plural": { "zh": "找到 {count} 篇文章", "en": "{count} articles" }
+  }
+}

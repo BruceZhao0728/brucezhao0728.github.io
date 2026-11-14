@@ -1,0 +1,19 @@
+<main id="main" class="site-main">
+  <div class="container article-layout">
+    <a class="text-link" href="/{{value:locale}}/blog.html">{{text:back}}</a>
+    <article class="article">
+      <header class="article-header">
+        <p class="eyebrow" id="article-meta"></p>
+        <h1 id="article-title">{{text:heading}}</h1>
+        <p id="article-summary"></p>
+      </header>
+      <div class="markdown-content" lang="zh-CN" aria-busy="true"
+        data-load-error="{{text:errors.load}}" data-not-found="{{text:errors.notFound}}"
+        data-read-markdown="{{text:errors.readMarkdown}}" data-back-to-list="{{text:errors.backToList}}"
+        data-original-language="{{text:shared.blog.originalLanguage}}" data-categories="{{value:blogCategories}}">
+        <p>{{text:loading}}</p>
+      </div>
+      <noscript><p><a href="/{{value:locale}}/blog.html">{{text:browse}}</a></p></noscript>
+    </article>
+  </div>
+</main>

@@ -1,0 +1,16 @@
+{
+  "meta": {
+    "title": { "zh": "博客文章 — 赵子辰", "en": "Blog article — Zichen Zhao" },
+    "description": { "zh": "阅读赵子辰的博客文章。", "en": "Read an article from Zichen Zhao’s blog." }
+  },
+  "back": { "zh": "← 所有文章", "en": "← All articles" },
+  "heading": { "zh": "博客文章", "en": "Blog article" },
+  "loading": { "zh": "正在加载文章…", "en": "Loading article…" },
+  "browse": { "zh": "查看文章列表", "en": "Browse articles" },
+  "errors": {
+    "load": { "zh": "文章加载失败。", "en": "The article could not be loaded." },
+    "notFound": { "zh": "找不到这篇文章。", "en": "Article not found." },
+    "readMarkdown": { "zh": "阅读 Markdown 原文", "en": "Read the original Markdown" },
+    "backToList": { "zh": "返回文章列表", "en": "Back to articles" }
+  }
+}

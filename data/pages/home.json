@@ -1,0 +1,92 @@
+{
+  "meta": {
+    "title": { "zh": "赵子辰 — 科研、写作与生活", "en": "Zichen Zhao — Research, writing & life" },
+    "description": { "zh": "认识赵子辰：信息安全专业学生，分享研究、学习笔记与生活见闻。", "en": "Meet Zichen Zhao: information security student, researcher, writer, and curious traveler." }
+  },
+  "hero": {
+    "eyebrow": { "zh": "你好，我是", "en": "Hello, I’m" },
+    "name": { "zh": "赵子辰", "en": "Zichen Zhao" },
+    "secondaryName": { "zh": "Zichen Zhao", "en": "赵子辰" },
+    "description": {
+      "zh": "上海交通大学信息安全专业四年级本科生，关注程序分析、人工智能与软件保护。这里也记录我的写作和生活。",
+      "en": "I’m a fourth-year information security student at Shanghai Jiao Tong University, exploring program analysis, AI, and software protection. I also write about what I learn and the life around it."
+    },
+    "illustration": {
+      "alt": { "zh": "坐在书桌前的学生，周围有科研、音乐、旅行与羽毛球元素", "en": "Student at a desk surrounded by research, music, travel, and badminton motifs" }
+    }
+  },
+  "about": {
+    "heading": { "zh": "自我介绍", "en": "About Me" },
+    "studies": {
+      "zh": "目前我就读于上海交通大学计算机学院，主修信息安全，辅修经济学。 我对智能体和程序分析有浓厚兴趣，希望能将所学技术应用于实践。",
+      "en": "I am currently studying at Shanghai Jiao Tong University (SJTU), majoring in information security and minoring in economics. I have strong interests in artificial intelligence and program analysis, and I am committed to solving practical problems through technology."
+    },
+    "hometown": {
+      "zh": "我成长于魔都上海，根植于星城长沙。欢迎来火宫殿嗦粉吃辣！",
+      "en": "I grew up in Shanghai, the biggest and most modern city in China. My family is originally from Hunan Province. Welcome to visit Hunan and taste its delicious food!"
+    },
+    "hobbies": {
+      "zh": "课余时间，我喜欢音乐、旅行、打羽毛球。 我的兴趣爱好可以让我放松身心、享受生活。期待遇见同样热爱的你！",
+      "en": "In my spare time, I enjoy music, traveling, and badminton. I believe that continuous learning and knowledge sharing make us better."
+    },
+    "photo": {
+      "alt": { "zh": "黄昏时的跨河大桥", "en": "Bridge over a river at dusk" },
+      "caption": { "zh": "镜头中的一刻 · 摄影", "en": "A moment through my lens · Photography" }
+    }
+  },
+  "education": {
+    "heading": { "zh": "教育经历", "en": "Education" },
+    "title": { "zh": "上海交通大学", "en": "Shanghai Jiao Tong University" },
+    "subtitle": { "zh": "计算机学院", "en": "School of Computer Science" },
+    "date": { "zh": "09/2023 - 06/2027 (Expected)", "en": "09/2023 - 06/2027 (Expected)" },
+    "degree": { "zh": "工学学士 - 信息安全", "en": "B.Eng. in Information Security" },
+    "courses": {
+      "zh": "主修课程：算法设计与分析，数据结构，编译原理，人工智能安全技术，离散数学",
+      "en": "Main Courses: Design & Analysis of Algorithms, Data Structures, Compiler Principles, Artificial Intelligence Security, Discrete Mathematics, etc."
+    }
+  },
+  "skills": {
+    "heading": { "zh": "专业技能", "en": "Skills & Specialties" },
+    "languages": {
+      "title": { "zh": "编程语言", "en": "PLs" },
+      "description": { "zh": "Python, C, C++, LLVM IR", "en": "Python, C, C++, LLVM IR" }
+    },
+    "tools": {
+      "title": { "zh": "常用软件", "en": "Tools" },
+      "description": { "zh": "Git, VS Code, Docker, IDA Pro, Codex, Claude Code", "en": "Git, VS Code, Docker, IDA Pro, Codex, Claude Code" }
+    },
+    "research": {
+      "title": { "zh": "研究兴趣", "en": "Research Interests" },
+      "description": { "zh": "人工智能", "en": "Artificial Intelligence" },
+      "description2": { "zh": "智能体", "en": "Agent" },
+      "description3": { "zh": "程序分析", "en": "Program Analysis" }
+    }
+  },
+  "updates": {
+    "heading": { "zh": "近期更新", "en": "Recent Updates" },
+    "tsinghua": {
+      "date": { "zh": "2026年9月24日", "en": "September 24, 2026" },
+      "title": { "zh": "下一站：清华叉院", "en": "Next Station: IIIS @ Tsinghua University" },
+      "description": {
+        "zh": "我将加入清华大学交叉信息研究院，攻读硕士学位。我对这个新的学术旅程感到兴奋，并期待为计算机科学和人工智能领域做出贡献。",
+        "en": "I will join the Institute for Interdisciplinary Information Sciences (IIIS) at Tsinghua University as a graduate student. I am excited to embark on this new academic journey and look forward to contributing to the field of computer science and artificial intelligence."
+      }
+    },
+    "cs231n": {
+      "date": { "zh": "2026年2月20日", "en": "February 20, 2026" },
+      "title": { "zh": "新博客系列：CS231n深度学习课程笔记", "en": "New Blog Series: CS231n Deep Learning Course Notes" },
+      "description": {
+        "zh": "我开始了一个新的博客系列，在这里我将分享我从CS231n深度学习课程中整理的笔记和心得。敬请期待这个系列的后续文章！",
+        "en": "I have started a new blog series where I will share my notes and insights from the CS231n Deep Learning course. Stay tuned for the upcoming posts in this series!"
+      }
+    },
+    "welcome": {
+      "date": { "zh": "2026年2月7日", "en": "February 7, 2026" },
+      "title": { "zh": "欢迎访问我的个人网站", "en": "Welcome to My Personal Website" },
+      "description": {
+        "zh": "这是我的个人网站，我在这里分享我的学习心得、研究经历和人生感悟。网站正在不断更新中，敬请期待更多精彩内容！",
+        "en": "This is my personal website where I share my learning insights, research experiences, and life reflections. The website is continuously being updated. Stay tuned for more exciting content!"
+      }
+    }
+  }
+}

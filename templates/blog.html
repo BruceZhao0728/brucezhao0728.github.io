@@ -1,0 +1,28 @@
+<main id="main" class="site-main">
+  <div class="container">
+    <header class="page-intro">
+      <h1 class="text-center">{{text:shared.nav.blog}}</h1>
+      <p class="text-center hero-subtitle">{{text:description}}</p>
+    </header>
+    <section class="blog-tools" aria-label="{{text:label}}">
+      <label>{{text:filters.search}}<input id="blog-search" type="search" placeholder="{{text:filters.search}}"></label>
+      <label>{{text:filters.category}}<select id="blog-category">
+        <option value="all">{{text:shared.filters.all}}</option>
+        {{value:blogCategoryOptions}}
+      </select></label>
+      <label>{{text:filters.tag}}<select id="blog-tag">
+        <option value="">{{text:shared.filters.all}}</option>
+        {{value:blogTags}}
+      </select></label>
+      <label>{{text:filters.sort}}<select id="blog-sort">
+        <option value="newest">{{text:filters.newest}}</option>
+        <option value="oldest">{{text:filters.oldest}}</option>
+      </select></label>
+    </section>
+    <p id="blog-count" class="result-count" aria-live="polite" data-single="{{text:count.single}}" data-plural="{{text:count.plural}}"></p>
+    <div id="blog-grid" class="blog-grid">
+      {{value:blogCards}}
+    </div>
+    <p id="blog-empty" hidden>{{text:empty}}</p>
+  </div>
+</main>

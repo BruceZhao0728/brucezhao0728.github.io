@@ -3,24 +3,6 @@
     "title": { "zh": "研究 — 赵子辰", "en": "Research — Zichen Zhao" },
     "description": { "zh": "程序分析、人工智能软件保护与智能体系统相关的研究项目。", "en": "Research projects in program analysis, AI software protection, and agent systems." }
   },
-  "publication": {
-    "originalTitle": {
-      "zh": "英文原题：<span lang=\"en\">Protecting Floating-Point Computation for DNN Binaries with MBA Obfuscation</span>"
-    },
-    "heading": { "zh": "论文发表", "en": "Publications" },
-    "description": { "zh": "我的学术论文与预印本", "en": "My academic publications and preprints" },
-    "eyebrow": { "zh": "arXiv 预印本 · 2026", "en": "arXiv preprint · 2026" },
-    "title": { "zh": "利用 MBA 混淆保护深度神经网络二进制程序中的浮点计算", "en": "Protecting Floating-Point Computation for DNN Binaries with MBA Obfuscation" },
-    "description2": {
-      "zh": "Yikun Hu, Zichen Zhao, Peixiang Qin, Ziyi Zhou, Jiaping Gui, Yuandao Cai, Wensheng Tang",
-      "en": "Yikun Hu, Zichen Zhao, Peixiang Qin, Ziyi Zhou, Jiaping Gui, Yuandao Cai, Wensheng Tang"
-    },
-    "description3": {
-      "zh": "FLOB 将浮点数提升至更高精度的表示空间，再应用混合布尔算术变换，以保护编译后的深度神经网络。论文报告在保持计算正确性的同时，算子平均恢复率降至 4.51%，较现有方法低 32.82 个百分点。",
-      "en": "FLOB protects floating-point operations in compiled deep neural networks by lifting values to a higher-precision representation and applying mixed Boolean-arithmetic transformations. The paper reports preserved computational correctness and an average operator recovery rate of 4.51%, 32.82 percentage points lower than existing methods."
-    },
-    "link": { "zh": "arXiv ↗", "en": "arXiv ↗" }
-  },
   "intro": {
     "title": { "zh": "研究经历", "en": "Research Experience" },
     "description": { "zh": "探索程序分析、人工智能软件保护与智能体系统。", "en": "Exploring program analysis, AI software protection, and agent systems." }
@@ -122,10 +104,28 @@
       }
     }
   },
+  "publication": {
+    "originalTitle": {
+      "zh": "英文原题：<span lang=\"en\">Protecting Floating-Point Computation for DNN Binaries with MBA Obfuscation</span>"
+    },
+    "heading": { "zh": "论文发表", "en": "Publications" },
+    "description": { "zh": "我的学术论文与预印本", "en": "My academic publications and preprints" },
+    "eyebrow": { "zh": "arXiv 预印本 · 2026", "en": "arXiv preprint · 2026" },
+    "title": { "zh": "利用 MBA 混淆保护深度神经网络二进制程序中的浮点计算", "en": "Protecting Floating-Point Computation for DNN Binaries with MBA Obfuscation" },
+    "description2": {
+      "zh": "Yikun Hu, Zichen Zhao, Peixiang Qin, Ziyi Zhou, Jiaping Gui, Yuandao Cai, Wensheng Tang",
+      "en": "Yikun Hu, Zichen Zhao, Peixiang Qin, Ziyi Zhou, Jiaping Gui, Yuandao Cai, Wensheng Tang"
+    },
+    "description3": {
+      "zh": "FLOB 将浮点数提升至更高精度的表示空间，再应用混合布尔算术变换，以保护编译后的深度神经网络。论文报告在保持计算正确性的同时，算子平均恢复率降至 4.51%，较现有方法低 32.82 个百分点。",
+      "en": "FLOB protects floating-point operations in compiled deep neural networks by lifting values to a higher-precision representation and applying mixed Boolean-arithmetic transformations. The paper reports preserved computational correctness and an average operator recovery rate of 4.51%, 32.82 percentage points lower than existing methods."
+    },
+    "link": { "zh": "arXiv ↗", "en": "arXiv ↗" }
+  },
   "collaboration": {
     "heading": { "zh": "协作与交流", "en": "Collaboration & Communication" },
     "description": {
-      "zh": "我很乐意与对相关领域感兴趣的同学和研究人员进行合作与交流。 如果你对我的研究感兴趣，或者有任何学术问题想要讨论， 欢迎通过电子邮件或其他方式与我联系。",
+      "zh": "我很乐意与对相关领域感兴趣的同学和研究人员进行合作与交流。 如果你对我的研究感兴趣，或者有任何学术问题想要讨论，欢迎通过电子邮件或其他方式与我联系。",
       "en": "I am always happy to collaborate and communicate with students and researchers interested in related fields. If you are interested in my research or have any academic questions you'd like to discuss, feel free to reach out to me via email or other means."
     },
     "email": { "zh": "发送邮件", "en": "Send email" },

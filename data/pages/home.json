@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": { "zh": "赵子辰 — 科研、写作与生活", "en": "Zichen Zhao — Research, writing & life" },
+    "title": { "zh": "赵子辰的个人网站", "en": "Zichen Zhao's Personal Website" },
     "description": { "zh": "认识赵子辰：信息安全专业学生，分享研究、学习笔记与生活见闻。", "en": "Meet Zichen Zhao: information security student, researcher, writer, and curious traveler." }
   },
   "hero": {
@@ -8,8 +8,8 @@
     "name": { "zh": "赵子辰", "en": "Zichen Zhao" },
     "secondaryName": { "zh": "Zichen Zhao", "en": "赵子辰" },
     "description": {
-      "zh": "上海交通大学信息安全专业四年级本科生，关注程序分析、人工智能与软件保护。这里也记录我的写作和生活。",
-      "en": "I’m a fourth-year information security student at Shanghai Jiao Tong University, exploring program analysis, AI, and software protection. I also write about what I learn and the life around it."
+      "zh": "一名上海交通大学信息安全专业的四年级本科生，关注程序分析、人工智能与软件保护。",
+      "en": "I’m a senior information security student at Shanghai Jiao Tong University, exploring program analysis, AI, and software protection."
     },
     "illustration": {
       "alt": { "zh": "坐在书桌前的学生，周围有科研、音乐、旅行与羽毛球元素", "en": "Student at a desk surrounded by research, music, travel, and badminton motifs" }
@@ -26,12 +26,12 @@
       "en": "I grew up in Shanghai, the biggest and most modern city in China. My family is originally from Hunan Province. Welcome to visit Hunan and taste its delicious food!"
     },
     "hobbies": {
-      "zh": "课余时间，我喜欢音乐、旅行、打羽毛球。 我的兴趣爱好可以让我放松身心、享受生活。期待遇见同样热爱的你！",
+      "zh": "课余时间，我喜欢音乐、旅行、打羽毛球。我的兴趣爱好可以让我放松身心、享受生活。期待遇见同样热爱的你！",
       "en": "In my spare time, I enjoy music, traveling, and badminton. I believe that continuous learning and knowledge sharing make us better."
     },
     "photo": {
-      "alt": { "zh": "黄昏时的跨河大桥", "en": "Bridge over a river at dusk" },
-      "caption": { "zh": "镜头中的一刻 · 摄影", "en": "A moment through my lens · Photography" }
+      "alt": { "zh": "海天一色", "en": "Sky and sea in one view" },
+      "caption": { "zh": "镜头中的一刻", "en": "A moment through my lens" }
     }
   },
   "education": {

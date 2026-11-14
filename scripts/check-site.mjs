@@ -7,6 +7,7 @@ import { renderSite } from './build-site.mjs';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const blogs = JSON.parse(fs.readFileSync(path.join(root, 'data/blogs.json'), 'utf8'));
 const music = JSON.parse(fs.readFileSync(path.join(root, 'data/music.json'), 'utf8'));
+const interestData = JSON.parse(fs.readFileSync(path.join(root, 'data/pages/interests.json'), 'utf8'));
 const pages = ['index','research','blog','interests','awards'];
 const failures = [];
 const check = (condition, message) => { if (!condition) failures.push(message); };
@@ -33,13 +34,13 @@ for (const [file, expected] of generated) {
     const value = $(el).attr('href') || $(el).attr('src');
     if (!value || !value.startsWith('/')) return;
     const target = value.split(/[?#]/)[0];
-    const local = path.join(root,target.slice(1));
+    const local = path.join(root, decodeURIComponent(target.slice(1)));
     check(fs.existsSync(local) || target === '/en/' || target === '/zh/', `${file}: missing ${target}`);
   });
   $('img').each((_, el) => {
     check(Number($(el).attr('width')) > 0 && Number($(el).attr('height')) > 0, `${file}: image dimensions`);
     const sources = ($(el).attr('srcset') || '').split(',').map(item => item.trim().split(' ')[0]).filter(Boolean);
-    for (const source of sources) if (source.startsWith('/')) check(fs.existsSync(path.join(root, source.slice(1))), `${file}: missing ${source}`);
+    for (const source of sources) if (source.startsWith('/')) check(fs.existsSync(path.join(root, decodeURIComponent(source.slice(1)))), `${file}: missing ${source}`);
   });
 }
 for (const blog of blogs) {
@@ -91,11 +92,15 @@ for (const lang of ['en','zh']) {
   check($('#blog-category option[value="personal"]').length === 1, `${lang}: Personal category`);
   check($('.blog-card time[datetime]').length === blogs.length, `${lang}: localized article dates`);
   const interests = cheerio.load(fs.readFileSync(path.join(root,lang,'interests.html'),'utf8'));
-  check(interests('img[loading="lazy"]').length >= 35, `${lang}: lazy photos`);
+  const tripPhotos = interests('.travel-photo-link');
+  const galleryPhotos = interests('.photo-gallery a.photo-item');
+  const travelCount = interestData.travel.trips.reduce((sum, trip) => sum + trip.photos.length, 0);
+  check(tripPhotos.find('img[loading="lazy"]').length === travelCount, `${lang}: lazy travel photos`);
+  check(galleryPhotos.find('img[loading="lazy"]').length === interestData.gallery.photos.length, `${lang}: lazy gallery photos`);
   check(interests('img:not([width]),img:not([height])').length === 0, `${lang}: image dimensions`);
-  check(interests('.travel-photo-link[href]').length === 25, `${lang}: travel photo links`);
+  check(tripPhotos.filter('[href][data-photo-group][data-caption]').length === travelCount, `${lang}: travel photo links`);
   check(interests('.athlete-photo-link[href]').length === 3, `${lang}: badminton photo links`);
-  check(interests('.photo-gallery a.photo-item[href][data-caption]').length === 14, `${lang}: gallery links and captions`);
+  check(galleryPhotos.filter('[href][data-caption]').length === interestData.gallery.photos.length, `${lang}: gallery links and captions`);
   check(interests('#photo-lightbox').length === 1, `${lang}: photo viewer`);
   const awards = cheerio.load(fs.readFileSync(path.join(root,lang,'awards.html'),'utf8'));
   const competition = awards('.award-card').filter((_, el) => /National Information Security Competition|全国大学生信息安全竞赛/.test(awards(el).text()));

@@ -43,156 +43,83 @@
   },
   "travel": {
     "heading": { "zh": "旅行足迹", "en": "Travel Memories" },
-    "harbin": {
-      "title": { "zh": "哈尔滨", "en": "🏘️ Harbin" },
-      "date": { "zh": "2026年夏", "en": "Summer 2026" },
-      "description": {
-        "zh": "时隔十年，故地重游，再次来到中央大街和哈工大，仍然被优美的俄式建筑所吸引。",
-        "en": "Ten years have passed since my last visit, and I am still amazed by the Russian architecture at the Central Street and HIT."
+    "photoLabel": { "zh": "查看{title}的第{number}张照片", "en": "View photo {number} from {title}" },
+    "trips": [
+      {
+        "title": { "zh": "🏘️ 哈尔滨", "en": "🏘️ Harbin" },
+        "date": { "zh": "2026年夏", "en": "Summer 2026" },
+        "description": { "zh": "时隔十年，故地重游，再次来到中央大街和哈工大，仍然被优美的俄式建筑所吸引。", "en": "Ten years have passed since my last visit, and I am still amazed by the Russian architecture at the Central Street and HIT." },
+        "photos": [
+          { "file": "harbin_1" },
+          { "file": "harbin_2" },
+          { "file": "harbin_3" }
+        ]
       },
-      "harbin_1": {
-        "label": { "zh": "查看哈尔滨的第1张照片", "en": "View photo 1 from 🏘️ Harbin" },
-        "span": { "zh": "01 / 03", "en": "01 / 03" }
+      {
+        "title": { "zh": "🏞️ 盐城", "en": "🏞️ Yancheng" },
+        "date": { "zh": "2026年春", "en": "Spring 2026" },
+        "description": { "zh": "依稀听见芦苇荡里《一个真实的故事》，孤舟远眺，呦鹿悠然，这里藏着最美的万物诗篇.", "en": "Echoes of <i>A True Story</i> drift through the reeds, and the wild deer unfold a beautiful poem of nature." },
+        "photos": [
+          { "file": "yancheng_1" },
+          { "file": "yancheng_2" },
+          { "file": "yancheng_3" },
+          { "file": "yancheng_4" }
+        ]
       },
-      "harbin_2": {
-        "label": { "zh": "查看哈尔滨的第2张照片", "en": "View photo 2 from 🏘️ Harbin" },
-        "span": { "zh": "02 / 03", "en": "02 / 03" }
+      {
+        "title": { "zh": "⛰️ 甘南", "en": "⛰️ Gannan" },
+        "date": { "zh": "2025年夏", "en": "Summer 2025" },
+        "description": { "zh": "探索了甘南的美丽风景，包括拉卜楞寺和若尔盖花湖。", "en": "Explored the beautiful landscapes of Gannan, including the Labrang Monastery and Zoige Wetland." },
+        "photos": [
+          { "file": "gannan_1" },
+          { "file": "gannan_2" },
+          { "file": "gannan_3" },
+          { "file": "gannan_4" }
+        ]
       },
-      "harbin_3": {
-        "label": { "zh": "查看哈尔滨的第3张照片", "en": "View photo 3 from 🏘️ Harbin" },
-        "span": { "zh": "03 / 03", "en": "03 / 03" }
+      {
+        "title": { "zh": "⛩️ 名古屋", "en": "⛩️ Nagoya" },
+        "date": { "zh": "2024年秋", "en": "Autumn 2024" },
+        "description": { "zh": "这是我第二次去日本了。这次在磁浮铁道馆看到了新干线列车，还品尝了美味的和牛！", "en": "This is my second trip to Japan. I enjoyed seeing the Shinkansen trains in the SC Maglev & Railway Park, and Wagyu beef tasted amazing!" },
+        "photos": [
+          { "file": "nagoya_2" },
+          { "file": "nagoya_3" },
+          { "file": "nagoya_4" }
+        ]
+      },
+      {
+        "title": { "zh": "🏜️ 青海与甘肃", "en": "🏜️ Qinghai & Gansu" },
+        "date": { "zh": "2024年夏", "en": "Summer 2024" },
+        "description": { "zh": "闻过青海湖畔的油菜花，摸过塔尔寺的转经筒，走过七彩丹霞的绚烂，赏过莫高窟的壁画。长河落日圆，大漠孤烟直。", "en": "Traveled through Qinghai and Gansu, visiting Qinghai Lake, Kumbum Monastery, Zhangye Danxia, and the Mogao Grottoes." },
+        "photos": [
+          { "file": "qinggan_1" },
+          { "file": "qinggan_3" },
+          { "file": "qinggan_6" }
+        ]
+      },
+      {
+        "title": { "zh": "🏙️ 广州", "en": "🏙️ Guangzhou" },
+        "date": { "zh": "2023年夏", "en": "Summer 2023" },
+        "description": { "zh": "广州初探：打卡广州塔，邂逅沙面，礼赞圣心大教堂。当然，必不可少的还有那口灵魂烧腩仔。真系正嘢！", "en": "Visited Guangzhou for the first time, exploring the Canton Tower, Shamian Island, Sacred Heart Cathedral, and enjoying delicious Cantonese cuisine!" },
+        "photos": [
+          { "file": "guangzhou_1" },
+          { "file": "guangzhou_2" },
+          { "file": "guangzhou_3" },
+          { "file": "guangzhou_4" }
+        ]
+      },
+      {
+        "title": { "zh": "🏔️ 云南", "en": "🏔️ Yunnan" },
+        "date": { "zh": "2023年夏", "en": "Summer 2023" },
+        "description": { "zh": "毕业盛夏，彩云之南。见证了春城的繁花、丽江的古韵与玉龙的孤傲。此行经年，长留心间。", "en": "The ultimate graduation getaway! Exploring Yunnan with my besties: from the breezy Kunming to the colorful Lijiang, and finally conquering the Jade Dragon Snow Mountain. Best friends, best memories." },
+        "photos": [
+          { "file": "yunnan_2" },
+          { "file": "yunnan_3" },
+          { "file": "yunnan_4" },
+          { "file": "yunnan_5" }
+        ]
       }
-    },
-    "yancheng": {
-      "title": { "zh": "盐城", "en": "🏞️ Yancheng" },
-      "date": { "zh": "2026年春", "en": "Spring 2026" },
-      "description": { "zh": "依稀听见芦苇荡里《一个真实的故事》，孤舟远眺，呦鹿悠然，这里藏着最美的万物诗篇.", "en": "Echoes of <i>A True Story</i> drift through the reeds, and the wild deer unfold a beautiful poem of nature." },
-      "yancheng_1": {
-        "label": { "zh": "查看盐城的第1张照片", "en": "View photo 1 from 🏞️ Yancheng" },
-        "span": { "zh": "01 / 04", "en": "01 / 04" }
-      },
-      "yancheng_2": {
-        "label": { "zh": "查看盐城的第2张照片", "en": "View photo 2 from 🏞️ Yancheng" },
-        "span": { "zh": "02 / 04", "en": "02 / 04" }
-      },
-      "yancheng_3": {
-        "label": { "zh": "查看盐城的第3张照片", "en": "View photo 3 from 🏞️ Yancheng" },
-        "span": { "zh": "03 / 04", "en": "03 / 04" }
-      },
-      "yancheng_4": {
-        "label": { "zh": "查看盐城的第4张照片", "en": "View photo 4 from 🏞️ Yancheng" },
-        "span": { "zh": "04 / 04", "en": "04 / 04" }
-      }
-    },
-    "gannan": {
-      "title": { "zh": "甘南", "en": "⛰️ Gannan" },
-      "date": { "zh": "2025年夏", "en": "Summer 2025" },
-      "description": { "zh": "探索了甘南的美丽风景，包括拉卜楞寺和若尔盖花湖。", "en": "Explored the beautiful landscapes of Gannan, including the Labrang Monastery and Zoige Wetland." },
-      "gannan_1": {
-        "label": { "zh": "查看甘南的第1张照片", "en": "View photo 1 from ⛰️ Gannan" },
-        "span": { "zh": "01 / 04", "en": "01 / 04" }
-      },
-      "gannan_2": {
-        "label": { "zh": "查看甘南的第2张照片", "en": "View photo 2 from ⛰️ Gannan" },
-        "span": { "zh": "02 / 04", "en": "02 / 04" }
-      },
-      "gannan_3": {
-        "label": { "zh": "查看甘南的第3张照片", "en": "View photo 3 from ⛰️ Gannan" },
-        "span": { "zh": "03 / 04", "en": "03 / 04" }
-      },
-      "gannan_4": {
-        "label": { "zh": "查看甘南的第4张照片", "en": "View photo 4 from ⛰️ Gannan" },
-        "span": { "zh": "04 / 04", "en": "04 / 04" }
-      }
-    },
-    "nagoya": {
-      "title": { "zh": "名古屋", "en": "⛩️ Nagoya" },
-      "date": { "zh": "2024年秋", "en": "Autumn 2024" },
-      "description": {
-        "zh": "这是我第二次去日本了。这次在磁浮铁道馆看到了新干线列车，还品尝了美味的和牛！",
-        "en": "This is my second trip to Japan. I enjoyed seeing the Shinkansen trains in the SC Maglev & Railway Park, and Wagyu beef tasted amazing!"
-      },
-      "nagoya_2": {
-        "label": { "zh": "查看名古屋的第1张照片", "en": "View photo 1 from ⛩️ Nagoya" },
-        "span": { "zh": "01 / 03", "en": "01 / 03" }
-      },
-      "nagoya_3": {
-        "label": { "zh": "查看名古屋的第2张照片", "en": "View photo 2 from ⛩️ Nagoya" },
-        "span": { "zh": "02 / 03", "en": "02 / 03" }
-      },
-      "nagoya_4": {
-        "label": { "zh": "查看名古屋的第3张照片", "en": "View photo 3 from ⛩️ Nagoya" },
-        "span": { "zh": "03 / 03", "en": "03 / 03" }
-      }
-    },
-    "qinghaiGansu": {
-      "title": { "zh": "青海与甘肃", "en": "🏜️ Qinghai & Gansu" },
-      "date": { "zh": "2024年夏", "en": "Summer 2024" },
-      "description": {
-        "zh": "闻过青海湖畔的油菜花，摸过塔尔寺的转经筒，走过七彩丹霞的绚烂，赏过莫高窟的壁画。长河落日圆，大漠孤烟直。",
-        "en": "Traveled through Qinghai and Gansu, visiting Qinghai Lake, Kumbum Monastery, Zhangye Danxia, and the Mogao Grottoes."
-      },
-      "qinggan_1": {
-        "label": { "zh": "查看青海与甘肃的第1张照片", "en": "View photo 1 from 🏜️ Qinghai & Gansu" },
-        "span": { "zh": "01 / 03", "en": "01 / 03" }
-      },
-      "qinggan_3": {
-        "label": { "zh": "查看青海与甘肃的第2张照片", "en": "View photo 2 from 🏜️ Qinghai & Gansu" },
-        "span": { "zh": "02 / 03", "en": "02 / 03" }
-      },
-      "qinggan_6": {
-        "label": { "zh": "查看青海与甘肃的第3张照片", "en": "View photo 3 from 🏜️ Qinghai & Gansu" },
-        "span": { "zh": "03 / 03", "en": "03 / 03" }
-      }
-    },
-    "guangzhou": {
-      "title": { "zh": "广州", "en": "🏙️ Guangzhou" },
-      "date": { "zh": "2023年夏", "en": "Summer 2023" },
-      "description": {
-        "zh": "广州初探：打卡广州塔，邂逅沙面，礼赞圣心大教堂。当然，必不可少的还有那口灵魂烧腩仔。真系正嘢！",
-        "en": "Visited Guangzhou for the first time, exploring the Canton Tower, Shamian Island, Sacred Heart Cathedral, and enjoying delicious Cantonese cuisine!"
-      },
-      "guangzhou_1": {
-        "label": { "zh": "查看广州的第1张照片", "en": "View photo 1 from 🏙️ Guangzhou" },
-        "span": { "zh": "01 / 04", "en": "01 / 04" }
-      },
-      "guangzhou_2": {
-        "label": { "zh": "查看广州的第2张照片", "en": "View photo 2 from 🏙️ Guangzhou" },
-        "span": { "zh": "02 / 04", "en": "02 / 04" }
-      },
-      "guangzhou_3": {
-        "label": { "zh": "查看广州的第3张照片", "en": "View photo 3 from 🏙️ Guangzhou" },
-        "span": { "zh": "03 / 04", "en": "03 / 04" }
-      },
-      "guangzhou_4": {
-        "label": { "zh": "查看广州的第4张照片", "en": "View photo 4 from 🏙️ Guangzhou" },
-        "span": { "zh": "04 / 04", "en": "04 / 04" }
-      }
-    },
-    "yunnan": {
-      "title": { "zh": "云南", "en": "🏔️ Yunnan" },
-      "date": { "zh": "2023年夏", "en": "Summer 2023" },
-      "description": {
-        "zh": "毕业盛夏，彩云之南。见证了春城的繁花、丽江的古韵与玉龙的孤傲。此行经年，长留心间。",
-        "en": "The ultimate graduation getaway! Exploring Yunnan with my besties: from the breezy Kunming to the colorful Lijiang, and finally conquering the Jade Dragon Snow Mountain. Best friends, best memories."
-      },
-      "yunnan_2": {
-        "label": { "zh": "查看云南的第1张照片", "en": "View photo 1 from 🏔️ Yunnan" },
-        "span": { "zh": "01 / 04", "en": "01 / 04" }
-      },
-      "yunnan_3": {
-        "label": { "zh": "查看云南的第2张照片", "en": "View photo 2 from 🏔️ Yunnan" },
-        "span": { "zh": "02 / 04", "en": "02 / 04" }
-      },
-      "yunnan_4": {
-        "label": { "zh": "查看云南的第3张照片", "en": "View photo 3 from 🏔️ Yunnan" },
-        "span": { "zh": "03 / 04", "en": "03 / 04" }
-      },
-      "yunnan_5": {
-        "label": { "zh": "查看云南的第4张照片", "en": "View photo 4 from 🏔️ Yunnan" },
-        "span": { "zh": "04 / 04", "en": "04 / 04" }
-      }
-    }
+    ]
   },
   "badminton": {
     "heading": { "zh": "羽毛球偶像", "en": "Badminton Idols" },
@@ -225,76 +152,88 @@
   "gallery": {
     "heading": { "zh": "照片墙", "en": "Photo Gallery" },
     "description": { "zh": "记录生活中的美好瞬间", "en": "Memory Moments" },
-    "guangzhouGuangxiaoTemple": {
-      "caption": { "zh": "广州光孝寺 🙏", "en": "Guangzhou Guangxiao Temple" },
-      "label": { "zh": "查看照片：广州光孝寺 🙏", "en": "View photo: Guangzhou Guangxiao Temple" },
-      "description": { "zh": "广州光孝寺 🙏", "en": "Guangzhou Guangxiao Temple" }
-    },
-    "bwfFinalHangzhou": {
-      "caption": { "zh": "2026年世界羽毛球锦标赛杭州总决赛 🏸", "en": "2026 BWF Final Hangzhou" },
-      "label": { "zh": "查看照片：2026年世界羽毛球锦标赛杭州总决赛 🏸", "en": "View photo: 2026 BWF Final Hangzhou" },
-      "description": { "zh": "2026年世界羽毛球锦标赛杭州总决赛 🏸", "en": "2026 BWF Final Hangzhou" }
-    },
-    "miriamYeungConcert": {
-      "caption": { "zh": "2023年杨千嬅演唱会 🎤", "en": "2023 Miriam Yeung Concert" },
-      "label": { "zh": "查看照片：2023年杨千嬅演唱会 🎤", "en": "View photo: 2023 Miriam Yeung Concert" },
-      "description": { "zh": "2023年杨千嬅演唱会 🎤", "en": "2023 Miriam Yeung Concert" }
-    },
-    "maydayConcert_1": {
-      "caption": { "zh": "2026年五月天演唱会 🎸", "en": "2026 Mayday Concert" },
-      "label": { "zh": "查看照片：2026年五月天演唱会 🎸", "en": "View photo: 2026 Mayday Concert" },
-      "description": { "zh": "2026年五月天演唱会 🎸", "en": "2026 Mayday Concert" }
-    },
-    "huaniaoIsland": {
-      "caption": { "zh": "花鸟岛 🌊", "en": "Huaniao Island" },
-      "label": { "zh": "查看照片：花鸟岛 🌊", "en": "View photo: Huaniao Island" },
-      "description": { "zh": "花鸟岛 🌊", "en": "Huaniao Island" }
-    },
-    "leifengSquare": {
-      "caption": { "zh": "猜猜这是哪儿？ 🏙️", "en": "Guess where?" },
-      "label": { "zh": "查看照片：猜猜这是哪儿？ 🏙️", "en": "View photo: Guess where?" },
-      "description": { "zh": "猜猜这是哪儿？ 🏙️", "en": "Guess where?" }
-    },
-    "sjtu": {
-      "caption": { "zh": "交大校园 🌳", "en": "SJTU Campus" },
-      "label": { "zh": "查看照片：交大校园 🌳", "en": "View photo: SJTU Campus" },
-      "description": { "zh": "交大校园 🌳", "en": "SJTU Campus" }
-    },
-    "qiantangRiverBridge": {
-      "caption": { "zh": "钱塘江大桥 🚂", "en": "Qiantang River Bridge" },
-      "label": { "zh": "查看照片：钱塘江大桥 🚂", "en": "View photo: Qiantang River Bridge" },
-      "description": { "zh": "钱塘江大桥 🚂", "en": "Qiantang River Bridge" }
-    },
-    "yujaWangConcert": {
-      "caption": { "zh": "王羽佳音乐会 🎹", "en": "Yuja Wang Concert" },
-      "label": { "zh": "查看照片：王羽佳音乐会 🎹", "en": "View photo: Yuja Wang Concert" },
-      "description": { "zh": "王羽佳音乐会 🎹", "en": "Yuja Wang Concert" }
-    },
-    "sjtuDeer": {
-      "caption": { "zh": "东川鹿 🦌", "en": "SJTU Deer" },
-      "label": { "zh": "查看照片：东川鹿 🦌", "en": "View photo: SJTU Deer" },
-      "description": { "zh": "东川鹿 🦌", "en": "SJTU Deer" }
-    },
-    "tiktok": {
-      "caption": { "zh": "上海字节跳动总部 🏢", "en": "TikTok & Bytedance @ Shanghai" },
-      "label": { "zh": "查看照片：上海字节跳动总部 🏢", "en": "View photo: TikTok & Bytedance @ Shanghai" },
-      "description": { "zh": "上海字节跳动总部 🏢", "en": "TikTok & Bytedance @ Shanghai" }
-    },
-    "nhsGeese": {
-      "caption": { "zh": "高中母校的鹅 🦆", "en": "The geese of my high school alma mater!" },
-      "label": { "zh": "查看照片：高中母校的鹅 🦆", "en": "View photo: The geese of my high school alma mater!" },
-      "description": { "zh": "高中母校的鹅 🦆", "en": "The geese of my high school alma mater!" }
-    },
-    "sjtuBadmintonCourt": {
-      "caption": { "zh": "交大气膜体育中心 🏸", "en": "SJTU Membrane Sports Center" },
-      "label": { "zh": "查看照片：交大气膜体育中心 🏸", "en": "View photo: SJTU Membrane Sports Center" },
-      "description": { "zh": "交大气膜体育中心 🏸", "en": "SJTU Membrane Sports Center" }
-    },
-    "changshaRiceNoodles": {
-      "caption": { "zh": "长沙米粉 🍜", "en": "Changsha Rice Noodles" },
-      "label": { "zh": "查看照片：长沙米粉 🍜", "en": "View photo: Changsha Rice Noodles" },
-      "description": { "zh": "长沙米粉 🍜", "en": "Changsha Rice Noodles" }
-    },
+    "photoLabel": { "zh": "查看照片：{caption}", "en": "View photo: {caption}" },
+    "photos": [
+      {
+        "file": "guangzhou_guangxiao_temple",
+        "caption": { "zh": "广州光孝寺", "en": "Guangzhou Guangxiao Temple" }
+      },
+      {
+        "file": "bwf_final_hangzhou",
+        "tile": "2x2",
+        "caption": { "zh": "2026年世界羽毛球锦标赛杭州总决赛", "en": "2026 BWF Final Hangzhou" }
+      },
+      {
+        "file": "miriam_yeung_concert",
+        "tile": "2x1",
+        "caption": { "zh": "2023年杨千嬅演唱会", "en": "2023 Miriam Yeung Concert" }
+      },
+      {
+        "file": "mayday_concert_1",
+        "caption": { "zh": "2026年五月天演唱会", "en": "2026 Mayday Concert" }
+      },
+      {
+        "file": "huaniao_island",
+        "tile": "1x2",
+        "caption": { "zh": "花鸟岛", "en": "Huaniao Island" }
+      },
+      {
+        "file": "leifeng_square",
+        "caption": { "zh": "初中母校", "en": "Middle School Alma Mater" }
+      },
+      {
+        "file": "sjtu",
+        "tile": "2x1",
+        "caption": { "zh": "交大校园", "en": "SJTU Campus" }
+      },
+      {
+        "file": "qiantang_river_bridge",
+        "tile": "2x1",
+        "caption": { "zh": "钱塘江大桥", "en": "Qiantang River Bridge" }
+      },
+      {
+        "file": "yuja_wang_concert",
+        "caption": { "zh": "王羽佳音乐会", "en": "Yuja Wang Concert" }
+      },
+      {
+        "file": "sjtu_deer",
+        "caption": { "zh": "东川鹿", "en": "SJTU Deer" }
+      },
+      {
+        "file": "tiktok",
+        "tile": "2x1",
+        "caption": { "zh": "上海字节跳动总部", "en": "TikTok & Bytedance @ Shanghai" }
+      },
+      {
+        "file": "nhs_geese",
+        "tile": "2x2",
+        "caption": { "zh": "高中母校的鹅", "en": "Geese @ My High School Alma Mater" }
+      },
+      {
+        "file": "sjtu_badminton_court",
+        "tile": "2x1",
+        "caption": { "zh": "交大气膜体育中心", "en": "SJTU Membrane Sports Center" }
+      },
+      {
+        "file": "changsha_rice_noodles",
+        "caption": { "zh": "长沙米粉", "en": "Changsha Rice Noodles" }
+      },
+      {
+        "file": "pizza_at_coffee_festival",
+        "tile": "1x2",
+        "caption": { "zh": "陆家嘴咖啡节上的披萨", "en": "Pizza @ Lujiazui Coffee Festival" }
+      },
+      {
+        "file": "tsinghua_university",
+        "tile": "1x2",
+        "caption": { "zh": "清华大学", "en": "Tsinghua University" }
+      },
+      {
+        "file": "puji_temple",
+        "tile": "2x1",
+        "caption": { "zh": "普陀山普济寺", "en": "Puji Temple @ Mount Putuo" }
+      }
+    ],
     "viewer": {
       "label": { "zh": "照片查看器", "en": "Photo viewer" },
       "close": { "zh": "关闭照片", "en": "Close photo" },
@@ -304,8 +243,20 @@
   },
   "philosophy": {
     "heading": { "zh": "生活态度", "en": "Life Philosophy" },
-    "quote": { "zh": "仰望星空，脚踏实地。", "en": "Look up at the stars, and keep your feet on the ground." },
-    "quote2": { "zh": "生活就像海洋，只有意志坚强的人才能到达彼岸。", "en": "Life is an ocean; perseverance carries us across." },
-    "em": { "zh": "PS：你发现彩蛋了吗？", "en": "PS: Did you spot the inside joke?" }
+    "quotes": [
+      {
+        "zh": "仰望星空，脚踏实地。",
+        "en": "Dare to dream, live your dream."
+      },
+      {
+        "zh": "生活就像海洋，只有意志坚强的人才能到达彼岸。",
+        "en": "生活就像海洋，只有意志坚强的人才能到达彼岸。"
+      },
+      {
+        "zh": "This is an apple. I like apples. Apples are good for our health.",
+        "en": "This is an apple. I like apples. Apples are good for our health."
+      }
+    ],
+    "em": { "zh": "PS：你发现彩蛋了吗？", "en": "PS: Can you get the joke inside?" }
   }
 }

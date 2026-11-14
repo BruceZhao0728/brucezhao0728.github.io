@@ -2,6 +2,7 @@ import { createHash } from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { readWebpSize } from './webp-size.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const origin = 'https://brucezhao0728.github.io';
@@ -78,6 +79,73 @@ function renderBlog(blogs, context, categories) {
   return { blogCards, blogTags, blogCategoryOptions };
 }
 
+function renderInterests({ data, locale, source }) {
+  const travelLabel = localized(data, 'travel.photoLabel', locale, source);
+  const galleryLabel = localized(data, 'gallery.photoLabel', locale, source);
+  const tripTemplate = readTemplate('travel-entry');
+  const travelPhotoTemplate = readTemplate('travel-photo');
+  const galleryPhotoTemplate = readTemplate('gallery-photo');
+  const tiles = new Set(['1x1', '1x2', '2x1', '2x2']);
+  const pad = number => String(number).padStart(2, '0');
+
+  function photoValues(photo, folder, entry) {
+    const { file } = photo;
+    if (typeof file !== 'string' || !file.trim() || /[\\/]/.test(file)) {
+      throw new Error(`${source}: ${entry}.file must be a filename stem`);
+    }
+    const base = `/img/interests/${folder}/${encodeURIComponent(file)}`;
+    const thumbnail = `${base}-480.webp`;
+    const full = `${base}-960.webp`;
+    const sizeOf = url => {
+      const filename = decodeURIComponent(url.slice(1));
+      try {
+        return readWebpSize(path.join(root, filename));
+      } catch (error) {
+        throw new Error(`${source}: ${entry}: cannot read ${filename}: ${error.message}`, { cause: error });
+      }
+    };
+    const { width, height } = sizeOf(thumbnail);
+    const fullWidth = sizeOf(full).width;
+    const srcset = width === fullWidth ? `${thumbnail} ${width}w` : `${thumbnail} ${width}w, ${full} ${fullWidth}w`;
+    return { thumbnail, full, width, height, srcset };
+  }
+
+  const trips = data.travel.trips.map((trip, tripIndex) => {
+    const entry = `travel.trips[${tripIndex}]`;
+    const context = { data: trip, locale, source: `${source}: ${entry}` };
+    const title = localized(trip, 'title', locale, context.source);
+    const photos = trip.photos.map((photo, photoIndex) => render(travelPhotoTemplate, context, {
+      ...photoValues(photo, 'travel', `${entry}.photos[${photoIndex}]`),
+      group: `travel-${tripIndex}`,
+      label: escapeHtml(travelLabel.replace(/\{title\}|\{number\}/g, token => token === '{title}' ? title : photoIndex + 1)),
+      index: `${pad(photoIndex + 1)} / ${pad(trip.photos.length)}`,
+    })).join('\n        ');
+    return render(tripTemplate, context, { photos });
+  }).join('\n        ');
+
+  const galleryPhotos = data.gallery.photos.map((photo, index) => {
+    const entry = `gallery.photos[${index}]`;
+    const context = { data: photo, locale, source: `${source}: ${entry}` };
+    const caption = localized(photo, 'caption', locale, context.source);
+    const tile = photo.tile ?? '1x1';
+    if (!tiles.has(tile)) throw new Error(`${context.source}: invalid tile size`);
+    const sizes = tile.startsWith('2')
+      ? '(max-width: 600px) 90vw, (max-width: 900px) 66vw, 50vw'
+      : '(max-width: 600px) 45vw, (max-width: 900px) 33vw, 25vw';
+    return render(galleryPhotoTemplate, context, {
+      ...photoValues(photo, 'gallery', entry), tile, sizes,
+      label: escapeHtml(galleryLabel.replace('{caption}', () => caption)),
+    });
+  }).join('\n        ');
+
+  const quotes = data.philosophy.quotes.map((_, index) => {
+    const text = localized(data, `philosophy.quotes.${index}`, locale, source);
+    return `${escapeHtml(text)}<br>`;
+  }).join('');
+
+  return { trips, galleryPhotos, quotes };
+}
+
 function initialMusic(music) {
   const song = Object.values(music).flat()[0];
   if (!song) throw new Error('data/music.json: expected a song for the Interests page');
@@ -123,7 +191,7 @@ export function renderSite() {
       }).join('');
       const values = { locale };
       if (page === 'blog') Object.assign(values, renderBlog(blogs, context, categories));
-      if (page === 'interests') Object.assign(values, music);
+      if (page === 'interests') Object.assign(values, music, renderInterests(context));
       if (isArticle) values.blogCategories = escapeHtml(JSON.stringify(categories));
 
       const extraScripts = isArticle ? '\n  ' + render(readTemplate('article-scripts'), context, versions).replaceAll('\n', '\n  ')

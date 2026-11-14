@@ -52,7 +52,9 @@ python3 -m pip install Pillow
 python3 scripts/convert-to-webp.py /path/to/photo.jpg img/interests/travel
 ```
 
-Use `--only-480` for an album cover. Use `--remove-source` only when you intend to delete the input after conversion. Add the generated paths to the relevant template or to `data/music.json`, and place any bilingual captions in the corresponding `data/pages/` file.
+Use `--only-480` for an album cover. Use `--remove-source` only when you intend to delete the input after conversion. Add album covers to `data/music.json`.
+
+For travel memories and the photo gallery, add the entries directly in `data/pages/interests.json`. Put a new trip in `travel.trips`, a new photo for that trip in its `photos` array, or a standalone gallery photo in `gallery.photos`. Array order determines display order. Put both WebP variants in `img/interests/travel/` or `img/interests/gallery/`, and set `file` to the filename without `-480.webp` or `-960.webp`. The build reads the dimensions from the WebP files automatically. Gallery photos also take a bilingual `caption` and an optional `tile` such as `2x1` (default `1x1`). Run `npm run build` and `npm run check` after editing.
 
 ## Publishing
 

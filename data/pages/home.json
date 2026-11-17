@@ -64,6 +64,14 @@
   },
   "updates": {
     "heading": { "zh": "近期更新", "en": "Recent Updates" },
+    "patent": {
+      "date": { "zh": "2026年", "en": "2026" },
+      "title": { "zh": "浮点计算混淆保护专利申请已公布", "en": "Patent Application on Floating-Point Obfuscation Published" },
+      "description": {
+        "zh": "我参与的神经网络软件保护发明专利申请已公布，尚未授权。",
+        "en": "A Chinese invention patent application for neural network software protection that lists me as a co-inventor was published and has not yet been granted."
+      }
+    },
     "tsinghua": {
       "date": { "zh": "2026年9月24日", "en": "September 24, 2026" },
       "title": { "zh": "下一站：清华叉院", "en": "Next Station: IIIS @ Tsinghua University" },

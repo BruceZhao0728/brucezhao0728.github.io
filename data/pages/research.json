@@ -41,7 +41,9 @@
         "zh": "浮点数表达式和 AI 模型运算结果在混淆前后100%一致，反混淆工具成功率下降30%以上，逆向工程成功率下降40%以上，同时提出统一的混淆效果量化指标体系，衡量代码混淆的强度和安全性。",
         "en": "Quantified efficacy by developing a standardized metric system; experimental results showed a >30% decrease in de-obfuscation success rates and a >40% decrease in reverse engineering success rates compared to SOTA works."
       },
-      "detail5": { "zh": "作为共同第一作者和项目负责人完成论文。", "en": "Authored a research paper detailing the implementation." }
+      "detail5": { "zh": "作为共同第一作者和项目负责人完成论文。", "en": "Authored a research paper detailing the implementation." },
+      "paperLink": { "zh": "查看论文", "en": "View paper" },
+      "patentLink": { "zh": "查看专利申请", "en": "View patent application" }
     },
     "vulnerabilityAnalysis": {
       "title": { "zh": "基于向量数据库和人工智能的智能漏洞分析系统", "en": "AI-Powered Vulnerability Analysis System Based on Vector Databases" },
@@ -121,6 +123,21 @@
       "en": "FLOB protects floating-point operations in compiled deep neural networks by lifting values to a higher-precision representation and applying mixed Boolean-arithmetic transformations. The paper reports preserved computational correctness and an average operator recovery rate of 4.51%, 32.82 percentage points lower than existing methods."
     },
     "link": { "zh": "arXiv ↗", "en": "arXiv ↗" }
+  },
+  "patentApplication": {
+    "heading": { "zh": "专利申请", "en": "Patent Applications" },
+    "status": { "zh": "中国发明专利申请 · 2026 年公布，尚未授权", "en": "Chinese invention patent application · Published in 2026; not yet granted" },
+    "title": {
+      "zh": "面向神经网络模型可执行代码的浮点计算混淆保护系统及应用",
+      "en": "System and Applications for Protecting Floating-Point Computation in Neural Network Model Binaries through Obfuscation"
+    },
+    "inventors": {
+      "zh": "发明人：谷大武、<strong>赵子辰</strong>、胡易坤",
+      "en": "Inventors: Dawu Gu, <strong>Zichen Zhao</strong>, and Yikun Hu"
+    },
+    "applicant": { "zh": "申请人：上海交通大学", "en": "Applicant: Shanghai Jiao Tong University" },
+    "publicationNumberLabel": { "zh": "公布号：", "en": "Publication No. " },
+    "lookup": { "zh": "在国家知识产权局检索 ↗", "en": "Search on CNIPA ↗" }
   },
   "collaboration": {
     "heading": { "zh": "协作与交流", "en": "Collaboration & Communication" },

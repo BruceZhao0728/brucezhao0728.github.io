@@ -1218,6 +1218,12 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .timeline-item::before { background: #aa674b; }
 .timeline-content { padding: 1.7rem 2rem; }
 .timeline-content li { margin-bottom: .65rem; }
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem 2rem;
+}
+.research-anchor { scroll-margin-top: 6rem; }
 .timeline-title, .award-title { color: var(--text-color); }
 .timeline-date, .award-date { color: #a4593d; font-weight: 700; }
 .award-card { align-items: flex-start; }

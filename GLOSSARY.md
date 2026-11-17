@@ -18,3 +18,7 @@ The website’s page text, navigation, captions, interface labels, and article s
 **Original-language article**:
 A blog article whose body remains in the language in which it was written, regardless of the selected language edition.
 _Avoid_: Untranslated article
+
+**Published patent application**:
+A publicly available invention patent application that may be listed as research output. Its publication number identifies the application, and a grant is a separate milestone.
+_Avoid_: Granted patent (before grant)
